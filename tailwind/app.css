@@ -13,6 +13,11 @@ h6 {
     font-family: "Poppins", sans-serif !important;
 }
 
+p
+{
+    margin-bottom: 0px !important;
+}
+
 @theme {
     --animate-blink: blink 1s steps(1) infinite;
 

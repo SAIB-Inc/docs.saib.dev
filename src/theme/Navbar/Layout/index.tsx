@@ -47,6 +47,9 @@ export default function NavbarLayout({children}: Props): ReactNode {
           'navbar--primary': style === 'primary',
           'navbar-sidebar--show': mobileSidebar.shown,
         },
+        '!bg-transparent',
+        '!fixed',
+        'w-[100vw]'
       )}>
       {children}
       <NavbarBackdrop onClick={mobileSidebar.toggle} />

@@ -6,6 +6,7 @@ import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import Button from '@mui/material/Button';
+import Section1 from '../components/Section1/Section1';
 // function HomepageHeader() {
 //   const {siteConfig} = useDocusaurusContext();
 //   return (
@@ -31,7 +32,7 @@ export default function Home(): ReactNode {
   // const {siteConfig} = useDocusaurusContext();
   return (
     <Layout>
-     <section>1st section</section>
+      <Section1 />
     </Layout>
   );
 }

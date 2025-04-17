@@ -28,20 +28,10 @@ import Button from '@mui/material/Button';
 // }
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
+  // const {siteConfig} = useDocusaurusContext();
   return (
     <Layout>
-      <div className='flex'>
-        <Button variant="contained">Hello world</Button>
-      </div>
+     <section>1st section</section>
     </Layout>
-    // <Layout
-    //   title={`Hello from ${siteConfig.title}`}
-    //   description="Description will go into a meta tag in <head />">
-    //   <HomepageHeader />
-    //   <main>
-    //     <HomepageFeatures />
-    //   </main>
-    // </Layout>
   );
 }

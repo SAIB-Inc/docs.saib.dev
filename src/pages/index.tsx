@@ -5,7 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
-
+import Button from '@mui/material/Button';
 // function HomepageHeader() {
 //   const {siteConfig} = useDocusaurusContext();
 //   return (
@@ -30,9 +30,11 @@ import Heading from '@theme/Heading';
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <div className='flex'>
-      Hello World
-    </div>
+    <Layout>
+      <div className='flex'>
+        <Button variant="contained">Hello world</Button>
+      </div>
+    </Layout>
     // <Layout
     //   title={`Hello from ${siteConfig.title}`}
     //   description="Description will go into a meta tag in <head />">

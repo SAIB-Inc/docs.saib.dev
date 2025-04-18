@@ -31,7 +31,7 @@ export default function Section7(): ReactNode {
 
                 </div>
 
-                <div className="flex justify-around items-center">
+                <div className="flex justify-between items-center">
                     <div className="bg-[url(/img/Section7/dotnet_cardone.webp)] w-[402.05px] h-[483px] pt-[157px] pl-[32px] pr-[48.5px] pb-[72px]">
                         <h4 className="!text-[40px] leading-[48px] !mb-[38px]">Popularity</h4>
                         <p className="!text-[20px] leading-[28px]">NET Core was ranked as the top <br />

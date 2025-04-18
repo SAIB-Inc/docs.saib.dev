@@ -1,0 +1,10 @@
+{
+    "label": "Core Features",
+    "position": 3,
+    "link": {
+      "type": "generated-index",
+      "title": "Argus Core Features",
+      "description": "Deep dives into each part of Argus’s indexing pipeline."
+    }
+  }
+  

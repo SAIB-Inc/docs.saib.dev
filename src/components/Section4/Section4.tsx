@@ -4,29 +4,30 @@ import { ReactNode } from "react";
 export default function Section4(): ReactNode {
     return (
         <section className="bg-darkbg bg-lines h-[952.98px] flex flex-col items-center w-screen">
-            <div className="block mx-auto bg-[url(/img/Section4/purple_bg.webp)] h-[631px] w-[1312px] mb-[64px] ">
-                <div className="mt-[246px] ml-[72px] w-[661px]">
-                    <h1 className="text-left !text-[64px] !leading-[60px]">
-                        <span>
-                            Streamline <br />
-                        </span>
-                        <span className="text-[#C2B8FF]">
-                            Cardano <br />
-                            Blockchain <br />
-                        </span>
-                        <span>
-                            Data Processing
-                        </span>
-                    </h1>
-                </div>
 
-                <div>
-
-                </div>
-                    
-            </div>
 
             <div className="container">
+                <div className="block mx-auto bg-[url(/img/Section4/purple_bg.webp)] h-[706px] w-full mb-[64px] pt-[329.84px] pl-[59.71px]">
+                    <div className="w-[661px]">
+                        <h1 className="text-left !text-[64px] !leading-[60px]">
+                            <span>
+                                Streamline <br />
+                            </span>
+                            <span className="text-[#C2B8FF]">
+                                Cardano <br />
+                                Blockchain <br />
+                            </span>
+                            <span>
+                                Data Processing
+                            </span>
+                        </h1>
+                    </div>
+
+                    <div>
+
+                    </div>
+
+                </div>
                 <div className="max-w-screen-xl w-full flex justify-between">
                     <div>
                         <div >
@@ -38,13 +39,13 @@ export default function Section4(): ReactNode {
 
                         <div className="mt-[32px]">
                             <Button variant="contained" sx={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    width: '305px',
-                                    px: 0,
-                                }} >
-                                <p className="text-[16px] leading-[24px] font-normal !ml-[24px]">Learn More</p>
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                width: '305px',
+                                px: 0,
+                            }} >
+                                <p className="text-[16px] leading-[24px] font-normal !ml-[24px] !mb-0">Learn More</p>
                                 <img src="/img/Section3/button.webp" className="w-[24px] h-[24px] mr-[16px]"></img>
                             </Button>
                         </div>
@@ -81,7 +82,7 @@ export default function Section4(): ReactNode {
                         </div>
 
                         <div className="mt-[43.19px]">
-                            <Button variant="contained" 
+                            <Button variant="contained"
                                 sx={{
                                     display: 'flex',
                                     justifyContent: 'space-between',
@@ -89,7 +90,7 @@ export default function Section4(): ReactNode {
                                     width: '305px',
                                     px: 0,
                                 }}>
-                                <p className="text-[16px] leading-[24px] font-normal !ml-[24px]">View in Catalyst</p>
+                                <p className="text-[16px] leading-[24px] font-normal !ml-[24px] !mb-0">View in Catalyst</p>
                                 <img src="/img/Section3/button.webp" className="w-[24px] h-[24px] mr-[16px]" />
                             </Button>
                         </div>

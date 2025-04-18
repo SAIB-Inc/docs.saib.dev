@@ -20,7 +20,7 @@ export default function Section8(): ReactNode {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-12 gap-[12px] mt-[65px]">
+                <div className="grid grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px]">
                     <img src="/img/Section8/frederik_gregaard.webp" alt="Frederik Gregaard" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover object-[center_-20px]"/>
                     <img src="/img/Section8/philip_disarro_jonathan_rodriguez.webp" alt="Phil and Jonathan " className="col-span-6 w-full h-[371px] rounded-[24px] object-cover object-[center_-100px]"/>
 

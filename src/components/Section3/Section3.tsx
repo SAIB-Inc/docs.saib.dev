@@ -41,8 +41,16 @@ export default function Section3(): ReactNode {
                                 <p className="text-white text-[16px] font-normal leading-[20.48px] ">Seamlessly Connecting Cardano And .NET For A Fast, Productive Developer Experience</p>
                             </div>
                             <div>
-                                <Button variant="contained" sx={{ width: '305px' }} className="flex justify-between items-center">
-                                    <p className="text-[16px] leading-[24px] font-normal ml-[24px]">Learn More</p>
+                                <Button variant="contained" 
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        width: '305px',
+                                        px: 0,
+                                    }}
+                                >
+                                    <p className="text-[16px] leading-[24px] font-normal !ml-[24px]">Learn More</p>
                                     <img src="/img/Section3/button.webp" className="w-[24px] h-[24px] mr-[16px]"></img>
                                 </Button>
                             </div>

@@ -1,7 +1,9 @@
 ---
-title: .NET building blocks for Cardano Development
+title: Overview
 sidebar_position: 1
 ---
+
+# .NET building blocks for Cardano Development
 
 Welcome to the Chrysalis —your gateway to building powerful Cardano applications using C# and .NET. Designed specifically for .NET developers, Chrysalis provides everything you need to create, deploy, and manage robust blockchain solutions seamlessly within your existing Microsoft development environment.
 

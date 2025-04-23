@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import { ReactNode } from "react";
+import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
+import RightArrow from "../../icons/RightArrow.svg";
 
 export default function Section4(): ReactNode {
     return (
-        <section className="bg-darkbg bg-lines h-[952.98px] flex flex-col items-center w-screen">
-
-
+        <section className="h-[952.98px] flex flex-col items-center w-screen">
             <div className="container">
                 <div className="block mx-auto bg-[url(/img/Section4/purple_bg.webp)] h-[706px] w-full mb-[64px] pt-[329.84px] pl-[59.71px]">
                     <div className="w-[661px]">
@@ -24,7 +24,7 @@ export default function Section4(): ReactNode {
                     </div>
 
                     <div>
-
+                        
                     </div>
 
                 </div>
@@ -38,16 +38,7 @@ export default function Section4(): ReactNode {
                         </div>
 
                         <div className="mt-[32px]">
-                            <Button variant="contained" sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                width: '305px',
-                                px: 0,
-                            }} >
-                                <p className="text-[16px] leading-[24px] font-normal !ml-[24px] !mb-0">Learn More</p>
-                                <img src="/img/Section3/button.webp" className="w-[24px] h-[24px] mr-[16px]"></img>
-                            </Button>
+                            <BtnMore />
                         </div>
 
                     </div>
@@ -81,18 +72,8 @@ export default function Section4(): ReactNode {
                             </svg>
                         </div>
 
-                        <div className="mt-[43.19px]">
-                            <Button variant="contained"
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    width: '305px',
-                                    px: 0,
-                                }}>
-                                <p className="text-[16px] leading-[24px] font-normal !ml-[24px] !mb-0">View in Catalyst</p>
-                                <img src="/img/Section3/button.webp" className="w-[24px] h-[24px] mr-[16px]" />
-                            </Button>
+                        <div className="mt-[43.19px] flex justify-end">
+                            <Button variant="contained" endIcon={<RightArrow />}>View In Catalyst</Button>
                         </div>
 
                     </div>

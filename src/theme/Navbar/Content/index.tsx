@@ -69,7 +69,9 @@ export default function NavbarContent(): ReactNode {
         <>
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
-          <NavbarItems items={leftItems} />
+          <div className='mt-1'>
+            <NavbarItems items={leftItems} />
+          </div>
         </>
       }
       right={

@@ -3,12 +3,12 @@ id: reducer
 slug: /features/reducer
 title: Reducer
 sidebar_label: Reducer
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 # Reducer
 
-The **Reducer** is Argus’s extension point: implement your application logic here to process every block (rollforward) and revert state when needed (rollback).
+A **Reducer** is Argus’s extension point: implement your application logic here to process every block (rollforward) and revert state when needed (rollback).
 
 ## How It Works
 

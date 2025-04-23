@@ -3,7 +3,7 @@ id: database
 slug: /database
 title: Database
 sidebar_label: Database
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Database

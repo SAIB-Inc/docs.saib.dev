@@ -52,7 +52,7 @@ export default function Section6(): ReactNode {
                         </div>
                         <div className="flex justify-between items-end">
                             <img src="/img/Section6/small_crystal.webp" className="w-[117.3px] h-[93.95px] self-end"/>
-                            <RightArrow className="w-[49px] h-[49px]"/>
+                            <RightArrow className="w-[49px] h-[49px] cursor-pointer"/>
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@ export default function Section6(): ReactNode {
                         </div>
                         <div className="flex justify-between items-end">
                             <img src="/img/Section6/small_crystal.webp" className="w-[117.3px] h-[93.95px]"/>
-                            <RightArrow className="w-[49px] h-[49px] stroke-[#191919] fill-[#191919]"/>
+                            <RightArrow className="w-[49px] h-[49px] stroke-[#191919] cursor-pointer"/>
                         </div>
                     </div>
                 </div>

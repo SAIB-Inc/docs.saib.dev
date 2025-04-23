@@ -1,7 +1,7 @@
 ---
 title: CBOR Deserialization
 sidebar_label: CBOR Deserialization
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 It is important for indexers to convert data between CBOR and C# types. Since Argus is powered by Chrysalis, it leverages a robust CBOR serialization library. However, deserialized blocks do not automatically yield domain-specific data—Argus is generic and doesn’t know your smart contract types. You must define your own types and annotations.

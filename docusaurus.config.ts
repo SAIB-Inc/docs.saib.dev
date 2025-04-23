@@ -78,12 +78,12 @@ const config: Config = {
       },
       items: [
         {
+          docId: 'argus',
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'argusSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Argus'
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
@@ -142,5 +142,6 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
 };
+
 
 export default config;

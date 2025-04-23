@@ -22,7 +22,16 @@ export default function Section6(): ReactNode {
                 </div>
 
                 <div className="flex justify-between flex-wrap gap-[16px]">
-                    <Paper sx={{ backgroundColor: '#5438DC', borderRadius: '24px', paddingTop: '51px', paddingLeft: '40px', paddingRight: '60px', paddingBottom: '43.3px' }} className="w-[915px] h-[304px]">
+                    <Paper sx={{
+                        backgroundColor: '#5438DC',
+                        borderRadius: '24px',
+                        paddingTop: '51px',
+                        paddingLeft: '40px',
+                        paddingRight: '60px',
+                        paddingBottom: '43.3px',
+                        width: '915px',
+                        height: '304px',
+                    }} >
                         <div className="flex justify-between">
                             <div>
                                 <h2 className="!text-[40px] !leading-[48px] !tracking-[0.4px] mb-[24px]">The Cardano<br />
@@ -38,11 +47,25 @@ export default function Section6(): ReactNode {
                         </div>
                     </Paper>
 
-                    <Paper sx={{ backgroundColor: '#1F2F4E', borderRadius: '24px' }} className="w-[357px] h-[304px] flex justify-center items-center">
+                    <Paper sx={{
+                        backgroundColor: '#1F2F4E',
+                        borderRadius: '24px',
+                        width: '357px',
+                        height: '304px'
+                    }}
+                        className="flex justify-center items-center"
+                    >
                         <img src="/img/Section6/chrysalis.webp" />
                     </Paper>
 
-                    <Paper sx={{ backgroundColor: '#24222D', borderRadius: '24px' }} className="w-[316px] h-[304px] flex justify-center items-center">
+                    <Paper sx={{
+                        backgroundColor: '#24222D',
+                        borderRadius: '24px',
+                        width: '316px',
+                        height: '304px'
+                    }}
+                        className="flex justify-center items-center"
+                    >
                         <img src="/img/Section6/cardano.svg" />
                     </Paper>
 
@@ -52,9 +75,11 @@ export default function Section6(): ReactNode {
                         paddingTop: '40px',
                         paddingLeft: '40px',
                         paddingRight: '32px',
-                        paddingBottom: '32.05px'
+                        paddingBottom: '32.05px',
+                        width: '471px',
+                        height: '304px'
                     }}
-                        className="w-[471px] h-[304px]">
+                    >
                         <div className="flex flex-col justify-between">
                             <div>
                                 <h3 className="!text-[30px] !font-semibold leading-[33px] !mb-[40px]">CHRYSALIS.TX</h3>
@@ -79,10 +104,11 @@ export default function Section6(): ReactNode {
                         paddingTop: '40px',
                         paddingLeft: '40px',
                         paddingRight: '32px',
-                        paddingBottom: '32.05px'
+                        paddingBottom: '32.05px',
+                        width: '469px',
+                        height: '304px'
                     }}
-                        className="w-[469px] h-[304px]">
-
+                    >
                         <div className="flex flex-col justify-between">
                             <div className="mb-[25px]">
                                 <h3 className="!text-[30px] !font-semibold leading-[33px] !text-[#191919] !mb-[40px]">CHRYSALIS.NETWORK</h3>

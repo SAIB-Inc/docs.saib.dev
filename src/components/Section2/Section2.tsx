@@ -41,9 +41,13 @@ export default function Section2(): ReactNode {
                         <img src="/img/Section2/developers.webp" alt="developers" />
                     </div>
 
-                    <div className="w-[305px]">
-                        <p className="text-white/60">The .NET Cardano Node</p>
-                        <BtnMore />
+                    <div className="w-[305px] flex gap-1 flex-col">
+                        <div>
+                            <p className="text-white/60">The .NET Cardano Node</p>
+                        </div>
+                        <div>
+                            <BtnMore />
+                        </div>
                     </div>
                 </div>
             </div>

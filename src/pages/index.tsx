@@ -7,6 +7,10 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import Button from '@mui/material/Button';
 import Section1 from '../components/Section1/Section1';
+import Section3 from '../components/Section3/Section3';
+import Section2 from '../components/Section2/Section2';
+import Section4 from '../components/Section4/Section4';
+import Section6 from '../components/Section6/Section6';
 // function HomepageHeader() {
 //   const {siteConfig} = useDocusaurusContext();
 //   return (
@@ -33,6 +37,10 @@ export default function Home(): ReactNode {
   return (
     <Layout>
       <Section1 />
+      <Section2 />
+      <Section3 />
+      <Section4 />
+      <Section6 />
     </Layout>
   );
 }

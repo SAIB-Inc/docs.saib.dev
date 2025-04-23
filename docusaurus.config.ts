@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
+  title: 'Developer Portal | Softwarez at its Best, Inc.',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -71,9 +71,9 @@ const config: Config = {
     },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: '',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'SAIB Developer Portal',
         src: 'img/logo.svg',
       },
       items: [
@@ -83,11 +83,18 @@ const config: Config = {
           position: "left",
           label: "Chrysalis",
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+          docId: 'argus',
+          type: 'docSidebar',
+          sidebarId: 'argusSidebar',
+          position: 'left',
+          label: 'Argus'
+        },
+
+        {
+          type: 'html',
           position: 'right',
+          value: '<a href="https://github.com/SAIB-Inc" target="_blank"><img src="/img/github.svg" alt="github"/></a>',
         },
       ],
     },
@@ -142,5 +149,6 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
 };
+
 
 export default config;

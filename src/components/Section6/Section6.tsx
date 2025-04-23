@@ -1,28 +1,22 @@
 import { Button } from "@mui/material";
 import { ReactNode } from "react";
+import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 
 export default function Section6(): ReactNode {
     return (
         <section className="h-[956px] w-screen">
             <div className="container place-content-between !pt-[148px]">
                 <div className="flex justify-between h-[72px] mb-[80px]">
-                    <h1 className="!text-[64px] !leading-[72px] tracking-[0.64px]">
-                        <span className="text-white">Built On...</span>
-                        <span className="text-[#C2B8FF]">Chrysalis</span>
-                    </h1>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            width: "305px",
-                            p: 0,
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            alignSelf: 'flex-end'
-                        }}>
-                        <p className="text-16px leading-[24px] font-normal !ml-[24px] !mb-0">Learn More</p>
-                        <img src="/img/Section6/button.webp" className="w-[24px] h-[24px] mr-[16px]" />
-                    </Button>
+                    <div>
+                        <h1 className="!text-[64px] !leading-[72px] tracking-[0.64px]">
+                            <span className="text-white">Built On...</span>
+                            <span className="text-[#C2B8FF]">Chrysalis</span>
+                        </h1>
+                    </div>
+                    <div className="flex items-center">   
+                        <BtnMore />
+                    </div>
+                    
                 </div>
 
                 <div className="flex justify-between flex-wrap gap-[16px]">

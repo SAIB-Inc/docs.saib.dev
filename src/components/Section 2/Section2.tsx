@@ -6,7 +6,7 @@ export default function Section2(): ReactNode {
         <section className="h-[1076px] w-screen">
             <div className="container flex flex-col justify-center">
                 <div className="flex flex-row justify-between">
-                    <div>
+                    <div className="!mt-[104px]">
                         <h1 className="!text-[56px] font-semibold leading-[53.76px] tracking-[0.56px]">
                             <span>Check Out <br />The </span>
                             <span className="text-[#C2B8FF]">Latest <br />Resources</span>
@@ -17,7 +17,7 @@ export default function Section2(): ReactNode {
                         <img src="/img/Section2/razor.webp" alt="razor logo" />
                     </div>
 
-                    <div className="w-[230.04px]">
+                    <div className="w-[230.04px] !mt-[102.22px]">
                         <div className="flex flex-col justify-end">
                             <nav>
                                 <ul className="!m-0 !p-0">

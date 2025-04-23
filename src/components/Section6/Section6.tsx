@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
+import RightArrow from "../../icons/RightArrow.svg";
 
 export default function Section6(): ReactNode {
     return (
@@ -51,7 +52,7 @@ export default function Section6(): ReactNode {
                         </div>
                         <div className="flex justify-between items-end">
                             <img src="/img/Section6/small_crystal.webp" className="w-[117.3px] h-[93.95px] self-end"/>
-                            <img src="/img/Section6/button.webp" className="w-[49px] h-[49px]"/>
+                            <RightArrow className="w-[49px] h-[49px]"/>
                         </div>
                     </div>
 
@@ -65,7 +66,7 @@ export default function Section6(): ReactNode {
                         </div>
                         <div className="flex justify-between items-end">
                             <img src="/img/Section6/small_crystal.webp" className="w-[117.3px] h-[93.95px]"/>
-                            <img src="/img/Section6/button.webp" className="w-[49px] h-[49px]" />
+                            <RightArrow className="w-[49px] h-[49px] stroke-[#191919] fill-[#191919]"/>
                         </div>
                     </div>
                 </div>

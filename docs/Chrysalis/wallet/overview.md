@@ -7,7 +7,6 @@ sidebar_position: 1
 
 Chrysalis.Wallet is a comprehensive, CIP-compliant .NET library delivering end-to-end Cardano wallet functionality. It’s organized into:
 
-- **Extensions**: High-performance helpers like `ByteArrayExtensions` for fast array operations.
 - **Wordlists**: Built-in BIP-39 English wordlist for mnemonic generation and restoration.
 - **Utilities**: Core algorithms for address handling (`Bech32Util`), key derivation math (`Bip32Util`), and hashing (`HashUtil`).
 - **Models**: Strongly-typed types for `Address`, credentials, enums, key structures, and network metadata (`NetworkInfo`).

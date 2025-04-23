@@ -78,10 +78,10 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
+          type: "docSidebar",
+          sidebarId: "chrysalis",
+          position: "left",
+          label: "Chrysalis",
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {

@@ -17,7 +17,7 @@ Whether you’re building wallets, crafting transactions, or integrating on-chai
 - **Zero Reflection**: No runtime penalties—serialization logic is baked into your assembly, keeping dependencies lean and performance predictable.
 - **Full CDDL Compliance**: Covers all core Cardano types (transactions, blocks, protocol parameters) and advanced patterns (indefinite lists, tagged values, unions, constructor types).
 - **Built‑in Type Library**: Includes a comprehensive suite of CBOR types for Cardano core, protocol, script, and governance data.
-- **Extensible & Customizable**: Easily define your own CBOR records, tags, and validation rules via `ICborValidator<T>`.
+- **Extensible & Customizable**: Easily define your own CBOR records, tags, and validation rules.
 
 ---
 
@@ -43,5 +43,4 @@ Whether you’re building wallets, crafting transactions, or integrating on-chai
    var copy = CborSerializer.Deserialize<TransactionInput>(cbor);
    ```
 
-That’s it—your C# records now round-trip to on-chain CBOR effortlessly!
 

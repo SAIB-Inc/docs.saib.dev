@@ -23,11 +23,7 @@ A **Reducer** is Argus’s extension point: implement your application logic her
 
 ### Purpose
 
-Index or transform data from each new block in real time:
-
-- **Block metadata**: hash, number, slot
-- **Transactions**: inputs, outputs, fees
-- **Smart‑contract UTxOs**: mint events, datum, redeemers
+Index or transform data from each new block.
 
 ### Signature
 
@@ -91,7 +87,7 @@ public async Task RollBackwardAsync(ulong rollbackSlot)
 
 ### Advanced Rollback Mode
 
-Enable one‑time or per‑reducer rollback in `appsettings.json` to test reprocessing without restarting:
+If you want to intentionally rollback to a specific slot, you can configure Argus to do so by enabling rollback mode in the configuration:
 
 ```jsonc
 "Sync": {
@@ -106,14 +102,3 @@ Enable one‑time or per‑reducer rollback in `appsettings.json` to test reproc
 ```
 
 With rollback mode active, Argus will revert to the specified slot, invoke `RollBackwardAsync`, then exit. Turn off `Enabled` to resume normal sync.
-
----
-
-## Best Practices
-
-- **Idempotence:** design reducers so repeated `RollForwardAsync` calls produce the same result when replayed.
-- **Error Handling:** catch and log exceptions; avoid partial commits.
-- **State Tracking:** if you manage intermediate state, record checkpoints in your model.
-- **Separation of Concerns:** delegate parsing, validation, and persistence to dedicated services or helper classes.
-
-Next up: **Configuration** — fine‑tune node settings, rollback behavior, and dashboard options.

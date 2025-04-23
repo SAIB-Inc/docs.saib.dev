@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
 import { ReactNode } from "react";
+import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 
 export default function Section3(): ReactNode {
     return (
-        <section className="bg-darkbg bg-lines h-[1088.02px] flex flex-col items-center bg-[url(/img/Section3/background.webp)] w-screen bg-cover">
+        <section className="bg-lines h-[1088.02px] flex flex-col items-center bg-[url(/img/Section3/background.webp)] w-screen bg-cover">
             <div className="container flex flex-col justify-center items-center">
 
                 <div className="text-center h-[64px] flex flex-row items-center mb-[178px] mt-[36px]">
@@ -43,18 +44,7 @@ export default function Section3(): ReactNode {
                             </div>
 
                             <div>
-                                <Button variant="contained" 
-                                    sx={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                        width: '305px',
-                                        px: 0
-                                    }}
-                                >
-                                    <p className="text-[16px] leading-[24px] font-normal !ml-[24px]">Learn More</p>
-                                    <img src="/img/Section3/button.webp" className="w-[24px] h-[24px] mr-[16px]"/>
-                                </Button>
+                                <BtnMore />
                             </div>
                         </div>
                     </div>

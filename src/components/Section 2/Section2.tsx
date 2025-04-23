@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { ReactNode } from "react";
+import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 
 export default function Section2(): ReactNode {
     return (
@@ -42,16 +43,7 @@ export default function Section2(): ReactNode {
 
                     <div className="w-[305px]">
                         <p className="text-white/60">The .NET Cardano Node</p>
-                        <Button variant="contained" sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                width: '305px',
-                                px: 0,
-                            }} >
-                                <p className="text-[16px] leading-[24px] font-normal !ml-[24px] !mb-0">Learn More</p>
-                                <img src="/img/Section2/button.webp" className="w-[24px] h-[24px] mr-[16px]"></img>
-                        </Button>
+                        <BtnMore />
                     </div>
                 </div>
             </div>

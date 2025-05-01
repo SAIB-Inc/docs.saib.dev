@@ -31,7 +31,7 @@ export default function Section4(): ReactNode {
                                 </span>
                             </h1>
                         </div>
-                        <div>
+                        <div className="w-88">
                             <img src="/img/Section4/code_snippet.webp" alt="code snippet"/>
                         </div>
                     </div>

@@ -2,6 +2,13 @@ import { Button } from "@mui/material";
 import { ReactNode } from "react";
 
 export default function Section1(): ReactNode {
+    const scrollToNextSection = () => {
+        const nextSection = document.getElementById("section-2");
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
     return (
         <section className="relative grid place-content-center bg-[url(/img/background.png)] w-screen h-screen bg-cover pt-[60px]">
             <div className="container text-center">
@@ -32,7 +39,10 @@ export default function Section1(): ReactNode {
                 </div>
             </div>
 
-            <div className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 flex justify-center items-center flex-col animate-bounce2 cursor-pointer">
+            <div 
+                onClick={scrollToNextSection}
+                className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 flex justify-center items-center flex-col animate-bounce2 cursor-pointer"
+            >
                 <img src="/img/scroll_arrow.webp" alt="scroll down"/>
             </div>
         </section>

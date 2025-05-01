@@ -37,6 +37,7 @@ p
 
 @theme {
     --animate-bounce2: bounce 2s infinite;
+    --animate-bounce3: bounce 2.5s infinite ease-In-Out;
     @keyframes bounce {
         0%,
         100% {

@@ -35,7 +35,7 @@ export default function Section2(): ReactNode {
     ];
 
     return (
-        <section className="h-[1076px] w-screen">
+        <section id="section-2" className="h-[1076px] w-screen">
             <div className="container flex flex-col h-full">
                 <div className="flex h-[calc(100%-230px)] justify-between">
                     <div className="!mt-[104px]">
@@ -49,7 +49,7 @@ export default function Section2(): ReactNode {
                             <img
                                 src={projects[currentProject].logo}
                                 alt="razor logo"
-                                className={`transition-opacity duration-150 ${isFading ? "opacity-0" : "opacity-100"} animate-bounce`}
+                                className={`transition-opacity duration-150 ${isFading ? "opacity-0" : "opacity-100"} animate-bounce3`}
                             />
                         </div>
                         <img src="/img/Section2/base_ellipse.webp" alt="base ellipse" />
@@ -83,7 +83,11 @@ export default function Section2(): ReactNode {
                         </div>
                         <div 
                             onClick={() => {
-                                setCurrentProject((currentProject + 1) % projects.length);
+                                setIsFading(true);
+                                setTimeout(() => {
+                                    setCurrentProject((currentProject + 1) % projects.length);
+                                    setIsFading(false);
+                                }, 150);
                             }}
                             className="float-right cursor-pointer hover:animate-bounce"
                         >

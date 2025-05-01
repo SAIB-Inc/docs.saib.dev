@@ -80,7 +80,7 @@ export default function Section6(): ReactNode {
                         height: '304px'
                     }}
                     >
-                        <div className="flex flex-col justify-between">
+                        <div className="flex flex-col gap-4 justify-between">
                             <div>
                                 <h3 className="!text-[30px] !font-semibold leading-[33px] !mb-[40px]">CHRYSALIS.TX</h3>
                                 <p className="!mb-0">
@@ -90,7 +90,7 @@ export default function Section6(): ReactNode {
                                 </p>
                             </div>
                             <div className="flex justify-between items-end">
-                                <img src="/img/Section6/small_crystal.webp" className="w-[117.3px] h-[93.95px] self-end" />
+                                <img src="/img/Section6/small_crystal.webp" className="w-[100px] self-end" />
                                 <IconButton aria-label="go to chrysalis network documentation">
                                     <WhiteRightArrow />
                                 </IconButton>
@@ -109,7 +109,7 @@ export default function Section6(): ReactNode {
                         height: '304px'
                     }}
                     >
-                        <div className="flex flex-col justify-between">
+                        <div className="flex flex-col gap-4 justify-between">
                             <div className="mb-[25px]">
                                 <h3 className="!text-[30px] !font-semibold leading-[33px] !text-[#191919] !mb-[40px]">CHRYSALIS.NETWORK</h3>
                                 <p className="!text-[#191919]">
@@ -118,7 +118,7 @@ export default function Section6(): ReactNode {
                                 </p>
                             </div>
                             <div className="flex justify-between items-end">
-                                <img src="/img/Section6/small_crystal.webp" className="w-[117.3px] h-[93.95px]" />
+                                <img src="/img/Section6/small_crystal.webp" className="w-[100px]" />
                                 <IconButton aria-label="go to chrysalis network documentation">
                                     <GrayRightArrow />
                                 </IconButton>

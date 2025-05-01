@@ -4,7 +4,7 @@ import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 
 export default function Section3(): ReactNode {
     return (
-        <section className="bg-lines h-[1088.02px] flex flex-col items-center bg-[url(/img/Section3/background.webp)] w-screen bg-cover">
+        <section className="bg-lines relative h-[1088.02px] flex flex-col items-center bg-[url(/img/Section3/background1.webp)] bg-center w-screen bg-cover">
             <div className="container flex flex-col justify-center items-center">
 
                 <div className="text-center h-[64px] flex flex-row items-center mb-[178px] mt-[36px]">
@@ -53,6 +53,9 @@ export default function Section3(): ReactNode {
                         <img src='/img/Section3/code.webp' />
                     </div>
                 </div>
+            </div>
+            <div className="absolute -bottom-118 -z-10">
+                <img src="/img/Section3/background_connector.webp" alt="background connector"/>
             </div>
         </section>
     )

@@ -51,9 +51,9 @@ export default function Section6(): ReactNode {
                         backgroundColor: '#1F2F4E',
                         borderRadius: '24px',
                         width: '357px',
-                        height: '304px'
+                        height: '304px',
                     }}
-                        className="flex justify-center items-center"
+                        className="flex justify-center items-center relative"
                     >
                         <img src="/img/Section6/chrysalis.webp" />
                     </Paper>

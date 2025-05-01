@@ -78,12 +78,6 @@ const config: Config = {
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "chrysalis",
-          position: "left",
-          label: "Chrysalis",
-        },
-        {
           docId: 'argus',
           type: 'docSidebar',
           sidebarId: 'argusSidebar',

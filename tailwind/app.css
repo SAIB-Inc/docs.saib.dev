@@ -48,3 +48,17 @@ p
         }
     }
 }
+
+.section4::after{
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    margin-left: -100px;
+
+    top: -100px;
+        
+    border-radius: 50%;
+    background-color: white;
+}

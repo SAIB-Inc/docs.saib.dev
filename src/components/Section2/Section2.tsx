@@ -1,7 +1,13 @@
 import { ReactNode, useState } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
+import { alpha, useTheme } from "@mui/material";
+import { useColorMode } from "@docusaurus/theme-common";
+import DownArrow from "../../icons/DownArrow.svg";
 
 export default function Section2(): ReactNode {
+
+    const theme = useTheme();
+    const { colorMode } = useColorMode()
 
     const [currentProject, setCurrentProject] = useState(0);
     const [isFading, setIsFading] = useState(false);
@@ -41,7 +47,7 @@ export default function Section2(): ReactNode {
                     <div className="!mt-[104px]">
                         <h1 className="!text-[56px] font-semibold leading-[53.76px]! tracking-[0.56px]">
                             <span>Check Out <br />The </span>
-                            <span className="text-[#C2B8FF]">Latest <br />Resources</span>
+                            <span style={{color: theme.palette.text.secondary}} >Latest <br />Resources</span>
                         </h1>
                     </div>
                     <div className="flex flex-col justify-end relative">
@@ -52,7 +58,7 @@ export default function Section2(): ReactNode {
                                 className={`transition-opacity duration-150 ${isFading ? "opacity-0" : "opacity-100"} animate-bounce3`}
                             />
                         </div>
-                        <img src="/img/Section2/base_ellipse.webp" alt="base ellipse" />
+                        <img src={colorMode === 'dark' ? "/img/Section2/base_ellipse_dark.webp" : "/img/Section2/base_ellipse_light.webp"} alt="base ellipse" />
                     </div>
                     <div className="w-[305px] !mt-[102.22px]">
                         <div className="flex flex-col justify-end pr-[6px]">
@@ -72,7 +78,15 @@ export default function Section2(): ReactNode {
                                                     }
                                                 }}                                                
                                             >
-                                                <p className={`text-[26.01px] leading-[28.611px] select-none !tracking-[1.17045px] cursor-pointer !mb-[40px] text-right ${currentProject == index ? "text-white" : "text-white/20"}`} style={{ fontFamily: "Space Mono" }}>
+                                                <p 
+                                                    className="text-[26.01px] leading-[28.611px] select-none !tracking-[1.17045px] cursor-pointer !mb-[40px] text-right" 
+                                                    style={{ 
+                                                        fontFamily: "Space Mono",
+                                                        color: currentProject === index
+                                                        ? theme.palette.text.primary
+                                                        : alpha(theme.palette.text.primary, 0.2)
+                                                    }}
+                                                >
                                                     <span className={currentProject == index ? "inline-block capitalize" : "hidden"}>{datum.name} -</span> 0{index + 1}
                                                 </p>
                                             </li>
@@ -91,19 +105,21 @@ export default function Section2(): ReactNode {
                             }}
                             className="float-right cursor-pointer hover:animate-bounce"
                         >
-                            <img src="/img/Section2/arrow_down.webp" alt="chevron" />
+                            <DownArrow/>
                         </div>
                     </div>
                 </div>
                 <div className="!mt-[45px] flex justify-between">
                     <div className="w-[223.18px]">
-                        <p className="text-white/60">/900k Developer Join</p>
+                        <p style={{ color: alpha(theme.palette.text.primary, 0.6) }}>
+                            /900k Developer Join
+                        </p>
                         <img src="/img/Section2/developers.webp" alt="developers" />
                     </div>
 
                     <div className="w-[305px] flex gap-1 flex-col">
                         <div>
-                            <p className="text-white/60">The .NET Cardano Node</p>
+                        <p style={{ color: theme.palette.text.disabled }}>The .NET Cardano Node</p>
                         </div>
                         <div>
                             <BtnMore />

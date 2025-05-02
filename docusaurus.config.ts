@@ -74,9 +74,16 @@ const config: Config = {
       title: '',
       logo: {
         alt: 'SAIB Developer Portal',
-        src: 'img/logo.svg',
+        src: 'img/logo_light.svg',
+        srcDark: 'img/logo_dark.svg'
       },
       items: [
+        // {
+        //   type: "docSidebar",
+        //   sidebarId: "chrysalis",
+        //   position: "left",
+        //   label: "Chrysalis",
+        // },
         {
           docId: 'argus',
           type: 'docSidebar',
@@ -84,7 +91,6 @@ const config: Config = {
           position: 'left',
           label: 'Argus'
         },
-
         {
           type: 'html',
           position: 'right',

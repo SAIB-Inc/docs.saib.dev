@@ -24,13 +24,25 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
                 mode: colorMode,
                 // Background
                 background: {
-                    default: colorMode === 'dark' ? '#191919' : '#191919',
-                    paper: colorMode === 'dark' ? '#191919' : '#191919',
+                    default: colorMode === 'dark' ? '#191919' : '#ffffff',
+                    paper: colorMode === 'dark' ? '#24222D' : '#E9F5FF',
                 },
                 // button background
                 primary: {
-                    main: colorMode === 'dark' ? '#5438DC' : '#5438DC',
+                    main: '#5438DC',
+                    light: '#C2B8FF',
+                    contrastText: colorMode === 'dark' ? '#ffffff' : '#5438DC'
                 },
+                text: {
+                    primary: colorMode === 'dark' ? '#ffffff' : '#2C1A53',
+                    secondary: colorMode === 'dark' ? '#C2B8FF' : '#5438DC',
+                    disabled: colorMode === 'dark' ? '#FFFFFF99' : '#2C1A53'
+                },
+                grey: {
+                    50: '#ffffff',
+                    600: '#191919',
+                    900: colorMode === 'dark' ? '#191919' : '#E9F5FF'
+                }
             },
             shape: {
                 borderRadius: 12,

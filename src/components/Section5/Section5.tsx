@@ -11,21 +11,21 @@ export default function Section5(): ReactNode {
         <section className={`bg-cover w-screen h-[1203px] ${colorMode === 'dark' ? "bg-[url(/img/Section5/fifth_background_dark.webp)]" : "bg-[url(/img/Section5/fifth_background_light.webp)]"}`}>
             <div className="container flex flex-col items-center !pt-[227px] !pb-[134px]">
                 <div>
-                    <h1 className="!text-[56px] leading-[53.76px] font-semibold text-center">
+                    <h1 className="font-semibold text-center !text-3xl lg:leading-[53.76px] lg:!text-[56px]">
                         <span>Accelerate&nbsp;</span>
                         <span style={{ color: theme.palette.text.secondary }}>Cardano<br />DApp Creation</span>
                     </h1>
                 </div>
 
-                <div className="flex gap-[16px] mt-[40px]">
+                <div className="flex flex-col gap-[16px] mt-[40px] lg:flex-row">
                     <Paper sx={{
-                        width: "636px",
-                        height: "654px",
                         paddingTop: '80px',
                         paddingLeft: '49px',
                         paddingRight: '45.74px',
                         boxShadow: 0
-                    }}>
+                        }}
+                        className="lg:!w-[646px] lg:!h-[654px]"
+                    >
                         <div className="flex flex-col">
                             <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Power</h2>
                             <p className="!text-[24px] !leading-[32px] !mb-[9.10px]">
@@ -38,8 +38,6 @@ export default function Section5(): ReactNode {
                     </Paper>
                     <div className="flex flex-col gap-[16px]">
                         <Paper sx={{
-                            width: "636px",
-                            height: "319px",
                             paddingTop: '80px',
                             paddingLeft: '48px',
                             paddingRight: '40.5px',
@@ -47,7 +45,9 @@ export default function Section5(): ReactNode {
                             display: 'flex',
                             justifyContent: 'space-between',
                             boxShadow: 0
-                        }}>
+                            }}
+                            className="lg:!w-[636px] lg:!h-[319px]"
+                        >
                             <div>
                                 <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Efficiency</h2>
                                 <p className="!text-[20px] !leading-28px]">

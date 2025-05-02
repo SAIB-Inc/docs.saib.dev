@@ -19,13 +19,13 @@ export default function Section1(): ReactNode {
         <section className={`relative grid place-content-center w-screen h-screen bg-cover pt-[60px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"}`}>
             <div className="container text-center">
                 <div>
-                    <h1 className="!text-[104px]">
+                    <h1 className="!text-[40px] sm:!text-[60px] lg:!text-[104px]">
                         <span className="inline-flex items-center -translate-y-4 ">
-                            <span className="text-[52.88px] tracking-[-9.62px] mr-[24px]" style={{ fontFamily: "Space Mono" }}>
+                            <span className="tracking-[-9.62px] leading-[-20px] mr-[24px] text-[30px] lg:text-[52.88px]" style={{ fontFamily: "Space Mono" }}>
                                 <span> &gt; _</span>
                                 <span 
                                     style={{color: theme.palette.primary.main}}
-                                    className="text-[55px] animate-blink inline-block ml-[9.62px]"> |</span>
+                                    className="animate-blink inline-block ml-[9.62px] text-[35px] lg:text-[55px]"> |</span>
                             </span>
                         </span>
                         <span 
@@ -35,7 +35,7 @@ export default function Section1(): ReactNode {
                     </h1>
                 </div>
                 <div>
-                    <p className="text-[20px] font-light">
+                    <p className="font-light text-sm sm:text-base lg:text-xl">
                         Whether you're developing decentralized applications (dApps), writing smart <br /> 
                         contracts, or exploring blockchain integration, the SAIB Cardano Developer <br />
                         Portal provides everything you need to innovate with confidence.
@@ -45,7 +45,7 @@ export default function Section1(): ReactNode {
                     <Button sx={{ color: theme.palette.grey[50] }} variant="contained">Let's Get Started</Button>
                 </div>
                 <div className="flex justify-center mt-[72.9px]">
-                    <Wizard sx={{ fontSize: 140, color: theme.palette.text.secondary }}/>
+                    <Wizard sx={{ color: theme.palette.text.secondary }} className="text-[120px]! lg:text-[140px]!"/>
                 </div>
             </div>
 

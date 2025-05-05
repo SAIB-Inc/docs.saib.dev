@@ -33,6 +33,9 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
                     light: '#C2B8FF',
                     contrastText: colorMode === 'dark' ? '#ffffff' : '#5438DC'
                 },
+                secondary: {
+                    main: colorMode === 'dark' ? '#5438DC' : '#ffffff',
+                },
                 text: {
                     primary: colorMode === 'dark' ? '#ffffff' : '#2C1A53',
                     secondary: colorMode === 'dark' ? '#C2B8FF' : '#5438DC',

@@ -7,6 +7,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --breakpoint-xl: 80rem;
@@ -14,6 +15,7 @@
     --font-weight-normal: 400;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --animate-bounce: bounce 1s infinite;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -552,8 +554,18 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
   .\!bg-transparent {
     background-color: transparent !important;
+  }
+  .bg-black {
+    background-color: var(--color-black);
+  }
+  .bg-black\! {
+    background-color: var(--color-black) !important;
   }
   .bg-\[url\(\/img\/Section3\/background_dark\.webp\)\] {
     background-image: url(/img/Section3/background_dark.webp);
@@ -799,6 +811,11 @@
   .opacity-100 {
     opacity: 100%;
   }
+  .transition-all\! {
+    transition-property: all !important;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function)) !important;
+    transition-duration: var(--tw-duration, var(--default-transition-duration)) !important;
+  }
   .transition-opacity {
     transition-property: opacity;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -807,6 +824,14 @@
   .duration-150 {
     --tw-duration: 150ms;
     transition-duration: 150ms;
+  }
+  .duration-200\! {
+    --tw-duration: 200ms !important;
+    transition-duration: 200ms !important;
+  }
+  .ease-in-out\! {
+    --tw-ease: var(--ease-in-out) !important;
+    transition-timing-function: var(--ease-in-out) !important;
   }
   .select-none {
     -webkit-user-select: none;
@@ -839,6 +864,24 @@ p {
   top: -100px;
   border-radius: 50%;
   background-color: white;
+}
+.navbar-icon::before {
+  content: '';
+  display: flex;
+  opacity: 60%;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background-image: url(/img/github_light.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+html[data-theme='dark'] .navbar-icon::before {
+  background-image: url(/img/github_dark.svg);
+}
+.navbar-icon:hover::before {
+  opacity: 100%;
 }
 @property --tw-translate-x {
   syntax: "*";
@@ -890,6 +933,11 @@ p {
   syntax: "*";
   inherits: false;
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-leading {
   syntax: "*";
   inherits: false;
@@ -903,6 +951,10 @@ p {
   inherits: false;
 }
 @property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ease {
   syntax: "*";
   inherits: false;
 }
@@ -946,10 +998,12 @@ p {
       --tw-rotate-z: initial;
       --tw-skew-x: initial;
       --tw-skew-y: initial;
+      --tw-border-style: solid;
       --tw-leading: initial;
       --tw-font-weight: initial;
       --tw-tracking: initial;
       --tw-duration: initial;
+      --tw-ease: initial;
     }
   }
 }

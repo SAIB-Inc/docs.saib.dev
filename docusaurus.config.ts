@@ -92,9 +92,10 @@ const config: Config = {
           label: 'Argus'
         },
         {
-          type: 'html',
+          href: 'https://github.com/SAIB-Inc',
           position: 'right',
-          value: '<a href="https://github.com/SAIB-Inc" target="_blank"><img src="/img/github.svg" alt="github"/></a>',
+          className: 'navbar-icon',
+          'aria-label': 'GitHub repository',
         },
       ],
     },

@@ -1,15 +1,20 @@
+import { useColorMode } from "@docusaurus/theme-common";
+import { useTheme } from "@mui/material";
 import { ReactNode } from "react";
 
 export default function Section8(): ReactNode {
+    const theme = useTheme();
+    const { colorMode } = useColorMode();
+
     return(
         <section className="bg-[url(/img/Section8/eighth_background.webp)] w-screen h-[1113px] bg-cover pt-[137px]">
             <div className="container">
                 <div className="flex justify-between items-center">
                     <h1 className="!text-[56px] leading-[54.88px] !mb-0">
-                        <span className="text-white">
+                        <span>
                             Let's&nbsp;
                         </span>
-                        <span className="text-[#C2B8FF]">
+                        <span style={{ color: theme.palette.text.secondary }}>
                             Build Together
                         </span>
                     </h1>

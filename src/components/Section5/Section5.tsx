@@ -12,75 +12,66 @@ export default function Section5(): ReactNode {
             <div className="container flex flex-col items-center !pt-[227px] !pb-[134px]">
                 <div>
                     <h1 className="font-semibold text-center !text-3xl lg:leading-[53.76px] lg:!text-[56px]">
-                        <span>Accelerate&nbsp;</span>
-                        <span style={{ color: theme.palette.text.secondary }}>Cardano<br />DApp Creation</span>
+                        <span>Accelerate </span>
+                        <span style={{ color: theme.palette.text.secondary }}>Cardano DApp Creation</span>
                     </h1>
                 </div>
-
                 <div className="flex flex-col gap-[16px] mt-[40px] lg:flex-row">
-                    <Paper sx={{
-                        paddingTop: '80px',
-                        paddingLeft: '49px',
-                        paddingRight: '45.74px',
-                        boxShadow: 0
+                    <Paper 
+                        sx={{
+                            boxShadow: 0
                         }}
-                        className="lg:!w-[646px] lg:!h-[654px]"
+                        className="!p-6 !pb-0 lg:!w-[646px] lg:!h-[654px] lg:!pt-20 lg:!pl-[49px] lg:!pr-[45.74px]"
                     >
                         <div className="flex flex-col">
-                            <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Power</h2>
-                            <p className="!text-[24px] !leading-[32px] !mb-[9.10px]">
-                                Harness the potential of C# with<br />
-                                robust tools such as LINQ, ASP.NET,<br />
+                            <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] !text-3xl lg:!mb-[48px] lg:!text-[48px]">Power</h2>
+                            <p className="!mb-[9.10px] !text-base lg:!leading-[32px] lg:!text-2xl">
+                                Harness the potential of C# with
+                                robust tools such as LINQ, ASP.NET,
                                 and Entity Framework.
                             </p>
-                            <img src="/img/Section5/power.svg" alt="power" className="self-end" />
+                            <img src="/img/Section5/power.svg" alt="power" className="self-end w-22 lg:w-auto" />
                         </div>
                     </Paper>
                     <div className="flex flex-col gap-[16px]">
-                        <Paper sx={{
-                            paddingTop: '80px',
-                            paddingLeft: '48px',
-                            paddingRight: '40.5px',
-                            paddingBottom: '40px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            boxShadow: 0
+                        <Paper 
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                boxShadow: 0
                             }}
-                            className="lg:!w-[636px] lg:!h-[319px]"
+                            className="!p-6 lg:pt-20 lg:pl-12 lg:pr-[40.5px] lg:pb-10 lg:!w-[636px] lg:!h-[319px]"
                         >
                             <div>
-                                <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Efficiency</h2>
-                                <p className="!text-[20px] !leading-28px]">
-                                    Experience streamlined developer<br />
-                                    experience for smooth dApp<br />
+                                <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] !text-3xl lg:!mb-[48px] lg:!text-[48px]">Efficiency</h2>
+                                <p className="!text-sm lg:!text-xl lg:!leading-[28px]">
+                                    Experience streamlined developer
+                                    experience for smooth dApp
                                     development and maintenance.
                                 </p>
                             </div>
                             <div className="flex flex-col justify-end">
-                                <img src="/img/Section5/efficiency.svg" alt="efficiency" />
+                                <img src="/img/Section5/efficiency.svg" alt="efficiency"  className="w-75 lg:w-auto"/>
                             </div>
                         </Paper>
-                        <Paper sx={{
-                            width: "636px",
-                            height: "319px",
-                            paddingTop: '80px',
-                            paddingLeft: '48px',
-                            paddingRight: '40px',
-                            paddingBottom: '40px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            boxShadow: 0
-                        }}>
+                        <Paper 
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                boxShadow: 0
+                            }}
+                            className="!p-6 lg:pt-20 lg:pl-12 lg:pr-10 lg:pb-10 lg:!w-[636px] lg:!h-[319px]"
+                        >
                             <div>
-                                <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Customizability</h2>
-                                <p className="!text-[20px] !leading-28px]">
-                                    Leverage built-in reducers or create<br />
-                                    custom ones tailored to your<br />
+                                <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] !text-3xl lg:!mb-[48px] lg:!text-[48px]">Efficiency</h2>
+                                <p className="!text-sm lg:!text-xl lg:!leading-[28px]">
+                                    Leverage built-in reducers or create
+                                    custom ones tailored to your
                                     requirements.
                                 </p>
                             </div>
                             <div className="flex flex-col justify-end">
-                                <img src="/img/Section5/customizability.svg" alt="customizability" />
+                                <img src="/img/Section5/customizability.svg" alt="customizability" className="w-60 lg:w-auto"/>
                             </div>
                         </Paper>
                     </div>

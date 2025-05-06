@@ -17,9 +17,9 @@ export default function Section1(): ReactNode {
 
     return (
         <section className={`relative grid place-content-center w-screen h-screen bg-cover pt-[60px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"}`}>
-            <div className="container text-center">
+            <div className="container mx-auto text-center">
                 <div>
-                    <h1 className="!text-[40px] sm:!text-[60px] lg:!text-[104px]">
+                    <h1 className="!text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
                         <span className="inline-flex items-center -translate-y-4 ">
                             <span className="tracking-[-9.62px] leading-[-20px] mr-[24px] text-[30px] lg:text-[52.88px]" style={{ fontFamily: "Space Mono" }}>
                                 <span> &gt; _</span>
@@ -36,8 +36,8 @@ export default function Section1(): ReactNode {
                 </div>
                 <div>
                     <p className="font-light text-sm sm:text-base lg:text-xl">
-                        Whether you're developing decentralized applications (dApps), writing smart <br /> 
-                        contracts, or exploring blockchain integration, the SAIB Cardano Developer <br />
+                        Whether you're developing decentralized applications (dApps), writing smart <br className="hidden md:block"/> 
+                        contracts, or exploring blockchain integration, the SAIB Cardano Developer <br className="hidden md:block"/>
                         Portal provides everything you need to innovate with confidence.
                     </p>
                 </div>
@@ -48,7 +48,6 @@ export default function Section1(): ReactNode {
                     <Wizard sx={{ color: theme.palette.text.secondary }} className="text-[120px]! lg:text-[140px]!"/>
                 </div>
             </div>
-
             <div 
                 onClick={scrollToNextSection}
                 className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 flex justify-center items-center flex-col animate-bounce2 cursor-pointer"

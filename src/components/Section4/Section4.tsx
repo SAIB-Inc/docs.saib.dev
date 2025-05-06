@@ -9,7 +9,7 @@ export default function Section4(): ReactNode {
     const theme = useTheme();
 
     return (
-        <section className="h-[952.98px] flex flex-col items-center w-screen">
+        <section className="flex flex-col items-center w-screen lg:h-[952.98px]">
             <div className="container mx-auto">
                 <div className="relative my-16 pt-40">
                     <div 
@@ -18,40 +18,40 @@ export default function Section4(): ReactNode {
                     >
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo"/>
                     </div>
-                    <div className="absolute right-0 top-6 z-10">
+                    <div className="absolute right-0 top-6 z-10 hidden sm:block">
                         <img src="/img/Section4/wizard.svg" alt="saib wizard"/>
                     </div>
-                    <div className="relative h-[498px] overflow-hidden bg-[url(/img/Section4/purple_bg.svg)] px-12 flex items-center justify-between">
+                    <div className="relative overflow-hidden bg-[url(/img/Section4/purple_bg.svg)] bg-cover bg-center p-4 flex items-center justify-between flex-col gap-2  rounded-[24px] lg:rounded-[48px] md:h-100 md:flex-row md:px-10 lg:h-[498px] lg:px-12">
                         <div className="bg-[url(/img/Section4/mesh.webp)] absolute left-0 w-full h-full bg-cover"/>
-                        <div className="w-[661px]">
-                            <h1 style={{color: theme.palette.grey[50]}} className="text-left !text-[64px] !leading-[60px]">
+                        <div className="z-10 mt-14 md:mt-0 lg:w-[661px]">
+                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl text-center sm:!text-5xl md:text-start md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
                                 <span>
-                                    Streamline <br />
+                                    Streamline <br className="hidden md:block"/>
                                 </span>
                                 <span style={{color: theme.palette.primary.light}}>
-                                    Cardano <br />
-                                    Blockchain <br />
+                                    Cardano <br className="hidden md:block"/>
+                                    Blockchain <br className="hidden md:block"/>
                                 </span>
                                 <span>
                                     Data Processing
                                 </span>
                             </h1>
                         </div>
-                        <div className="w-88">
+                        <div className="z-10 w-62 sm:w-82 md:w-74 lg:w-88">
                             <img src="/img/Section4/code_snippet.webp" alt="code snippet"/>
                         </div>
                     </div>
                 </div>
-                <div className="max-w-screen-xl w-full flex justify-between">
+                <div className="max-w-screen-xl w-full flex justify-between flex-col md:flex-row">
                     <div>
                         <div >
                             <p 
                                 style={{ color: theme.palette.text.disabled }}
-                                className="capitalize text-[18px] leading-[23.04px]"
+                                className="capitalize leading-[23.04px] !text-sm lg:!text-lg"
                             >
-                                Argus brings Cardano blockchain data seamlessly <br />
-                                into the .NET environment, empowering developers <br />
-                                to efficiently query and access data using familiar <br />
+                                Argus brings Cardano blockchain data seamlessly <br className="hidden md:block"/>
+                                into the .NET environment, empowering developers <br className="hidden md:block"/>
+                                to efficiently query and access data using familiar <br className="hidden md:block"/>
                                 .NET languages like C#. </p>
                         </div>
 
@@ -60,11 +60,11 @@ export default function Section4(): ReactNode {
                         </div>
 
                     </div>
-                    <div>
+                    <div className="mt-6 flex flex-col justify-between md:mt-0">
                         <div>
-                            <Catalyst />
+                            <Catalyst className="w-48 md:w-60 lg:w-auto"/>
                         </div>
-                        <div className="mt-[43.19px] flex justify-end">
+                        <div className="flex mt-3 lg:mt-[43.19px] lg:justify-end">
                             <Button sx={{ color: theme.palette.grey[50] }} variant="contained" endIcon={<RightArrow />}>View In Catalyst</Button>
                         </div>
                     </div>

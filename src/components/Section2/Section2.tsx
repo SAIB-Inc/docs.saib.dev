@@ -17,41 +17,41 @@ export default function Section2(): ReactNode {
         {
             name: "chrysalis",
             logo: "/img/Section2/Logos/chrysalis.webp",
-            class: "w-full -top-36 lg:top-76"
+            class: "w-72 -top-36 sm:w-100 sm:-top-49 md:w-120 md:-top-59 lg:top-84 xl:top-76 xl:w-full"
         },
         {
             name: "argus",
             logo: "/img/Section2/Logos/argus.webp",
-            class: "-top-48 w-62 lg:w-full lg:top-68"
+            class: "-top-48 w-62 sm:w-72 sm:-top-52 md:w-82 md:-top-56 lg:w-94 lg:top-72 xl:w-full xl:top-68"
         },
         {
             name: "aegis",
             logo: "/img/Section2/Logos/aegis.webp",
-            class: "-top-45 w-62 lg:w-full lg:top-70"
+            class: "-top-45 w-62 sm:w-72 sm:-top-49 md:w-82 md:-top-53 lg:w-94 lg:top-72 xl:w-full xl:top-70"
         },
         {
             name: "futura",
             logo: "/img/Section2/Logos/futura.webp",
-            class: "-top-45 w-56 lg:w-full lg:top-76"
+            class: "-top-45 w-56 sm:w-68 sm:-top-51 md:w-76 md:-top-55 lg:w-80 lg:top-84 xl:w-full xl:top-76"
         },
         {
             name: "razor",
             logo: "/img/Section2/Logos/razor.webp", 
-            class: "-top-52 w-38 lg:w-full lg:top-50"
+            class: "-top-52 w-38 sm:w-44 sm:-top-58 md:w-46 lg:w-58 lg:top-60 xl:w-full lg:top-50"
         }
     ];
 
     return (
-        <section id="section-2" className="w-screen pb-20 lg:pb-0 lg:h-[1076px]">
+        <section id="section-2" className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
             <div className="container flex flex-col h-full">
                 <div className="flex justify-between flex-col lg:h-[calc(100%-230px)] lg:flex-row">
                     <div className="!mt-[104px]">
-                        <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center lg:text-start lg:leading-[53.76px]! lg:!text-[56px]">
-                            <span>Check Out The </span>
-                            <span style={{color: theme.palette.text.secondary}} >Latest Resources</span>
+                        <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:leading-[53.76px]! lg:!text-[40px] xl:!text-[56px]">
+                            <span>Check Out <br className="hidden lg:block"/>The </span>
+                            <span style={{color: theme.palette.text.secondary}} >Latest <br className="hidden xl:block"/>Resources</span>
                         </h1>
                     </div>
-                    <div className="flex flex-col justify-end relative mt-60 lg:mt-0">
+                    <div className="flex flex-col justify-end items-center relative mt-60 lg:mt-0">
                         <div className={`absolute inset-x-0 left-1/2 transform -translate-x-1/2 flex justify-center ${projects[currentProject].class}`}>
                             <img
                                 src={projects[currentProject].logo}
@@ -59,9 +59,13 @@ export default function Section2(): ReactNode {
                                 className={`transition-opacity duration-150 ${isFading ? "opacity-0" : "opacity-100"} animate-bounce3`}
                             />
                         </div>
-                        <img src={colorMode === 'dark' ? "/img/Section2/base_ellipse_dark.webp" : "/img/Section2/base_ellipse_light.webp"} alt="base ellipse" />
+                        <img 
+                            src={colorMode === 'dark' ? "/img/Section2/base_ellipse_dark.webp" : "/img/Section2/base_ellipse_light.webp"} 
+                            alt="base ellipse" 
+                            className="w-72 sm:w-100 md:w-120 lg:w-auto"
+                        />
                     </div>
-                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-[305px]">
+                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[305px]">
                         <div className="flex flex-col justify-end pr-[6px]">
                             <nav>
                                 <ul className="!m-0 !p-0 hidden lg:block">
@@ -121,7 +125,7 @@ export default function Section2(): ReactNode {
                             >
                                 <ChevronLeft/>
                             </IconButton>
-                            <p className="capitalize w-max text-2xl" style={{fontFamily: "Space Mono"}}>{projects[currentProject].name}</p>
+                            <p className="capitalize w-max text-2xl md:text-3xl" style={{fontFamily: "Space Mono"}}>{projects[currentProject].name}</p>
                             <IconButton 
                                 onClick={() => {
                                     setIsFading(true);

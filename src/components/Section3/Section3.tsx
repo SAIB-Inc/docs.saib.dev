@@ -45,11 +45,11 @@ export default function Section3(): ReactNode {
                             <h1 className="text-center lg:text-start">
                                 <span
                                     style={{color: theme.palette.text.secondary}}
-                                    className="font-semibold text-3xl lg:text-[56px] lg:leading-[53.76px]"
+                                    className="font-semibold text-3xl sm:!text-5xl md:!text-[56px] lg:!text-[40px] lg:leading-[53.76px] xl:!text-[56px]"
                                 >
                                     Argus
                                 </span>
-                                <span className="font-semibold text-3xl lg:text-[56px] lg:leading-[53.76px]"> - The .NET Cardano Indexing Framework</span>
+                                <span className="font-semibold text-3xl sm:!text-5xl md:!text-[56px] lg:!text-[40px] lg:leading-[53.76px] xl:!text-[56px]"> - The .NET Cardano Indexing Framework</span>
                             </h1>
                         </div>
                         <div className="flex flex-col items-center lg:items-end lg:w-[557px]">

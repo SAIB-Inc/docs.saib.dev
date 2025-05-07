@@ -8,6 +8,7 @@ import Github from '../../../../static/img/Footer/github.svg';
 import X from '../../../../static/img/Footer/x.svg';
 import UpperRightArrow from '../../../../static/img/Footer/arrow_upper_right.svg';
 import LogoStyles from '../../../../static/img/Footer/logo_styled.svg';
+import BackgroundLines from '../../../../static/img/Footer/background_lines.svg';
 
 
 
@@ -19,7 +20,10 @@ export default function FooterLayout({
 }: Props): ReactNode {
   return (
     <footer className='h-[1078px]'>
-      <div className='bg-[url(/img/Footer/background.webp)] bg-cover bg-no-repeat place-items-center'>
+      <div className='bg-[url(/img/Footer/background.webp)] bg-cover bg-no-repeat place-items-center relative'>
+      <div>
+        <BackgroundLines/>
+      </div>
         <div className="container h-[1021px] !p-0 !pt-67">
           {/* {links} */}
           <div className='flex gap-x-20'>
@@ -32,16 +36,17 @@ export default function FooterLayout({
                   borderRadius: '16px',
                 }}
               >
-                <div className='!pb-0 !mt-[30.51px] !mb-[301.57px]'>
-                  <h2 className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px]'>Subscribe to our <br />
-                    Newsletter</h2>
-                </div>
-                <div>
-                  <div className='flex gap-x-[169.45px] pr-[6.14px]'>
-                    <p className='!text-[17.8px] leading-[24.92px]'>accounts@saib.dev</p>
-                    <RightArrow />
-                  </div>
-                  <hr className='!mt-[10.17px] !mb-[37.48px]' />
+                <div className='!pb-0 !mt-[30.51px] !mb-[160.49px]'>
+                  <p className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px] !mb-10'>
+                    Fueling the future <br />
+                    with bold ideas and <br />
+                    unstoppable energy.
+                  </p>
+                  <p className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px]'>
+                    Stay in the loop, <br />
+                    follow us on our <br />
+                    socials!
+                  </p>
                 </div>
               </Paper>
               <div className='flex gap-x-[10px]'>

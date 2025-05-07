@@ -20,6 +20,12 @@ export default function FooterCopyright({ copyright }: Props): ReactNode {
             fontSize: '12.71px',
             lineHeight: '17.794px',
             letterSpacing: '0.5084px',
+            '&:visited': {
+              color: 'white',
+            },
+            '&:hover': {
+              color: 'white',
+            },
           }}
           href="#"
         >
@@ -32,6 +38,12 @@ export default function FooterCopyright({ copyright }: Props): ReactNode {
             fontSize: '12.71px',
             lineHeight: '17.794px',
             letterSpacing: '0.5084px',
+            '&:visited': {
+              color: 'white',
+            },
+            '&:hover': {
+              color: 'white',
+            },
           }}
           href="#"
         >
@@ -44,6 +56,12 @@ export default function FooterCopyright({ copyright }: Props): ReactNode {
             fontSize: '12.71px',
             lineHeight: '17.794px',
             letterSpacing: '0.5084px',
+            '&:visited': {
+              color: 'white',
+            },
+            '&:hover': {
+              color: 'white',
+            },
           }}
           href="#"
         >

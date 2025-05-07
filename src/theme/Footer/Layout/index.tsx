@@ -1,11 +1,15 @@
-import React, {type ReactNode} from 'react';
+import React, { type ReactNode } from 'react';
 import clsx from 'clsx';
-import type {Props} from '@theme/Footer/Layout';
+import type { Props } from '@theme/Footer/Layout';
+import { Icon, IconButton, Link, Paper } from '@mui/material';
 import RightArrow from '../../../../static/img/Footer/arrow.svg';
 import UpArrow from '../../../../static/img/Footer/arrow_up.svg';
 import Github from '../../../../static/img/Footer/github.svg';
 import Discord from '../../../../static/img/Footer/discord.svg';
 import UpperRightArrow from '../../../../static/img/Footer/arrow_upper_right.svg';
+import LogoStyles from '../../../../static/img/Footer/logo_styled.svg';
+
+
 
 export default function FooterLayout({
   style,
@@ -20,52 +24,130 @@ export default function FooterLayout({
           {/* {links} */}
           <div className='flex gap-x-20'>
             <div className='flex flex-col gap-y-[127.3px]'>
-              <div className='bg-[#5438DC] pl-[30.51px] pr-[30.26px] rounded-2xl'> {/* MUI Paper or Button */}
+              <Paper
+                sx={{
+                  backgroundColor: '#5438DC',
+                  paddingLeft: '30.51px',
+                  paddingRight: '30.26px',
+                  borderRadius: '16px',
+                }}
+              >
                 <div className='!pb-0 !mt-[30.51px] !mb-[301.57px]'>
                   <h2 className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px]'>Subscribe to our <br />
-                  Newsletter</h2>
+                    Newsletter</h2>
                 </div>
                 <div>
                   <div className='flex gap-x-[169.45px] pr-[6.14px]'>
                     <p className='!text-[17.8px] leading-[24.92px]'>accounts@saib.dev</p>
-                    <RightArrow/>
+                    <RightArrow />
                   </div>
-                  <hr className='!mt-[10.17px] !mb-[37.48px]'/>
+                  <hr className='!mt-[10.17px] !mb-[37.48px]' />
                 </div>
-              </div>
-              <div className='flex'>
+              </Paper>
+              <div className='flex gap-x-[10px]'>
                 <div>
-                  <UpArrow/>
+                  <IconButton sx={{ padding: 0 }}>
+                    <UpArrow />
+                  </IconButton>
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
-                  <Github/>
-                  <Discord/>
+                  <IconButton sx={{ padding: 0 }}>
+                    <Github />
+                  </IconButton>
+                  <IconButton sx={{ padding: 0 }}>
+                    <Discord />
+                  </IconButton>
                 </div>
               </div>
             </div>
-            
-            <div>
+
+            <div className='relative'>
+              <img src="img/Footer/wizard.svg" className='absolute right-[44.5px] top-[-138.14px]' />
+              <LogoStyles className='absolute top-[226.18px] left-[126.5px]' />
+              <img src="img/Footer/logo_icon.svg" className='absolute right-[141px] top-[-127px]' />
               <div className='flex gap-x-[31px] mb-[61.02px]'>
-                <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal'>For Inquiries</h3>
-                <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !text-[#717171]'>/</h3>
-                <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal'>For Developer</h3>
+                <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Inquiries</h3>
+                <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !text-[#717171] !mb-0'>/</h3>
+                <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Developer</h3>
               </div>
 
-              <div className='flex justify-between gap-x-[362px]'>
+              <div className='flex justify-between gap-x-[369px]'>
                 <div>
                   <div className='mb-[60.64px]'>
                     <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>INFO</p>
                   </div>
                   <div>
                     <div className='flex flex-col gap-y-[10.17px]'>
-                      <p className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px]'>Contact Us</p>
-                      <p className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px]'>Documentation</p>
+                      <Link
+                        href=""
+                        target="_blank"
+                        rel="noopener"
+                        sx={{
+                          color: 'white',
+                          fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
+                          textDecoration: 'none',
+                          '&:visited': {
+                            color: 'white', // stop the purple visited color
+                          },
+                          '&:hover': {
+                            color: 'white', // optional: keep white on hover
+                          },
+                        }}
+                        underline="none">
+                        Contact Us
+                      </Link>
+                      <Link
+                        href=""
+                        target="_blank"
+                        rel="noopener"
+                        sx={{
+                          color: 'white',
+                          fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
+                          textDecoration: 'none',
+                          '&:visited': {
+                            color: 'white', // stop the purple visited color
+                          },
+                          '&:hover': {
+                            color: 'white', // optional: keep white on hover
+                          },
+                        }}
+                        underline="none">
+                        Documentation
+                      </Link>
                     </div>
-                    <div className='flex gap-x-[10.17px] items-center mt-[10.17px]'>
-                      <p className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px]'>FAQs</p> 
-                      <UpperRightArrow/>
+                    <div>
+                      <Link
+                        href=""
+                        target="_blank"
+                        rel="noopener"
+                        sx={{
+                          display: 'flex',
+                          gap: '10.17px',
+                          alignItems: 'center',
+                          marginTop: '10.17px',
+                          color: 'white',
+                          fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
+                          textDecoration: 'none',
+                          '&:visited': {
+                            color: 'white',
+                          },
+                          '&:hover': {
+                            color: 'white',
+                          },
+                        }}
+                        underline="none"
+                      >
+                        FAQs
+                        <UpperRightArrow />
+                      </Link>
                     </div>
-                    
+
                   </div>
                 </div>
 
@@ -74,9 +156,66 @@ export default function FooterLayout({
                     <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>ADDITIONAL LINKS</p>
                   </div>
                   <div className='flex flex-col gap-y-[7.63px]'>
-                    <p className='!text-[17.8px] leading-[24.92px]'>Product Customization</p>
-                    <p className='!text-[17.8px] leading-[24.92px]'>Community</p>
-                    <p className='!text-[17.8px] leading-[24.92px]'>Corporate Repsonsibility</p>
+                    <Link
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                      sx={{
+                        color: 'white',
+                        fontSize: '17.8px',
+                        lineHeight: '24.92px',
+                        textDecoration: 'none',
+                        '&:visited': {
+                          color: 'white',
+                        },
+                        '&:hover': {
+                          color: 'white',
+                        },
+                      }}
+                      underline="none"
+                    >
+                      Product Customization
+                    </Link>
+                    <Link
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                      sx={{
+                        color: 'white',
+                        fontSize: '17.8px',
+                        lineHeight: '24.92px',
+                        textDecoration: 'none',
+                        '&:visited': {
+                          color: 'white',
+                        },
+                        '&:hover': {
+                          color: 'white',
+                        },
+                      }}
+                      underline="none"
+                    >
+                      Community
+                    </Link>
+                    <Link
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                      sx={{
+                        color: 'white',
+                        fontSize: '17.8px',
+                        lineHeight: '24.92px',
+                        textDecoration: 'none',
+                        '&:visited': {
+                          color: 'white',
+                        },
+                        '&:hover': {
+                          color: 'white',
+                        },
+                      }}
+                      underline="none"
+                    >
+                      Corporate Responsibility
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -98,16 +237,11 @@ export default function FooterLayout({
             </div>
           </div>
         </div>
-        <div>
-          {(logo || copyright) && (
-            <div className="footer__bottom text--center">
-              {logo && <div className="margin-bottom--sm">{logo}</div>}
-              {copyright}
-            </div>
-          )}
-        </div>
       </div>
-      
+      <div className='h-[57px] bg-[#151515] flex items-center'>
+          {copyright}
+        </div>
+
     </footer>
   );
 }

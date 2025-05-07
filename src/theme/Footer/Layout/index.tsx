@@ -5,7 +5,7 @@ import { Icon, IconButton, Link, Paper } from '@mui/material';
 import RightArrow from '../../../../static/img/Footer/arrow.svg';
 import UpArrow from '../../../../static/img/Footer/arrow_up.svg';
 import Github from '../../../../static/img/Footer/github.svg';
-import Discord from '../../../../static/img/Footer/discord.svg';
+import X from '../../../../static/img/Footer/x.svg';
 import UpperRightArrow from '../../../../static/img/Footer/arrow_upper_right.svg';
 import LogoStyles from '../../../../static/img/Footer/logo_styled.svg';
 
@@ -46,32 +46,58 @@ export default function FooterLayout({
               </Paper>
               <div className='flex gap-x-[10px]'>
                 <div>
-                  <IconButton sx={{ padding: 0 }}>
+                  <IconButton LinkComponent={'a'}
+                    href='#'
+                    sx={{
+                      padding: 0,
+                      opacity: 0.6,
+                      '&:hover': {
+                        opacity: 1,
+                      },
+                    }}>
                     <UpArrow />
                   </IconButton>
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
-                  <IconButton sx={{ padding: 0 }}>
-                    <Github />
+                  <IconButton
+                    LinkComponent={'a'}
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener"
+                    sx={{
+                      padding: 0,
+                      opacity: 0.6,
+                      '&:hover': {
+                        opacity: 1,
+                      },
+                    }}>
+                    <Github href='https://github.com/SAIB-Inc' />
                   </IconButton>
-                  <IconButton sx={{ padding: 0 }}>
-                    <Discord />
+                  <IconButton
+                    sx={{
+                      padding: 0,
+                      opacity: 0.6,
+                      '&:hover': {
+                        opacity: 1,
+                      },
+                    }}>
+                    <X/>
                   </IconButton>
                 </div>
               </div>
             </div>
 
             <div className='relative'>
-              <img src="img/Footer/wizard.svg" className='absolute right-[44.5px] top-[-138.14px]' />
+              <img src="img/Footer/wizard.svg" alt="Wizard" className='absolute right-[44.5px] top-[-138.14px]' />
               <LogoStyles className='absolute top-[226.18px] left-[126.5px]' />
-              <img src="img/Footer/logo_icon.svg" className='absolute right-[141px] top-[-127px]' />
+              <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[141px] top-[-127px]' />
               <div className='flex gap-x-[31px] mb-[61.02px]'>
                 <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Inquiries</h3>
                 <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !text-[#717171] !mb-0'>/</h3>
                 <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Developer</h3>
               </div>
 
-              <div className='flex justify-between gap-x-[369px]'>
+              <div className='flex justify-between gap-x-[390px]'>
                 <div>
                   <div className='mb-[60.64px]'>
                     <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>INFO</p>
@@ -79,7 +105,7 @@ export default function FooterLayout({
                   <div>
                     <div className='flex flex-col gap-y-[10.17px]'>
                       <Link
-                        href=""
+                        href="https://calendly.com/saibdev"
                         target="_blank"
                         rel="noopener"
                         sx={{
@@ -121,7 +147,7 @@ export default function FooterLayout({
                     </div>
                     <div>
                       <Link
-                        href=""
+                        href="https://saib.dev/"
                         target="_blank"
                         rel="noopener"
                         sx={{
@@ -143,7 +169,7 @@ export default function FooterLayout({
                         }}
                         underline="none"
                       >
-                        FAQs
+                        SAIB
                         <UpperRightArrow />
                       </Link>
                     </div>
@@ -153,11 +179,11 @@ export default function FooterLayout({
 
                 <div>
                   <div className='mb-[60.64px]'>
-                    <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>ADDITIONAL LINKS</p>
+                    <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>REPOSITORY LINKS</p>
                   </div>
                   <div className='flex flex-col gap-y-[7.63px]'>
                     <Link
-                      href=""
+                      href="https://github.com/SAIB-Inc/Argus"
                       target="_blank"
                       rel="noopener"
                       sx={{
@@ -174,10 +200,10 @@ export default function FooterLayout({
                       }}
                       underline="none"
                     >
-                      Product Customization
+                      Argus
                     </Link>
                     <Link
-                      href=""
+                      href="https://github.com/SAIB-Inc/Chrysalis"
                       target="_blank"
                       rel="noopener"
                       sx={{
@@ -194,10 +220,10 @@ export default function FooterLayout({
                       }}
                       underline="none"
                     >
-                      Community
+                      Chrysalis
                     </Link>
                     <Link
-                      href=""
+                      href="https://github.com/SAIB-Inc/Razor"
                       target="_blank"
                       rel="noopener"
                       sx={{
@@ -214,7 +240,7 @@ export default function FooterLayout({
                       }}
                       underline="none"
                     >
-                      Corporate Responsibility
+                      Razor
                     </Link>
                   </div>
                 </div>
@@ -239,8 +265,8 @@ export default function FooterLayout({
         </div>
       </div>
       <div className='h-[57px] bg-[#151515] flex items-center'>
-          {copyright}
-        </div>
+        {copyright}
+      </div>
 
     </footer>
   );

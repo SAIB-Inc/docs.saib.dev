@@ -78,18 +78,26 @@ const config: Config = {
         srcDark: 'img/logo_dark.svg'
       },
       items: [
-        // {
-        //   type: "docSidebar",
-        //   sidebarId: "chrysalis",
-        //   position: "left",
-        //   label: "Chrysalis",
-        // },
+        {
+          docId: 'chrysalis',
+          type: "docSidebar",
+          sidebarId: "chrysalis",
+          position: "left",
+          label: "Chrysalis",
+        },
         {
           docId: 'argus',
           type: 'docSidebar',
           sidebarId: 'argusSidebar',
           position: 'left',
           label: 'Argus'
+        },
+        {
+          docId: 'razor',
+          type: 'docSidebar',
+          sidebarId: 'razor',
+          position: 'left',
+          label: 'Razor'
         },
         {
           href: 'https://github.com/SAIB-Inc',

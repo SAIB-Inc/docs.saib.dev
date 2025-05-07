@@ -81,3 +81,27 @@ background-image: url(/img/github_dark.svg);
 .navbar-icon:hover::before { 
     opacity: 100%;
 }
+
+[data-theme='dark'][data-theme-variant='home'] {
+    --ifm-color-primary: #5438DC;
+    --ifm-color-primary-light: #C2B8FF;
+    --ifm-color-primary-contrast: #ffffff;
+}
+
+[data-theme='dark'][data-theme-variant='chrysalis'] {
+    --ifm-color-primary: #049E96;
+    --ifm-color-primary-light: #59EDE0;
+    --ifm-color-primary-contrast: #ffffff;
+}
+  
+[data-theme='dark'][data-theme-variant='argus'] {
+    --ifm-color-primary: #813ADF;
+    --ifm-color-primary-light: #813ADF;
+    --ifm-color-primary-contrast: #ffffff;
+}
+
+[data-theme='dark'][data-theme-variant='razor'] {
+    --ifm-color-primary: #649DCA;
+    --ifm-color-primary-light: #649DCA;
+    --ifm-color-primary-contrast: #ffffff;
+}

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import RightArrow from "../../icons/RightArrow.svg";
 import Catalyst from "../../icons/Catalyst.svg";
+import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 
 export default function Section4(): ReactNode {
     return (
@@ -24,7 +25,7 @@ export default function Section4(): ReactNode {
                         </h1>
                     </div>
                     <div data-comment="argus code here">
-                        
+
                     </div>
                 </div>
                 <div className="max-w-screen-xl w-full flex justify-between">
@@ -37,7 +38,18 @@ export default function Section4(): ReactNode {
                         </div>
 
                         <div className="mt-[32px]">
-                            <BtnMore />
+                            <BtnMore LinkComponent={ExternalLink} href="http://localhost:3000/docs/"
+                                sx={{
+                                    '&:hover': {
+                                        backgroundColor: '#C2B8FF',
+                                        color: 'white'
+                                    },
+                                    '&:active': {
+                                        backgroundColor: '#3A376A',
+                                        color: '#white'
+                                    },
+                                }}
+                            />
                         </div>
 
                     </div>
@@ -46,7 +58,21 @@ export default function Section4(): ReactNode {
                             <Catalyst />
                         </div>
                         <div className="mt-[43.19px] flex justify-end">
-                            <Button variant="contained" endIcon={<RightArrow />}>View In Catalyst</Button>
+                            <BtnMore 
+                                LinkComponent={ExternalLink} href="https://milestones.projectcatalyst.io/projects/1200072"
+                                sx={{
+                                    '&:hover': {
+                                        backgroundColor: '#C2B8FF',
+                                        color: 'white'
+                                    },
+                                    '&:active': {
+                                        backgroundColor: '#3A376A',
+                                        color: '#white'
+                                    },
+                                }}
+                            >
+                                View in Catalyst
+                            </BtnMore>
                         </div>
                     </div>
                 </div>

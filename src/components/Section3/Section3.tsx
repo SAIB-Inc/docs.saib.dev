@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
+import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 
 export default function Section3(): ReactNode {
     return (

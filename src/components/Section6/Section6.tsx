@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import GrayRightArrow from "../../../static/img/Section6/gray_right_arrow.svg";
 import WhiteRightArrow from "../../../static/img/Section6/white_right_arrow.svg";
+import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 
 export default function Section6(): ReactNode {
     return (
@@ -16,7 +17,18 @@ export default function Section6(): ReactNode {
                         </h1>
                     </div>
                     <div className="flex items-center">
-                        <BtnMore />
+                        <BtnMore LinkComponent={ExternalLink} href="http://localhost:3000/docs/Chrysalis/overview"
+                            sx={{
+                                '&:hover': {
+                                    backgroundColor: '#C2B8FF',
+                                    color: 'white'
+                                },
+                                '&:active': {
+                                    backgroundColor: '#3A376A',
+                                    color: '#white'
+                                },
+                            }}
+                        />
                     </div>
 
                 </div>

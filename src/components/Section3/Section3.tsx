@@ -14,7 +14,7 @@ export default function Section3(): ReactNode {
 
                 <div className="text-center h-[64px] flex flex-row items-center mb-[178px] mt-[36px]">
                     <div>
-                        <img alt="Buriza" src="/img/Section3/buriza.webp" />
+                        <img alt="Buriza" src={colorMode === 'dark' ? '/img/Section3/buriza_dark.webp' : '/img/Section3/buriza_light.webp'} />
                     </div>
                     <div className="ml-[80px]">
                         <img src="/img/Section3/arrow.webp" />

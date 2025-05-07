@@ -1,4 +1,4 @@
-import { Button, IconButton, Paper, useTheme } from "@mui/material";
+import { IconButton, Paper, useTheme } from "@mui/material";
 import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import GrayRightArrow from "../../../static/img/Section6/gray_right_arrow.svg";
@@ -6,7 +6,6 @@ import WhiteRightArrow from "../../../static/img/Section6/white_right_arrow.svg"
 import CardanoLogo from "@site/static/img/cardano_logo";
 
 export default function Section6(): ReactNode {
-
     const theme = useTheme();
 
     return (
@@ -27,7 +26,7 @@ export default function Section6(): ReactNode {
 
                 <div className="flex justify-between flex-wrap gap-[16px]">
                     <Paper sx={{
-                        backgroundColor: '#5438DC',
+                        backgroundColor: theme.palette.secondary.dark,
                         borderRadius: '24px',
                         paddingTop: '51px',
                         paddingLeft: '40px',
@@ -53,7 +52,7 @@ export default function Section6(): ReactNode {
                     </Paper>
 
                     <Paper sx={{
-                        backgroundColor: '#1F2F4E',
+                        backgroundColor: theme.palette.grey[800],
                         borderRadius: '24px',
                         width: '357px',
                         height: '304px',
@@ -82,7 +81,7 @@ export default function Section6(): ReactNode {
                     </Paper>
 
                     <Paper sx={{
-                        backgroundColor: '#7454FF',
+                        backgroundColor: theme.palette.secondary.light,
                         borderRadius: '24px',
                         paddingTop: '40px',
                         paddingLeft: '40px',
@@ -112,7 +111,7 @@ export default function Section6(): ReactNode {
                     </Paper>
 
                     <Paper sx={{
-                        backgroundColor: '#C2B8FF',
+                        backgroundColor: theme.palette.primary.light,
                         borderRadius: '24px',
                         paddingTop: '40px',
                         paddingLeft: '40px',

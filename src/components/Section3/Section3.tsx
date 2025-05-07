@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
-import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 import { useTheme } from "@mui/material";
 import { useColorMode } from "@docusaurus/theme-common";
+import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 
 export default function Section3(): ReactNode {
 

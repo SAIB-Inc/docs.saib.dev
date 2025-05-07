@@ -3,8 +3,8 @@ import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import GrayRightArrow from "../../../static/img/Section6/gray_right_arrow.svg";
 import WhiteRightArrow from "../../../static/img/Section6/white_right_arrow.svg";
-import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 import CardanoLogo from "@site/static/img/cardano_logo";
+import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 
 export default function Section6(): ReactNode {
     const theme = useTheme();

@@ -19,7 +19,7 @@ export default function Section7(): ReactNode {
                             </span>
                         </h1>
                         <img 
-                            src="/img/Section7/seventh_wizard.webp" 
+                            src="/img/Section7/seventh_wizard.svg" 
                             alt="wizard" 
                             className="absolute right-[355.44px] bottom-[-4.74px]" 
                         />

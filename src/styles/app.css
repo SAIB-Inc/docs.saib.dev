@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-white: #fff;
     --spacing: 0.25rem;
     --breakpoint-xl: 80rem;
     --font-weight-light: 300;
@@ -460,12 +459,6 @@
   .h-screen {
     height: 100vh;
   }
-  .\!w-\[100px\] {
-    width: 100px !important;
-  }
-  .w-26 {
-    width: calc(var(--spacing) * 26);
-  }
   .w-74 {
     width: calc(var(--spacing) * 74);
   }
@@ -609,9 +602,6 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .bg-\[\#5438DC\] {
-    background-color: #5438DC;
-  }
   .bg-\[url\(\/img\/Section3\/background_dark\.webp\)\] {
     background-image: url(/img/Section3/background_dark.webp);
   }
@@ -741,17 +731,8 @@
   .\!text-\[104px\] {
     font-size: 104px !important;
   }
-  .\!text-\[106px\] {
-    font-size: 106px !important;
-  }
-  .\!text-\[120px\] {
-    font-size: 120px !important;
-  }
   .\!text-\[130px\] {
     font-size: 130px !important;
-  }
-  .\!text-\[140px\] {
-    font-size: 140px !important;
   }
   .text-\[16px\] {
     font-size: 16px;
@@ -779,9 +760,6 @@
   }
   .text-\[56px\] {
     font-size: 56px;
-  }
-  .text-\[106px\] {
-    font-size: 106px;
   }
   .text-\[192px\]\! {
     font-size: 192px !important;
@@ -905,12 +883,6 @@
   .tracking-\[0\.64px\] {
     --tw-tracking: 0.64px;
     letter-spacing: 0.64px;
-  }
-  .text-\[\#C2B8FF\] {
-    color: #C2B8FF;
-  }
-  .text-white {
-    color: var(--color-white);
   }
   .capitalize {
     text-transform: capitalize;

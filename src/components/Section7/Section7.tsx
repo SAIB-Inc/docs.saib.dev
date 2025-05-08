@@ -10,7 +10,7 @@ export default function Section7(): ReactNode {
     const theme = useTheme();
 
     return (
-        <section className="bg-[url(/img/Section7/seventh_background.webp)] bg-cover h-[1171px]">
+        <section style={{ backgroundColor: theme.palette.background.default }} className="bg-[url(/img/Section7/seventh_background.webp)] bg-cover h-[1171px]">
             <div className="container !pt-[274.77px] !pb-[152.23px]">
                 <div className="flex flex-col justify-center !pb-15">
                     <div className="relative">

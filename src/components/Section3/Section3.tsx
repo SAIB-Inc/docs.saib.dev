@@ -9,7 +9,7 @@ export default function Section3(): ReactNode {
     const { colorMode } = useColorMode();
 
     return (
-        <section className={`bg-lines relative h-[1088.02px] flex flex-col items-center bg-center w-screen bg-cover ${colorMode === 'dark' ? 'bg-[url(/img/Section3/background_dark.webp)]' : 'bg-[url(/img/Section3/background_light.webp)]'}`}>
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-lines relative h-[1088.02px] flex flex-col items-center bg-center w-screen bg-cover ${colorMode === 'dark' ? 'bg-[url(/img/Section3/background_dark.webp)]' : 'bg-[url(/img/Section3/background_light.webp)]'}`}>
             <div className="container flex flex-col justify-center items-center">
 
                 <div className="text-center h-[64px] flex flex-row items-center mb-[178px] mt-[36px]">

@@ -9,7 +9,7 @@ export default function Section4(): ReactNode {
     const { colorMode } = useColorMode();
 
     return (
-        <section className="h-[952.98px] flex flex-col items-center w-screen">
+        <section style={{ backgroundColor: theme.palette.background.default }} className="h-[952.98px] flex flex-col items-center w-screen">
             <div className="container mx-auto">
                 <div className="relative my-16 pt-40">
                     <div 

@@ -7,7 +7,7 @@ export default function Section8(): ReactNode {
     const { colorMode } = useColorMode();
 
     return(
-        <section className="bg-[url(/img/Section8/eighth_background.webp)] w-screen h-[1113px] bg-cover pt-[137px]">
+        <section style={{ backgroundColor: theme.palette.background.default }} className="bg-[url(/img/Section8/eighth_background.webp)] w-screen h-[1113px] bg-cover pt-[137px]">
             <div className="container">
                 <div className="flex justify-between items-center">
                     <h1 className="!text-[56px] leading-[54.88px] !mb-0">

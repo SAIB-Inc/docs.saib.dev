@@ -160,7 +160,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `© SAIB ${new Date().getFullYear()} - Copyright`,
     },
     prism: {
       theme: prismThemes.github,

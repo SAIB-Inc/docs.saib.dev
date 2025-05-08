@@ -1,19 +1,36 @@
-import { Button } from "@mui/material";
+import { useColorMode } from "@docusaurus/theme-common";
+import { Button, useTheme } from "@mui/material";
+import Wizard from "@site/static/img/wizard";
 import { ReactNode } from "react";
 
 export default function Section1(): ReactNode {
+
+    const theme = useTheme();
+    const { colorMode } = useColorMode();
+
+    const scrollToNextSection = () => {
+        const nextSection = document.getElementById("section-2");
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
     return (
-        <section className="relative grid place-content-center bg-[url(/img/background.png)] w-screen h-screen bg-cover pt-[60px]">
+        <section className={`relative grid place-content-center w-screen h-screen bg-cover pt-[60px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"}`}>
             <div className="container text-center">
                 <div>
                     <h1 className="!text-[104px]">
                         <span className="inline-flex items-center -translate-y-4 ">
                             <span className="text-[52.88px] tracking-[-9.62px] mr-[24px]" style={{ fontFamily: "Space Mono" }}>
                                 <span> &gt; _</span>
-                                <span className="text-[55px] text-[#5438DC] animate-blink inline-block ml-[9.62px]"> |</span>
+                                <span 
+                                    style={{color: theme.palette.primary.main}}
+                                    className="text-[55px] animate-blink inline-block ml-[9.62px]"> |</span>
                             </span>
                         </span>
-                        <span className="text-[#C2B8FF]">SAIB </span>
+                        <span 
+                            style={{color: theme.palette.text.secondary}} 
+                        >SAIB </span>
                         <span>Cardano Developer Portal</span>
                     </h1>
                 </div>
@@ -25,14 +42,17 @@ export default function Section1(): ReactNode {
                     </p>
                 </div>
                 <div className="mt-[34px]">
-                    <Button variant="contained">Let's Get Started</Button>
+                    <Button sx={{ color: theme.palette.grey[50] }} variant="contained">Let's Get Started</Button>
                 </div>
                 <div className="flex justify-center mt-[72.9px]">
-                    <img src="/img/wizard.webp" alt="wizard developers" />
+                    <Wizard sx={{ fontSize: 140, color: theme.palette.text.secondary }}/>
                 </div>
             </div>
 
-            <div className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 flex justify-center items-center flex-col animate-bounce2 cursor-pointer">
+            <div 
+                onClick={scrollToNextSection}
+                className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 flex justify-center items-center flex-col animate-bounce2 cursor-pointer"
+            >
                 <img src="/img/scroll_arrow.webp" alt="scroll down"/>
             </div>
         </section>

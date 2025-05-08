@@ -3,25 +3,34 @@ import CardHead from "../../../static/img/Section7/card_head.svg";
 import Popularity from "../../../static/img/Section7/popularity.svg";
 import Performance from "../../../static/img/Section7/performance.svg";
 import Versatility from "../../../static/img/Section7/versatility.svg";
+import SeventhWizard from "@site/static/img/Section7/seventh_wizard";
+import { useTheme } from "@mui/material";
+import { useColorMode } from "@docusaurus/theme-common";
 
 export default function Section7(): ReactNode {
+    const theme = useTheme();
+    const { colorMode } = useColorMode();
+    
     return (
-        <section className="bg-[url(/img/Section7/seventh_background.webp)] bg-cover h-[1171px]">
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover h-[1171px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"}`}>
             <div className="container !pt-[274.77px] !pb-[152.23px]">
                 <div className="flex flex-col justify-center !pb-15">
                     <div className="relative">
                         <h1 className="!text-[56px] text-center leading-[53.76px] tracking-[0.56px] font-semibold  !m-0">
-                            <span className="text-white">
+                            <span>
                                 Why&nbsp;
                             </span>
-                            <span className="text-[#C2B8FF]">
+                            <span style={{
+                                color: theme.palette.text.secondary
+                            }}>
                                 .NET?
                             </span>
                         </h1>
-                        <img 
-                            src="/img/Section7/seventh_wizard.svg" 
-                            alt="wizard" 
-                            className="absolute right-[355.44px] bottom-[-4.74px]" 
+                        <SeventhWizard 
+                            sx={{
+                                color: theme.palette.text.secondary
+                            }}
+                            className="absolute !text-[130px] right-[355.44px] bottom-[-4.74px]"
                         />
                     </div>
 
@@ -42,7 +51,13 @@ export default function Section7(): ReactNode {
                             <CardHead className="absolute top-0 w-full" />
                             <Popularity className="absolute top-8 right-[32.05px]" />
                         </div>
-                        <div className="bg-[#5438DC] rounded-b-[24px] mt-[99px] pt-[57px] pl-8 pr-[46px] pb-[50px]">
+                        <div   
+                            style={{
+                                backgroundColor: theme.palette.primary.main,
+                                color: theme.palette.grey[50]
+                            }}
+                            className="rounded-b-[24px] mt-[99px] pt-[57px] pl-8 pr-[46px] pb-[50px]"
+                        >
                             <h4 className="!text-[40px] leading-[48px] !mb-[38px]">Popularity</h4>
                             <p className="!text-[20px] leading-[28px]">NET Core was ranked as the top <br />
                             non-web framework in the 2024<br />
@@ -59,7 +74,13 @@ export default function Section7(): ReactNode {
                             <CardHead className="absolute top-0 w-full" />
                             <Performance className="absolute top-8 right-[32.05px]" />
                         </div>
-                        <div className="bg-[#5438DC] rounded-b-[24px] mt-[99px] pt-[57px] pl-8 pr-[48.5px] pb-[50px]">
+                        <div 
+                            style={{
+                                backgroundColor: theme.palette.primary.main,
+                                color: theme.palette.grey[50]
+                            }}
+                            className="rounded-b-[24px] mt-[99px] pt-[57px] pl-8 pr-[48.5px] pb-[50px]"
+                        >
                             <h4 className="!text-[40px] leading-12 !mb-[38px]">Performance</h4>
                             <p className="!text-[20px] leading-7">NET Core delivers high-<br />
                             performance applications, with <br />
@@ -75,7 +96,13 @@ export default function Section7(): ReactNode {
                             <CardHead className="absolute top-0 w-full" />
                             <Versatility className="absolute top-8 right-[32.05px]" />
                         </div>
-                        <div className="bg-[#5438DC] rounded-b-[24px] mt-[99px] pt-[57px] pl-8 pr-[48.5px] pb-[50px]">
+                        <div 
+                            style={{
+                                backgroundColor: theme.palette.primary.main,
+                                color: theme.palette.grey[50]
+                            }}
+                            className="rounded-b-[24px] mt-[99px] pt-[57px] pl-8 pr-[48.5px] pb-[50px]"
+                        >
                             <h4 className="!text-[40px] leading-12 !mb-[38px]">Versatility</h4>
                             <p className="!text-[20px] leading-7">.NET supports development <br />
                             across Windows, Linux, and <br />

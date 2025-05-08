@@ -966,7 +966,7 @@ html[data-theme='dark'] .navbar-icon::before {
   --ifm-color-primary-contrast: #ffffff;
 }
 [data-theme='dark'][data-theme-variant='futura'] {
-  --ifm-color-primary: #FFF8E0;
+  --ifm-color-primary: #936FB6;
   --ifm-color-primary-light: #FFF8E0;
   --ifm-color-primary-contrast: #ffffff;
 }

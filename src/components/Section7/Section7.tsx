@@ -5,12 +5,14 @@ import Performance from "../../../static/img/Section7/performance.svg";
 import Versatility from "../../../static/img/Section7/versatility.svg";
 import SeventhWizard from "@site/static/img/Section7/seventh_wizard";
 import { useTheme } from "@mui/material";
+import { useColorMode } from "@docusaurus/theme-common";
 
 export default function Section7(): ReactNode {
     const theme = useTheme();
-
+    const { colorMode } = useColorMode();
+    
     return (
-        <section style={{ backgroundColor: theme.palette.background.default }} className="bg-[url(/img/Section7/seventh_background.webp)] bg-cover h-[1171px]">
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover h-[1171px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"}`}>
             <div className="container !pt-[274.77px] !pb-[152.23px]">
                 <div className="flex flex-col justify-center !pb-15">
                     <div className="relative">

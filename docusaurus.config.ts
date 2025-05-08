@@ -37,10 +37,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
@@ -74,10 +70,12 @@ const config: Config = {
       title: '',
       logo: {
         alt: 'SAIB Developer Portal',
-        src: 'img/logo.svg',
+        src: 'img/logo_light.svg',
+        srcDark: 'img/logo_dark.svg'
       },
       items: [
         {
+          docId: 'chrysalis',
           type: "docSidebar",
           sidebarId: "chrysalis",
           position: "left",
@@ -90,11 +88,32 @@ const config: Config = {
           position: 'left',
           label: 'Argus'
         },
-
         {
-          type: 'html',
+          docId: 'razor',
+          type: 'docSidebar',
+          sidebarId: 'razor',
+          position: 'left',
+          label: 'Razor'
+        },
+        {
+          docId: 'comp',
+          type: 'docSidebar',
+          sidebarId: 'comp',
+          position: 'left',
+          label: 'COMP'
+        },
+        {
+          docId: 'futura',
+          type: 'docSidebar',
+          sidebarId: 'futura',
+          position: 'left',
+          label: 'Futura'
+        },
+        {
+          href: 'https://github.com/SAIB-Inc',
           position: 'right',
-          value: '<a href="https://github.com/SAIB-Inc" target="_blank"><img src="/img/github.svg" alt="github"/></a>',
+          className: 'navbar-icon',
+          'aria-label': 'GitHub repository',
         },
       ],
     },

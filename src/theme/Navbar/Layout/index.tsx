@@ -10,6 +10,7 @@ import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
 import type {Props} from '@theme/Navbar/Layout';
 
 import styles from './styles.module.css';
+import { alpha, useTheme } from '@mui/material';
 
 function NavbarBackdrop(props: ComponentProps<'div'>) {
   return (
@@ -22,6 +23,7 @@ function NavbarBackdrop(props: ComponentProps<'div'>) {
 }
 
 export default function NavbarLayout({children}: Props): ReactNode {
+  const theme = useTheme();
   const {
     navbar: {hideOnScroll, style},
   } = useThemeConfig();
@@ -35,6 +37,9 @@ export default function NavbarLayout({children}: Props): ReactNode {
         message: 'Main',
         description: 'The ARIA label for the main navigation',
       })}
+      style={{
+        backgroundColor: alpha(theme.palette.background.default, 0.8),
+      }}
       className={clsx(
         'navbar',
         'navbar--fixed-top',
@@ -47,9 +52,8 @@ export default function NavbarLayout({children}: Props): ReactNode {
           'navbar--primary': style === 'primary',
           'navbar-sidebar--show': mobileSidebar.shown,
         },
-        '!bg-transparent',
-        '!fixed',
-        'w-[100vw]'
+        'w-[100vw]',
+        'backdrop-blur-xl!'
       )}>
       {children}
       <NavbarBackdrop onClick={mobileSidebar.toggle} />

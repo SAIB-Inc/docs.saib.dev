@@ -1,11 +1,11 @@
-import React, {type ReactNode} from 'react';
+import React, { type ReactNode } from 'react';
 import {useColorMode, useThemeConfig} from '@docusaurus/theme-common';
-import ColorModeToggle from '@theme/ColorModeToggle';
 import type {Props} from '@theme/Navbar/ColorModeToggle';
-import styles from './styles.module.css';
+import { IconButton, useTheme } from '@mui/material';
+import ColorModeIcon from '@site/static/img/color_mode_logo';
 
 export default function NavbarColorModeToggle({className}: Props): ReactNode {
-  const navbarStyle = useThemeConfig().navbar.style;
+  const theme = useTheme();
   const disabled = useThemeConfig().colorMode.disableSwitch;
   const {colorMode, setColorMode} = useColorMode();
 
@@ -13,14 +13,30 @@ export default function NavbarColorModeToggle({className}: Props): ReactNode {
     return null;
   }
 
+  const isDark = colorMode === 'dark';
+
   return (
-    <ColorModeToggle
+    <IconButton
       className={className}
-      buttonClassName={
-        navbarStyle === 'dark' ? styles.darkNavbarColorModeToggle : undefined
-      }
-      value={colorMode}
-      onChange={setColorMode}
-    />
+      onClick={() => setColorMode(isDark ? 'light' : 'dark')}
+      title="Toggle color mode"
+      sx={{
+        border: 1,
+        borderColor: theme.palette.primary.contrastText,
+        padding: '5px',
+        opacity: '60%',
+        '&:hover': {
+          opacity: '100%',
+          backgroundColor: 'transparent'
+        },
+      }}
+    >
+      <ColorModeIcon 
+        sx={{
+          color: theme.palette.primary.contrastText,
+          fontSize: 20,
+        }}
+      /> 
+    </IconButton>
   );
 }

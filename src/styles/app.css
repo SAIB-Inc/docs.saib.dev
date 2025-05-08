@@ -945,6 +945,11 @@ html[data-theme='dark'] .navbar-icon::before {
 .breadcrumbs__item>a {
   height: 19px;
 }
+[data-theme-variant='home'] {
+  --ifm-color-primary: #5438DC;
+  --ifm-color-primary-light: #C2B8FF;
+  --ifm-color-primary-contrast: #ffffff;
+}
 [data-theme-variant='chrysalis'] {
   --ifm-color-primary: #049E96;
   --ifm-color-primary-light: #59EDE0;
@@ -958,6 +963,11 @@ html[data-theme='dark'] .navbar-icon::before {
 [data-theme-variant='razor'] {
   --ifm-color-primary: #649DCA;
   --ifm-color-primary-light: #649DCA;
+  --ifm-color-primary-contrast: #ffffff;
+}
+[data-theme-variant='comp'] {
+  --ifm-color-primary: #F83C01;
+  --ifm-color-primary-light: #FF8F71;
   --ifm-color-primary-contrast: #ffffff;
 }
 @property --tw-translate-x {

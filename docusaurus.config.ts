@@ -100,6 +100,13 @@ const config: Config = {
           label: 'Razor'
         },
         {
+          docId: 'comp',
+          type: 'docSidebar',
+          sidebarId: 'comp',
+          position: 'left',
+          label: 'COMP'
+        },
+        {
           href: 'https://github.com/SAIB-Inc',
           position: 'right',
           className: 'navbar-icon',

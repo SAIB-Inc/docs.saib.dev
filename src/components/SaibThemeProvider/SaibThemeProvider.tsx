@@ -22,6 +22,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
     const isChrysalis = location.pathname.startsWith('/docs/chrysalis');
     const isArgus = location.pathname.startsWith('/docs/argus');
     const isRazor = location.pathname.startsWith('/docs/razor');
+    const isComp = location.pathname.startsWith('/docs/comp');
 
     const darkTheme = useMemo(() =>
         createTheme({
@@ -68,10 +69,12 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
         root.setAttribute('data-theme-variant', 'chrysalis');
       } else if (isRazor) {
         root.setAttribute('data-theme-variant', 'razor'); 
-      }else {
+      } else if (isComp) {
+        root.setAttribute('data-theme-variant', 'comp');
+      } else {
         root.setAttribute('data-theme-variant', 'home');
       }
-    }, [isArgus, isChrysalis]);
+    }, [isArgus, isChrysalis, isRazor, isComp]);
 
     return (
         <ThemeProvider theme={darkTheme}>

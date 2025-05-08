@@ -11,7 +11,7 @@ export default function Section6(): ReactNode {
 
     return (
         <section className="w-screen lg:h-[956px]">
-            <div className="container place-content-between !pt-[148px]">
+            <div className="container place-content-between !pt-20 md:!pt-[148px]">
                 <div className="flex justify-between h-[72px] items-center flex-col mb-6 lg:mb-20 lg:items-start md:flex-row">
                     <div>
                         <h1 className="!text-3xl text-center sm:!text-5xl lg:text-start lg:!leading-[72px] lg:tracking-[0.64px] lg:!text-[64px]">

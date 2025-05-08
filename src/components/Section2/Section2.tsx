@@ -45,7 +45,7 @@ export default function Section2(): ReactNode {
         <section id="section-2" className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
             <div className="container flex flex-col h-full">
                 <div className="flex justify-between flex-col lg:h-[calc(100%-230px)] lg:flex-row">
-                    <div className="!mt-[104px]">
+                    <div className="!mt-18 md:!mt-26">
                         <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:leading-[53.76px]! lg:!text-[40px] xl:!text-[56px]">
                             <span>Check Out <br className="hidden lg:block"/>The </span>
                             <span style={{color: theme.palette.text.secondary}} >Latest <br className="hidden xl:block"/>Resources</span>

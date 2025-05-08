@@ -8,8 +8,8 @@ export default function Section5(): ReactNode {
     const { colorMode } = useColorMode();
 
     return (
-        <section className={`bg-cover w-screen h-[1203px] ${colorMode === 'dark' ? "bg-[url(/img/Section5/fifth_background_dark.webp)]" : "bg-[url(/img/Section5/fifth_background_light.webp)]"}`}>
-            <div className="container flex flex-col items-center !pt-[227px] !pb-[134px]">
+        <section className={`bg-cover w-screen ${colorMode === 'dark' ? "bg-[url(/img/Section5/fifth_background_dark.webp)]" : "bg-[url(/img/Section5/fifth_background_light.webp)]"} md:h-[1203px]`}>
+            <div className="container flex flex-col items-center !pt-30 md:!pt-[227px] md:!pb-[134px]">
                 <div>
                     <h1 className="font-semibold text-center !text-3xl sm:!text-5xl md:!text-[56px] md:leading-[53.76px]">
                         <span>Accelerate </span>

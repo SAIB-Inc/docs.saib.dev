@@ -16,7 +16,7 @@ export default function Section1(): ReactNode {
       };
 
     return (
-        <section className={`relative grid place-content-center w-screen h-screen bg-cover pt-[60px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"}`}>
+        <section className={`relative grid place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} pt-24 md:pt-15 md:h-screen`}>
             <div className="container mx-auto text-center">
                 <div>
                     <h1 className="!text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
@@ -50,7 +50,7 @@ export default function Section1(): ReactNode {
             </div>
             <div 
                 onClick={scrollToNextSection}
-                className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 flex justify-center items-center flex-col animate-bounce2 cursor-pointer"
+                className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 justify-center items-center flex-col animate-bounce2 cursor-pointer hidden md:flex"
             >
                 <img src="/img/scroll_arrow.webp" alt="scroll down"/>
             </div>

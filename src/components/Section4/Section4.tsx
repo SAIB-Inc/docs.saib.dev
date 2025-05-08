@@ -11,10 +11,10 @@ export default function Section4(): ReactNode {
     return (
         <section className="flex flex-col items-center w-screen lg:h-[952.98px]">
             <div className="container mx-auto">
-                <div className="relative my-16 pt-40">
+                <div className="relative my-16 pt-20 md:pt-40">
                     <div 
                         style={{backgroundColor: theme.palette.primary.main}}
-                        className="rounded-full flex items-center justify-center size-26 absolute top-20 left-1/2 -translate-x-1/2"
+                        className="rounded-full flex items-center justify-center size-26 absolute left-1/2 -translate-x-1/2 top-0 md:top-20"
                     >
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo"/>
                     </div>

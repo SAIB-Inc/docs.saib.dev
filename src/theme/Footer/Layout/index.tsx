@@ -104,14 +104,14 @@ export default function FooterLayout({
               <div>
                 <div className='flex gap-x-[31px] mb-[61.02px]'>
                   <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Inquiries</h3>
-                  <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !text-[#717171] !mb-0'>/</h3>
+                  <h3 style={{color: theme.palette.grey[100]}} className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>/</h3>
                   <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Developer</h3>
                 </div>
 
                 <div className='flex justify-between gap-x-[460px]'>
                   <div>
                     <div className='mb-[60.64px]'>
-                      <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>INFO</p>
+                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] font-medium'>INFO</p>
                     </div>
                     <div>
                       <div className='flex flex-col gap-y-[10.17px]'>
@@ -189,7 +189,7 @@ export default function FooterLayout({
 
                   <div>
                     <div className='mb-[60.64px]'>
-                      <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>DOCUMENTATION LINKS</p>
+                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] font-medium'>DOCUMENTATION LINKS</p>
                     </div>
                     <div className='flex flex-col gap-y-[7.63px]'>
                       <Link
@@ -305,15 +305,15 @@ export default function FooterLayout({
               <div>
                 <div className='flex gap-x-15 self-end !mb-[21.83px]'>
                   <div>
-                    <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] !mb-[10.17px]'>CORPORATE OFFICE</p>
+                    <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
                     <p className='!text=[17.8px] leading-[17.92px]'>Philippines</p>
                   </div>
                   <div>
-                    <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] !mb-[10.17px]'>PHONE</p>
+                    <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE</p>
                     <p className='!text=[17.8px] leading-[17.92px]'>+63 XXX XXX XXX</p>
                   </div>
                   <div>
-                    <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] !mb-[10.17px]'>EMAIL</p>
+                    <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>EMAIL</p>
                     <p className='!text=[17.8px] leading-[17.92px]'>accounts@saib.dev</p>
                   </div>
                 </div>

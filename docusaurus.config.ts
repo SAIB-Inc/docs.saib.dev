@@ -37,10 +37,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
@@ -78,18 +74,40 @@ const config: Config = {
         srcDark: 'img/logo_dark.svg'
       },
       items: [
-        // {
-        //   type: "docSidebar",
-        //   sidebarId: "chrysalis",
-        //   position: "left",
-        //   label: "Chrysalis",
-        // },
+        {
+          docId: 'chrysalis',
+          type: "docSidebar",
+          sidebarId: "chrysalis",
+          position: "left",
+          label: "Chrysalis",
+        },
         {
           docId: 'argus',
           type: 'docSidebar',
           sidebarId: 'argusSidebar',
           position: 'left',
           label: 'Argus'
+        },
+        {
+          docId: 'razor',
+          type: 'docSidebar',
+          sidebarId: 'razor',
+          position: 'left',
+          label: 'Razor'
+        },
+        {
+          docId: 'comp',
+          type: 'docSidebar',
+          sidebarId: 'comp',
+          position: 'left',
+          label: 'COMP'
+        },
+        {
+          docId: 'futura',
+          type: 'docSidebar',
+          sidebarId: 'futura',
+          position: 'left',
+          label: 'Futura'
         },
         {
           href: 'https://github.com/SAIB-Inc',

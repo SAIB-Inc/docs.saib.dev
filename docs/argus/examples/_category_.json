@@ -3,6 +3,7 @@
     "position": 4,
     "link": {
       "type": "generated-index",
-      "description": "Some examples of Argus in action."
+      "description": "Some examples of Argus in action.",
+      "slug": "/argus/examples"
     }
   }

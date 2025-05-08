@@ -4,7 +4,8 @@
     "link": {
       "type": "generated-index",
       "title": "Argus Core Features",
-      "description": "Deep dives into each part of Argus’s indexing pipeline."
+      "description": "Deep dives into each part of Argus’s indexing pipeline.",
+      "slug": "/argus/core-features"
     }
   }
   

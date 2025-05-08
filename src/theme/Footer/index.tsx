@@ -12,16 +12,14 @@ function Footer(): ReactNode {
     return null;
   }
   const { copyright, links, logo, style } = footer;
-// <FooterLayout
-    //   style={style}
-    //   links={links && links.length > 0 && <FooterLinks links={links} />}
-    //   logo={logo && <FooterLogo logo={logo} />}
-    //   copyright={copyright && <FooterCopyright copyright={copyright} />}
-    // />
+
   return (
-    <>
-    
-    </>
+    <FooterLayout
+      style={style}
+      links={links && links.length > 0 && <FooterLinks links={links} />}
+      logo={logo && <FooterLogo logo={logo} />}
+      copyright={copyright && <FooterCopyright copyright={copyright} />}
+    />
   );
 }
 

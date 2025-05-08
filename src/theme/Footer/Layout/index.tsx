@@ -2,7 +2,6 @@ import React, { type ReactNode } from 'react';
 import clsx from 'clsx';
 import type { Props } from '@theme/Footer/Layout';
 import { Icon, IconButton, Link, Paper } from '@mui/material';
-import RightArrow from '../../../../static/img/Footer/arrow.svg';
 import UpArrow from '../../../../static/img/Footer/arrow_up.svg';
 import Github from '../../../../static/img/Footer/github.svg';
 import X from '../../../../static/img/Footer/x.svg';

@@ -294,7 +294,7 @@ export default function FooterLayout({
                 </div>
               </div>
 
-              <div className='!mt-[395.82px] flex gap-x-15'>
+              <div className='!mt-[335.82px] flex gap-x-15 self-end'>
                 <div>
                   <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] !mb-[10.17px]'>CORPORATE OFFICE</p>
                   <p className='!text=[17.8px] leading-[17.92px]'>Philippines</p>

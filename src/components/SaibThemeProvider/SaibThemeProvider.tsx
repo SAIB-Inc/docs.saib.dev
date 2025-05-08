@@ -18,6 +18,7 @@ type SaibThemeProviderProps = {
 
 export default function SaibThemeProvider({ children }: SaibThemeProviderProps): ReactNode {
     const { colorMode } = useColorMode();
+    const location = useLocation();
     const isChrysalis = location.pathname.startsWith('/docs/chrysalis');
     const isArgus = location.pathname.startsWith('/docs/argus');
     const isRazor = location.pathname.startsWith('/docs/razor');

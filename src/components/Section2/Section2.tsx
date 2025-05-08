@@ -41,7 +41,7 @@ export default function Section2(): ReactNode {
     ];
 
     return (
-        <section id="section-2" className="h-[1076px] w-screen">
+        <section id="section-2" style={{ backgroundColor: theme.palette.background.default }} className="h-[1076px] w-screen">
             <div className="container flex flex-col h-full">
                 <div className="flex h-[calc(100%-230px)] justify-between">
                     <div className="!mt-[104px]">

@@ -8,7 +8,7 @@ export default function Section5(): ReactNode {
     const { colorMode } = useColorMode();
 
     return (
-        <section className={`bg-cover w-screen h-[1203px] ${colorMode === 'dark' ? "bg-[url(/img/Section5/fifth_background_dark.webp)]" : "bg-[url(/img/Section5/fifth_background_light.webp)]"}`}>
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover w-screen h-[1203px] ${colorMode === 'dark' ? "bg-[url(/img/Section5/fifth_background_dark.webp)]" : "bg-[url(/img/Section5/fifth_background_light.webp)]"}`}>
             <div className="container flex flex-col items-center !pt-[227px] !pb-[134px]">
                 <div>
                     <h1 className="!text-[56px] leading-[53.76px] font-semibold text-center">

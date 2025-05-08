@@ -2,14 +2,14 @@ import { Button, useTheme } from "@mui/material";
 import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import RightArrow from "../../icons/RightArrow.svg";
-import Catalyst from "../../icons/Catalyst.svg";
+import { useColorMode } from "@docusaurus/theme-common";
 
 export default function Section4(): ReactNode {
-
     const theme = useTheme();
+    const { colorMode } = useColorMode();
 
     return (
-        <section className="h-[952.98px] flex flex-col items-center w-screen">
+        <section style={{ backgroundColor: theme.palette.background.default }} className="h-[952.98px] flex flex-col items-center w-screen">
             <div className="container mx-auto">
                 <div className="relative my-16 pt-40">
                     <div 
@@ -61,8 +61,11 @@ export default function Section4(): ReactNode {
 
                     </div>
                     <div>
-                        <div>
-                            <Catalyst />
+                        <div className="w-74">
+                            <img
+                                src={colorMode === 'dark' ? '/img/Section4/catalyst_dark.webp' : '/img/Section4/catalyst_light.webp'}
+                                alt="catalyst"
+                            />
                         </div>
                         <div className="mt-[43.19px] flex justify-end">
                             <Button sx={{ color: theme.palette.grey[50] }} variant="contained" endIcon={<RightArrow />}>View In Catalyst</Button>

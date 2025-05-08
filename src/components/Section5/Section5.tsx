@@ -1,14 +1,19 @@
-import { Paper } from "@mui/material";
+import { useColorMode } from "@docusaurus/theme-common";
+import { Paper, useTheme } from "@mui/material";
 import { ReactNode } from "react";
 
 export default function Section5(): ReactNode {
+
+    const theme = useTheme();
+    const { colorMode } = useColorMode();
+
     return (
-        <section className="bg-[url(/img/Section5/fifth_background.webp)] bg-cover w-screen h-[1203px]">
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover w-screen h-[1203px] ${colorMode === 'dark' ? "bg-[url(/img/Section5/fifth_background_dark.webp)]" : "bg-[url(/img/Section5/fifth_background_light.webp)]"}`}>
             <div className="container flex flex-col items-center !pt-[227px] !pb-[134px]">
                 <div>
                     <h1 className="!text-[56px] leading-[53.76px] font-semibold text-center">
                         <span>Accelerate&nbsp;</span>
-                        <span className="text-[#C2B8FF]">Cardano<br />DApp Creation</span>
+                        <span style={{ color: theme.palette.text.secondary }}>Cardano<br />DApp Creation</span>
                     </h1>
                 </div>
 
@@ -16,13 +21,13 @@ export default function Section5(): ReactNode {
                     <Paper sx={{
                         width: "636px",
                         height: "654px",
-                        backgroundColor: '#24222D',
                         paddingTop: '80px',
                         paddingLeft: '49px',
-                        paddingRight: '45.74px'
+                        paddingRight: '45.74px',
+                        boxShadow: 0
                     }}>
                         <div className="flex flex-col">
-                            <h2 className="!text-[48px] font-bold !leading-[32px] !text-[#C2B8FF] !mb-[48px]">Power</h2>
+                            <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Power</h2>
                             <p className="!text-[24px] !leading-[32px] !mb-[9.10px]">
                                 Harness the potential of C# with<br />
                                 robust tools such as LINQ, ASP.NET,<br />
@@ -39,12 +44,12 @@ export default function Section5(): ReactNode {
                             paddingLeft: '48px',
                             paddingRight: '40.5px',
                             paddingBottom: '40px',
-                            backgroundColor: '#24222D',
                             display: 'flex',
                             justifyContent: 'space-between',
+                            boxShadow: 0
                         }}>
                             <div>
-                                <h2 className="!text-[48px] font-bold !leading-[32px] !text-[#C2B8FF] !mb-[48px]">Efficiency</h2>
+                                <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Efficiency</h2>
                                 <p className="!text-[20px] !leading-28px]">
                                     Experience streamlined developer<br />
                                     experience for smooth dApp<br />
@@ -56,7 +61,6 @@ export default function Section5(): ReactNode {
                             </div>
                         </Paper>
                         <Paper sx={{
-                            backgroundColor: '#24222D',
                             width: "636px",
                             height: "319px",
                             paddingTop: '80px',
@@ -65,9 +69,10 @@ export default function Section5(): ReactNode {
                             paddingBottom: '40px',
                             display: 'flex',
                             justifyContent: 'space-between',
+                            boxShadow: 0
                         }}>
                             <div>
-                                <h2 className="!text-[48px] font-bold !leading-[32px] !text-[#C2B8FF] !mb-[48px]">Customizability</h2>
+                                <h2 style={{ color: theme.palette.text.secondary }} className="!text-[48px] font-bold !leading-[32px] !mb-[48px]">Customizability</h2>
                                 <p className="!text-[20px] !leading-28px]">
                                     Leverage built-in reducers or create<br />
                                     custom ones tailored to your<br />

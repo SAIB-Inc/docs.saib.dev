@@ -37,6 +37,7 @@ p
 
 @theme {
     --animate-bounce2: bounce 2s infinite;
+    --animate-bounce3: bounce 2.5s infinite ease-In-Out;
     @keyframes bounce {
         0%,
         100% {
@@ -47,4 +48,36 @@ p
             transform: translateY(-10px);
         }
     }
+}
+
+.section4::after{
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    margin-left: -100px;
+    top: -100px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.navbar-icon::before {
+    content: '';
+    display: flex;
+    opacity: 60%;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background-image: url(/img/github_light.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+html[data-theme='dark'] .navbar-icon::before {
+background-image: url(/img/github_dark.svg);
+}
+
+.navbar-icon:hover::before { 
+    opacity: 100%;
 }

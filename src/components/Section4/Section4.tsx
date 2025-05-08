@@ -12,9 +12,9 @@ export default function Section4(): ReactNode {
     return (
         <section style={{ backgroundColor: theme.palette.background.default }} className="h-[952.98px] flex flex-col items-center w-screen">
             <div className="container mx-auto">
-                <div className="relative my-16 pt-40">
-                    <div
-                        style={{ backgroundColor: theme.palette.primary.main }}
+                <div className="relative my-16 pt-40 flex flex-col">
+                    <div 
+                        style={{backgroundColor: theme.palette.primary.main}}
                         className="rounded-full flex items-center justify-center size-26 absolute top-20 left-1/2 -translate-x-1/2"
                     >
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo" />
@@ -60,6 +60,7 @@ export default function Section4(): ReactNode {
                         <div className="mt-[32px]">
                             <BtnMore LinkComponent={ExternalLink} href="http://localhost:3000/docs/"
                                 sx={{
+                                    color: theme.palette.grey[50],
                                     '&:hover': {
                                         backgroundColor: '#C2B8FF',
                                         color: 'white'
@@ -84,6 +85,7 @@ export default function Section4(): ReactNode {
                             <BtnMore
                                 LinkComponent={ExternalLink} href="https://milestones.projectcatalyst.io/projects/1200072"
                                 sx={{
+                                    color: theme.palette.grey[50],
                                     '&:hover': {
                                         backgroundColor: '#C2B8FF',
                                         color: 'white'

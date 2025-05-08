@@ -58,7 +58,7 @@ export default function Section3(): ReactNode {
                             </div>
 
                             <div>
-                                <BtnMore />
+                                <BtnMore sx={{color: theme.palette.grey[50]}}/>
                             </div>
                         </div>
                     </div>

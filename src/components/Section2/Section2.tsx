@@ -141,14 +141,14 @@ export default function Section2(): ReactNode {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-between gap-4 flex-wrap !mt-[65px] lg:!mt-[45px]">
+                <div className="flex justify-between gap-4 !mt-[65px] items-center flex-col md:flex-row lg:!mt-[45px]">
                     <div className="w-[223.18px]">
                         <p style={{ color: alpha(theme.palette.text.primary, 0.6) }}>
                             /900k Developer Join
                         </p>
                         <img src="/img/Section2/developers.webp" alt="developers" />
                     </div>
-                    <div className="w-[305px] flex gap-1 flex-col">
+                    <div className="w-[305px] flex gap-1 flex-col items-center md:items-start">
                         <div>
                         <p style={{ color: theme.palette.text.disabled }}>The .NET Cardano Node</p>
                         </div>

@@ -53,7 +53,7 @@ export default function Section6(): ReactNode {
                         borderRadius: '24px',
                         boxShadow: 0
                     }}
-                        className="flex h-full justify-center items-center relative overflow-hidden sm:w-[calc(50%-8px)] lg:w-[calc(30%-8px)] 2xl:w-[357px] 2xl:h-[304px]"
+                        className="flex justify-center items-center relative overflow-hidden w-[calc(50%-8px)] lg:w-[calc(30%-8px)] 2xl:w-[357px] 2xl:h-[304px]"
                     >
                         <img src="/img/Section6/chrysalis.webp"/>
                     </Paper>
@@ -62,13 +62,13 @@ export default function Section6(): ReactNode {
                         borderRadius: '24px',
                         boxShadow: 0
                     }}
-                        className="flex justify-center items-center w-full  aspect-square sm:aspect-auto sm:w-[calc(50%-8px)] lg:w-[calc(30%-16px)] 2xl:w-[316px] 2xl:h-[304px]"
+                        className="flex justify-center items-center w-[calc(50%-8px)] sm:aspect-auto lg:w-[calc(30%-16px)] 2xl:w-[316px] 2xl:h-[304px]"
                     >
                         <CardanoLogo 
                             sx={{
                                 color: theme.palette.primary.contrastText
                             }}
-                            className="text-[150px]! xl:text-[192px]!"
+                            className="text-[95px]! sm:text-[150px]! xl:text-[192px]!"
                         />
                     </Paper>
 

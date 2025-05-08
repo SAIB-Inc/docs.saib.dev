@@ -30,7 +30,9 @@ export default function Section5(): ReactNode {
                                 robust tools such as LINQ, ASP.NET, <br className="hidden xl:block"/>
                                 and Entity Framework.
                             </p>
-                            <img src="/img/Section5/power.svg" alt="power" className="self-end w-18 sm:w-22 md:w-24 lg:w-62 lg:mt-7 xl:mt-0 xl:w-auto" />
+                            <div className="flex items-center">
+                                <img src="/img/Section5/power.svg" alt="power" className="w-28 sm:w-22 md:w-24 lg:w-62 lg:mt-7 xl:mt-0 xl:w-auto" />
+                            </div>
                         </div>
                     </Paper>
                     <div className="flex flex-col gap-[16px]">
@@ -41,14 +43,14 @@ export default function Section5(): ReactNode {
                             className="!p-6 lg:!pt-20 !block h-full md:!p-10 lg:!pl-12 lg:!pr-10 lg:!pb-10 lg:!w-[636px] lg:!h-[319px]"
                         >
                             <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] !text-3xl md:!text-5xl lg:!mb-[48px] ">Efficiency</h2>
-                            <div className="flex md:h-[calc(100%-25px)] md:gap-4 lg:h-auto lg:justify-between">
+                            <div className="flex  md:h-[calc(100%-25px)] gap-4 lg:h-auto lg:justify-between">
                                 <p className="!text-sm sm:!text-base md:!text-xl lg:!leading-[28px]">
                                     Experience streamlined developer <br className="hidden lg:block"/>
                                     experience for smooth dApp <br className="hidden lg:block"/>
                                     development and maintenance.
                                 </p>
-                                <div className="flex flex-col justify-end">
-                                    <img src="/img/Section5/efficiency.svg" alt="efficiency"  className="w-54 sm:w-36 md:w-88 lg:w-auto"/>
+                                <div className="flex flex-col items-center justify-end">
+                                    <img src="/img/Section5/efficiency.svg" alt="efficiency"  className="w-43 sm:w-36 md:w-88 lg:w-auto"/>
                                 </div>
                             </div>
                         </Paper>
@@ -59,14 +61,14 @@ export default function Section5(): ReactNode {
                             className="!p-6 lg:!pt-20 !block md:!hidden lg:!block lg:!pl-12 lg:!pr-10 lg:!pb-10 lg:!w-[636px] lg:!h-[319px]"
                         >
                             <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] !text-3xl md:!text-5xl lg:!mb-[48px] ">Customizability</h2>
-                            <div className="flex lg:justify-between">
+                            <div className="flex gap-4 lg:justify-between">
                                 <p className="!text-sm sm:!text-base lg:!text-xl lg:!leading-[28px]">
                                     Leverage built-in reducers or create <br className="hidden lg:block"/>
                                     custom ones tailored to your <br className="hidden lg:block"/>
                                     requirements.
                                 </p>
                                 <div className="flex flex-col justify-end">
-                                    <img src="/img/Section5/customizability.svg" alt="efficiency"  className="w-44 sm:w-36 md:w-60 lg:w-auto"/>
+                                    <img src="/img/Section5/customizability.svg" alt="efficiency"  className="w-34 sm:w-36 md:w-60 lg:w-auto"/>
                                 </div>
                             </div>
                         </Paper>

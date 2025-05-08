@@ -23,6 +23,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
     const isArgus = location.pathname.startsWith('/docs/argus');
     const isRazor = location.pathname.startsWith('/docs/razor');
     const isComp = location.pathname.startsWith('/docs/comp');
+    const isFutura = location.pathname.startsWith('/docs/futura');
 
     const darkTheme = useMemo(() =>
         createTheme({
@@ -71,6 +72,8 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
         root.setAttribute('data-theme-variant', 'razor'); 
       } else if (isComp) {
         root.setAttribute('data-theme-variant', 'comp');
+      } else if (isFutura) {
+        root.setAttribute('data-theme-variant', 'futura');
       } else {
         root.setAttribute('data-theme-variant', 'home');
       }

@@ -111,8 +111,26 @@ background-image: url(/img/github_dark.svg);
     --ifm-color-primary-contrast: #ffffff;
 }
 
-[data-theme-variant='comp'] {
+[data-theme='dark'][data-theme-variant='futura'] {
+    --ifm-color-primary: #FFF8E0;
+    --ifm-color-primary-light: #FFF8E0;
+    --ifm-color-primary-contrast: #ffffff;
+}
+
+[data-theme='light'][data-theme-variant='futura'] {
+    --ifm-color-primary: #4B0082;
+    --ifm-color-primary-light: #FFF8E0;
+    --ifm-color-primary-contrast: #ffffff;
+}
+
+[data-theme='light'][data-theme-variant='comp'] {
     --ifm-color-primary: #F83C01;
+    --ifm-color-primary-light: #FF8F71;
+    --ifm-color-primary-contrast: #ffffff;
+}
+
+[data-theme='dark'][data-theme-variant='comp'] {
+    --ifm-color-primary: #FF8F71;
     --ifm-color-primary-light: #FF8F71;
     --ifm-color-primary-contrast: #ffffff;
 }

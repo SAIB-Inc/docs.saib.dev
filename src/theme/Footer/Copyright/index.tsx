@@ -1,9 +1,12 @@
 import React, { type ReactNode } from 'react';
 import type { Props } from '@theme/Footer/Copyright';
-import { Link } from '@mui/material';
-
+import { Link, useTheme } from '@mui/material';
+import { useColorMode } from '@docusaurus/theme-common';
 
 export default function FooterCopyright({ copyright }: Props): ReactNode {
+    const theme = useTheme();
+    const { colorMode } = useColorMode();
+    
   return (
     <div className='container flex justify-between'>
       <div
@@ -16,15 +19,15 @@ export default function FooterCopyright({ copyright }: Props): ReactNode {
         <Link
           underline="none"
           sx={{
-            color: 'white',
+            color: theme.palette.text.primary,
             fontSize: '12.71px',
             lineHeight: '17.794px',
             letterSpacing: '0.5084px',
             '&:visited': {
-              color: 'white',
+              color: theme.palette.text.primary,
             },
             '&:hover': {
-              color: 'white',
+              color: theme.palette.text.primary,
             },
           }}
           href="#"
@@ -34,15 +37,15 @@ export default function FooterCopyright({ copyright }: Props): ReactNode {
         <Link
           underline="none"
           sx={{
-            color: 'white',
+            color: theme.palette.text.primary,
             fontSize: '12.71px',
             lineHeight: '17.794px',
             letterSpacing: '0.5084px',
             '&:visited': {
-              color: 'white',
+              color: theme.palette.text.primary,
             },
             '&:hover': {
-              color: 'white',
+              color: theme.palette.text.primary,
             },
           }}
           href="#"
@@ -52,15 +55,15 @@ export default function FooterCopyright({ copyright }: Props): ReactNode {
         <Link
           underline="none"
           sx={{
-            color: 'white',
+            color: theme.palette.text.primary,
             fontSize: '12.71px',
             lineHeight: '17.794px',
             letterSpacing: '0.5084px',
             '&:visited': {
-              color: 'white',
+              color: theme.palette.text.primary,
             },
             '&:hover': {
-              color: 'white',
+              color: theme.palette.text.primary,
             },
           }}
           href="#"

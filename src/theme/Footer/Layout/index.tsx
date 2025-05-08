@@ -1,13 +1,14 @@
 import React, { type ReactNode } from 'react';
 import clsx from 'clsx';
 import type { Props } from '@theme/Footer/Layout';
-import { Icon, IconButton, Link, Paper } from '@mui/material';
-import UpArrow from '../../../../static/img/Footer/arrow_up.svg';
-import Github from '../../../../static/img/Footer/github.svg';
-import X from '../../../../static/img/Footer/x.svg';
-import UpperRightArrow from '../../../../static/img/Footer/arrow_upper_right.svg';
-import LogoStyles from '../../../../static/img/Footer/logo_styled.svg';
+import { Icon, IconButton, Link, Paper, useTheme } from '@mui/material';
+import { useColorMode } from '@docusaurus/theme-common';
 import BackgroundLines from '../../../../static/img/Footer/background_lines.svg';
+import FooterWizard from '@site/static/img/Footer/wizard';
+import GithubIcon from '@site/static/img/Footer/github';
+import XIcon from '@site/static/img/Footer/x';
+import ScrollUpIcon from '@site/static/img/Footer/scroll_up';
+import UpperRightArrowIcon from '@site/static/img/Footer/arrow_upper_right';
 
 
 
@@ -17,9 +18,13 @@ export default function FooterLayout({
   logo,
   copyright,
 }: Props): ReactNode {
+
+  const theme = useTheme();
+  const { colorMode } = useColorMode();
+
   return (
-    <footer className='h-[1078px]'>
-      <div className='bg-[url(/img/Footer/background.webp)] bg-cover bg-no-repeat place-items-center relative'>
+    <footer style={{backgroundColor: theme.palette.background.default}} className='h-[1078px]'>
+      <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/Footer/background_dark.webp)]" : "bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
         <div>
           <BackgroundLines />
         </div>
@@ -29,19 +34,19 @@ export default function FooterLayout({
             <div className='flex flex-col gap-y-[127.3px]'>
               <Paper
                 sx={{
-                  backgroundColor: '#5438DC',
+                  backgroundColor: theme.palette.primary.main,
                   paddingLeft: '30.51px',
                   paddingRight: '30.26px',
                   borderRadius: '16px',
                 }}
               >
                 <div className='!pb-0 !mt-[30.51px] !mb-[160.49px]'>
-                  <p className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px] !mb-10'>
+                  <p style={{color: theme.palette.grey[50]}} className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px] !mb-10'>
                     Fueling the future <br />
                     with bold ideas and <br />
                     unstoppable energy.
                   </p>
-                  <p className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px]'>
+                  <p style={{color: theme.palette.grey[50]}} className='!text-[35.6px] !font-medium leading-[42.72px] tracking-[-0.356px]'>
                     Stay in the loop, <br />
                     follow us on our <br />
                     socials!
@@ -59,13 +64,13 @@ export default function FooterLayout({
                         opacity: 1,
                       },
                     }}>
-                    <UpArrow />
+                    <ScrollUpIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[111.88px]"/>
                   </IconButton>
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
                   <IconButton
                     LinkComponent={'a'}
-                    href="https://github.com"
+                    href="https://github.com/SAIB-Inc"
                     target="_blank"
                     rel="noopener"
                     sx={{
@@ -75,7 +80,7 @@ export default function FooterLayout({
                         opacity: 1,
                       },
                     }}>
-                    <Github href='https://github.com/SAIB-Inc' />
+                    <GithubIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[50.85px]"/>
                   </IconButton>
                   <IconButton
                     sx={{
@@ -85,15 +90,15 @@ export default function FooterLayout({
                         opacity: 1,
                       },
                     }}>
-                    <X />
+                    <XIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[50.85px]"/>
                   </IconButton>
                 </div>
               </div>
             </div>
 
             <div className='relative flex flex-col justify-between'>
-              <img src="img/Footer/wizard.svg" alt="Wizard" className='absolute right-[44.5px] top-[-138.14px]' />
-              <LogoStyles className='absolute top-[226.18px] left-[126.5px]' />
+              <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[210.14px] absolute right-[44.5px] top-[-138.14px]'/>
+              <img src={`${colorMode=='dark'? "img/Footer/logo_styled_dark.svg" : "img/Footer/logo_styled_light.svg"}`} alt="" className='absolute top-[226.18px] left-[126.5px]' />
               <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[141px] top-[-127px]' />
 
               <div>
@@ -103,7 +108,7 @@ export default function FooterLayout({
                   <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Developer</h3>
                 </div>
 
-                <div className='flex justify-between gap-x-[490px]'>
+                <div className='flex justify-between gap-x-[460px]'>
                   <div>
                     <div className='mb-[60.64px]'>
                       <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>INFO</p>
@@ -115,16 +120,16 @@ export default function FooterLayout({
                           target="_blank"
                           rel="noopener"
                           sx={{
-                            color: 'white',
+                            color: theme.palette.text.primary,
                             fontSize: '25.43px',
                             lineHeight: '30.516px',
                             letterSpacing: '-0.2543px',
                             textDecoration: 'none',
                             '&:visited': {
-                              color: 'white',
+                              color: theme.palette.text.primary,
                             },
                             '&:hover': {
-                              color: 'white',
+                              color: theme.palette.text.primary,
                             },
                           }}
                           underline="none">
@@ -135,16 +140,16 @@ export default function FooterLayout({
                           target="_blank"
                           rel="noopener"
                           sx={{
-                            color: 'white',
+                            color: theme.palette.text.primary,
                             fontSize: '25.43px',
                             lineHeight: '30.516px',
                             letterSpacing: '-0.2543px',
                             textDecoration: 'none',
                             '&:visited': {
-                              color: 'white',
+                              color: theme.palette.text.primary,
                             },
                             '&:hover': {
-                              color: 'white',
+                              color: theme.palette.text.primary,
                             },
                           }}
                           underline="none">
@@ -161,22 +166,22 @@ export default function FooterLayout({
                             gap: '10.17px',
                             alignItems: 'center',
                             marginTop: '10.17px',
-                            color: 'white',
+                            color: theme.palette.text.primary,
                             fontSize: '25.43px',
                             lineHeight: '30.516px',
                             letterSpacing: '-0.2543px',
                             textDecoration: 'none',
                             '&:visited': {
-                              color: 'white',
+                              color: theme.palette.text.primary,
                             },
                             '&:hover': {
-                              color: 'white',
+                              color: theme.palette.text.primary,
                             },
                           }}
                           underline="none"
                         >
                           SAIB
-                          <UpperRightArrow />
+                          <UpperRightArrowIcon sx={{color:theme.palette.text.primary}}/>
                         </Link>
                       </div>
                     </div>
@@ -184,7 +189,7 @@ export default function FooterLayout({
 
                   <div>
                     <div className='mb-[60.64px]'>
-                      <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>REPOSITORY LINKS</p>
+                      <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>DOCUMENTATION LINKS</p>
                     </div>
                     <div className='flex flex-col gap-y-[7.63px]'>
                       <Link
@@ -192,16 +197,16 @@ export default function FooterLayout({
                         target="_blank"
                         rel="noopener"
                         sx={{
-                          color: 'white',
+                          color: theme.palette.text.primary,
                           fontSize: '25.43px',
                           lineHeight: '30.516px',
                           letterSpacing: '-0.2543px',
                           textDecoration: 'none',
                           '&:visited': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                           '&:hover': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                         }}
                         underline="none"
@@ -213,16 +218,16 @@ export default function FooterLayout({
                         target="_blank"
                         rel="noopener"
                         sx={{
-                          color: 'white',
+                          color: theme.palette.text.primary,
                           fontSize: '25.43px',
                           lineHeight: '30.516px',
                           letterSpacing: '-0.2543px',
                           textDecoration: 'none',
                           '&:visited': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                           '&:hover': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                         }}
                         underline="none"
@@ -234,16 +239,16 @@ export default function FooterLayout({
                         target="_blank"
                         rel="noopener"
                         sx={{
-                          color: 'white',
+                          color: theme.palette.text.primary,
                           fontSize: '25.43px',
                           lineHeight: '30.516px',
                           letterSpacing: '-0.2543px',
                           textDecoration: 'none',
                           '&:visited': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                           '&:hover': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                         }}
                         underline="none"
@@ -255,16 +260,16 @@ export default function FooterLayout({
                         target="_blank"
                         rel="noopener"
                         sx={{
-                          color: 'white',
+                          color: theme.palette.text.primary,
                           fontSize: '25.43px',
                           lineHeight: '30.516px',
                           letterSpacing: '-0.2543px',
                           textDecoration: 'none',
                           '&:visited': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                           '&:hover': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                         }}
                         underline="none"
@@ -276,16 +281,16 @@ export default function FooterLayout({
                         target="_blank"
                         rel="noopener"
                         sx={{
-                          color: 'white',
+                          color: theme.palette.text.primary,
                           fontSize: '25.43px',
                           lineHeight: '30.516px',
                           letterSpacing: '-0.2543px',
                           textDecoration: 'none',
                           '&:visited': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                           '&:hover': {
-                            color: 'white',
+                            color: theme.palette.text.primary,
                           },
                         }}
                         underline="none"
@@ -319,7 +324,7 @@ export default function FooterLayout({
           </div>
         </div>
       </div>
-      <div className='h-[57px] bg-[#151515] flex items-center'>
+      <div style={{background: theme.palette.grey.A100}} className='h-[57px] flex items-center'>
         {copyright}
       </div>
 

@@ -102,7 +102,7 @@ export default function FooterLayout({
                 <h3 className='!text-[25.43px] leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0'>For Developer</h3>
               </div>
 
-              <div className='flex justify-between gap-x-[390px]'>
+              <div className='flex justify-between gap-x-[490px]'>
                 <div>
                   <div className='mb-[60.64px]'>
                     <p className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] text-[#717171] font-medium'>INFO</p>
@@ -120,10 +120,10 @@ export default function FooterLayout({
                           letterSpacing: '-0.2543px',
                           textDecoration: 'none',
                           '&:visited': {
-                            color: 'white', // stop the purple visited color
+                            color: 'white',
                           },
                           '&:hover': {
-                            color: 'white', // optional: keep white on hover
+                            color: 'white',
                           },
                         }}
                         underline="none">
@@ -140,10 +140,10 @@ export default function FooterLayout({
                           letterSpacing: '-0.2543px',
                           textDecoration: 'none',
                           '&:visited': {
-                            color: 'white', // stop the purple visited color
+                            color: 'white', 
                           },
                           '&:hover': {
-                            color: 'white', // optional: keep white on hover
+                            color: 'white',
                           },
                         }}
                         underline="none">
@@ -178,7 +178,6 @@ export default function FooterLayout({
                         <UpperRightArrow />
                       </Link>
                     </div>
-
                   </div>
                 </div>
 
@@ -193,8 +192,9 @@ export default function FooterLayout({
                       rel="noopener"
                       sx={{
                         color: 'white',
-                        fontSize: '17.8px',
-                        lineHeight: '24.92px',
+                        fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
                         textDecoration: 'none',
                         '&:visited': {
                           color: 'white',
@@ -213,8 +213,9 @@ export default function FooterLayout({
                       rel="noopener"
                       sx={{
                         color: 'white',
-                        fontSize: '17.8px',
-                        lineHeight: '24.92px',
+                        fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
                         textDecoration: 'none',
                         '&:visited': {
                           color: 'white',
@@ -228,13 +229,56 @@ export default function FooterLayout({
                       Chrysalis
                     </Link>
                     <Link
+                      href="https://github.com/SAIB-Inc/COMP"
+                      target="_blank"
+                      rel="noopener"
+                      sx={{
+                        color: 'white',
+                        fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
+                        textDecoration: 'none',
+                        '&:visited': {
+                          color: 'white',
+                        },
+                        '&:hover': {
+                          color: 'white',
+                        },
+                      }}
+                      underline="none"
+                    >
+                      COMP
+                    </Link>
+                    <Link
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                      sx={{
+                        color: 'white',
+                        fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
+                        textDecoration: 'none',
+                        '&:visited': {
+                          color: 'white',
+                        },
+                        '&:hover': {
+                          color: 'white',
+                        },
+                      }}
+                      underline="none"
+                    >
+                      Futura
+                    </Link>
+                    <Link
                       href="https://github.com/SAIB-Inc/Razor"
                       target="_blank"
                       rel="noopener"
                       sx={{
                         color: 'white',
-                        fontSize: '17.8px',
-                        lineHeight: '24.92px',
+                        fontSize: '25.43px',
+                          lineHeight: '30.516px',
+                          letterSpacing: '-0.2543px',
                         textDecoration: 'none',
                         '&:visited': {
                           color: 'white',

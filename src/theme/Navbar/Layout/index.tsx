@@ -52,7 +52,6 @@ export default function NavbarLayout({children}: Props): ReactNode {
           'navbar--primary': style === 'primary',
           'navbar-sidebar--show': mobileSidebar.shown,
         },
-        '!fixed',
         'w-[100vw]',
         'backdrop-blur-xl!'
       )}>

@@ -21,12 +21,13 @@ export default function Section8(): ReactNode {
                 </div>
 
                 <div className="grid grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px]">
-                    <img src="/img/Section8/frederik_gregaard.webp" alt="Frederik Gregaard" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover object-[center_-20px]"/>
-                    <img src="/img/Section8/philip_disarro_jonathan_rodriguez.webp" alt="Phil and Jonathan " className="col-span-6 w-full h-[371px] rounded-[24px] object-cover object-[center_-100px]"/>
-
-                    <img src="/img/Section8/hongjing_k.webp" alt="Jingles" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover object-[center_-20px]"/>
-                    <img src="/img/Section8/cardano_girls.webp" alt="Lily and Lenna" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover object-[center_-20px]"/>
-                    <img src="/img/Section8/diego_mac.webp" alt="Diego" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover object-[center_-20px]"/>
+                    <img src="/img/Section8/danang_buidler.webp" alt="Da Nang Group Photo" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/panel_tooling.webp" alt="Panel" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/danang_discussions.webp" alt="Da Nang Buidler Fest" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/open_spaces.webp" alt="Open Spaces" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/buidler_guests.webp" alt="Guests" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
+                    
+                    
                 </div>
             </div>
         </section>

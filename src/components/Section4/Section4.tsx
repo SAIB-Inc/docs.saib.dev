@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 import { useColorMode } from "@docusaurus/theme-common";
+import Section4Wizard from "@site/static/img/Section4/wizard";
 
 
 export default function Section4(): ReactNode {
@@ -10,54 +11,54 @@ export default function Section4(): ReactNode {
     const { colorMode } = useColorMode();
 
     return (
-        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="h-[952.98px] flex flex-col items-center w-screen">
+        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col items-center w-screen lg:h-[952.98px]">
             <div className="container mx-auto">
-                <div className="relative my-16 pt-40 flex flex-col">
+                <div className="relative my-16 pt-20 md:pt-40">
                     <div
                         style={{ backgroundColor: theme.palette.primary.main }}
-                        className="rounded-full flex items-center justify-center size-26 absolute top-20 left-1/2 -translate-x-1/2"
+                        className="rounded-full flex items-center justify-center  absolute left-1/2 -translate-x-1/2 top-0 size-22 sm:size-26 md:top-20"
                     >
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo" />
                     </div>
 
-                    <div className="absolute right-0 top-6 z-10">
-                        <img src="/img/Section4/wizard.svg" alt="saib wizard" />
+                    <div className="absolute right-7 z-10 w-16 -top-2 sm:-right-7 sm:w-auto sm:-top-14 md:right-0 md:top-6">
+                        <Section4Wizard className="!text-[110px] sm:!text-[163px]"/>
                     </div>
-                    <div className="relative h-[498px] overflow-hidden bg-[url(/img/Section4/purple_bg.svg)] px-12 flex items-center justify-between">
-                        <div className="bg-[url(/img/Section4/mesh.webp)] absolute left-0 w-full h-full bg-cover" />
-                        <div className="w-[661px]">
-                            <h1 style={{ color: theme.palette.grey[50] }} className="text-left !text-[64px] !leading-[60px]">
+                    <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col bg-[url(/img/Section4/purple_bg_mobile.svg)] gap-2 rounded-[24px] lg:rounded-[48px] md:h-100 md:flex-row md:items-center md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
+                    <div className="z-10 mt-14 md:mt-0 lg:w-[661px]">
+                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl min-[345px]:!text-5xl md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
                                 <span>
-                                    Streamline <br />
+                                    Streamline <br/>
                                 </span>
-                                <span style={{ color: theme.palette.primary.light }}>
-                                    Cardano <br />
-                                    Blockchain <br />
+                                <span style={{color: theme.palette.primary.light}}>
+                                    Cardano <br/>
+                                    Blockchain <br/>
+
                                 </span>
                                 <span>
                                     Data Processing
                                 </span>
                             </h1>
                         </div>
-                        <div className="w-88">
-                            <img src="/img/Section4/code_snippet.webp" alt="code snippet" />
+                        <div className="z-10 w-62 sm:w-82 md:w-74 lg:w-88">
+                            <img src="/img/Section4/code_snippet.webp" alt="code snippet"/>
                         </div>
                     </div>
                 </div>
-                <div className="max-w-screen-xl w-full flex justify-between">
+                <div className="max-w-screen-xl w-full flex justify-between flex-col md:flex-row">
                     <div>
                         <div >
                             <p
                                 style={{ color: theme.palette.text.disabled }}
-                                className="capitalize text-[18px] leading-[23.04px]"
+                                className="capitalize leading-[23.04px] !text-sm text-center md:text-start lg:!text-lg"
                             >
-                                Argus brings Cardano blockchain data seamlessly <br />
-                                into the .NET environment, empowering developers <br />
-                                to efficiently query and access data using familiar <br />
+                                Argus brings Cardano blockchain data seamlessly <br className="hidden md:block"/>
+                                into the .NET environment, empowering developers <br className="hidden md:block"/>
+                                to efficiently query and access data using familiar <br className="hidden md:block"/>
                                 .NET languages like C#. </p>
                         </div>
 
-                        <div className="mt-[32px]">
+                        <div className="mt-[32px] flex items-center justify-center md:block">
                             <BtnMore
                                 LinkComponent='a' href="/docs/argus/intro"
                                 sx={{
@@ -75,14 +76,20 @@ export default function Section4(): ReactNode {
                         </div>
 
                     </div>
-                    <div>
-                        <div className="w-74">
+                    <div className="mt-14 flex flex-col gap-8 justify-between items-center md:items-start md:mt-0 lg:gap-0">
+                        <p
+                            style={{ color: theme.palette.text.disabled }}
+                            className="md:hidden"
+                        >
+                            Argus is a proud product of...
+                        </p>
+                        <div className="w-65 lg:w-74">
                             <img
                                 src={colorMode === 'dark' ? '/img/Section4/catalyst_dark.webp' : '/img/Section4/catalyst_light.webp'}
                                 alt="catalyst"
                             />
                         </div>
-                        <div className="mt-[43.19px] flex justify-end">
+                        <div className="flex mt-3 lg:mt-[43.19px] lg:justify-end">
                             <BtnMore
                                 LinkComponent={ExternalLink} href="https://milestones.projectcatalyst.io/projects/1200072"
                                 sx={{

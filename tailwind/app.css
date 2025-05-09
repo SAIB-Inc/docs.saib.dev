@@ -38,7 +38,10 @@ p
 @theme {
     --animate-bounce2: bounce 2s infinite;
     --animate-bounce3: bounce 2.5s infinite ease-In-Out;
+<<<<<<< HEAD
     --animate-bounce3: bounce 2.5s infinite ease-In-Out;
+=======
+>>>>>>> 18c1e2ebbbcb2f71764458368156da1ea047e5c2
     @keyframes bounce {
         0%,
         100% {
@@ -63,6 +66,7 @@ p
     background-color: white;
 }
 
+<<<<<<< HEAD
 .navbar-icon::before {
     content: '';
     display: flex;
@@ -81,6 +85,10 @@ background-image: url(/img/github_dark.svg);
 
 .navbar-icon:hover::before { 
     opacity: 100%;
+=======
+.navbar__items.navbar__items--right {
+    gap: 12px;
+>>>>>>> 18c1e2ebbbcb2f71764458368156da1ea047e5c2
 }
 
 .breadcrumbs__item>a {
@@ -133,4 +141,13 @@ background-image: url(/img/github_dark.svg);
     --ifm-color-primary: #FF8F71;
     --ifm-color-primary-light: #FF8F71;
     --ifm-color-primary-contrast: #ffffff;
+<<<<<<< HEAD
+=======
+}
+
+@media only screen and (max-width: 997px) {
+    .navbar-icon {
+        display: none;
+    }
+>>>>>>> 18c1e2ebbbcb2f71764458368156da1ea047e5c2
 }

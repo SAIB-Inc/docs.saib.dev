@@ -25,12 +25,14 @@ export default function Section8(): ReactNode {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px] sm:grid-cols-12">
-                    <img src="/img/Section8/frederik_gregaard.webp" alt="Frederik Gregaard" className="w-full rounded-[24px] sm:h-[371px] sm:object-cover sm:object-[center_-20px] sm:col-span-6"/>
-                    <img src="/img/Section8/philip_disarro_jonathan_rodriguez.webp" alt="Phil and Jonathan " className="w-full rounded-[24px] sm:h-[371px] sm:object-cover sm:object-[center_-100px] sm:col-span-6"/>
-                    <img src="/img/Section8/hongjing_k.webp" alt="Jingles" className="w-full h-full rounded-[24px] sm:col-span-4 sm:object-cover lg:h-[371px] lg:object-[center_-20px]"/>
-                    <img src="/img/Section8/cardano_girls.webp" alt="Lily and Lenna" className="w-full h-full rounded-[24px] sm:col-span-4 sm:object-cover lg:h-[371px] lg:object-[center_-20px]"/>
-                    <img src="/img/Section8/diego_mac.webp" alt="Diego" className="w-full h-full rounded-[24px] sm:col-span-4 sm:object-cover lg:h-[371px] lg:object-[center_-20px]"/>
+                <div className="grid grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px]">
+                    <img src="/img/Section8/danang_buidler.webp" alt="Da Nang Group Photo" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/panel_tooling.webp" alt="Panel" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/danang_discussions.webp" alt="Da Nang Buidler Fest" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/open_spaces.webp" alt="Open Spaces" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
+                    <img src="/img/Section8/buidler_guests.webp" alt="Guests" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
+                    
+                    
                 </div>
             </div>
         </section>

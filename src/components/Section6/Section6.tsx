@@ -49,7 +49,7 @@ export default function Section6(): ReactNode {
                         </div>
                     </Paper>
                     <Paper sx={{
-                        backgroundColor: '#1F2F4E',
+                        backgroundColor: theme.palette.grey[800],
                         borderRadius: '24px',
                         boxShadow: 0
                     }}

@@ -19,7 +19,7 @@ export default function Section3(): ReactNode {
                         <div style={{borderTopColor: theme.palette.primary.main}} className="w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent"/>
                     </div>
                     <div>
-                        <img alt="Buriza" src="/img/Section3/buriza.webp" />
+                        <img alt="Buriza" src={colorMode === 'dark' ? '/img/Section3/buriza_dark.webp' : '/img/Section3/buriza_light.webp'} />
                     </div>
                     <div className="ml-[80px] hidden lg:block">
                         <img src="/img/Section3/arrow.webp" />

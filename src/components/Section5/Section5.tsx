@@ -3,7 +3,6 @@ import { Paper, useTheme } from "@mui/material";
 import { ReactNode } from "react";
 
 export default function Section5(): ReactNode {
-
     const theme = useTheme();
     const { colorMode } = useColorMode();
 

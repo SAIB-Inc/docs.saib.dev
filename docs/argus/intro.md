@@ -1,8 +1,6 @@
 ---
 id: intro
-slug: /
 title: Overview
-sidebar_label: Overview
 sidebar_position: 1
 ---
 

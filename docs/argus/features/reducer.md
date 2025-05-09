@@ -1,6 +1,5 @@
 ---
 id: reducer
-slug: /features/reducer
 title: Reducer
 sidebar_label: Reducer
 sidebar_position: 1

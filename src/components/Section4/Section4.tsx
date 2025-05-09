@@ -2,7 +2,7 @@ import { Button, useTheme } from "@mui/material";
 import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import RightArrow from "../../icons/RightArrow.svg";
-import Catalyst from "../../icons/Catalyst.svg";
+import { useColorMode } from "@docusaurus/theme-common";
 
 export default function Section4(): ReactNode {
 
@@ -67,7 +67,6 @@ export default function Section4(): ReactNode {
                             Argus is a proud product of...
                         </p>
                         <div className="mt-4!">
-                            <Catalyst className="w-64 md:w-60 lg:w-auto"/>
                         </div>
                         <div className="flex mt-3 lg:mt-[43.19px] lg:justify-end">
                             <Button sx={{ color: theme.palette.grey[50] }} variant="contained" endIcon={<RightArrow />}>View In Catalyst</Button>

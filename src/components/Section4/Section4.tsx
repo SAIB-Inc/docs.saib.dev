@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import RightArrow from "../../icons/RightArrow.svg";
 import { useColorMode } from "@docusaurus/theme-common";
+import Section4Wizard from "@site/static/img/Section4/wizard";
 
 export default function Section4(): ReactNode {
     const { colorMode } = useColorMode();
@@ -18,8 +19,8 @@ export default function Section4(): ReactNode {
                     >
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo"/>
                     </div>
-                    <div className="absolute right-0 z-10 w-16 top-0 sm:w-auto sm:-top-14 md:top-6">
-                        <img src="/img/Section4/wizard.svg" alt="saib wizard"/>
+                    <div className="absolute right-7 z-10 w-16 -top-2 sm:-right-7 sm:w-auto sm:-top-14 md:right-0 md:top-6">
+                        <Section4Wizard className="!text-[110px] sm:!text-[163px]"/>
                     </div>
                     <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col bg-[url(/img/Section4/purple_bg_mobile.svg)] gap-2 rounded-[24px] lg:rounded-[48px] md:h-100 md:flex-row md:items-center md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
                         <div className="z-10 mt-14 md:mt-0 lg:w-[661px]">

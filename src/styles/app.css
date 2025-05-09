@@ -206,6 +206,12 @@
   .inset-x-0 {
     inset-inline: calc(var(--spacing) * 0);
   }
+  .-top-2 {
+    top: calc(var(--spacing) * -2);
+  }
+  .-top-4 {
+    top: calc(var(--spacing) * -4);
+  }
   .-top-36 {
     top: calc(var(--spacing) * -36);
   }
@@ -242,11 +248,29 @@
   .top-\[39\%\] {
     top: 39%;
   }
+  .-right-0 {
+    right: calc(var(--spacing) * -0);
+  }
+  .-right-7 {
+    right: calc(var(--spacing) * -7);
+  }
+  .-right-10 {
+    right: calc(var(--spacing) * -10);
+  }
   .-right-33 {
     right: calc(var(--spacing) * -33);
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
+  }
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
+  .right-7 {
+    right: calc(var(--spacing) * 7);
+  }
+  .right-10 {
+    right: calc(var(--spacing) * 10);
   }
   .right-\[32\.05px\] {
     right: 32.05px;
@@ -592,6 +616,10 @@
     --tw-translate-x: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .-translate-y-1 {
+    --tw-translate-y: calc(var(--spacing) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .-translate-y-4 {
     --tw-translate-y: calc(var(--spacing) * -4);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -903,8 +931,23 @@
   .\!text-\[56px\] {
     font-size: 56px !important;
   }
+  .\!text-\[95px\] {
+    font-size: 95px !important;
+  }
+  .\!text-\[100px\] {
+    font-size: 100px !important;
+  }
+  .\!text-\[110px\] {
+    font-size: 110px !important;
+  }
+  .\!text-\[120px\] {
+    font-size: 120px !important;
+  }
   .\!text-\[130px\] {
     font-size: 130px !important;
+  }
+  .\!text-\[163px\] {
+    font-size: 163px !important;
   }
   .\!text-\[210\.14px\] {
     font-size: 210.14px !important;
@@ -1044,6 +1087,9 @@
     --tw-tracking: 0.5084px;
     letter-spacing: 0.5084px;
   }
+  .\!text-\[100\] {
+    color: 100 !important;
+  }
   .capitalize {
     text-transform: capitalize;
   }
@@ -1130,6 +1176,11 @@
   .sm\:top-\[30\%\] {
     @media (width >= 40rem) {
       top: 30%;
+    }
+  }
+  .sm\:-right-7 {
+    @media (width >= 40rem) {
+      right: calc(var(--spacing) * -7);
     }
   }
   .sm\:left-12 {
@@ -1233,6 +1284,23 @@
       width: auto;
     }
   }
+  .sm\:w-full {
+    @media (width >= 40rem) {
+      width: 100%;
+    }
+  }
+  .sm\:-translate-y-2 {
+    @media (width >= 40rem) {
+      --tw-translate-y: calc(var(--spacing) * -2);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+  .sm\:-translate-y-4 {
+    @media (width >= 40rem) {
+      --tw-translate-y: calc(var(--spacing) * -4);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
   .sm\:flex-row {
     @media (width >= 40rem) {
       flex-direction: row;
@@ -1261,6 +1329,11 @@
   .sm\:gap-10 {
     @media (width >= 40rem) {
       gap: calc(var(--spacing) * 10);
+    }
+  }
+  .sm\:gap-18 {
+    @media (width >= 40rem) {
+      gap: calc(var(--spacing) * 18);
     }
   }
   .sm\:gap-x-5 {
@@ -1323,6 +1396,11 @@
       font-size: 70px !important;
     }
   }
+  .sm\:\!text-\[163px\] {
+    @media (width >= 40rem) {
+      font-size: 163px !important;
+    }
+  }
   .sm\:text-\[150px\]\! {
     @media (width >= 40rem) {
       font-size: 150px !important;
@@ -1361,6 +1439,11 @@
   .md\:top-20 {
     @media (width >= 48rem) {
       top: calc(var(--spacing) * 20);
+    }
+  }
+  .md\:right-0 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing) * 0);
     }
   }
   .md\:\!mt-26 {
@@ -1586,6 +1669,12 @@
   .md\:w-120 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 120);
+    }
+  }
+  .md\:-translate-y-4 {
+    @media (width >= 48rem) {
+      --tw-translate-y: calc(var(--spacing) * -4);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
     }
   }
   .md\:flex-col {
@@ -2094,6 +2183,12 @@
   .lg\:w-auto {
     @media (width >= 64rem) {
       width: auto;
+    }
+  }
+  .lg\:-translate-y-4 {
+    @media (width >= 64rem) {
+      --tw-translate-y: calc(var(--spacing) * -4);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
     }
   }
   .lg\:flex-col {

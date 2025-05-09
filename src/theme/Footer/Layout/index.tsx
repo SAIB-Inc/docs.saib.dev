@@ -130,7 +130,7 @@ export default function FooterLayout({
                   <h3 className='leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0 !text-base md:!text-xl lg:!text-[25.43px]'>For Developer</h3>
                 </div>
 
-                <div className='flex justify-between flex-col sm:justify-start sm:gap-10 sm:flex-row lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[460px]'>
+                <div className='flex justify-between flex-col sm:justify-start sm:gap-18 sm:flex-row lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[460px]'>
                   <div className='text-center sm:text-start'>
                     <div className='md:mb-10 lg:mb-[60.64px]'>
                       <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] font-medium !mb-[10.17px] md:!mb-0'>INFO</p>
@@ -213,7 +213,7 @@ export default function FooterLayout({
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div className='sm:w-full lg:w-auto'>
                     <div className='flex items-center justify-center !mt-10 md:block sm:!justify-start sm:!mt-0 md:mb-10 lg:mb-[60.64px]'>
                       <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] font-medium !mb-[7.63px] md:!mb-0'>DOCUMENTATION LINKS</p>
                     </div>
@@ -325,7 +325,7 @@ export default function FooterLayout({
                       </Link>
                     </div>
                   </div>
-                  <div className='relative w-max mx-auto hidden sm:block lg:hidden'>
+                  <div className='relative w-full hidden justify-end items-center sm:flex lg:hidden'>
                     <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[90px] top-[14px]' />
                     <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!relative !text-[210.14px] lg:!hidden'/>
                   </div>

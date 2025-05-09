@@ -117,8 +117,15 @@ export default function Section7(): ReactNode {
                                 }}
                                 className="rounded-b-2xl !p-6 z-10 -mt-18"
                             >
-                                <h4 className="!text-[32px] leading-12 !mb-6">{datum.title}</h4>
-                                <p>{datum.description}</p>
+                                <h4 
+                                    style={{
+                                        color: theme.palette.grey[50]
+                                    }}
+                                    className="!text-[32px] leading-12 !mb-6"
+                                >
+                                    {datum.title}
+                                </h4>
+                                <p style={{ color: theme.palette.grey[50] }}>{datum.description}</p>
                             </div>
                         </div>
                         );

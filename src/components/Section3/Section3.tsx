@@ -16,7 +16,7 @@ export default function Section3(): ReactNode {
 
                 <div className="text-center flex items-center flex-col mt-[36px] gap-6 sm:gap-4 sm:flex-row mb-20 lg:gap-0 lg:mb-[178px] lg:h-[64px]">
                     <p className="text-[24px] leading-[34.8px] font-semibold sm:hidden">Used By</p>
-                    <ArrowDown sx={{ fontSize:100 }} className="sm:hidden!"/>
+                    <ArrowDown sx={{ fontSize:100, color: theme.palette.primary.main }} className="sm:hidden!"/>
                     <div>
                         <img 
                             alt="Buriza" 

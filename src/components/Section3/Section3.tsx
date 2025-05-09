@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import { useTheme } from "@mui/material";
 import { useColorMode } from "@docusaurus/theme-common";
+import { KeyboardArrowDown } from "@mui/icons-material";
+import ArrowDown from "@site/static/img/Section3/arrowDown";
 
 export default function Section3(): ReactNode {
 
@@ -9,29 +11,34 @@ export default function Section3(): ReactNode {
     const { colorMode } = useColorMode();
 
     return (
-        <section className={`bg-lines relative flex flex-col items-center bg-center w-screen bg-cover ${colorMode === 'dark' ? 'bg-[url(/img/Section3/background_dark.webp)]' : 'bg-[url(/img/Section3/background_light.webp)]'} sm:pb-20 lg:pb-0 lg:h-[1088.02px]`}>
-            <div className="container flex flex-col justify-center items-center">
+        <section style={{ backgroundColor:theme.palette.background.default }} className={`bg-lines relative flex flex-col items-center bg-center w-screen bg-cover ${colorMode === 'dark' ? 'bg-[url(/img/Section3/background_dark.webp)]' : 'bg-[url(/img/Section3/background_light.webp)]'} sm:pb-20 lg:pb-0 lg:h-[1088.02px]`}>
+            <div className="container flex flex-col justify-center items-center z-10">
 
-                <div className="text-center flex items-center flex-col mt-[36px] mb-20 lg:mb-[178px] lg:h-[64px] lg:flex-row">
-                    <p className="text-[24px] leading-[34.8px] font-semibold lg:hidden">Used By</p>
-                    <div className="flex flex-col items-center lg:hidden">
-                        <div style={{backgroundColor: theme.palette.primary.main}} className="w-[2px] h-30"/>
-                        <div style={{borderTopColor: theme.palette.primary.main}} className="w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent"/>
-                    </div>
+                <div className="text-center flex items-center flex-col mt-[36px] gap-6 sm:gap-4 sm:flex-row mb-20 lg:gap-0 lg:mb-[178px] lg:h-[64px]">
+                    <p className="text-[24px] leading-[34.8px] font-semibold sm:hidden">Used By</p>
+                    <ArrowDown sx={{ fontSize:100 }} className="sm:hidden!"/>
                     <div>
-                        <img alt="Buriza" src={colorMode === 'dark' ? '/img/Section3/buriza_dark.webp' : '/img/Section3/buriza_light.webp'} />
+                        <img 
+                            alt="Buriza" 
+                            src={colorMode === 'dark' ? '/img/Section3/buriza_dark.webp' : '/img/Section3/buriza_light.webp'} 
+                            className="sm:w-30 lg:w-auto"
+                        />
                     </div>
-                    <div className="ml-[80px] hidden lg:block">
+                    <div className="hidden w-27 sm:block md:ml-4 md:w-40 lg:w-auto lg:ml-10 xl:ml-[80px]">
                         <img src="/img/Section3/arrow.webp" />
                     </div>
-                    <div className="ml-[40px] mr-[40px] flex items-center">
-                        <p className="text-[24px] leading-[34.8px] font-semibold hidden lg:block">Used By</p>
+                    <div className="items-center my-2 mx-2 hidden sm:flex lg:mx-4 xl:mx-10">
+                        <p className="font-semibold md:text-xl lg:leading-[34.8px] lg:text-2xl ">Used By</p>   
                     </div>
-                    <div className="hidden lg:block">
-                        <img src="/img/Section3/arrow.webp" className="scale-x-[-1] mr-[80px]" />
+                    <div className="hidden w-27 sm:block md:w-40 lg:w-auto">
+                        <img src="/img/Section3/arrow.webp" className="scale-x-[-1] mr-1 md:mr-10 lg:mr-10 xl:mr-[80px]" />
                     </div>
                     <div>
-                        <img src='/img/Section3/levvy.webp' />
+                        <img 
+                            src='/img/Section3/levvy.webp' 
+                            alt="levvy"
+                            className="sm:w-30 lg:w-auto"
+                        />
                     </div>
                 </div>
                 <div>
@@ -61,12 +68,12 @@ export default function Section3(): ReactNode {
                             </div>
                         </div>
                     </div>
-                    <div className="hidden lg:block">
+                    <div className="hidden sm:block">
                         <img src={colorMode === 'dark' ? '/img/Section3/code_snippet_dark.webp' : '/img/Section3/code_snippet_light.webp'} />
                     </div>
                 </div>
             </div>
-            <div className="absolute -bottom-118 -z-10 hidden lg:block">
+            <div className="absolute -bottom-118 hidden lg:block">
                 <img src={colorMode === 'dark' ? '/img/Section3/background_connector_dark.webp' : '/img/Section3/background_connector_light.webp'} alt="background connector"/>
             </div>
         </section>

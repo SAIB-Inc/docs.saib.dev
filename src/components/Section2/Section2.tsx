@@ -17,32 +17,37 @@ export default function Section2(): ReactNode {
         {
             name: "chrysalis",
             logo: "/img/Section2/Logos/chrysalis.webp",
+            description: "Razor is a next-generation .NET Cardano node",
             class: "w-72 -top-36 sm:w-100 sm:-top-49 md:w-120 md:-top-59 lg:top-84 xl:top-76 xl:w-full"
         },
         {
             name: "argus",
             logo: "/img/Section2/Logos/argus.webp",
+            description: "Razor is a next-generation .NET Cardano node",
             class: "-top-48 w-62 sm:w-72 sm:-top-52 md:w-82 md:-top-56 lg:w-94 lg:top-72 xl:w-full xl:top-68"
         },
         {
             name: "aegis",
             logo: "/img/Section2/Logos/aegis.webp",
+            description: "Razor is a next-generation .NET Cardano node",
             class: "-top-45 w-62 sm:w-72 sm:-top-49 md:w-82 md:-top-53 lg:w-94 lg:top-72 xl:w-full xl:top-70"
         },
         {
             name: "futura",
             logo: "/img/Section2/Logos/futura.webp",
+            description: "Razor is a next-generation .NET Cardano node",
             class: "-top-45 w-56 sm:w-68 sm:-top-51 md:w-76 md:-top-55 lg:w-80 lg:top-84 xl:w-full xl:top-76"
         },
         {
             name: "razor",
             logo: "/img/Section2/Logos/razor.webp", 
+            description: "Razor is a next-generation .NET Cardano node",
             class: "-top-52 w-38 sm:w-44 sm:-top-58 md:w-46 lg:w-58 lg:top-60 xl:w-full lg:top-50"
         }
     ];
 
     return (
-        <section id="section-2" className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
+        <section id="section-2" style={{ backgroundColor:theme.palette.background.default }} className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
             <div className="container flex flex-col h-full">
                 <div className="flex justify-between flex-col lg:h-[calc(100%-230px)] lg:flex-row">
                     <div className="!mt-18 md:!mt-26">
@@ -51,7 +56,7 @@ export default function Section2(): ReactNode {
                             <span style={{color: theme.palette.text.secondary}} >Latest <br className="hidden xl:block"/>Resources</span>
                         </h1>
                     </div>
-                    <div className="flex flex-col justify-end items-center relative mt-60 lg:mt-0">
+                    <div className="flex flex-col justify-end items-center relative mt-54 lg:mt-0">
                         <div className={`absolute inset-x-0 left-1/2 transform -translate-x-1/2 flex justify-center ${projects[currentProject].class}`}>
                             <img
                                 src={projects[currentProject].logo}
@@ -112,7 +117,7 @@ export default function Section2(): ReactNode {
                         >
                             <DownArrow/>
                         </div>
-                        <div className="flex items-center justify-between text-center lg:hidden">
+                        <div className="flex items-center justify-between text-center max-w-107 mx-auto lg:hidden">
                             <IconButton 
                                 onClick={() => {
                                     setIsFading(true);
@@ -141,17 +146,18 @@ export default function Section2(): ReactNode {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-between gap-4 !mt-[65px] items-center flex-col md:flex-row lg:!mt-[45px]">
-                    <div className="w-[223.18px]">
-                        <p style={{ color: alpha(theme.palette.text.primary, 0.6) }}>
-                            /900k Developer Join
+                <div className="flex justify-between gap-6 mt-8 items-center flex-col-reverse md:flex-row lg:!mt-[45px]">
+                    <div className="w-[223.18px] space-y-2!">
+                        <p 
+                            className="text-center md:text-start"
+                            style={{ color: alpha(theme.palette.text.primary, 0.6) }}
+                        >
+                            Our Developers:
                         </p>
                         <img src="/img/Section2/developers.webp" alt="developers" />
                     </div>
-                    <div className="w-[305px] flex gap-1 flex-col items-center md:items-start">
-                        <div>
-                        <p style={{ color: theme.palette.text.disabled }}>The .NET Cardano Node</p>
-                        </div>
+                    <div className="w-[305px] flex flex-col items-center text-center gap-6 md:gap-6 md:text-start md:items-start">
+                        <p>{projects[currentProject].description}</p>
                         <div>
                             <BtnMore />
                         </div>

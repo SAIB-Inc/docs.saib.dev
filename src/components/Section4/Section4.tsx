@@ -9,27 +9,26 @@ export default function Section4(): ReactNode {
     const theme = useTheme();
 
     return (
-        <section className="flex flex-col items-center w-screen lg:h-[952.98px]">
+        <section style={{ backgroundColor:theme.palette.background.default }} className="flex flex-col items-center w-screen lg:h-[952.98px]">
             <div className="container mx-auto">
                 <div className="relative my-16 pt-20 md:pt-40">
                     <div 
                         style={{backgroundColor: theme.palette.primary.main}}
-                        className="rounded-full flex items-center justify-center size-26 absolute left-1/2 -translate-x-1/2 top-0 md:top-20"
+                        className="rounded-full flex items-center justify-center  absolute left-1/2 -translate-x-1/2 top-0 size-22 sm:size-26 md:top-20"
                     >
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo"/>
                     </div>
-                    <div className="absolute right-0 top-6 z-10 hidden sm:block">
+                    <div className="absolute right-0 z-10 w-16 top-0 sm:w-auto sm:-top-14 md:top-6">
                         <img src="/img/Section4/wizard.svg" alt="saib wizard"/>
                     </div>
-                    <div className="relative overflow-hidden bg-[url(/img/Section4/purple_bg.svg)] bg-cover bg-center p-4 flex justify-between flex-col gap-2  rounded-[24px] lg:rounded-[48px] md:h-100 md:flex-row md:px-10 lg:h-[498px] lg:px-12">
-                        <div className="bg-[url(/img/Section4/mesh.webp)] absolute left-0 w-full h-full bg-cover"/>
+                    <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col bg-[url(/img/Section4/purple_bg_mobile.svg)] gap-2 rounded-[24px] lg:rounded-[48px] md:h-100 md:flex-row md:items-center md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
                         <div className="z-10 mt-14 md:mt-0 lg:w-[661px]">
-                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl sm:!text-5xl md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
+                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl min-[345px]:!text-5xl md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
                                 <span>
-                                    Streamline <br className="hidden md:block"/>
+                                    Streamline <br/>
                                 </span>
                                 <span style={{color: theme.palette.primary.light}}>
-                                    Cardano <br className="hidden md:block"/>
+                                    Cardano <br/>
                                     Blockchain <br/>
                                 </span>
                                 <span>
@@ -60,13 +59,14 @@ export default function Section4(): ReactNode {
                         </div>
 
                     </div>
-                    <div className="mt-14 flex flex-col gap-4 justify-between items-center md:mt-0">
+                    <div className="mt-14 flex flex-col gap-8 justify-between items-center md:items-start md:mt-0 lg:gap-0">
                         <p
                             style={{ color: theme.palette.text.disabled }}
+                            className="md:hidden"
                         >
                             Argus is a proud product of...
                         </p>
-                        <div className="w-65 md:w-74">
+                        <div className="w-65 lg:w-74">
                             <img
                                 src={colorMode === 'dark' ? '/img/Section4/catalyst_dark.webp' : '/img/Section4/catalyst_light.webp'}
                                 alt="catalyst"

@@ -10,7 +10,7 @@ export default function Section6(): ReactNode {
     const theme = useTheme();
 
     return (
-        <section className="w-screen lg:h-[956px]">
+        <section style={{ backgroundColor:theme.palette.background.default }} className="w-screen lg:h-[956px]">
             <div className="container place-content-between !pt-20 md:!pt-[148px]">
                 <div className="flex justify-between h-[72px] items-center flex-col mb-6 lg:mb-20 lg:items-start md:flex-row">
                     <div>

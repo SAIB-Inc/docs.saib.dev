@@ -37,7 +37,7 @@ export default function Section8(): ReactNode {
     ]
 
     return(
-        <section className="bg-[url(/img/Section8/eighth_background.webp)] bg-cover pt-20 md:pt-[137px] md:h-[1113px]">
+        <section style={{ backgroundColor:theme.palette.background.default }} className="bg-[url(/img/Section8/eighth_background.webp)] bg-cover md:!pt-[137px] md:h-[1113px]">
             <div className="container">
                 <div className="flex items-center flex-col justify-center text-center lg:text-start lg:justify-between lg:flex-row">
                     <h1 className="!text-3xl sm:!text-5xl md:!text-[56px] md:leading-[54.88px]">
@@ -64,7 +64,7 @@ export default function Section8(): ReactNode {
                                     transform: `translateX(calc(-${selectedItem * 100}% - ${selectedItem * 11}px))`,
                                     transition: 'transform 0.5s ease'
                                 }}
-                                className="min-w-full"
+                                className={`min-w-full ` + datum.ClassNames}
                             >
                                 <img
                                     src={datum.src}

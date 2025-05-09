@@ -16,7 +16,7 @@ export default function Section1(): ReactNode {
       };
 
     return (
-        <section className={`relative grid place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} pt-24 md:pt-15 md:h-screen`}>
+        <section style={{ backgroundColor:theme.palette.background.default }}  className={`relative grid place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} pt-12 md:pt-0 md:h-screen`}>
             <div className="container mx-auto text-center">
                 <div>
                     <h1 className="!text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
@@ -44,13 +44,13 @@ export default function Section1(): ReactNode {
                 <div className="mt-[34px]">
                     <Button sx={{ color: theme.palette.grey[50] }} variant="contained">Let's Get Started</Button>
                 </div>
-                <div className="flex justify-center mt-[72.9px]">
+                <div className="flex justify-center mt-10 md:mt-[72.9px]">
                     <Wizard sx={{ color: theme.palette.text.secondary }} className="text-[120px]! lg:text-[140px]!"/>
                 </div>
             </div>
             <div 
                 onClick={scrollToNextSection}
-                className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 justify-center items-center flex-col animate-bounce2 cursor-pointer hidden md:flex"
+                className="absolute bottom-20 left-1/2 transform -translate-x-1/2 justify-center items-center flex-col animate-bounce2 cursor-pointer hidden md:flex"
             >
                 <img src="/img/scroll_arrow.webp" alt="scroll down"/>
             </div>

@@ -59,7 +59,7 @@ export default function Section4(): ReactNode {
 
                         <div className="mt-[32px]">
                             <BtnMore
-                                LinkComponent='a' href="http://localhost:3000/docs/argus/intro"
+                                LinkComponent='a' href="/docs/argus/intro"
                                 sx={{
                                     color: theme.palette.grey[50],
                                     '&:hover': {

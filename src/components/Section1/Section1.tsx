@@ -44,7 +44,7 @@ export default function Section1(): ReactNode {
                 <div className="mt-[34px]">
                     <Button
                         LinkComponent='a'
-                        href="http://localhost:3000/docs/chrysalis/overview"
+                        href="/docs/chrysalis/overview"
                         sx={{
                             color: theme.palette.grey[50],
                             '&:hover': {

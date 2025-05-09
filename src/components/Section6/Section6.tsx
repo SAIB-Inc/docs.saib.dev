@@ -21,7 +21,7 @@ export default function Section6(): ReactNode {
                     </div>
                     <div className="flex items-center">
                         <BtnMore 
-                            LinkComponent='a' href="http://localhost:3000/docs/Chrysalis/overview"
+                            LinkComponent='a' href="/docs/Chrysalis/overview"
                             sx={{
                                 color: theme.palette.grey[50],
                                 '&:hover': {
@@ -119,7 +119,7 @@ export default function Section6(): ReactNode {
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px] self-end" />
                                 <IconButton 
                                     LinkComponent={'a'}
-                                    href="http://localhost:3000/docs/chrysalis/tx/low-level-builder"
+                                    href="/docs/chrysalis/tx/low-level-builder"
                                     sx={{
                                         padding: 0,
                                         opacity: 0.8,
@@ -158,7 +158,7 @@ export default function Section6(): ReactNode {
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px]" />
                                 <IconButton 
                                     LinkComponent={'a'}
-                                    href="http://localhost:3000/docs/chrysalis/network/overview"
+                                    href="/docs/chrysalis/network/overview"
                                     sx={{
                                         padding: 0,
                                         opacity: 0.8,

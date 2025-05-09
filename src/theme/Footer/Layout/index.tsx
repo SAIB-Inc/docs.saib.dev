@@ -144,7 +144,7 @@ export default function FooterLayout({
                           Contact Us
                         </Link>
                         <Link
-                          href="http://localhost:3000/docs/chrysalis/overview"
+                          href="/docs/chrysalis/overview"
                           sx={{
                             color: theme.palette.text.primary,
                             fontSize: '25.43px',
@@ -199,7 +199,7 @@ export default function FooterLayout({
                     </div>
                     <div className='flex flex-col gap-y-[7.63px]'>
                       <Link
-                        href="http://localhost:3000/docs/argus/intro"
+                        href="/docs/argus/intro"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -218,7 +218,7 @@ export default function FooterLayout({
                         Argus
                       </Link>
                       <Link
-                        href="http://localhost:3000/docs/chrysalis/overview"
+                        href="/docs/chrysalis/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -237,7 +237,7 @@ export default function FooterLayout({
                         Chrysalis
                       </Link>
                       <Link
-                        href="http://localhost:3000/docs/comp/overview"
+                        href="/docs/comp/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -256,7 +256,7 @@ export default function FooterLayout({
                         COMP
                       </Link>
                       <Link
-                        href="http://localhost:3000/docs/futura/overview"
+                        href="/docs/futura/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -275,7 +275,7 @@ export default function FooterLayout({
                         Futura
                       </Link>
                       <Link
-                        href="http://localhost:3000/docs/razor/overview"
+                        href="/docs/razor/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',

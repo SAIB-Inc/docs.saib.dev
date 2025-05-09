@@ -1,5 +1,5 @@
 import React, {type ReactNode} from 'react';
-import {useThemeConfig, ErrorCauseBoundary} from '@docusaurus/theme-common';
+import {useThemeConfig, ErrorCauseBoundary, useColorMode} from '@docusaurus/theme-common';
 import {
   splitNavbarItems,
   useNavbarMobileSidebar,
@@ -12,6 +12,7 @@ import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
 
 import styles from './styles.module.css';
+import Link from '@docusaurus/Link';
 
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
@@ -55,6 +56,7 @@ function NavbarContentLayout({
 }
 
 export default function NavbarContent(): ReactNode {
+  const { colorMode } = useColorMode();
   const mobileSidebar = useNavbarMobileSidebar();
 
   const items = useNavbarItems();
@@ -79,6 +81,15 @@ export default function NavbarContent(): ReactNode {
         // Ask the user to add the respective navbar items => more flexible
         <>
           <NavbarItems items={rightItems} />
+          <Link
+            href='https://github.com/SAIB-Inc'
+          >
+            <img
+              src={colorMode ? '/img/github_dark.svg' : '/img/github_light.svg'}
+              alt='github logo'
+              className='opacity-60 hover:opacity-100'
+            />
+          </Link>
           <NavbarColorModeToggle className={styles.colorModeToggle} />
           {!searchBarItem && (
             <NavbarSearch>

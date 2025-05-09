@@ -79,10 +79,8 @@ export default function FooterLayout({
                   </div>
                   <div className='flex gap-y-[10px] flex-row gap-x-2 lg:gap-x-0 lg:flex-col'>
                     <IconButton
-                      LinkComponent={'a'}
+                      LinkComponent={ExternalLink}
                       href="https://github.com/SAIB-Inc"
-                      target="_blank"
-                      rel="noopener"
                       sx={{
                         padding: 0,
                         opacity: 0.6,
@@ -93,6 +91,8 @@ export default function FooterLayout({
                       <GithubIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-5xl md:!text-[50.85px]"/>
                     </IconButton>
                     <IconButton
+                      LinkComponent={ExternalLink}
+                      href="https://x.com/saibdev"
                       sx={{
                         padding: 0,
                         opacity: 0.6,

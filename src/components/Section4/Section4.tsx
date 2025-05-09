@@ -13,8 +13,8 @@ export default function Section4(): ReactNode {
         <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="h-[952.98px] flex flex-col items-center w-screen">
             <div className="container mx-auto">
                 <div className="relative my-16 pt-40 flex flex-col">
-                    <div 
-                        style={{backgroundColor: theme.palette.primary.main}}
+                    <div
+                        style={{ backgroundColor: theme.palette.primary.main }}
                         className="rounded-full flex items-center justify-center size-26 absolute top-20 left-1/2 -translate-x-1/2"
                     >
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo" />
@@ -58,17 +58,17 @@ export default function Section4(): ReactNode {
                         </div>
 
                         <div className="mt-[32px]">
-                            <BtnMore 
+                            <BtnMore
                                 LinkComponent='a' href="http://localhost:3000/docs/argus/intro"
                                 sx={{
                                     color: theme.palette.grey[50],
                                     '&:hover': {
-                                        backgroundColor: '#C2B8FF',
-                                        color: 'white'
+                                        backgroundColor: theme.palette.action.hover,
+                                        color: theme.palette.grey[50]
                                     },
                                     '&:active': {
-                                        backgroundColor: '#3A376A',
-                                        color: '#white'
+                                        backgroundColor: theme.palette.action.active,
+                                        color: theme.palette.grey[50]
                                     },
                                 }}
                             />
@@ -88,38 +88,22 @@ export default function Section4(): ReactNode {
                                 sx={{
                                     color: theme.palette.grey[50],
                                     '&:hover': {
-                                        backgroundColor: '#C2B8FF',
-                                        color: 'white'
+                                        backgroundColor: theme.palette.action.hover,
+                                        color: theme.palette.grey[50]
                                     },
                                     '&:active': {
-                                        backgroundColor: '#3A376A',
-                                        color: '#white'
+                                        backgroundColor: theme.palette.action.active,
+                                        color: theme.palette.grey[50]
                                     },
                                 }}
                             >
                                 View in Catalyst
                             </BtnMore>
-                        </div >
+                        </div>
                     </div >
                 </div >
             </div >
-            <div className="mt-[43.19px] flex justify-end">
-                <BtnMore
-                    LinkComponent={ExternalLink} href="https://milestones.projectcatalyst.io/projects/1200072"
-                    sx={{
-                        '&:hover': {
-                            backgroundColor: theme.palette.action.hover,
-                            color: theme.palette.grey[50]
-                        },
-                        '&:active': {
-                            backgroundColor: theme.palette.action.active,
-                            color: theme.palette.grey[50]
-                        },
-                    }}
-                >
-                    View in Catalyst
-                </BtnMore>
-            </div>
+
         </section >
     )
 };

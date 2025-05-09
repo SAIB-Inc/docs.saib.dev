@@ -85,7 +85,7 @@ export default function NavbarContent(): ReactNode {
             href='https://github.com/SAIB-Inc'
           >
             <img
-              src={colorMode ? '/img/github_dark.svg' : '/img/github_light.svg'}
+              src={colorMode === 'dark' ? '/img/github_dark.svg' : '/img/github_light.svg'}
               alt='github logo'
               className='opacity-60 hover:opacity-100'
             />

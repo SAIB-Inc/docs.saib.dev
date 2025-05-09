@@ -49,10 +49,10 @@ export default function Section4(): ReactNode {
                                 style={{ color: theme.palette.text.disabled }}
                                 className="capitalize text-[18px] leading-[23.04px]"
                             >
-                                Argus brings Cardano blockchain data seamlessly <br />
-                                into the .NET environment, empowering developers <br />
-                                to efficiently query and access data using familiar <br />
-                                .NET languages like C#. </p>
+                                Argus brings Cardano blockchain data seamlessly into the .NET 
+                                environment, empowering developers to efficiently query and 
+                                access data using familiar .NET languages like C#. 
+                            </p>
                         </div>
 
                         <div className="mt-[32px]">

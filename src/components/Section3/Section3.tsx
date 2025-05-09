@@ -50,9 +50,10 @@ export default function Section3(): ReactNode {
                             <div className="w-[304.95px] h-[60px] mt-[2px] mb-[20.06px] flex justify-end" >
                                 <p
                                     style={{color: theme.palette.text.disabled}}
-                                    className="text-[16px] font-normal leading-[20.48px] "
+                                    className="text-[20px] font-normal leading-[25.6px]"
                                 >
-                                    Seamlessly Connecting Cardano And .NET For A Fast, Productive Developer Experience
+                                    Seamlessly connecting Cardano and .NET <br />
+                                    for a fast, productive developer experience.
                                 </p>
                             </div>
 

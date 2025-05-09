@@ -5,7 +5,7 @@ import RightArrow from "../../icons/RightArrow.svg";
 import { useColorMode } from "@docusaurus/theme-common";
 
 export default function Section4(): ReactNode {
-
+    const { colorMode } = useColorMode();
     const theme = useTheme();
 
     return (
@@ -66,7 +66,11 @@ export default function Section4(): ReactNode {
                         >
                             Argus is a proud product of...
                         </p>
-                        <div className="mt-4!">
+                        <div className="w-65 md:w-74">
+                            <img
+                                src={colorMode === 'dark' ? '/img/Section4/catalyst_dark.webp' : '/img/Section4/catalyst_light.webp'}
+                                alt="catalyst"
+                            />
                         </div>
                         <div className="flex mt-3 lg:mt-[43.19px] lg:justify-end">
                             <Button sx={{ color: theme.palette.grey[50] }} variant="contained" endIcon={<RightArrow />}>View In Catalyst</Button>

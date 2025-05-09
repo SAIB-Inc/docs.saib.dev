@@ -52,6 +52,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
                 50: '#ffffff',
                 100: '#717171',
                 600: '#191919',
+                700: '#23212B',
                 800: '#1F2F4E',
                 900: colorMode === 'dark' ? '#191919' : '#E9F5FF',
                 A100: colorMode === 'dark' ? '#151515' : '#E9F5FF',

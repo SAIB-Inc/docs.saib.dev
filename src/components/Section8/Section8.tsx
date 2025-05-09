@@ -1,10 +1,40 @@
 import { useColorMode } from "@docusaurus/theme-common";
+import { ClassNames } from "@emotion/react";
 import { useTheme } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 export default function Section8(): ReactNode {
     const theme = useTheme();
     const { colorMode } = useColorMode();
+    const [selectedItem, setSelectedItem] = useState(0);
+
+    const imageList = [
+        {
+            alt: "Da Nang Group Photo",
+            src: "/img/Section8/danang_buidler.webp",
+            ClassNames: "col-span-6 w-full h-[371px] rounded-[24px] object-cover"
+        },
+        {
+            alt: "Panel",
+            src: "/img/Section8/panel_tooling.webp",
+            ClassNames: "col-span-6 w-full h-[371px] rounded-[24px] object-cover"
+        },
+        {
+            alt: "Da Nang Buidler Fest",
+            src: "/img/Section8/danang_discussions.webp",
+            ClassNames: "col-span-4 w-full h-[371px] rounded-[24px] object-cover"
+        },
+        {
+            alt: "Open Spaces",
+            src: "/img/Section8/open_spaces.webp",
+            ClassNames: "col-span-4 w-full h-[371px] rounded-[24px] object-cover"
+        },
+        {
+            alt: "Guests",
+            src: "/img/Section8/buidler_guests.webp",
+            ClassNames: "col-span-4 w-full h-[371px] rounded-[24px] object-cover"
+        }
+    ]
 
     return(
         <section className="bg-[url(/img/Section8/eighth_background.webp)] bg-cover pt-20 md:pt-[137px] md:h-[1113px]">
@@ -25,14 +55,40 @@ export default function Section8(): ReactNode {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px]">
-                    <img src="/img/Section8/danang_buidler.webp" alt="Da Nang Group Photo" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover"/>
-                    <img src="/img/Section8/panel_tooling.webp" alt="Panel" className="col-span-6 w-full h-[371px] rounded-[24px] object-cover"/>
-                    <img src="/img/Section8/danang_discussions.webp" alt="Da Nang Buidler Fest" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
-                    <img src="/img/Section8/open_spaces.webp" alt="Open Spaces" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
-                    <img src="/img/Section8/buidler_guests.webp" alt="Guests" className="col-span-4 w-full h-[371px] rounded-[24px] object-cover"/>
-                    
-                    
+                <div className="flex overflow-hidden grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px] md:grid">
+                    {imageList.map((datum) => {
+                        return(
+                            <div
+                                id={datum.alt}
+                                style={{
+                                    transform: `translateX(calc(-${selectedItem * 100}% - ${selectedItem * 11}px))`,
+                                    transition: 'transform 0.5s ease'
+                                }}
+                                className="min-w-full"
+                            >
+                                <img
+                                    src={datum.src}
+                                    alt={datum.alt}
+                                    className={datum.ClassNames}
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className="flex gap-2 items-center mt-6 md:hidden">
+                    {imageList.map((_, i) => (
+                        <div 
+                            key={i}
+                            onClick={() => {
+                                setSelectedItem(i)
+                            }}
+                            style={{
+                                backgroundColor: selectedItem === i ? theme.palette.primary.main : theme.palette.grey[700],
+                                width: `calc(${100/imageList.length}%)`
+                            }}
+                            className="h-2 rounded-full"
+                        />
+                    ))}
                 </div>
             </div>
         </section>

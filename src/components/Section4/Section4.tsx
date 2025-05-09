@@ -10,7 +10,7 @@ export default function Section4(): ReactNode {
     const { colorMode } = useColorMode();
 
     return (
-        <section style={{ backgroundColor: theme.palette.background.default }} className="h-[952.98px] flex flex-col items-center w-screen">
+        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="h-[952.98px] flex flex-col items-center w-screen">
             <div className="container mx-auto">
                 <div className="relative my-16 pt-40 flex flex-col">
                     <div 
@@ -58,7 +58,8 @@ export default function Section4(): ReactNode {
                         </div>
 
                         <div className="mt-[32px]">
-                            <BtnMore LinkComponent={ExternalLink} href="http://localhost:3000/docs/"
+                            <BtnMore 
+                                LinkComponent='a' href="http://localhost:3000/docs/argus/intro"
                                 sx={{
                                     color: theme.palette.grey[50],
                                     '&:hover': {

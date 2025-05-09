@@ -9,6 +9,7 @@ import GithubIcon from '@site/static/img/Footer/github';
 import XIcon from '@site/static/img/Footer/x';
 import ScrollUpIcon from '@site/static/img/Footer/scroll_up';
 import UpperRightArrowIcon from '@site/static/img/Footer/arrow_upper_right';
+import ExternalLink from '@site/src/components/Shared/Links/ExternalLink/ExternalLink';
 
 
 
@@ -21,6 +22,14 @@ export default function FooterLayout({
 
   const theme = useTheme();
   const { colorMode } = useColorMode();
+
+  const scrollToFirstSection = () => {
+    const nextSection = document.getElementById("section-1");
+    if (nextSection) {
+        nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+};
+
 
   return (
     <footer style={{backgroundColor: theme.palette.background.default}} className='h-[1078px]'>
@@ -56,7 +65,6 @@ export default function FooterLayout({
               <div className='flex gap-x-[10px]'>
                 <div>
                   <IconButton LinkComponent={'a'}
-                    href='#'
                     sx={{
                       padding: 0,
                       opacity: 0.6,
@@ -64,15 +72,13 @@ export default function FooterLayout({
                         opacity: 1,
                       },
                     }}>
-                    <ScrollUpIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[111.88px]"/>
+                    <ScrollUpIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[111.88px]" onClick={scrollToFirstSection}/>
                   </IconButton>
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
                   <IconButton
-                    LinkComponent={'a'}
+                    LinkComponent={ExternalLink}
                     href="https://github.com/SAIB-Inc"
-                    target="_blank"
-                    rel="noopener"
                     sx={{
                       padding: 0,
                       opacity: 0.6,
@@ -83,6 +89,8 @@ export default function FooterLayout({
                     <GithubIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[50.85px]"/>
                   </IconButton>
                   <IconButton
+                    LinkComponent={ExternalLink}
+                    href="https://x.com/saibdev"
                     sx={{
                       padding: 0,
                       opacity: 0.6,
@@ -118,7 +126,7 @@ export default function FooterLayout({
                         <Link
                           href="https://calendly.com/saibdev"
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                           sx={{
                             color: theme.palette.text.primary,
                             fontSize: '25.43px',
@@ -136,9 +144,7 @@ export default function FooterLayout({
                           Contact Us
                         </Link>
                         <Link
-                          href=""
-                          target="_blank"
-                          rel="noopener"
+                          href="http://localhost:3000/docs/chrysalis/overview"
                           sx={{
                             color: theme.palette.text.primary,
                             fontSize: '25.43px',
@@ -160,7 +166,7 @@ export default function FooterLayout({
                         <Link
                           href="https://saib.dev/"
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                           sx={{
                             display: 'flex',
                             gap: '10.17px',
@@ -193,9 +199,7 @@ export default function FooterLayout({
                     </div>
                     <div className='flex flex-col gap-y-[7.63px]'>
                       <Link
-                        href="https://github.com/SAIB-Inc/Argus"
-                        target="_blank"
-                        rel="noopener"
+                        href="http://localhost:3000/docs/argus/intro"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -214,9 +218,7 @@ export default function FooterLayout({
                         Argus
                       </Link>
                       <Link
-                        href="https://github.com/SAIB-Inc/Chrysalis"
-                        target="_blank"
-                        rel="noopener"
+                        href="http://localhost:3000/docs/chrysalis/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -235,9 +237,7 @@ export default function FooterLayout({
                         Chrysalis
                       </Link>
                       <Link
-                        href="https://github.com/SAIB-Inc/COMP"
-                        target="_blank"
-                        rel="noopener"
+                        href="http://localhost:3000/docs/comp/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -256,9 +256,7 @@ export default function FooterLayout({
                         COMP
                       </Link>
                       <Link
-                        href=""
-                        target="_blank"
-                        rel="noopener"
+                        href="http://localhost:3000/docs/futura/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',
@@ -277,9 +275,7 @@ export default function FooterLayout({
                         Futura
                       </Link>
                       <Link
-                        href="https://github.com/SAIB-Inc/Razor"
-                        target="_blank"
-                        rel="noopener"
+                        href="http://localhost:3000/docs/razor/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           fontSize: '25.43px',

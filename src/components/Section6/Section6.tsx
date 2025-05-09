@@ -20,8 +20,10 @@ export default function Section6(): ReactNode {
                         </h1>
                     </div>
                     <div className="flex items-center">
-                        <BtnMore LinkComponent={ExternalLink} href="http://localhost:3000/docs/Chrysalis/overview"
+                        <BtnMore 
+                            LinkComponent='a' href="http://localhost:3000/docs/Chrysalis/overview"
                             sx={{
+                                color: theme.palette.grey[50],
                                 '&:hover': {
                                     backgroundColor: '#C2B8FF',
                                     color: 'white'
@@ -115,7 +117,17 @@ export default function Section6(): ReactNode {
                             </div>
                             <div className="flex justify-between items-end">
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px] self-end" />
-                                <IconButton aria-label="go to chrysalis network documentation">
+                                <IconButton 
+                                    LinkComponent={'a'}
+                                    href="http://localhost:3000/docs/chrysalis/tx/low-level-builder"
+                                    sx={{
+                                        padding: 0,
+                                        opacity: 0.8,
+                                        '&:hover': {
+                                          opacity: 1,
+                                        },
+                                      }}
+                                      aria-label="go to chrysalis tx documentation">
                                     <WhiteRightArrow />
                                 </IconButton>
                             </div>
@@ -144,7 +156,17 @@ export default function Section6(): ReactNode {
                             </div>
                             <div className="flex justify-between items-end">
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px]" />
-                                <IconButton aria-label="go to chrysalis network documentation">
+                                <IconButton 
+                                    LinkComponent={'a'}
+                                    href="http://localhost:3000/docs/chrysalis/network/overview"
+                                    sx={{
+                                        padding: 0,
+                                        opacity: 0.8,
+                                        '&:hover': {
+                                          opacity: 1,
+                                        },
+                                      }}
+                                      aria-label="go to chrysalis network documentation">
                                     <GrayRightArrow />
                                 </IconButton>
                             </div>

@@ -24,43 +24,38 @@ export default function Section6(): ReactNode {
 
                 </div>
 
-                <div className="flex justify-between flex-wrap gap-[16px]">
-                    <Paper sx={{
-                        backgroundColor: theme.palette.secondary.dark,
-                        borderRadius: '24px',
-                        paddingTop: '51px',
-                        paddingLeft: '40px',
-                        paddingRight: '60px',
-                        paddingBottom: '43.3px',
-                        width: '915px',
-                        height: '304px',
-                        boxShadow: 0
-                    }} >
+                <div className="flex justify-between flex-wrap gap-y-[16px]">
+                    <Paper 
+                        sx={{
+                            backgroundImage: "url('/img/Section6/chyrsalis_bg.webp')",
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            borderRadius: '24px',
+                            paddingTop: '40px',
+                            paddingLeft: '41px',
+                            paddingRight: '74.14px',
+                            paddingBottom: '48px',
+                            width: '956px',
+                            height: '304px',
+                            boxShadow: 0
+                        }} 
+                    >
                         <div className="flex justify-between">
                             <div>
-                                <h2 style={{color: theme.palette.grey[50]}} className="!text-[40px] !leading-[48px] !tracking-[0.4px] mb-[24px]">The Cardano<br />
-                                    (De)Serializer for .NET
+                                <h2 style={{color: theme.palette.secondary.contrastText}} className="!text-[40px] !font-semibold !leading-[48px] !tracking-[0.4px] mb-[24px]">
+                                    The Core Building-<br />
+                                    Block .NET Library
                                 </h2>
-                                <p style={{color: theme.palette.grey[50]}} className="!text-[20px] !leading-[27.14px] !tracking-[0.9px]">
-                                    Chrysalis provides a seamless path to interact with<br />
-                                    the Cardano network—from CBOR (de)serialization<br />
-                                    to building and customizing transactions.
+                                <p style={{color: theme.palette.grey[50]}} className="!text-[18px] !leading-[24.426px] !tracking-[0.9px]">
+                                    Interact seamlessly with the Cardano network, native<br />
+                                    to C#, F#, and VB NET. Featuring its three main<br />
+                                    functionalities—Chrysalis.CBOR, Chrysalis.Tx, and<br />
+                                    Chrysalis.Network.
                                 </p>
                             </div>
-                            <img src="/img/Section6/big_crystal.webp" className="w-[223.82px] h-[179.39px] self-end"></img>
+                            <img src="/img/Section6/chyrsalis.svg" className="self-end"></img>
                         </div>
-                    </Paper>
-
-                    <Paper sx={{
-                        backgroundColor: theme.palette.grey[800],
-                        borderRadius: '24px',
-                        width: '357px',
-                        height: '304px',
-                        boxShadow: 0
-                    }}
-                        className="flex justify-center items-center relative"
-                    >
-                        <img src="/img/Section6/chrysalis.webp" />
                     </Paper>
 
                     <Paper sx={{
@@ -81,27 +76,55 @@ export default function Section6(): ReactNode {
                     </Paper>
 
                     <Paper sx={{
-                        backgroundColor: theme.palette.secondary.light,
+                        backgroundColor: theme.palette.secondary.dark,
                         borderRadius: '24px',
                         paddingTop: '40px',
                         paddingLeft: '40px',
-                        paddingRight: '32px',
+                        paddingRight: '32.6px',
                         paddingBottom: '32.05px',
-                        width: '471px',
                         height: '304px',
                         boxShadow: 0
                     }}
                     >
-                        <div className="flex flex-col gap-4 justify-between">
+                        <div className="flex flex-col justify-between h-full">
                             <div>
-                                <h3 style={{color: theme.palette.grey[50]}} className="!text-[30px] !font-semibold leading-[33px] !mb-[40px]">CHRYSALIS.TX</h3>
+                                <h3 style={{color: theme.palette.grey[50]}} className="!text-[30px] !font-semibold leading-[33px] !mb-[24px]">CHRYSALIS.CBOR</h3>
+                                <p style={{color: theme.palette.grey[50]}} className="!mb-0">
+                                    Streamline data exchange through<br />
+                                    serializing or (de)serializing Cardano<br />
+                                    data structures.
+                                </p>
+                            </div>
+                            <div className="flex justify-between items-end gap-x-45">
+                                <img src="/img/Section6/small_crystal.webp" className="w-[100px] self-end" />
+                                <IconButton aria-label="go to chrysalis network documentation">
+                                    <WhiteRightArrow />
+                                </IconButton>
+                            </div>
+                        </div>
+                    </Paper>
+
+                    <Paper sx={{
+                        backgroundColor: theme.palette.secondary.light,
+                        borderRadius: '24px',
+                        paddingTop: '40px',
+                        paddingLeft: '40px',
+                        paddingRight: '32.6px',
+                        paddingBottom: '32.05px',
+                        height: '304px',
+                        boxShadow: 0
+                    }}
+                    >
+                        <div className="flex flex-col justify-between h-full">
+                            <div>
+                                <h3 style={{color: theme.palette.grey[50]}} className="!text-[30px] !font-semibold leading-[33px] !mb-[24px]">CHRYSALIS.TX</h3>
                                 <p style={{color: theme.palette.grey[50]}} className="!mb-0">
                                     Create, sign, and manage Cardano<br />
                                     transactions effortlessly in C# with the<br />
                                     Chyrsalis Transaction Builder.
                                 </p>
                             </div>
-                            <div className="flex justify-between items-end">
+                            <div className="flex justify-between items-end gap-x-45">
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px] self-end" />
                                 <IconButton aria-label="go to chrysalis network documentation">
                                     <WhiteRightArrow />
@@ -115,22 +138,21 @@ export default function Section6(): ReactNode {
                         borderRadius: '24px',
                         paddingTop: '40px',
                         paddingLeft: '40px',
-                        paddingRight: '32px',
+                        paddingRight: '32.6px',
                         paddingBottom: '32.05px',
-                        width: '469px',
                         height: '304px',
                         boxShadow: 0
                     }}
                     >
-                        <div className="flex flex-col gap-4 justify-between">
-                            <div className="mb-[25px]">
-                                <h3 style={{color: theme.palette.grey[600]}} className="!text-[30px] !font-semibold leading-[33px] !mb-[40px]">CHRYSALIS.NETWORK</h3>
+                        <div className="flex flex-col justify-between h-full">
+                            <div>
+                                <h3 style={{color: theme.palette.grey[600]}} className="!text-[30px] !font-semibold leading-[33px] !mb-[24px]">CHRYSALIS.NETWORK</h3>
                                 <p style={{color: theme.palette.grey[600]}}>
                                     Communicate with the Cardano network<br />
                                     in C# through Ouroboros
                                 </p>
                             </div>
-                            <div className="flex justify-between items-end">
+                            <div className="flex justify-between items-end gap-x-45">
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px]" />
                                 <IconButton aria-label="go to chrysalis network documentation">
                                     <GrayRightArrow />

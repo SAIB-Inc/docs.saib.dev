@@ -18,9 +18,10 @@ export default function Section8(): ReactNode {
                             Build Together
                         </span>
                     </h1>
-                    <p className="!text-[20px] leading-[25.6px] !mb-0 capitalize">
-                    We’re proud to be part of the Cardano community— constantly building, 
-                    collaborating, and connecting with others who share the vision.
+                    <p className="!text-[20px] leading-[25.6px] !mb-0">
+                    We’re proud to be part of the Cardano<br />
+                    community— constantly building, collaborating, <br />
+                    and connecting with others who share the vision.
                     </p>
                 </div>
 

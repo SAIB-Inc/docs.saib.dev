@@ -109,12 +109,6 @@ const config: Config = {
           position: 'left',
           label: 'Futura'
         },
-        {
-          href: 'https://github.com/SAIB-Inc',
-          position: 'right',
-          className: 'navbar-icon',
-          'aria-label': 'GitHub repository',
-        },
       ],
     },
     footer: {

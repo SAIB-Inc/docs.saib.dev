@@ -51,12 +51,13 @@ export default function Section2(): ReactNode {
             <div className="container flex flex-col h-full">
                 <div className="flex justify-between flex-col lg:h-[calc(100%-230px)] lg:flex-row">
                     <div className="!mt-18 md:!mt-26">
-                        <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:leading-[53.76px]! lg:!text-[40px] xl:!text-[56px]">
-                            <span>Check Out <br className="hidden lg:block"/>The </span>
+                        <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:leading-[53.76px]! lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[56px]">
+                            <span>Check Out </span><br className="hidden lg:block"/> 
+                            <span>The </span>
                             <span style={{color: theme.palette.text.secondary}} >Latest <br className="hidden xl:block"/>Resources</span>
                         </h1>
                     </div>
-                    <div className="flex flex-col justify-end items-center relative mt-54 lg:mt-0">
+                    <div className="flex flex-col justify-end items-center relative mt-54 md:mt-77 lg:mt-0">
                         <div className={`absolute inset-x-0 left-1/2 transform -translate-x-1/2 flex justify-center ${projects[currentProject].class}`}>
                             <img
                                 src={projects[currentProject].logo}
@@ -70,7 +71,7 @@ export default function Section2(): ReactNode {
                             className="w-72 sm:w-100 md:w-120 lg:w-auto"
                         />
                     </div>
-                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[305px]">
+                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-100 2xl:w-116 xl:w-[305px]">
                         <div className="flex flex-col justify-end pr-[6px]">
                             <nav>
                                 <ul className="!m-0 !p-0 hidden lg:block">

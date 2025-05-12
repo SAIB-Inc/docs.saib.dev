@@ -62,8 +62,8 @@ export default function FooterLayout({
               </Paper>
               <div className='flex gap-x-[10px] flex-row-reverse justify-between lg:justify-start lg:flex-row'>
                   <div>
-                    <IconButton LinkComponent={'a'}
-                      href='#'
+                    <IconButton 
+                      LinkComponent={'a'}
                       sx={{
                         padding: 0,
                         opacity: 0.6,
@@ -72,6 +72,7 @@ export default function FooterLayout({
                           opacity: 1,
                         },
                       }}
+                      onClick={scrollToFirstSection}
                       className='!transition-all !duration-300 !ease-in-out'>
                       <ScrollUpIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[56px] sm:!text-[70px] lg:!text-[111.88px]"/>
                     </IconButton>

@@ -23,12 +23,12 @@ export default function Section6(): ReactNode {
                             sx={{
                                 color: theme.palette.grey[50],
                                 '&:hover': {
-                                    backgroundColor: '#C2B8FF',
-                                    color: 'white'
+                                    backgroundColor: theme.palette.action.hover,
+                                    color: theme.palette.grey[50]
                                 },
                                 '&:active': {
-                                    backgroundColor: '#3A376A',
-                                    color: '#white'
+                                    backgroundColor: theme.palette.action.active,
+                                    color: theme.palette.grey[50]
                                 },
                             }}
                         />
@@ -39,7 +39,7 @@ export default function Section6(): ReactNode {
                 <div className="flex justify-between flex-wrap gap-4 !mt-20 md:mt-10 xl:mt-30">
                     <Paper 
                         sx={{
-                            backgroundColor: '#5438DC',
+                            backgroundColor: theme.palette.primary.main,
                             borderRadius: '24px',
                             boxShadow: 0
                         }} 
@@ -85,7 +85,7 @@ export default function Section6(): ReactNode {
 
                     <Paper 
                         sx={{
-                            backgroundColor: '#7454FF',
+                            backgroundColor: theme.palette.secondary.light,
                             borderRadius: '24px',
                             boxShadow: 0
                         }}
@@ -122,7 +122,7 @@ export default function Section6(): ReactNode {
 
                     <Paper 
                         sx={{
-                            backgroundColor: '#C2B8FF',
+                            backgroundColor: theme.palette.primary.light,
                             borderRadius: '24px',
                             boxShadow: 0
                         }}

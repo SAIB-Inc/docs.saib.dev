@@ -59,7 +59,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
             },
             action: {
                 active: '#3A376A',
-                hover: '#C2B8FF',
+                hover: '#988DE2',
                 hoverOpacity: 0.6,
             },
         },

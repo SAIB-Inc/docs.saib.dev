@@ -9,6 +9,7 @@ import GithubIcon from '@site/static/img/Footer/github';
 import XIcon from '@site/static/img/Footer/x';
 import ScrollUpIcon from '@site/static/img/Footer/scroll_up';
 import UpperRightArrowIcon from '@site/static/img/Footer/arrow_upper_right';
+import ExternalLink from '@site/src/components/Shared/Links/ExternalLink/ExternalLink';
 
 
 
@@ -21,14 +22,17 @@ export default function FooterLayout({
 
   const theme = useTheme();
   const { colorMode } = useColorMode();
-
+  const scrollToFirstSection = () => {
+    const nextSection = document.getElementById("section-1");
+    if (nextSection) {
+        nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+};
   return (
     <footer style={{backgroundColor: theme.palette.background.default}} className='!pt-30 lg:!pt-0 md:h-[1078px]'>
-      <div className={`place-items-center relative ${colorMode === 'dark' ? "md:bg-[url(/img/Footer/background_dark.webp)]" : "md:bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
-        <div className='!hidden 2xl:!block'>
-          <BackgroundLines />
-        </div>
+      <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/Footer/background_dark.webp)]" : "bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
         <div className="container !px-4 md:!pt-67 md:h-[1021px]">
+          {/* {links} */}
           <div className='flex gap-x-20 h-full flex-col-reverse lg:flex-row'>
             <div className='flex flex-col gap-y-8 lg:justify-between lg:!mb-[21.83px]'>
               <div className='relative w-max mx-auto sm:!hidden'>
@@ -58,41 +62,48 @@ export default function FooterLayout({
               </Paper>
               <div className='flex gap-x-[10px] flex-row-reverse justify-between lg:justify-start lg:flex-row'>
                   <div>
-                    <IconButton LinkComponent={'a'}
-                      href='#'
+                    <IconButton 
+                      LinkComponent={'a'}
                       sx={{
                         padding: 0,
                         opacity: 0.6,
                         '&:hover': {
+                          backgroundColor: 'transparent',
                           opacity: 1,
                         },
-                      }}>
+                      }}
+                      onClick={scrollToFirstSection}
+                      className='!transition-all !duration-300 !ease-in-out'>
                       <ScrollUpIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[56px] sm:!text-[70px] lg:!text-[111.88px]"/>
                     </IconButton>
                   </div>
                   <div className='flex gap-y-[10px] flex-row gap-x-2 lg:gap-x-0 lg:flex-col'>
                     <IconButton
-                      LinkComponent={'a'}
+                      LinkComponent={ExternalLink}
                       href="https://github.com/SAIB-Inc"
-                      target="_blank"
-                      rel="noopener"
                       sx={{
                         padding: 0,
                         opacity: 0.6,
                         '&:hover': {
+                          backgroundColor: 'transparent',
                           opacity: 1,
                         },
-                      }}>
+                      }}
+                      className='!transition-all !duration-300 !ease-in-out'>
                       <GithubIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-5xl md:!text-[50.85px]"/>
                     </IconButton>
                     <IconButton
+                      LinkComponent={ExternalLink}
+                      href="https://x.com/saibdev"
                       sx={{
                         padding: 0,
                         opacity: 0.6,
                         '&:hover': {
+                          backgroundColor: 'transparent',
                           opacity: 1,
-                        },
-                      }}>
+                        },                        
+                      }}
+                      className='!transition-all !duration-300 !ease-in-out'>
                       <XIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-5xl md:!text-[50.85px]"/>
                     </IconButton>
                   </div>
@@ -140,7 +151,7 @@ export default function FooterLayout({
                         <Link
                           href="https://calendly.com/saibdev"
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                           sx={{
                             color: theme.palette.text.primary,
                             lineHeight: '30.516px',
@@ -158,9 +169,7 @@ export default function FooterLayout({
                           Contact Us
                         </Link>
                         <Link
-                          href=""
-                          target="_blank"
-                          rel="noopener"
+                          href="/docs/chrysalis/overview"
                           sx={{
                             color: theme.palette.text.primary,
                             lineHeight: '30.516px',
@@ -182,7 +191,7 @@ export default function FooterLayout({
                         <Link
                           href="https://saib.dev/"
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                           sx={{
                             display: 'flex',
                             gap: '10.17px',
@@ -219,9 +228,7 @@ export default function FooterLayout({
                     </div>
                     <div className='flex flex-col items-center gap-y-[7.63px] sm:items-start'>
                       <Link
-                        href="https://github.com/SAIB-Inc/Argus"
-                        target="_blank"
-                        rel="noopener"
+                        href="/docs/argus/intro"
                         sx={{
                           color: theme.palette.text.primary,
                           lineHeight: '30.516px',
@@ -240,9 +247,7 @@ export default function FooterLayout({
                         Argus
                       </Link>
                       <Link
-                        href="https://github.com/SAIB-Inc/Chrysalis"
-                        target="_blank"
-                        rel="noopener"
+                        href="/docs/chrysalis/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           lineHeight: '30.516px',
@@ -261,7 +266,7 @@ export default function FooterLayout({
                         Chrysalis
                       </Link>
                       <Link
-                        href="https://github.com/SAIB-Inc/COMP"
+                        href="/docs/comp/overview"
                         target="_blank"
                         rel="noopener"
                         sx={{
@@ -282,9 +287,7 @@ export default function FooterLayout({
                         COMP
                       </Link>
                       <Link
-                        href=""
-                        target="_blank"
-                        rel="noopener"
+                        href="/docs/futura/overview"
                         sx={{
                           color: theme.palette.text.primary,
                           lineHeight: '30.516px',
@@ -303,7 +306,7 @@ export default function FooterLayout({
                         Futura
                       </Link>
                       <Link
-                        href="https://github.com/SAIB-Inc/Razor"
+                        href="/docs/razor/overview"
                         target="_blank"
                         rel="noopener"
                         sx={{

@@ -6,13 +6,11 @@ import WhiteRightArrow from "../../../static/img/Section6/white_right_arrow.svg"
 import CardanoLogo from "@site/static/img/cardano_logo";
 
 export default function Section6(): ReactNode {
-
     const theme = useTheme();
-
     return (
         <section style={{ backgroundColor:theme.palette.background.default }} className="w-screen lg:h-[956px]">
             <div className="container place-content-between !pt-20 md:!pt-[148px]">
-                <div className="flex justify-between h-[72px] items-center flex-col mb-6 lg:mb-20 lg:items-start md:flex-row">
+                <div className="flex justify-between h-[72px] items-center flex-col mb-6 lg:mb-20 md:flex-row">
                     <div>
                         <h1 className="!text-3xl text-center sm:!text-5xl lg:text-start lg:!leading-[72px] lg:tracking-[0.64px] lg:!text-[64px]">
                             <span>Built On... </span>
@@ -20,15 +18,28 @@ export default function Section6(): ReactNode {
                         </h1>
                     </div>
                     <div className="flex items-center">
-                        <BtnMore />
+                        <BtnMore 
+                            LinkComponent='a' href="/docs/Chrysalis/overview"
+                            sx={{
+                                color: theme.palette.grey[50],
+                                '&:hover': {
+                                    backgroundColor: theme.palette.action.hover,
+                                    color: theme.palette.grey[50]
+                                },
+                                '&:active': {
+                                    backgroundColor: theme.palette.action.active,
+                                    color: theme.palette.grey[50]
+                                },
+                            }}
+                        />
                     </div>
 
                 </div>
 
-                <div className="flex justify-between flex-wrap gap-4 mt-20 md:mt-10 xl:mt-30">
+                <div className="flex justify-between flex-wrap gap-4 !mt-20 md:mt-10 xl:mt-30">
                     <Paper 
                         sx={{
-                            backgroundColor: '#5438DC',
+                            backgroundColor: theme.palette.primary.main,
                             borderRadius: '24px',
                             boxShadow: 0
                         }} 
@@ -74,7 +85,7 @@ export default function Section6(): ReactNode {
 
                     <Paper 
                         sx={{
-                            backgroundColor: '#7454FF',
+                            backgroundColor: theme.palette.secondary.light,
                             borderRadius: '24px',
                             boxShadow: 0
                         }}
@@ -92,7 +103,17 @@ export default function Section6(): ReactNode {
                             </div>
                             <div className="flex justify-between items-end">
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px] self-end" />
-                                <IconButton aria-label="go to chrysalis network documentation">
+                                <IconButton 
+                                    LinkComponent={'a'}
+                                    href="/docs/chrysalis/tx/low-level-builder"
+                                    sx={{
+                                        padding: 0,
+                                        opacity: 0.8,
+                                        '&:hover': {
+                                          opacity: 1,
+                                        },
+                                      }}
+                                      aria-label="go to chrysalis tx documentation">
                                     <WhiteRightArrow />
                                 </IconButton>
                             </div>
@@ -101,7 +122,7 @@ export default function Section6(): ReactNode {
 
                     <Paper 
                         sx={{
-                            backgroundColor: '#C2B8FF',
+                            backgroundColor: theme.palette.primary.light,
                             borderRadius: '24px',
                             boxShadow: 0
                         }}
@@ -117,7 +138,18 @@ export default function Section6(): ReactNode {
                             </div>
                             <div className="flex justify-between items-end">
                                 <img src="/img/Section6/small_crystal.webp" className="w-[100px]" />
-                                <IconButton aria-label="go to chrysalis network documentation">
+                                <IconButton 
+                                    aria-label="go to chrysalis network documentation"
+                                    LinkComponent={'a'}
+                                    href="/docs/chrysalis/network/overview"
+                                    sx={{
+                                        padding: 0,
+                                        opacity: 0.8,
+                                        '&:hover': {
+                                          opacity: 1,
+                                        },
+                                      }}
+                                      >
                                     <GrayRightArrow />
                                 </IconButton>
                             </div>

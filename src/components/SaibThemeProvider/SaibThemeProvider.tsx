@@ -56,7 +56,12 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
                 800: '#1F2F4E',
                 900: colorMode === 'dark' ? '#191919' : '#E9F5FF',
                 A100: colorMode === 'dark' ? '#151515' : '#E9F5FF',
-            }
+            },
+            action: {
+                active: '#3A376A',
+                hover: '#988DE2',
+                hoverOpacity: 0.6,
+            },
         },
         shape: {
             borderRadius: 12,

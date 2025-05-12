@@ -1,29 +1,31 @@
 import { Button, useTheme } from "@mui/material";
 import { ReactNode } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
-import RightArrow from "../../icons/RightArrow.svg";
+import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 import { useColorMode } from "@docusaurus/theme-common";
 import Section4Wizard from "@site/static/img/Section4/wizard";
 
+
 export default function Section4(): ReactNode {
-    const { colorMode } = useColorMode();
     const theme = useTheme();
+    const { colorMode } = useColorMode();
 
     return (
-        <section style={{ backgroundColor:theme.palette.background.default }} className="flex flex-col items-center w-screen lg:h-[952.98px]">
+        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col items-center w-screen lg:h-[952.98px]">
             <div className="container mx-auto">
                 <div className="relative my-16 pt-20 md:pt-40">
-                    <div 
-                        style={{backgroundColor: theme.palette.primary.main}}
+                    <div
+                        style={{ backgroundColor: theme.palette.primary.main }}
                         className="rounded-full flex items-center justify-center  absolute left-1/2 -translate-x-1/2 top-0 size-22 sm:size-26 md:top-20"
                     >
-                        <img src="/img/Section4/cardano_logo.svg" alt="cardano logo"/>
+                        <img src="/img/Section4/cardano_logo.svg" alt="cardano logo" />
                     </div>
+
                     <div className="absolute right-7 z-10 w-16 -top-2 sm:-right-7 sm:w-auto sm:-top-14 md:right-0 md:top-6">
                         <Section4Wizard className="!text-[110px] sm:!text-[163px]"/>
                     </div>
                     <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col bg-[url(/img/Section4/purple_bg_mobile.svg)] gap-2 rounded-[24px] lg:rounded-[48px] md:h-100 md:flex-row md:items-center md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
-                        <div className="z-10 mt-14 md:mt-0 lg:w-[661px]">
+                    <div className="z-10 mt-14 md:mt-0 lg:w-[661px]">
                             <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl min-[345px]:!text-5xl md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
                                 <span>
                                     Streamline <br/>
@@ -31,6 +33,7 @@ export default function Section4(): ReactNode {
                                 <span style={{color: theme.palette.primary.light}}>
                                     Cardano <br/>
                                     Blockchain <br/>
+
                                 </span>
                                 <span>
                                     Data Processing
@@ -45,7 +48,7 @@ export default function Section4(): ReactNode {
                 <div className="max-w-screen-xl w-full flex justify-between flex-col md:flex-row">
                     <div>
                         <div >
-                            <p 
+                            <p
                                 style={{ color: theme.palette.text.disabled }}
                                 className="capitalize leading-[23.04px] !text-sm text-center md:text-start lg:!text-lg"
                             >
@@ -56,7 +59,20 @@ export default function Section4(): ReactNode {
                         </div>
 
                         <div className="mt-[32px] flex items-center justify-center md:block">
-                            <BtnMore />
+                            <BtnMore
+                                LinkComponent='a' href="/docs/argus/intro"
+                                sx={{
+                                    color: theme.palette.grey[50],
+                                    '&:hover': {
+                                        backgroundColor: theme.palette.action.hover,
+                                        color: theme.palette.grey[50]
+                                    },
+                                    '&:active': {
+                                        backgroundColor: theme.palette.action.active,
+                                        color: theme.palette.grey[50]
+                                    },
+                                }}
+                            />
                         </div>
 
                     </div>
@@ -74,11 +90,27 @@ export default function Section4(): ReactNode {
                             />
                         </div>
                         <div className="flex mt-3 lg:mt-[43.19px] lg:justify-end">
-                            <Button sx={{ color: theme.palette.grey[50] }} variant="contained" endIcon={<RightArrow />}>View In Catalyst</Button>
+                            <BtnMore
+                                LinkComponent={ExternalLink} href="https://milestones.projectcatalyst.io/projects/1200072"
+                                sx={{
+                                    color: theme.palette.grey[50],
+                                    '&:hover': {
+                                        backgroundColor: theme.palette.action.hover,
+                                        color: theme.palette.grey[50]
+                                    },
+                                    '&:active': {
+                                        backgroundColor: theme.palette.action.active,
+                                        color: theme.palette.grey[50]
+                                    },
+                                }}
+                            >
+                                View in Catalyst
+                            </BtnMore>
                         </div>
-                    </div>
-                </div>
+                    </div >
+                </div >
             </div >
+
         </section >
     )
 };

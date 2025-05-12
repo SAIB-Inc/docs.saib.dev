@@ -5,6 +5,7 @@ import { useColorMode } from "@docusaurus/theme-common";
 import DownArrow from "../../icons/DownArrow.svg";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
+
 export default function Section2(): ReactNode {
 
     const theme = useTheme();
@@ -40,21 +41,21 @@ export default function Section2(): ReactNode {
         },
         {
             name: "razor",
-            logo: "/img/Section2/Logos/razor.webp", 
+            logo: "/img/Section2/Logos/razor.webp",
             description: "Razor is a next-generation .NET Cardano node",
             class: "-top-52 w-38 sm:w-44 sm:-top-58 md:w-46 lg:w-58 lg:top-60 xl:w-full lg:top-50"
         }
     ];
 
     return (
-        <section id="section-2" style={{ backgroundColor:theme.palette.background.default }} className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
+        <section id="section-2" style={{ backgroundColor: theme.palette.background.default }} className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
             <div className="container flex flex-col h-full">
                 <div className="flex justify-between flex-col lg:h-[calc(100%-230px)] lg:flex-row">
                     <div className="!mt-18 md:!mt-26">
                         <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:leading-[53.76px]! lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[56px]">
-                            <span>Check Out </span><br className="hidden lg:block"/> 
+                            <span>Check Out </span><br className="hidden lg:block" />
                             <span>The </span>
-                            <span style={{color: theme.palette.text.secondary}} >Latest <br className="hidden xl:block"/>Resources</span>
+                            <span style={{ color: theme.palette.text.secondary }} >Latest <br className="hidden xl:block" />Resources</span>
                         </h1>
                     </div>
                     <div className="flex flex-col justify-end items-center relative mt-54 md:mt-77 lg:mt-0">
@@ -65,9 +66,9 @@ export default function Section2(): ReactNode {
                                 className={`transition-opacity duration-150 ${isFading ? "opacity-0" : "opacity-100"} animate-bounce3`}
                             />
                         </div>
-                        <img 
-                            src={colorMode === 'dark' ? "/img/Section2/base_ellipse_dark.webp" : "/img/Section2/base_ellipse_light.webp"} 
-                            alt="base ellipse" 
+                        <img
+                            src={colorMode === 'dark' ? "/img/Section2/base_ellipse_dark.webp" : "/img/Section2/base_ellipse_light.webp"}
+                            alt="base ellipse"
                             className="w-72 sm:w-100 md:w-120 lg:w-auto"
                         />
                     </div>
@@ -75,8 +76,8 @@ export default function Section2(): ReactNode {
                         <div className="flex flex-col justify-end pr-[6px]">
                             <nav>
                                 <ul className="!m-0 !p-0 hidden lg:block">
-                                    {projects.map((datum, index)=>{
-                                        return(
+                                    {projects.map((datum, index) => {
+                                        return (
                                             <li
                                                 id={datum.name}
                                                 onClick={() => {
@@ -87,15 +88,15 @@ export default function Section2(): ReactNode {
                                                             setIsFading(false);
                                                         }, 150);
                                                     }
-                                                }}                                                
+                                                }}
                                             >
-                                                <p 
-                                                    className="text-[26.01px] leading-[28.611px] select-none !tracking-[1.17045px] cursor-pointer !mb-[40px] text-right" 
-                                                    style={{ 
+                                                <p
+                                                    className="text-[26.01px] leading-[28.611px] select-none !tracking-[1.17045px] cursor-pointer !mb-[40px] text-right"
+                                                    style={{
                                                         fontFamily: "Space Mono",
                                                         color: currentProject === index
-                                                        ? theme.palette.text.primary
-                                                        : alpha(theme.palette.text.primary, 0.2)
+                                                            ? theme.palette.text.primary
+                                                            : alpha(theme.palette.text.primary, 0.2)
                                                     }}
                                                 >
                                                     <span className={currentProject == index ? "inline-block capitalize" : "hidden"}>{datum.name} -</span> 0{index + 1}
@@ -106,7 +107,7 @@ export default function Section2(): ReactNode {
                                 </ul>
                             </nav>
                         </div>
-                        <div 
+                        <div
                             onClick={() => {
                                 setIsFading(true);
                                 setTimeout(() => {
@@ -116,23 +117,23 @@ export default function Section2(): ReactNode {
                             }}
                             className="float-right cursor-pointer hover:animate-bounce hidden lg:block"
                         >
-                            <DownArrow/>
+                            <DownArrow />
                         </div>
                         <div className="flex items-center justify-between text-center max-w-107 mx-auto lg:hidden">
-                            <IconButton 
+                            <IconButton
                                 onClick={() => {
                                     setIsFading(true);
                                     setTimeout(() => {
-                                    setCurrentProject((currentProject - 1 + projects.length) % projects.length);
-                                    setIsFading(false);
+                                        setCurrentProject((currentProject - 1 + projects.length) % projects.length);
+                                        setIsFading(false);
                                     }, 150);
                                 }}
                                 aria-label="previous button"
                             >
-                                <ChevronLeft/>
+                                <ChevronLeft />
                             </IconButton>
-                            <p className="capitalize w-max text-2xl md:text-3xl" style={{fontFamily: "Space Mono"}}>{projects[currentProject].name}</p>
-                            <IconButton 
+                            <p className="capitalize w-max text-2xl md:text-3xl" style={{ fontFamily: "Space Mono" }}>{projects[currentProject].name}</p>
+                            <IconButton
                                 onClick={() => {
                                     setIsFading(true);
                                     setTimeout(() => {
@@ -142,14 +143,14 @@ export default function Section2(): ReactNode {
                                 }}
                                 aria-label="next button"
                             >
-                                <ChevronRight/>
+                                <ChevronRight />
                             </IconButton>
                         </div>
                     </div>
                 </div>
                 <div className="flex justify-between gap-6 mt-8 items-center flex-col-reverse md:flex-row lg:!mt-[45px]">
                     <div className="w-[223.18px] space-y-2!">
-                        <p 
+                        <p
                             className="text-center md:text-start"
                             style={{ color: alpha(theme.palette.text.primary, 0.6) }}
                         >
@@ -165,6 +166,6 @@ export default function Section2(): ReactNode {
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

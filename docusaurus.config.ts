@@ -109,12 +109,6 @@ const config: Config = {
           position: 'left',
           label: 'Futura'
         },
-        {
-          href: 'https://github.com/SAIB-Inc',
-          position: 'right',
-          className: 'navbar-icon',
-          'aria-label': 'GitHub repository',
-        },
       ],
     },
     footer: {
@@ -160,7 +154,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© SAIB ${new Date().getFullYear()} - Copyright`,
+      copyright: `© Softwarez at its Best, Inc. ${new Date().getFullYear()}. - All Rights Reserved`,
     },
     prism: {
       theme: prismThemes.github,

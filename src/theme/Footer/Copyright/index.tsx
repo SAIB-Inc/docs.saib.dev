@@ -10,67 +10,11 @@ export default function FooterCopyright({ copyright }: Props): ReactNode {
   return (
     <div className='container flex justify-between'>
       <div
-        className="footer__copyright"
+        className="footer__copyright text-[11px] md:text-base"
         // Developer provided the HTML, so assume it's safe.
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: copyright }}
       />
-      <div className='flex gap-x-[31px] items-center'>
-        <Link
-          underline="none"
-          sx={{
-            color: theme.palette.text.primary,
-            fontSize: '12.71px',
-            lineHeight: '17.794px',
-            letterSpacing: '0.5084px',
-            '&:visited': {
-              color: theme.palette.text.primary,
-            },
-            '&:hover': {
-              color: theme.palette.text.primary,
-            },
-          }}
-          href="#"
-        >
-          EN
-        </Link>
-        <Link
-          underline="none"
-          sx={{
-            color: theme.palette.text.primary,
-            fontSize: '12.71px',
-            lineHeight: '17.794px',
-            letterSpacing: '0.5084px',
-            '&:visited': {
-              color: theme.palette.text.primary,
-            },
-            '&:hover': {
-              color: theme.palette.text.primary,
-            },
-          }}
-          href="#"
-        >
-          SE
-        </Link>
-        <Link
-          underline="none"
-          sx={{
-            color: theme.palette.text.primary,
-            fontSize: '12.71px',
-            lineHeight: '17.794px',
-            letterSpacing: '0.5084px',
-            '&:visited': {
-              color: theme.palette.text.primary,
-            },
-            '&:hover': {
-              color: theme.palette.text.primary,
-            },
-          }}
-          href="#"
-        >
-          DE
-        </Link>
-      </div>
     </div>
 
   );

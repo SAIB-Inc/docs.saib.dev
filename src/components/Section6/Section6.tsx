@@ -4,14 +4,13 @@ import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import GrayRightArrow from "../../../static/img/Section6/gray_right_arrow.svg";
 import WhiteRightArrow from "../../../static/img/Section6/white_right_arrow.svg";
 import CardanoLogo from "@site/static/img/cardano_logo";
-import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 
 export default function Section6(): ReactNode {
     const theme = useTheme();
     return (
         <section style={{ backgroundColor:theme.palette.background.default }} className="w-screen lg:h-[956px]">
             <div className="container place-content-between !pt-20 md:!pt-[148px]">
-                <div className="flex justify-between h-[72px] items-center flex-col mb-6 lg:mb-20 lg:items-start md:flex-row">
+                <div className="flex justify-between h-[72px] items-center flex-col mb-6 lg:mb-20 md:flex-row">
                     <div>
                         <h1 className="!text-3xl text-center sm:!text-5xl lg:text-start lg:!leading-[72px] lg:tracking-[0.64px] lg:!text-[64px]">
                             <span>Built On... </span>
@@ -37,7 +36,7 @@ export default function Section6(): ReactNode {
 
                 </div>
 
-                <div className="flex justify-between flex-wrap gap-4 mt-20 md:mt-10 xl:mt-30">
+                <div className="flex justify-between flex-wrap gap-4 !mt-20 md:mt-10 xl:mt-30">
                     <Paper 
                         sx={{
                             backgroundColor: '#5438DC',

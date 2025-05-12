@@ -71,12 +71,6 @@ export default function Section1(): ReactNode {
             >
                 <img src="/img/scroll_arrow.webp" alt="scroll down" />
 
-                <div
-                    onClick={scrollToNextSection}
-                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 justify-center items-center flex-col animate-bounce2 cursor-pointer hidden md:flex 2xl:bottom-20"
-                >
-                    <img src="/img/scroll_arrow.webp" alt="scroll down" />
-                </div>
             </div>    
         </section>
     )

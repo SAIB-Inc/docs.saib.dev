@@ -115,6 +115,7 @@ export default function Section2(): ReactNode {
                                     setIsFading(false);
                                 }, 150);
                             }}
+                            className="float-right cursor-pointer hover:animate-bounce hidden lg:block"
                         >
                             <DownArrow />
                         </div>

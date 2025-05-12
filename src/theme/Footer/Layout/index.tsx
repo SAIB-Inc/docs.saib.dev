@@ -31,9 +31,6 @@ export default function FooterLayout({
   return (
     <footer style={{backgroundColor: theme.palette.background.default}} className='!pt-30 lg:!pt-0 md:h-[1078px]'>
       <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/Footer/background_dark.webp)]" : "bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
-      <div className='!hidden 2xl:!block'>
-          <BackgroundLines />
-        </div>
         <div className="container !px-4 md:!pt-67 md:h-[1021px]">
           {/* {links} */}
           <div className='flex gap-x-20 h-full flex-col-reverse lg:flex-row'>
@@ -71,9 +68,11 @@ export default function FooterLayout({
                         padding: 0,
                         opacity: 0.6,
                         '&:hover': {
+                          backgroundColor: 'transparent',
                           opacity: 1,
                         },
-                      }}>
+                      }}
+                      className='!transition-all !duration-300 !ease-in-out'>
                       <ScrollUpIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[56px] sm:!text-[70px] lg:!text-[111.88px]"/>
                     </IconButton>
                   </div>
@@ -85,9 +84,11 @@ export default function FooterLayout({
                         padding: 0,
                         opacity: 0.6,
                         '&:hover': {
+                          backgroundColor: 'transparent',
                           opacity: 1,
                         },
-                      }}>
+                      }}
+                      className='!transition-all !duration-300 !ease-in-out'>
                       <GithubIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-5xl md:!text-[50.85px]"/>
                     </IconButton>
                     <IconButton
@@ -97,9 +98,11 @@ export default function FooterLayout({
                         padding: 0,
                         opacity: 0.6,
                         '&:hover': {
+                          backgroundColor: 'transparent',
                           opacity: 1,
-                        },
-                      }}>
+                        },                        
+                      }}
+                      className='!transition-all !duration-300 !ease-in-out'>
                       <XIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-5xl md:!text-[50.85px]"/>
                     </IconButton>
                   </div>

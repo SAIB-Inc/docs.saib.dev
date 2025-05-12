@@ -63,25 +63,30 @@ export default function Section3(): ReactNode {
                             </h1>
                         </div>
                         <div className="flex flex-col items-center lg:items-end lg:w-[557px]">
-                            <div className="h-[60px] mt-[2px] mb-[20.06px] flex text-center lg:text-start lg:justify-end lg:w-[304.95px]" >
-                                <p
-                                    style={{color: theme.palette.text.disabled}}
-                                    className="text-[16px] font-normal leading-[20.48px] "
-                                >
-                                    Seamlessly Connecting Cardano And .NET For A Fast, Productive Developer Experience
-                                </p>
-
-                                <IconButton aria-label="go to next argus section" onClick={scrollToNextSection}
-                                    sx={{
-                                        padding: 0,
-                                        opacity: 0.6,
-                                        '&:hover': {
-                                          opacity: 1,
-                                        },
-                                      }}
-                                >
-                                    <ArrowDown sx={{ color: theme.palette.primary.contrastText }} className="!text-[48px]"/>
-                                </IconButton>
+                            <div className="h-[60px] mt-[2px] mb-[20.06px] flex flex-col text-center lg:text-start lg:justify-end lg:w-108 lg:h-auto lg:gap-y-6" >
+                                <div>
+                                    <p
+                                        style={{color: theme.palette.text.disabled}}
+                                        className="text-[16px] font-normal leading-[20.48px] "
+                                    >
+                                        Seamlessly connecting Cardano and .NET for a fast, productive developer experience.
+                                    </p>
+                                </div>
+                                <div className="w-full flex items-center justify-end">
+                                    <IconButton aria-label="go to next argus section" onClick={scrollToNextSection}
+                                        sx={{
+                                            padding: 0,
+                                            opacity: 0.6,
+                                            '&:hover': {
+                                                backgroundColor: 'transparent',
+                                                opacity: 1,
+                                            },
+                                        }}
+                                        className="!h-max !transition-all !duration-300 !ease-in-out !justify-end"
+                                    >
+                                        <ArrowDown sx={{ color: theme.palette.primary.contrastText }} className="!text-[48px]"/>
+                                    </IconButton>
+                                </div>
                             </div>
                         </div>
                     </div>

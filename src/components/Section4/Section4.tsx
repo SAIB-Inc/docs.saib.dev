@@ -1,8 +1,10 @@
-import { Button, useTheme } from "@mui/material";
-import { ReactNode } from "react";
+import { Button, IconButton, Paper, Tooltip, useTheme } from "@mui/material";
+import { ReactNode, useRef } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
 import { useColorMode } from "@docusaurus/theme-common";
+import CodeBlock from "../Section6/CodeBlock";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Section4Wizard from "@site/static/img/Section4/wizard";
 
 
@@ -10,10 +12,22 @@ export default function Section4(): ReactNode {
     const theme = useTheme();
     const { colorMode } = useColorMode();
 
+    const editorRef = useRef(null);
+
+    const copyToClipboard = () => {
+        const editor = editorRef.current;
+        if (editor) {
+            const value = editor.getValue();
+            navigator.clipboard.writeText(value)
+                .then(() => console.log('Copied!'))
+                .catch((err) => console.error('Copy failed', err));
+        }
+    };
+
     return (
         <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col items-center w-screen lg:h-[952.98px]">
             <div className="container mx-auto">
-                <div className="relative my-16 pt-20 md:pt-40">
+                <div className="relative sm:my-16 pt-20 md:pt-40">
                     <div
                         style={{ backgroundColor: theme.palette.primary.main }}
                         className="rounded-full flex items-center justify-center  absolute left-1/2 -translate-x-1/2 top-0 size-22 sm:size-26 md:top-20"
@@ -30,34 +44,70 @@ export default function Section4(): ReactNode {
                                 <span>
                                     Streamline <br/>
                                 </span>
-                                <span style={{color: theme.palette.primary.light}}>
-                                    Cardano <br/>
-                                    Blockchain <br/>
-
+                                <span style={{ color: theme.palette.primary.light }}>
+                                    Cardano <br />
+                                    Blockchain <br />
                                 </span>
                                 <span>
                                     Data Processing
                                 </span>
                             </h1>
                         </div>
-                        <div className="z-10 w-62 sm:w-82 md:w-74 lg:w-88">
-                            <img src="/img/Section4/code_snippet.webp" alt="code snippet"/>
-                        </div>
+                        <Paper
+                            elevation={1}
+                            sx={{
+                                borderRadius: '5.5px',
+                                position: 'relative',
+                                width: '500px',
+                                height: '318px',
+                            }}>
+                            <div style={{color: theme.palette.grey[200]}}>
+                                <div className="flex justify-between items-center">
+                                    <p style={{color: theme.palette.text.primary }} className="!text-sm !ml-[10px]">BlockReducer.cs</p>
+                                    <Tooltip title="Copy code">
+                                        <IconButton
+                                            className="self-end"
+                                            onClick={copyToClipboard}
+                                            sx={{
+                                                width: '17px',
+                                                height: '17px',
+                                                margin: '6px 8px',
+                                                opacity: 0.6, 
+                                                '&:hover': {
+                                                    opacity: 1,
+                                                },
+                                            }}
+                                        >
+                                            <ContentCopyIcon 
+                                                sx={{ 
+                                                    color: theme.palette.primary.contrastText,
+                                                    width: '18px',
+                                                    height: '18px',
+                                                }} />
+                                        </IconButton>
+                                    </Tooltip>
+                                </div>
+                                <div className="rounded-b-[5px] w-[100] h-[300px] overflow-hidden">
+                                    <CodeBlock
+                                        editorRef={editorRef}
+                                    />
+                                </div>
+                            </div>
+
+                        </Paper>
                     </div>
                 </div>
                 <div className="max-w-screen-xl w-full flex justify-between flex-col md:flex-row">
-                    <div>
-                        <div >
+                    <div className="mt-8 lg:mt-0">
+                        <div>
                             <p
-                                style={{ color: theme.palette.text.disabled }}
-                                className="capitalize leading-[23.04px] !text-sm text-center md:text-start lg:!text-lg"
+                                className="leading-[23.04px] !text-base text-center md:text-start lg:!text-lg"
                             >
                                 Argus brings Cardano blockchain data seamlessly <br className="hidden md:block"/>
                                 into the .NET environment, empowering developers <br className="hidden md:block"/>
                                 to efficiently query and access data using familiar <br className="hidden md:block"/>
                                 .NET languages like C#. </p>
                         </div>
-
                         <div className="mt-[32px] flex items-center justify-center md:block">
                             <BtnMore
                                 LinkComponent='a' href="/docs/argus/intro"
@@ -76,9 +126,8 @@ export default function Section4(): ReactNode {
                         </div>
 
                     </div>
-                    <div className="mt-14 flex flex-col gap-8 justify-between items-center md:items-start md:mt-0 lg:gap-0">
+                    <div className="mt-10 flex flex-col gap-4 justify-between items-center md:items-end md:mt-0 lg:gap-0">
                         <p
-                            style={{ color: theme.palette.text.disabled }}
                             className="md:hidden"
                         >
                             Argus is a proud product of...

@@ -19,7 +19,7 @@ export default function Section2(): ReactNode {
             name: "chrysalis",
             logo: "/img/Section2/Logos/chrysalis.webp",
             description: "Razor is a next-generation .NET Cardano node",
-            class: "w-72 -top-36 sm:w-100 sm:-top-49 md:w-120 md:-top-59 lg:top-84 xl:top-76 xl:w-full"
+            class: "w-83 -top-44 sm:w-100 sm:-top-49 md:w-120 md:-top-59 lg:top-84 xl:top-76 xl:w-full"
         },
         {
             name: "argus",
@@ -69,7 +69,7 @@ export default function Section2(): ReactNode {
                         <img
                             src={colorMode === 'dark' ? "/img/Section2/base_ellipse_dark.webp" : "/img/Section2/base_ellipse_light.webp"}
                             alt="base ellipse"
-                            className="w-72 sm:w-100 md:w-120 lg:w-auto"
+                            className="w-83 sm:w-100 md:w-120 lg:w-auto"
                         />
                     </div>
                     <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-100 2xl:w-116 xl:w-[305px]">
@@ -158,7 +158,7 @@ export default function Section2(): ReactNode {
                         </p>
                         <img src="/img/Section2/developers.webp" alt="developers" />
                     </div>
-                    <div className="w-[305px] flex flex-col items-center text-center gap-6 md:gap-6 md:text-start md:items-start">
+                    <div className="w-[305px] flex flex-col items-center text-center gap-6 md:gap-6 md:text-end md:items-end">
                         <p>{projects[currentProject].description}</p>
                         <div>
                             <BtnMore />

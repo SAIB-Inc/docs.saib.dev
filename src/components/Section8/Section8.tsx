@@ -48,14 +48,14 @@ export default function Section8(): ReactNode {
                             Build Together
                         </span>
                     </h1>
-                    <p className="!mb-0 capitalize !text-base lg:!text-xl lg:leading-[25.6px]">
+                    <p className="!mb-0 !text-base lg:!text-xl lg:leading-[25.6px]">
                         We’re proud to be part of the Cardano community<br  className="hidden lg:block"/>
                         —constantly building, collaborating, and <br className="hidden lg:block"/>
                         connecting with others who share the vision.
                     </p>
                 </div>
 
-                <div className="flex overflow-hidden grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px] md:grid">
+                <div className="flex overflow-hidden grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-8 md:mt-[65px] md:grid">
                     {imageList.map((datum) => {
                         return(
                             <div

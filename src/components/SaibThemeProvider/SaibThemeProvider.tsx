@@ -41,7 +41,8 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
             secondary: {
                 main: colorMode === 'dark' ? '#5438DC' : '#ffffff',
                 dark: '#5438DC',
-                light: '#7454FF'
+                light: '#7454FF',
+                contrastText: '#59EDE0'
             },
             text: {
                 primary: colorMode === 'dark' ? '#ffffff' : '#2C1A53',
@@ -51,15 +52,22 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
             grey: {
                 50: '#ffffff',
                 100: '#717171',
+                200: '#E9F5FF',
                 600: '#191919',
+                700: colorMode === 'dark' ? '#23212B' : '#E9F5FF',
                 800: '#1F2F4E',
-                900: colorMode === 'dark' ? '#191919' : '#E9F5FF',
+                900: '#1C3250',
                 A100: colorMode === 'dark' ? '#151515' : '#E9F5FF',
-            }
+            },
+            action: {
+                active: '#3A376A',
+                hover: '#988DE2',
+                hoverOpacity: 0.6,
+            },
         },
         shape: {
             borderRadius: 12,
-        }
+        },
       })
     , [colorMode]);
 

@@ -2,47 +2,37 @@ import { ButtonBase, useTheme } from '@mui/material';
 import { themes } from 'prism-react-renderer';
 import { forwardRef, ReactNode } from 'react';
 
-export default function AvatarButton({ src, top, left, link, scale = 1 }):ReactNode {
+export default function AvatarButton({ datum, index }):ReactNode {
 
     const theme = useTheme();
 
   return (
     <ButtonBase
-      LinkComponent={'a'}      //Change to ExternalLink after button-states-and-links merge
-      href={link}
-      sx={{
-        position: 'absolute',
-        top,
-        left,
-        transform: `scale(${scale})`,
-        borderRadius: '50%',
-        width: '53.55px',
-        height: '53.55px',
-        backgroundColor: theme.palette.background.default,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'hidden',
-        padding: 0,
-      }}
-    >
-      <div
-        style={{
-          borderRadius: '50%',
-          overflow: 'hidden',
+        id={datum.name}
+        sx={{
+            backgroundColor: theme.palette.background.default,
+            position: "relative",
+            left: `-${index * 16}px`,
+            borderRadius: "50%",
+            padding: "4px"
         }}
-      >
-        <img
-          src={src}
-          alt=""
-          style={{
-            width: '45.55px',
-            height: '45.55px',
-            objectFit: 'cover',
-            objectPosition: 'center',
-          }}
-        />
-      </div>
-    </ButtonBase>
+    >
+        <div
+            style={{
+            borderRadius: '50%',
+            overflow: 'hidden',
+            }}
+            className='size-9 sm:size-12 md:size-10'
+          >
+            <img
+            src={datum.src}
+            alt={datum.alt}
+            style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+            }}
+            />
+        </div>
+    </ButtonBase> 
   );
 }

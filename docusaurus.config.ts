@@ -80,40 +80,39 @@ const config: Config = {
           sidebarId: "chrysalis",
           position: "left",
           label: "Chrysalis",
+          className: "hover:text-[#049E96]!"
         },
         {
           docId: 'argus',
           type: 'docSidebar',
           sidebarId: 'argusSidebar',
           position: 'left',
-          label: 'Argus'
+          label: 'Argus',
+          className: "hover:text-[#813ADF]!"
         },
         {
           docId: 'razor',
           type: 'docSidebar',
           sidebarId: 'razor',
           position: 'left',
-          label: 'Razor'
+          label: 'Razor',
+          className: "hover:text-[#649DCA]!"
         },
         {
           docId: 'comp',
           type: 'docSidebar',
           sidebarId: 'comp',
           position: 'left',
-          label: 'COMP'
+          label: 'COMP',
+          className: "hover:text-[var(--comp-color-primary)]!"
         },
         {
           docId: 'futura',
           type: 'docSidebar',
           sidebarId: 'futura',
           position: 'left',
-          label: 'Futura'
-        },
-        {
-          href: 'https://github.com/SAIB-Inc',
-          position: 'right',
-          className: 'navbar-icon',
-          'aria-label': 'GitHub repository',
+          label: 'Futura',
+          className: "hover:text-[var(--futura-color-primary)]!"
         },
       ],
     },
@@ -160,7 +159,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© SAIB ${new Date().getFullYear()} - Copyright`,
+      copyright: `© Softwarez at its Best, Inc. ${new Date().getFullYear()}. - All Rights Reserved`,
     },
     prism: {
       theme: prismThemes.github,

@@ -713,6 +713,9 @@
   .gap-x-2 {
     column-gap: calc(var(--spacing) * 2);
   }
+  .gap-x-10 {
+    column-gap: calc(var(--spacing) * 10);
+  }
   .gap-x-20 {
     column-gap: calc(var(--spacing) * 20);
   }
@@ -1896,6 +1899,11 @@
       font-size: 12.71px !important;
     }
   }
+  .md\:\!text-\[14\.8px\] {
+    @media (width >= 48rem) {
+      font-size: 14.8px !important;
+    }
+  }
   .md\:\!text-\[17\.8px\] {
     @media (width >= 48rem) {
       font-size: 17.8px !important;
@@ -2269,6 +2277,11 @@
   .lg\:gap-x-6 {
     @media (width >= 64rem) {
       column-gap: calc(var(--spacing) * 6);
+    }
+  }
+  .lg\:gap-x-10 {
+    @media (width >= 64rem) {
+      column-gap: calc(var(--spacing) * 10);
     }
   }
   .lg\:gap-x-47 {
@@ -2766,6 +2779,11 @@
   .\32 xl\:gap-0 {
     @media (width >= 96rem) {
       gap: calc(var(--spacing) * 0);
+    }
+  }
+  .\32 xl\:gap-x-\[429px\] {
+    @media (width >= 96rem) {
+      column-gap: 429px;
     }
   }
   .\32 xl\:gap-x-\[460px\] {

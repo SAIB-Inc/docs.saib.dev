@@ -33,7 +33,7 @@ export default function FooterLayout({
         <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/Footer/background_dark.webp)]" : "bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
           <div className="container !px-4 md:!pt-67 md:h-[1021px]">
             {/* {links} */}
-            <div className='flex gap-x-20 h-full flex-col-reverse lg:flex-row'>
+            <div className='flex gap-x-20 h-full flex-col-reverse lg:justify-between lg:gap-x-10 lg:flex-row'>
               <div className='flex flex-col gap-y-8 lg:justify-between lg:!mb-[21.83px]'>
                 <div className='relative w-max mx-auto sm:!hidden'>
                   <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[90px] top-[14px]' />
@@ -60,7 +60,7 @@ export default function FooterLayout({
                     </p>
                   </div>
                 </Paper>
-                <div className='flex gap-x-[10px] flex-row-reverse justify-between lg:justify-start lg:flex-row'>
+                  <div className='flex gap-x-[10px] flex-row-reverse justify-between lg:justify-start lg:hidden'>
                     <div>
                       <IconButton 
                         LinkComponent={'a'}
@@ -108,6 +108,22 @@ export default function FooterLayout({
                       </IconButton>
                     </div>
                   </div>
+                  <div className='hidden lg:block'>
+                    <div className='flex self-end lg:gap-x-6'>
+                      <div>
+                        <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
+                        <p className='md:!text-[14.8px]'>Philippines</p>
+                      </div>
+                      <div>
+                        <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE</p>
+                        <p className='md:!text-[14.8px]'>+63 XXX XXX XXX</p>
+                      </div>
+                      <div>
+                        <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>EMAIL</p>
+                        <p className='md:!text-[14.8px]'>accounts@saib.dev</p>
+                      </div>
+                    </div>
+                  </div>
                   <div className='w-full flex items-center justify-between lg:hidden'>
                     <div className='flex flex-col self-end !mb-[21.83px] gap-y-2 md:gap-x-15'>
                       <div>
@@ -141,7 +157,7 @@ export default function FooterLayout({
                     <h3 className='leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0 !text-base md:!text-xl lg:!text-[25.43px]'>For Developer</h3>
                   </div>
 
-                  <div className='flex justify-between flex-col sm:justify-start sm:gap-18 sm:flex-row lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[460px]'>
+                  <div className='flex justify-between flex-col sm:justify-start sm:gap-18 sm:flex-row lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[429px]'>
                     <div className='text-center sm:text-start'>
                       <div className='md:mb-10 lg:mb-[60.64px]'>
                         <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] font-medium !mb-[10.17px] md:!mb-0'>INFO</p>
@@ -335,7 +351,7 @@ export default function FooterLayout({
                   </div>
                 </div>
 
-                <div className='hidden lg:block'>
+                {/* <div className='hidden lg:block'>
                   <div className='flex self-end !mb-[21.83px] lg:gap-x-6 xl:gap-x-15'>
                     <div>
                       <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
@@ -350,7 +366,55 @@ export default function FooterLayout({
                       <p className='md:!text-[17.8px] md:leading-[17.92px]'>accounts@saib.dev</p>
                     </div>
                   </div>
-                </div>
+                </div> */}
+                <div className='gap-x-[10px] flex-row-reverse !mb-[21.83px] self-end justify-end hidden lg:justify-start lg:flex-row lg:flex'>
+                    <div>
+                      <IconButton 
+                        LinkComponent={'a'}
+                        sx={{
+                          padding: 0,
+                          opacity: 0.6,
+                          '&:hover': {
+                            backgroundColor: 'transparent',
+                            opacity: 1,
+                          },
+                        }}
+                        onClick={scrollToFirstSection}
+                        className='!transition-all !duration-300 !ease-in-out'>
+                        <ScrollUpIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-[56px] sm:!text-[70px] lg:!text-[111.88px]"/>
+                      </IconButton>
+                    </div>
+                    <div className='flex gap-y-[10px] flex-row gap-x-2 lg:gap-x-0 lg:flex-col'>
+                      <IconButton
+                        LinkComponent={ExternalLink}
+                        href="https://github.com/SAIB-Inc"
+                        sx={{
+                          padding: 0,
+                          opacity: 0.6,
+                          '&:hover': {
+                            backgroundColor: 'transparent',
+                            opacity: 1,
+                          },
+                        }}
+                        className='!transition-all !duration-300 !ease-in-out'>
+                        <GithubIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-5xl md:!text-[50.85px]"/>
+                      </IconButton>
+                      <IconButton
+                        LinkComponent={ExternalLink}
+                        href="https://x.com/saibdev"
+                        sx={{
+                          padding: 0,
+                          opacity: 0.6,
+                          '&:hover': {
+                            backgroundColor: 'transparent',
+                            opacity: 1,
+                          },                        
+                        }}
+                        className='!transition-all !duration-300 !ease-in-out'>
+                        <XIcon sx={{ color: theme.palette.primary.contrastText }} className="!text-5xl md:!text-[50.85px]"/>
+                      </IconButton>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

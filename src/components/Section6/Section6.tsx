@@ -39,7 +39,7 @@ export default function Section6(): ReactNode {
                 <div className="flex justify-between flex-wrap gap-4 !mt-14 md:mt-10 xl:mt-30">
                     <Paper 
                         sx={{
-                            backgroundImage: "url('/img/Section6/chyrsalis_bg.webp')",
+                            backgroundImage: "url('/img/Section6/chrysalis_bg.webp')",
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
@@ -66,7 +66,7 @@ export default function Section6(): ReactNode {
                                 </p>
                             </div>
                             <div className="w-36 shrink-0 hidden sm:w-45 md:block lg:w-50 xl:w-auto">
-                                <img src="/img/Section6/chyrsalis.svg"/>
+                                <img src="/img/Section6/chrysalis.svg"/>
                             </div>
                         </div>
                     </Paper>
@@ -81,7 +81,7 @@ export default function Section6(): ReactNode {
                         className="w-[calc(50%-8px)] !p-6 md:!hidden"
                     >
                         <div className="w-42">
-                            <img src="/img/Section6/chyrsalis.svg" alt="chrysalis logo"/>
+                            <img src="/img/Section6/chrysalis.svg" alt="chrysalis logo"/>
                         </div>
                     </Paper>
                     <Paper 
@@ -139,7 +139,7 @@ export default function Section6(): ReactNode {
                                 <p style={{color: theme.palette.grey[50]}} className="!text-sm sm:!text-lg md:!text-sm lg:!text-base">
                                     Enables transaction creation, signing, <br className="hidden 2xl:block"/>
                                     and management directly in C# .
-                                    Chyrsalis Transaction Builder.
+                                    Chrysalis Transaction Builder.
                                 </p>
                             </div>
                             <div className="flex justify-between items-end">

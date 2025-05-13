@@ -101,8 +101,7 @@ export default function Section4(): ReactNode {
                     <div className="mt-8 lg:mt-0">
                         <div>
                             <p
-                                style={{ color: theme.palette.text.disabled }}
-                                className="leading-[23.04px] !text-sm text-center md:text-start lg:!text-lg"
+                                className="leading-[23.04px] !text-base text-center md:text-start lg:!text-lg"
                             >
                                 Argus brings Cardano blockchain data seamlessly <br className="hidden md:block"/>
                                 into the .NET environment, empowering developers <br className="hidden md:block"/>
@@ -127,9 +126,8 @@ export default function Section4(): ReactNode {
                         </div>
 
                     </div>
-                    <div className="mt-14 flex flex-col gap-4 justify-between items-center md:items-end md:mt-0 lg:gap-0">
+                    <div className="mt-10 flex flex-col gap-4 justify-between items-center md:items-end md:mt-0 lg:gap-0">
                         <p
-                            style={{ color: theme.palette.text.disabled }}
                             className="md:hidden"
                         >
                             Argus is a proud product of...

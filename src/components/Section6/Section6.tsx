@@ -36,7 +36,7 @@ export default function Section6(): ReactNode {
 
                 </div>
 
-                <div className="flex justify-between flex-wrap gap-4 !mt-20 md:mt-10 xl:mt-30">
+                <div className="flex justify-between flex-wrap gap-4 !mt-14 md:mt-10 xl:mt-30">
                     <Paper 
                         sx={{
                             backgroundImage: "url('/img/Section6/chyrsalis_bg.webp')",
@@ -59,9 +59,9 @@ export default function Section6(): ReactNode {
                                     Block .NET Library
                                 </h2>
                                 <p style={{color: theme.palette.grey[50]}} className="!text-sm sm:!text-lg md:!text-sm lg:!text-[18px] lg:!leading-[24.426px] lg:!tracking-[0.9px]">
-                                    Interact seamlessly with the Cardano network, native <br className="max-lg:hidden"/>
-                                    to C#, F#, and VB NET. Featuring its three main <br className="max-lg:hidden"/>
-                                    functionalities—Chrysalis.CBOR, Chrysalis.Tx, and <br className="max-lg:hidden"/>
+                                    Interact seamlessly with the Cardano network, native <br className="max-2xl:hidden"/>
+                                    to C#, F#, and VB NET. Featuring its three main <br className="max-2xl:hidden"/>
+                                    functionalities—Chrysalis.CBOR, Chrysalis.Tx, and <br className="max-2xl:hidden"/>
                                     Chrysalis.Network.
                                 </p>
                             </div>
@@ -96,9 +96,9 @@ export default function Section6(): ReactNode {
                     >
                         <CardanoLogo 
                             sx={{
-                                color: theme.palette.primary.contrastText
+                                color: theme.palette.grey[50]
                             }}
-                            className="text-[80px]! sm:text-[150px]! md:text-[124px]! xl:text-[192px]!"
+                            className="text-[80px]! sm:text-[124px]! md:text-[124px]! xl:text-[192px]!"
                         />
                     </Paper>
                     <Paper sx={{
@@ -106,14 +106,14 @@ export default function Section6(): ReactNode {
                         borderRadius: '24px',
                         boxShadow: 0
                     }}
-                    className="!p-6 !w-full md:!w-[calc(33%-12px)] lg:!p-8 lg:h-full lg:!w-[calc(33%-8px)] 2xl:h-[304px]"
+                    className="!p-6 !w-full md:!w-[calc(33%-12px)] lg:!p-8 lg:!w-[calc(33%-8px)] lg:h-[300.4px] 2xl:h-[304px]"
                     >
-                        <div className="flex flex-col justify-between h-full gap-4 lg:gap-0">
+                        <div className="flex flex-col justify-between h-full gap-4 lg:gap-6 2xl:gap-0">
                             <div>
-                                <h3 style={{color: theme.palette.grey[50]}} className="!font-semibold !text-2xl sm:!text-3xl md:!text-xl lg:!text-[30px] lg:leading-[33px] lg:!mb-[24px]">CHRYSALIS.CBOR</h3>
+                                <h3 style={{color: theme.palette.grey[50]}} className="!font-semibold !text-2xl sm:!text-3xl md:!text-xl xl:!text-[26px] 2xl:!text-[30px] lg:leading-[33px] lg:!mb-[24px]">CHRYSALIS.CBOR</h3>
                                 <p style={{color: theme.palette.grey[50]}} className="!text-sm sm:!text-lg md:!text-sm lg:!text-base">
-                                    Streamline data exchange through <br className="max-lg:hidden"/>
-                                    serializing or (de)serializing Cardano <br className="max-lg:hidden"/>
+                                    Streamline data exchange through <br className="max-2xl:hidden"/>
+                                    serializing or (de)serializing Cardano <br className="max-2xl:hidden"/>
                                     data structures.
                                 </p>
                             </div>
@@ -133,11 +133,11 @@ export default function Section6(): ReactNode {
                     }}
                     className="!p-6 !w-full md:!w-[calc(33%-8px)] lg:!p-8 lg:h-full 2xl:h-[304px]"
                     >
-                        <div className="flex flex-col justify-between h-full gap-4 lg:gap-0">
+                        <div className="flex flex-col justify-between h-full gap-4 lg:gap-6 2xl:gap-0">
                             <div>
-                            <h3 style={{color: theme.palette.grey[50]}} className="!font-semibold !text-2xl sm:!text-3xl md:!text-xl lg:!text-[30px] lg:leading-[33px] lg:!mb-[24px]">CHRYSALIS.TX</h3>
+                            <h3 style={{color: theme.palette.grey[50]}} className="!font-semibold !text-2xl sm:!text-3xl md:!text-xl lg:leading-[33px] lg:!mb-[24px] xl:!text-[26px] 2xl:!text-[30px]">CHRYSALIS.TX</h3>
                                 <p style={{color: theme.palette.grey[50]}} className="!text-sm sm:!text-lg md:!text-sm lg:!text-base">
-                                    Enables transaction creation, signing, <br className="hidden xl:block"/>
+                                    Enables transaction creation, signing, <br className="hidden 2xl:block"/>
                                     and management directly in C# .
                                     Chyrsalis Transaction Builder.
                                 </p>
@@ -166,14 +166,14 @@ export default function Section6(): ReactNode {
                         borderRadius: '24px',
                         boxShadow: 0
                     }}
-                    className="!p-6 !w-full md:!w-[calc(33%-8px)] lg:!p-8 lg:h-full 2xl:h-[304px]"
+                    className="!p-6 !w-full md:!w-[calc(33%-8px)] lg:!p-8 lg:h-[300.4px] 2xl:h-[304px]"
                     >
-                        <div className="flex flex-col justify-between h-full gap-4 lg:gap-0">
+                        <div className="flex flex-col justify-between h-full gap-4 lg:gap-6 2xl:gap-0">
                             <div>
-                                <h3 style={{color: theme.palette.grey[600]}} className="!font-semibold !text-2xl sm:!text-3xl md:!text-xl lg:!text-[30px] lg:leading-[33px] lg:!mb-[24px]">CHRYSALIS.NETWORK</h3>
+                                <h3 style={{color: theme.palette.grey[600]}} className="!font-semibold !text-2xl sm:!text-3xl md:!text-xl xl:!text-[26px] 2xl:!text-[30px] lg:leading-[33px] lg:!mb-[24px]">CHRYSALIS.NETWORK</h3>
                                 <p style={{color: theme.palette.grey[600]}} className="!text-sm sm:!text-lg md:!text-sm lg:!text-base">
-                                    Streamline data exchange through<br className="max-md:hidden"/>
-                                    serializing or (de)serializing Cardano<br className="max-md:hidden"/>
+                                    Streamline data exchange through<br className="max-2xl:hidden"/>
+                                    serializing or (de)serializing Cardano<br className="max-2xl:hidden"/>
                                     data structures.
                                 </p>
                             </div>

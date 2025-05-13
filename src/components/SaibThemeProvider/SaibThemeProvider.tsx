@@ -67,7 +67,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
         },
         shape: {
             borderRadius: 12,
-        }
+        },
       })
     , [colorMode]);
 

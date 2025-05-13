@@ -55,7 +55,7 @@ export default function Section8(): ReactNode {
                     </p>
                 </div>
 
-                <div className="flex overflow-hidden grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-[65px] md:grid">
+                <div className="flex overflow-hidden grid-cols-12 grid-rows-2 gap-x-[12px] gap-y-[11px] mt-8 md:mt-[65px] md:grid">
                     {imageList.map((datum) => {
                         return(
                             <div

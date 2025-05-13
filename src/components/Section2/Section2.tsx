@@ -21,7 +21,7 @@ export default function Section2(): ReactNode {
             logo: "/img/Section2/Logos/chrysalis.webp",
             description: "Chrysalis is the core building-block library for .NET Cardano development.",
             link: "/docs/chrysalis/overview",
-            class: "w-78 -top-44 sm:w-100 sm:-top-49 md:w-120 md:-top-59 lg:w-136 lg:top-68 xl:top-60 xl:w-full 2xl:top-76"
+            class: "w-78 -top-44 sm:w-100 sm:-top-49 md:w-120 md:-top-59 lg:w-120 lg:top-78 xl:top-60 xl:w-full 2xl:top-80"
         },
         {
             name: "argus",
@@ -107,7 +107,7 @@ export default function Section2(): ReactNode {
                 <div className="flex justify-between flex-col lg:flex-row lg:h-[calc(100%-230px)] xl:h-[calc(100%-382px)] 2xl:h-[calc(100%-300px)]">
                     <div className="!mt-18 md:!mt-26">
                         <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[40px]">
-                            <span>Check Out </span>
+                            <span>Check Out </span><br className="hidden lg:block xl:hidden"/>
                             <span>The </span>
                             <span style={{ color: theme.palette.text.secondary }} >Latest Resources</span>
                         </h1>
@@ -126,7 +126,7 @@ export default function Section2(): ReactNode {
                             className="w-83 sm:w-100 md:w-120 lg:w-auto"
                         />
                     </div>
-                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-120 xl:w-[360px] 2xl:w-130">
+                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[360px] 2xl:w-130">
                         <div className="flex flex-col justify-end pr-[6px]">
                             <nav>
                                 <ul className="!m-0 !p-0 hidden lg:block">

@@ -30,17 +30,17 @@ export default function Section2(): ReactNode {
         },
         {
             name: "comp",
-            logo: "/img/Section2/Logos/aegis.webp",
+            logo: "/img/Section2/Logos/comp.webp",
             description: "Cardano Open Metadata Project (COMP) sets metadata standards for the Cardano ecosystem.",
             link: "/docs/comp/overview",
             class: "top-70"
         },
         {
             name: "futura",
-            logo: "/img/Section2/Logos/futura.webp",
+            logo: colorMode === "dark" ? "/img/Section2/Logos/futura_dark.webp" : "/img/Section2/Logos/futura_light.webp",
             description: "Futura is the DSL that compiles UPLC - Cardano smart contract development on .NET.",
             link: "/docs/futura/overview",
-            class: "top-76"
+            class: "top-70"
         },
         {
             name: "razor",

@@ -56,7 +56,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
                 600: '#191919',
                 700: colorMode === 'dark' ? '#23212B' : '#E9F5FF',
                 800: '#1F2F4E',
-                900: colorMode === 'dark' ? '#191919' : '#E9F5FF',
+                900: '#1C3250',
                 A100: colorMode === 'dark' ? '#151515' : '#E9F5FF',
             },
             action: {

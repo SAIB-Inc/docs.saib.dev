@@ -27,7 +27,7 @@ export default function Section4(): ReactNode {
     return (
         <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col items-center w-screen lg:h-[952.98px]">
             <div className="container mx-auto">
-                <div className="relative my-16 pt-20 md:pt-40">
+                <div className="relative sm:my-16 pt-20 md:pt-40">
                     <div
                         style={{ backgroundColor: theme.palette.primary.main }}
                         className="rounded-full flex items-center justify-center  absolute left-1/2 -translate-x-1/2 top-0 size-22 sm:size-26 md:top-20"
@@ -98,8 +98,8 @@ export default function Section4(): ReactNode {
                     </div>
                 </div>
                 <div className="max-w-screen-xl w-full flex justify-between flex-col md:flex-row">
-                    <div>
-                        <div >
+                    <div className="mt-8 lg:mt-0">
+                        <div>
                             <p
                                 style={{ color: theme.palette.text.disabled }}
                                 className="leading-[23.04px] !text-sm text-center md:text-start lg:!text-lg"
@@ -109,7 +109,6 @@ export default function Section4(): ReactNode {
                                 to efficiently query and access data using familiar <br className="hidden md:block"/>
                                 .NET languages like C#. </p>
                         </div>
-
                         <div className="mt-[32px] flex items-center justify-center md:block">
                             <BtnMore
                                 LinkComponent='a' href="/docs/argus/intro"
@@ -128,7 +127,7 @@ export default function Section4(): ReactNode {
                         </div>
 
                     </div>
-                    <div className="mt-14 flex flex-col gap-8 justify-between items-center md:items-start md:mt-0 lg:gap-0">
+                    <div className="mt-14 flex flex-col gap-4 justify-between items-center md:items-end md:mt-0 lg:gap-0">
                         <p
                             style={{ color: theme.palette.text.disabled }}
                             className="md:hidden"

@@ -25,7 +25,10 @@ export default function Section4(): ReactNode {
     };
 
     return (
-        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col items-center w-screen lg:h-[952.98px]">
+        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col relative items-center w-screen lg:h-[952.98px]">
+            <div className="absolute -top-2 hidden xl:block">
+                <img src={colorMode === 'dark' ? '/img/Section3/background_connector_dark.webp' : '/img/Section3/background_connector_light.webp'} alt="background connector"/>
+            </div>
             <div className="container mx-auto">
                 <div className="relative sm:my-16 pt-20 md:pt-40">
                     <div

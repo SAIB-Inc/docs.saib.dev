@@ -16,14 +16,13 @@ export default function Section3(): ReactNode {
     };
 
     return (
-        <section style={{ backgroundColor:theme.palette.background.default }} className={`bg-lines relative flex flex-col items-center bg-center w-screen bg-cover ${colorMode === 'dark' ? 'bg-[url(/img/Section3/background_dark.webp)]' : 'bg-[url(/img/Section3/background_light.webp)]'} sm:pb-20 lg:pb-0 lg:h-[1088.02px]`}>
+        <section style={{ backgroundColor:theme.palette.background.default }} className={`bg-lines relative flex flex-col items-center bg-center w-screen bg-cover ${colorMode === 'dark' ? 'bg-[url(/img/Section3/background_dark.webp)]' : 'bg-[url(/img/Section3/background_light.webp)]'} pb-12 sm:pb-20 lg:pb-0 lg:h-[1088.02px]`}>
             <div className="container flex flex-col justify-center items-center z-10">
-
-                <div className="text-center flex items-center w-full justify-between mt-[36px] gap-8 sm:gap-4 mb-28 sm:justify-start sm:w-auto lg:gap-0 lg:mb-[178px] lg:h-[64px]">
+                <div className="text-center flex items-center w-full justify-between mt-[36px] gap-6 flex-col sm:flex-row sm:gap-4 mb-28 sm:justify-start sm:w-auto lg:gap-0 lg:mb-[178px] lg:h-[64px]">
                     <div className="w-max!">
-                        <p className="leading-[34.8px] font-semibold text-base w-max! sm:text-2xl sm:hidden">Used By</p>
+                        <p className="leading-[34.8px] font-semibold w-max! text-2xl sm:hidden">Used By</p>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-8 sm:gap-4">
                         <div className="sm:w-30 lg:w-auto">
                             <img 
                                 alt="Buriza" 
@@ -87,13 +86,13 @@ export default function Section3(): ReactNode {
                             </div>
                         </div>
                     </div>
-                    <div className="hidden sm:block">
-                        <img src={colorMode === 'dark' ? '/img/Section3/code_snippet_dark.webp' : '/img/Section3/code_snippet_light.webp'} />
+                    <div className="hidden lg:block">
+                        <img src={colorMode === 'dark' ? '/img/Section3/project_schema_dark.webp' : '/img/Section3/project_schema_light.webp'} alt="project shema"/>
+                    </div>
+                    <div className="mx-auto max-w-110 sm:max-w-full sm:w-130 md:w-140 lg:hidden">
+                        <img src={colorMode === 'dark' ? '/img/Section3/project_schema_mobile_dark.webp' : '/img/Section3/project_schema_mobile_light.webp'} alt="project shema"/>
                     </div>
                 </div>
-            </div>
-            <div className="absolute -bottom-118 hidden lg:block">
-                <img src={colorMode === 'dark' ? '/img/Section3/background_connector_dark.webp' : '/img/Section3/background_connector_light.webp'} alt="background connector"/>
             </div>
         </section>
     )

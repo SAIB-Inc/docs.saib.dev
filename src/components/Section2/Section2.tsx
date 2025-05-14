@@ -31,7 +31,7 @@ export default function Section2(): ReactNode {
             class: "-top-48 w-62 sm:w-72 sm:-top-52 md:w-92 md:-top-68 lg:w-110 lg:top-56 xl:w-full xl:top-38 2xl:top-56"
         },
         {
-            name: "comp",
+            name: "COMP",
             logo: "/img/Section2/Logos/comp.webp",
             description: "Cardano Open Metadata Project (COMP) sets metadata standards for the Cardano ecosystem.",
             link: "/docs/comp/overview",

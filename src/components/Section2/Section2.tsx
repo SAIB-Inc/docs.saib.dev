@@ -31,6 +31,13 @@ export default function Section2(): ReactNode {
             class: "-top-48 w-62 sm:w-72 sm:-top-52 md:w-92 md:-top-68 lg:w-110 lg:top-56 xl:w-full xl:top-38 2xl:top-56"
         },
         {
+            name: "razor",
+            logo: "/img/Section2/Logos/razor.webp",
+            description: "Razor is our fully open-source .NET impementation of a Cardano Node",
+            link: "/docs/razor/overview",
+            class: "-top-52 w-38 sm:w-40 sm:-top-52 md:w-56 md:-top-74 lg:w-64 lg:top-50 xl:w-full xl:top-20 2xl:top-40"
+        },
+        {
             name: "COMP",
             logo: "/img/Section2/Logos/comp.webp",
             description: "Cardano Open Metadata Project (COMP) sets metadata standards for the Cardano ecosystem.",
@@ -43,13 +50,6 @@ export default function Section2(): ReactNode {
             description: "Futura is the DSL that compiles UPLC - Cardano smart contract development on .NET.",
             link: "/docs/futura/overview",
             class: "-top-45 w-48 sm:w-52 sm:-top-48 md:w-72 md:-top-70 lg:w-80 lg:top-58 xl:w-full xl:top-44 2xl:top-64"
-        },
-        {
-            name: "razor",
-            logo: "/img/Section2/Logos/razor.webp",
-            description: "Razor is our fully open-source .NET impementation of a Cardano Node",
-            link: "/docs/razor/overview",
-        class: "-top-52 w-38 sm:w-40 sm:-top-52 md:w-56 md:-top-74 lg:w-64 lg:top-50 xl:w-full xl:top-20 2xl:top-40"
         }
     ];
 

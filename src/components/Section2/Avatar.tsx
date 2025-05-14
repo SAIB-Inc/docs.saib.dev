@@ -8,6 +8,9 @@ export default function AvatarButton({ datum, index }):ReactNode {
 
   return (
     <ButtonBase
+        LinkComponent='a'
+        href={datum.link}
+        target='_blank'
         id={datum.name}
         sx={{
             backgroundColor: theme.palette.background.default,

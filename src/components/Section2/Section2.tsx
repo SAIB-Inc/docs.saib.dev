@@ -57,27 +57,27 @@ export default function Section2(): ReactNode {
         {
             src: "/img/Section2/Avatars/cait.webp",
             alt: "caitlin",
-            link: "https://github.com/orgs/SAIB-Inc/people/CML90"
+            link: "https://github.com/CML90"
         },
         {
             src: "/img/Section2/Avatars/kief.webp",
             alt: "keef",
-            link: "https://github.com/orgs/SAIB-Inc/people/KeeeeEf"
+            link: "https://github.com/KeeeeEf"
         },
         {
             src: "/img/Section2/Avatars/hermi.webp",
             alt: "hermi",
-            link: "https://github.com/orgs/SAIB-Inc/people/Herminigildo-Timtim"
+            link: "https://github.com/Herminigildo-Timtim"
         },
         {
             src: "/img/Section2/Avatars/lance.webp",
             alt: "lance",
-            link: "https://github.com/orgs/SAIB-Inc/people/lancevincentsalera"
+            link: "https://github.com/lancevincentsalera"
         },
         {
             src: "/img/Section2/Avatars/windz.webp",
             alt: "windz",
-            link: "https://github.com/orgs/SAIB-Inc/people/WendellMorTamayo"
+            link: "https://github.com/WendellMorTamayo"
         },
         {
             src: "/img/Section2/Avatars/tan.webp",
@@ -87,17 +87,17 @@ export default function Section2(): ReactNode {
         {
             src: "/img/Section2/Avatars/rico.webp",
             alt: "rico",
-            link: "https://github.com/orgs/SAIB-Inc/people/ricomiles"
+            link: "https://github.com/ricomiles"
         },
         {
             src: "/img/Section2/Avatars/rj.webp",
             alt: "rj",
-            link: "https://github.com/orgs/SAIB-Inc/people/rjlacanlaled"
+            link: "https://github.com/rjlacanlaled"
         },
         {
             src: "/img/Section2/Avatars/clark.webp",
             alt: "clarkitlin",
-            link: "https://github.com/orgs/SAIB-Inc/people/Mercurial"
+            link: "https://github.com/Mercurial"
         }
     ]
 
@@ -227,7 +227,20 @@ export default function Section2(): ReactNode {
                     <div className="w-[305px] flex flex-col items-center text-center gap-6 md:w-[465px] md:text-end md:items-end md:gap-4 lg:gap-6">
                         <p className="min-h-18">{projects[currentProject].description}</p>
                         <div>
-                            <BtnMore />
+                            <BtnMore 
+                                LinkComponent='a' href={projects[currentProject].link}
+                                sx={{
+                                    color: theme.palette.grey[50],
+                                    '&:hover': {
+                                        backgroundColor: theme.palette.action.hover,
+                                        color: theme.palette.grey[50]
+                                    },
+                                    '&:active': {
+                                        backgroundColor: theme.palette.action.active,
+                                        color: theme.palette.grey[50]
+                                    },
+                                }}
+                            />
                         </div>
                     </div>
                 </div>

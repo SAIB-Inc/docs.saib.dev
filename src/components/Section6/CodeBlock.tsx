@@ -8,7 +8,6 @@ export default function CodeBlock({ editorRef }) {
     onMount={(editor, monacoInstance) => {
       if (editorRef) editorRef.current = editor;
       
-      // Define your theme
       monacoInstance.editor.defineTheme('purple-cool-light', {
         base: 'vs-dark',
         inherit: true,
@@ -17,7 +16,6 @@ export default function CodeBlock({ editorRef }) {
           { token: 'identifier', foreground: '#C478FF' },
           { token: 'delimiter', foreground: 'FFFFFF' },
           { token: 'delimiter.square', foreground: 'FFFFFF' },
-          // Keep any other token rules you want
         ],
         colors: {
           'editor.background': '#1C1C1C',
@@ -27,8 +25,6 @@ export default function CodeBlock({ editorRef }) {
           'editorCursor.foreground': '#ffffff',
           'editor.lineHighlightBackground': '#00000000',
           'editor.lineHighlightBorder': '#00000000',
-          
-          // Bracket pair colorization colors
           'editorBracketHighlight.foreground1': '#FFFFFF',
           'editorBracketHighlight.foreground2': '#FFFFFF',
           'editorBracketHighlight.foreground3': '#FFFFFF',
@@ -37,8 +33,6 @@ export default function CodeBlock({ editorRef }) {
           'editorBracketHighlight.unexpectedBracket.foreground': '#FF0000'
         },
       });
-      
-      // Apply the theme
       monacoInstance.editor.setTheme('purple-cool-light');
       
       // Enable bracket pair colorization
@@ -142,7 +136,15 @@ export default function CodeBlock({ editorRef }) {
       }
     }}
     options={{
+      readOnly: true,
       minimap: { enabled: false },
+      scrollbar: {
+        vertical:"hidden",
+        horizontal: "hidden",
+        verticalScrollbarSize: 0,
+        horizontalScrollbarSize: 0,
+        handleMouseWheel:false,
+    },
       lineNumbers: 'on',
       lineDecorationsWidth: 0,
       lineNumbersMinChars: 0,
@@ -158,21 +160,14 @@ export default function CodeBlock({ editorRef }) {
 {
   public async Task RollBackwardAsync(ulong slot)
   {
-    using AppDbContext dbContext = dbContextFactory.CreateDbContext();
-    var blocksToRollBack = dbContext.BlockData
-      .AsNoTracking()
-      .Where(b => b.Slot >= slot));
-    dbContext.BlockData.RemoveRange(blocksToRollBack);
-    await dbContext.SaveChangesAsync();
+    //RollBack logic here
   }
+
   public async Task RollForwardAsync(CBlock block)
   {
-    using AppDbContext dbContext = dbContextFactory.CreateDbContext();
     var blockSlot = block.Header().HeaderBody().Slot();
     var blockCbor = block.Raw is null ? CborSerializer.Serialize(block) : block.Raw;
     var blockDataEntry = new BlockData(blockSlot, blockCbor.Value.ToArray());
-    dbContext.BlockData.Add(blockDataEntry);
-    await dbContext.SaveChangesAsync();
   }
 }`}
   />;

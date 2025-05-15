@@ -2933,6 +2933,21 @@
       height: calc(var(--spacing) * 86) !important;
     }
   }
+  .\32 xl\:\!h-87 {
+    @media (width >= 96rem) {
+      height: calc(var(--spacing) * 87) !important;
+    }
+  }
+  .\32 xl\:\!h-88 {
+    @media (width >= 96rem) {
+      height: calc(var(--spacing) * 88) !important;
+    }
+  }
+  .\32 xl\:\!h-89 {
+    @media (width >= 96rem) {
+      height: calc(var(--spacing) * 89) !important;
+    }
+  }
   .\32 xl\:h-\[304px\] {
     @media (width >= 96rem) {
       height: 304px;

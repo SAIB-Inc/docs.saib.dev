@@ -49,7 +49,7 @@ export default function Section7(): ReactNode {
     };
     
     return (
-        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1171px] 2xl:h-full`}>
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1080px]`}>
             <div className="container !py-20 md:!pt-[274.77px] md:!pb-[152.23px]">
                 <div className="flex flex-col justify-center !pb-8 md:!pb-15">
                     <div className="relative flex flex-col-reverse gap-4  items-center md:gap-0">

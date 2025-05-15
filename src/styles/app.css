@@ -2773,9 +2773,24 @@
       height: 654px !important;
     }
   }
+  .xl\:h-\[1000px\] {
+    @media (width >= 80rem) {
+      height: 1000px;
+    }
+  }
   .xl\:h-\[1076px\] {
     @media (width >= 80rem) {
       height: 1076px;
+    }
+  }
+  .xl\:h-\[1080px\] {
+    @media (width >= 80rem) {
+      height: 1080px;
+    }
+  }
+  .xl\:h-\[1100px\] {
+    @media (width >= 80rem) {
+      height: 1100px;
     }
   }
   .xl\:h-\[1171px\] {

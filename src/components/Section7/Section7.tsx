@@ -1,6 +1,4 @@
-import React, { ReactNode, useState } from "react";
-import CardHead from "../../../static/img/Section7/card_head.svg";
-import CardHeadMobile from "../../../static/img/Section7/card_head_mobile.svg";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Popularity from "../../../static/img/Section7/popularity";
 import Performance from "../../../static/img/Section7/performance";
 import Versatility from "../../../static/img/Section7/versatility";
@@ -9,10 +7,6 @@ import { useTheme } from "@mui/material";
 import { useColorMode } from "@docusaurus/theme-common";
 
 export default function Section7(): ReactNode {
-    const theme = useTheme();
-    const { colorMode } = useColorMode();
-    const [selectedItem, setSelectedItem] = useState(0);
-
     const section7Items = [
         {
             title: "Popularity",
@@ -29,14 +23,37 @@ export default function Section7(): ReactNode {
             icon: Versatility,
             description: ".NET supports development across Windows, Linux, and macOS, enabling the creation of applications for desktop, mobile, cloud, and IoT environments."
         },
-    ]
+    ];
+
+    const theme = useTheme();
+    const { colorMode } = useColorMode();
+    const [selectedItem, setSelectedItem] = useState(0);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+        const deltaX = touchEndX.current - touchStartX.current;
+        if (deltaX > 50) {
+            setSelectedItem((prev) => Math.max(prev - 1, 0));
+        } else if (deltaX < -50) {
+            setSelectedItem((prev) => Math.min(prev + 1, section7Items.length - 1))
+        }
+    };
     
     return (
-        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1171px]`}>
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1171px] 2xl:h-full`}>
             <div className="container !py-20 md:!pt-[274.77px] md:!pb-[152.23px]">
-                <div className="flex flex-col justify-center sm:!pb-8 md:!pb-15">
+                <div className="flex flex-col justify-center !pb-8 md:!pb-15">
                     <div className="relative flex flex-col-reverse gap-4  items-center md:gap-0">
-                        <h1 className="relative text-center leading-[53.76px] tracking-[0.56px] font-semibold !m-0 !text-3xl sm:!text-5xl md:!text-[56px]">
+                        <h1 className="relative text-center font-semibold !text-3xl sm:!text-5xl md:leading-[53.76px] md:tracking-[0.56px] md:!text-[56px]">
                             <span>
                                 Why&nbsp;
                             </span>
@@ -62,34 +79,51 @@ export default function Section7(): ReactNode {
 
                     <div className="md:mt-[38px]">
                         <p className="text-center !text-base lg:!text-lg">
-                            .NET is a powerful, open-source development platform backed by a vast global community.<br className="hidden md:block"/>
-                            It offers a comprehensive ecosystem of tools and libraries, enabling developers to build <br className="hidden md:block"/>
+                            .NET is a powerful, open-source development platform backed by a vast global community.<br className="hidden lg:block"/>
+                            It offers a comprehensive ecosystem of tools and libraries, enabling developers to build <br className="hidden lg:block"/>
                             high-performance, scalable applications across various platforms.
                         </p>
                     </div>
 
                 </div>
-                <div className="items-center hidden md:flex flex-wrap xl:flex-nowrap gap-4 md:justify-center xl:justify-between xl:gap-x-[4.94px]">
+                <div className="hidden md:grid md:grid-cols-2 gap-6 lg:gap-4 lg:grid-cols-3 xl:gap-6 2xl:gap-10">
                     {section7Items.map((datum, index) => {
                         return (
-                            <div className="relative basis-89 xl:basis-[353.05px] 2xl:basis-[402.05px]">
-                                <div className="absolute w-full">
-                                    <p className="text-[32px] leading-8 absolute top-[15px] left-[19px]">0{index + 1}</p>
-                                    <CardHead className="absolute top-0 w-full" />
-                                    {React.createElement(datum.icon, { className:"absolute top-8 right-[32.05px] md:!text-[56px] xl:!text-[68px]" })}
-                                </div>
-                                <div   
-                                    style={{
-                                        backgroundColor: theme.palette.primary.main,
-                                        color: theme.palette.grey[50]
-                                    }}
-                                    className="rounded-b-[24px] pt-[57px] pl-8 pr-[46px] pb-[50px] mt-22 md:!h-[391px] xl:h-auto xl:mt-[93px] 2xl:mt-[99px]"
+                            <div
+                                id={datum.title}
+                                className={`h-full ${index===2 ? "col-span-2 lg:col-span-1" : "col-span-1"}`}
+                            >
+                                <div 
+                                    className="flex items-center justify-end relative top-1 rounded-tr-3xl"
                                 >
-                                    <h4 className="!text-[40px] leading-[48px] !mb-[38px]">{datum.title}</h4>
-                                    <p className="!text-[20px] leading-[28px]">
+                                    <div className={`${index===2 ? "w-[10%] lg:w-[20%]" : "w-[20%]"} relative flex items-center justify-center`}>
+                                        <div 
+                                            style={{
+                                                borderBottomColor: theme.palette.primary.main, 
+                                                borderRightColor: theme.palette.primary.main,
+                                        }}
+                                            className="border-r-8 border-b-8 w-14 aspect-square absolute top-2 -right-2 rounded-br-3xl lg:w-12 lg:top-[6px]"
+                                        />
+                                        <p className="text-[32px] leading-8  inset-0 top-6 left-6 lg:left-4 lg:top-4">0{index + 1}</p>
+                                    </div>
+                                    <div
+                                        style={{
+                                            backgroundColor: theme.palette.primary.main
+                                        }}
+                                        className={`${index===2 ? "w-[90%] lg:w-[80%]" : "w-[80%]"} flex justify-end rounded-t-3xl relative h-22 px-10 lg:px-6 lg:h-17`}
+                                    >
+                                        {React.createElement(datum.icon, { className:"self-end md:!text-[56px] xl:!text-[68px] absolute top-6" })}
+                                    </div>
+                                </div>
+                                <div
+                                    style={{backgroundColor: theme.palette.primary.main}}
+                                    className={`rounded-b-[24px] px-6 pt-6 pb-10 lg:pt-[57px] lg:pl-8 lg:pr-[46px] lg:pb-[50px] rounded-tl-3xl ${index===2 ? "lg:!h-[391px]" : "!h-75 lg:!h-[391px]"} xl:h-auto`}
+                                >
+                                    <h4 className="!text-[40px] leading-[48px] !mb-4 lg:!mb-[38px] lg:!text-[34px] xl:!text-[40px]">{datum.title}</h4>
+                                    <p className="!text-xl">
                                         {datum.description}
                                     </p>
-                                </div>
+                                </div>   
                             </div>
                         );
                     })}
@@ -100,22 +134,40 @@ export default function Section7(): ReactNode {
                         <div
                             key={datum.title}
                             id={datum.title}
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
                             style={{
                                 transform: `translateX(calc(-${selectedItem * 100}% - ${selectedItem * 16}px))`,
                                 transition: 'transform 0.5s ease'
                             }}
-                            className="min-w-full flex flex-col"
+                            className="min-w-full"
                         >
-                            <div className="w-full relative">
-                                <p className="text-2xl leading-8 absolute top-[35%] left-[19px] sm:text-4xl sm:top-[30%] sm:left-12">0{index + 1}</p>
-                                <CardHeadMobile className="w-full" />
-                                {React.createElement(datum.icon, { className:"absolute top-[39%] right-[32.05px] !text-[50px] sm:!text-[60px] sm:!top-[33%]" })}
+                            <div className="flex items-center relative top-1 justify-end">
+                                <div className="relative flex items-center justify-center w-[14%] sm:w-[10%]">
+                                    <div 
+                                        style={{
+                                            borderBottomColor: theme.palette.primary.main, 
+                                            borderRightColor: theme.palette.primary.main,
+                                    }}
+                                        className="border-r-8 border-b-8 w-9 aspect-square absolute top-[17px] -right-2 rounded-br-3xl"
+                                    />
+                                    <p className="text-2xl leading-8 sm:text-3xl">0{index + 1}</p>
+                                </div>
+                                <div 
+                                    style={{
+                                        backgroundColor: theme.palette.primary.main
+                                    }}
+                                    className="h-16 px-6 rounded-t-3xl relative flex items-center justify-end w-[86%] sm:w-[90%]"
+                                >
+                                    {React.createElement(datum.icon, { className:"self-end absolute top-6 !text-[50px] sm:!text-[60px]" })}
+                                </div>
                             </div>
                             <div 
                                 style={{
                                     backgroundColor: theme.palette.primary.main
                                 }}
-                                className="rounded-b-2xl !p-6 z-10 -mt-18"
+                                className="rounded-b-2xl rounded-tl-2xl !p-6"
                             >
                                 <h4 
                                     style={{

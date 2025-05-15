@@ -119,8 +119,18 @@ export default function Section7(): ReactNode {
                                     style={{backgroundColor: theme.palette.primary.main}}
                                     className={`rounded-b-[24px] px-6 pt-6 pb-10 lg:pt-[57px] lg:pl-8 lg:pr-[46px] lg:pb-[50px] rounded-tl-3xl ${index===2 ? "lg:!h-[391px]" : "!h-75 lg:!h-[391px]"} xl:h-auto`}
                                 >
-                                    <h4 className="!text-[40px] leading-[48px] !mb-4 lg:!mb-[38px] lg:!text-[34px] xl:!text-[40px]">{datum.title}</h4>
-                                    <p className="!text-xl">
+                                    <h4 
+                                        style={{
+                                            color: theme.palette.grey[50]
+                                        }}
+                                        className="!text-[40px] leading-[48px] !mb-4 lg:!mb-[38px] lg:!text-[34px] xl:!text-[40px]"
+                                    >{datum.title}</h4>
+                                    <p 
+                                        style={{
+                                            color: theme.palette.grey[50]
+                                        }}
+                                        className="!text-xl"
+                                    >
                                         {datum.description}
                                     </p>
                                 </div>   

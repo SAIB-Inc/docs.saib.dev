@@ -70,6 +70,12 @@ p
     height: 19px;
 }
 
+.monaco-editor .margin, 
+.monaco-editor .monaco-editor-background,
+.monaco-editor .view-lines {
+  outline: none !important;
+}
+
 [data-theme-variant='home'] {
     --ifm-color-primary: #5438DC;
     --ifm-color-primary-light: #C2B8FF;

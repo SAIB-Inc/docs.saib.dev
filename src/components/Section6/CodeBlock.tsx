@@ -1,73 +1,194 @@
-
+import { useEffect } from 'react';
+import { useColorMode } from '@docusaurus/theme-common';
 import Editor from '@monaco-editor/react';
+import { useTheme } from '@mui/material';
 
 export default function CodeBlock({ editorRef }) {
-    return <Editor 
-            height="100%" 
-            defaultLanguage="csharp" 
-            theme="purple-cool-light"
-            onMount={(editor, monacoInstance) => {
-                if (editorRef) editorRef.current = editor;
+  const muiTheme = useTheme();
+  const { colorMode } = useColorMode();
 
-                monacoInstance.editor.defineTheme('purple-cool-light', {
-                    base: 'vs',
-                    inherit: true,
-                    rules: [
-                      { token: 'keyword', foreground: '7c3aed', fontStyle: 'bold' },     
-                      { token: 'string', foreground: '0ea5e9' },                         
-                      { token: 'number', foreground: 'e11d48' },                         
-                      { token: 'comment', foreground: '6b7280', fontStyle: 'italic' },  
-                      { token: 'type', foreground: '4c1d95' },                         
-                      { token: 'identifier', foreground: '1e293b' },                   
-                      { token: 'function', foreground: '3b82f6' },                     
-                      { token: 'operator', foreground: '6366f1' },             
-                    ],
-                    colors: {
-                      'editor.background': '#ffffff',
-                      'editor.foreground': '#1e293b',
-                      'editorLineNumber.foreground': '#d1d5db',
-                      'editorLineNumber.activeForeground': '#7c3aed',
-                      'editorCursor.foreground': '#7c3aed',
-                    },
-                  });                  
-              }}
-            options={{
-                minimap: { enabled: false },
-                lineNumbers: 'off',
-                lineDecorationsWidth: 0,     
-                lineNumbersMinChars: 0,
-                scrollBeyondLastLine: false,
-                wordWrap: 'on',
-                padding: { top: 10, bottom: 10 }
-            }}
-        defaultValue=
-{`public class BlockReducer(IDbContextFactory<AppDbContext> dbContextFactory) : IReducer<BlockData>
+  let currentEditor = null;
+  let currentMonaco = null;
+
+  const defineThemes = (monacoInstance) => {
+    monacoInstance.editor.defineTheme('purple-cool-dark', {
+      base: 'vs-dark',
+      inherit: true,
+      rules: [
+        { token: 'keyword', foreground: '#FF32C6', fontStyle: 'bold' },
+        { token: 'identifier', foreground: '#C478FF' },
+        { token: 'delimiter', foreground: 'FFFFFF' },
+        { token: 'delimiter.square', foreground: 'FFFFFF' },
+        { token: 'comment', foreground: 'FFFFFF' },
+      ],
+      colors: {
+        'editor.background': '#1C1C1C',
+        'editor.foreground': '#FFFFFF',
+        'editorLineNumber.foreground': '#FFFFFF33',
+        'editorLineNumber.activeForeground': '#FFFFFF99',
+        'editorCursor.foreground': '#ffffff',
+        'editor.lineHighlightBackground': '#00000000',
+        'editor.lineHighlightBorder': '#00000000',
+        'editorBracketHighlight.foreground1': '#ffffff',
+        'editorBracketHighlight.foreground2': '#ffffff',
+        'editorBracketHighlight.foreground3': '#ffffff',
+        'editorBracketHighlight.unexpectedBracket.foreground': '#FF0000',
+      },
+    });
+
+    monacoInstance.editor.defineTheme('purple-cool-light', {
+      base: 'vs',
+      inherit: true,
+      rules: [
+        { token: 'keyword', foreground: '#D1009C', fontStyle: 'bold' },
+        { token: 'identifier', foreground: '#7D33D1' },
+        { token: 'delimiter', foreground: '000000' },
+        { token: 'delimiter.square', foreground: '000000' },
+        { token: 'comment', foreground: '717171' },
+      ],
+      colors: {
+        'editor.background': '#F7F9FB',
+        'editor.foreground': '#000000',
+        'editorLineNumber.foreground': '#00000033',
+        'editorLineNumber.activeForeground': '#00000099',
+        'editorCursor.foreground': '#000000',
+        'editor.lineHighlightBackground': '#00000011',
+        'editor.lineHighlightBorder': '#00000000',
+        'editorBracketHighlight.foreground1': '#000000',
+        'editorBracketHighlight.foreground2': '#000000',
+        'editorBracketHighlight.foreground3': '#000000',
+        'editorBracketHighlight.unexpectedBracket.foreground': '#FF0000',
+      },
+    });
+  };
+
+  // Switch Monaco theme based on color mode
+  useEffect(() => {
+    if (currentMonaco) {
+      currentMonaco.editor.setTheme(
+        colorMode === 'dark' ? 'purple-cool-dark' : 'purple-cool-light'
+      );
+    }
+  }, [colorMode]);
+
+  return (
+    <Editor
+      height="100%"
+      defaultLanguage="csharp"
+      theme={colorMode === 'dark' ? 'purple-cool-dark' : 'purple-cool-light'}
+      onMount={(editor, monacoInstance) => {
+        if (editorRef) editorRef.current = editor;
+        currentEditor = editor;
+        currentMonaco = monacoInstance;
+
+        defineThemes(monacoInstance);
+        monacoInstance.editor.setTheme(
+          colorMode === 'dark' ? 'purple-cool-dark' : 'purple-cool-light'
+        );
+
+        editor.updateOptions({
+          bracketPairColorization: {
+            enabled: true,
+            independentColorPoolPerBracketType: true,
+          },
+        });
+
+        const model = editor.getModel();
+        if (model) {
+          const addCustomDecorations = () => {
+            const text = model.getValue();
+            const customStyleTerms = {
+              'AppDbContext': '#C478FF',
+              'dbContextFactory': '#3FA4FF',
+              'blockSlot': '#3FA4FF',
+              'blockCbor': '#3FA4FF',
+              'block': '#3FA4FF',
+              'slot': '#3FA4FF',
+              'blockDataEntry': '#3FA4FF',
+              'RollForwardAsync': '#FFAC60',
+              'RollBackwardAsync': '#FFAC60',
+              'CborSerializer': '#FFAC60',
+              'Serialize': '#1AC69C',
+              'Header': '#1AC69C',
+              'HeaderBody': '#1AC69C',
+              'Slot': '#1AC69C',
+              'Raw': '#1AC69C',
+              'Value': '#C478FF',
+              'ToArray': '#1AC69C',
+              'BlockData': '#C478FF',
+              'Add': '#1AC69C',
+              'SaveChangesAsync': '#1AC69C',
+              'IDbContextFactory': '#FFFFFF',
+            };
+
+            const decorations = [];
+            Object.entries(customStyleTerms).forEach(([term, color]) => {
+              const regex = new RegExp(`\\b${term}\\b`, 'g');
+              let match;
+              while ((match = regex.exec(text)) !== null) {
+                const startPosition = model.getPositionAt(match.index);
+                const endPosition = model.getPositionAt(match.index + term.length);
+                decorations.push({
+                  range: new monacoInstance.Range(
+                    startPosition.lineNumber,
+                    startPosition.column,
+                    endPosition.lineNumber,
+                    endPosition.column
+                  ),
+                  options: {
+                    inlineClassName: `highlight-${color.substring(1)}`,
+                    hoverMessage: { value: `Term: ${term}` },
+                  },
+                });
+              }
+            });
+
+            editor.deltaDecorations([], decorations);
+          };
+
+          const styleElement = document.createElement('style');
+          styleElement.textContent = `
+            .highlight-FFAC60 { color: #FFAC60 !important; font-weight: bold; }
+            .highlight-3FA4FF { color: #3FA4FF !important; font-weight: bold; }
+            .highlight-1AC69C { color: #1AC69C !important; font-weight: bold; }
+          `;
+          document.head.appendChild(styleElement);
+
+          addCustomDecorations();
+          model.onDidChangeContent(() => addCustomDecorations());
+        }
+      }}
+      options={{
+        readOnly: true,
+        minimap: { enabled: false },
+        scrollbar: {
+          vertical: 'hidden',
+          horizontal: 'hidden',
+          verticalScrollbarSize: 0,
+          horizontalScrollbarSize: 0,
+          handleMouseWheel: false,
+        },
+        lineNumbers: 'on',
+        lineDecorationsWidth: 0,
+        lineNumbersMinChars: 0,
+        scrollBeyondLastLine: false,
+        wordWrap: 'on',
+        padding: { top: 10, bottom: 10 },
+      }}
+      defaultValue={`public class BlockReducer(IDbContextFactory<AppDbContext> dbContextFactory) : IReducer<BlockData>
 {
-    public async Task RollBackwardAsync(ulong slot)
-    {
-        using AppDbContext dbContext = dbContextFactory.CreateDbContext();
+  public async Task RollBackwardAsync(ulong slot)
+  {
+    //RollBack logic here
+  }
 
-        var blocksToRollBack = dbContext.BlockData
-            .AsNoTracking()
-            .Where(b => b.Slot >= slot));
-
-        dbContext.BlockData.RemoveRange(blocksToRollBack);
-        await dbContext.SaveChangesAsync();
-    }
-
-    public async Task RollForwardAsync(CBlock block)
-    {
-        using AppDbContext dbContext = dbContextFactory.CreateDbContext();
-
-        var blockSlot = block.Header().HeaderBody().Slot();
-        var blockCbor = block.Raw is null ? CborSerializer.Serialize(block) : block.Raw;
-        var blockDataEntry = new BlockData(blockSlot, blockCbor.Value.ToArray());
-
-        dbContext.BlockData.Add(blockDataEntry);
-        await dbContext.SaveChangesAsync();
-    }
+  public async Task RollForwardAsync(CBlock block)
+  {
+    var blockSlot = block.Header().HeaderBody().Slot();
+    var blockCbor = block.Raw is null ? CborSerializer.Serialize(block) : block.Raw;
+    var blockDataEntry = new BlockData(blockSlot, blockCbor.Value.ToArray());
+  }
+}`}
+    />
+  );
 }
-        `}
-    />;
-}
-

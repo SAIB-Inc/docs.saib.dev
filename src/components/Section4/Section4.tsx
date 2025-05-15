@@ -25,7 +25,7 @@ export default function Section4(): ReactNode {
     };
 
     return (
-        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col relative items-center w-screen lg:h-[952.98px]">
+        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col relative overflow-hidden items-center w-screen lg:h-[952.98px]">
             <div className="absolute -top-2 hidden xl:block">
                 <img src={colorMode === 'dark' ? '/img/Section3/background_connector_dark.webp' : '/img/Section3/background_connector_light.webp'} alt="background connector"/>
             </div>
@@ -41,14 +41,14 @@ export default function Section4(): ReactNode {
                     <div className="absolute right-7 z-10 w-16 -top-2 sm:-right-7 sm:w-auto sm:-top-14 md:right-0 md:top-6">
                         <Section4Wizard className="!text-[110px] sm:!text-[163px]"/>
                     </div>
-                    <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col bg-[url(/img/Section4/purple_bg_mobile.svg)] gap-2 rounded-[24px] lg:rounded-[48px] md:h-100 md:flex-row md:items-center md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
-                    <div className="z-10 mt-14 md:mt-0 lg:w-[661px]">
-                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl min-[345px]:!text-5xl md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
+                    <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col items-center bg-[url(/img/Section4/purple_bg_mobile.svg)] rounded-[24px] gap-6 md:gap-2 lg:rounded-[48px] md:h-100 md:flex-row md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
+                        <div className="z-10 mt-14 w-full md:mt-0 lg:w-[661px]">
+                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl !mb-0 min-[345px]:!text-5xl text-center md:text-start md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
                                 <span>
                                     Streamline <br/>
                                 </span>
                                 <span style={{ color: theme.palette.primary.light }}>
-                                    Cardano <br />
+                                    Cardano <br className="hidden md:block"/>
                                     Blockchain <br />
                                 </span>
                                 <span>
@@ -56,48 +56,51 @@ export default function Section4(): ReactNode {
                                 </span>
                             </h1>
                         </div>
-                        <Paper
-                            elevation={1}
-                            sx={{
-                                borderRadius: '5.5px',
-                                position: 'relative',
-                                width: '500px',
-                                height: '318px',
-                            }}>
-                            <div style={{color: theme.palette.grey[200]}}>
-                                <div className="flex justify-between items-center">
-                                    <p style={{color: theme.palette.text.primary }} className="!text-sm !ml-[10px]">BlockReducer.cs</p>
-                                    <Tooltip title="Copy code">
-                                        <IconButton
-                                            className="self-end"
-                                            onClick={copyToClipboard}
-                                            sx={{
-                                                width: '17px',
-                                                height: '17px',
-                                                margin: '6px 8px',
-                                                opacity: 0.6, 
-                                                '&:hover': {
-                                                    opacity: 1,
-                                                },
-                                            }}
-                                        >
-                                            <ContentCopyIcon 
-                                                sx={{ 
-                                                    color: theme.palette.primary.contrastText,
-                                                    width: '18px',
-                                                    height: '18px',
-                                                }} />
-                                        </IconButton>
-                                    </Tooltip>
-                                </div>
-                                <div className="rounded-b-[5px] w-[100] h-[300px] overflow-hidden">
-                                    <CodeBlock
-                                        editorRef={editorRef}
-                                    />
-                                </div>
+                        <div 
+                            style={{
+                                backgroundColor: theme.palette.grey[300]
+                            }}
+                            className="w-full !h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
+                        >
+                            <div className="absolute top-2 right-2 z-10">
+                            <Tooltip
+                                title="Copy code"
+                                componentsProps={{
+                                    tooltip: {
+                                    sx: {
+                                        backgroundColor: theme.palette.background.paper,
+                                        color: theme.palette.text.primary,
+                                    },
+                                    },
+                                }}
+                                >
+                                    <IconButton
+                                        className="self-end"
+                                        onClick={copyToClipboard}
+                                        sx={{
+                                            width: '17px',
+                                            height: '17px',
+                                            margin: '6px 8px',
+                                            opacity: 0.6, 
+                                            '&:hover': {
+                                                opacity: 1,
+                                                backgroundColor: "transparent"
+                                            },
+                                        }}
+                                    >
+                                        <ContentCopyIcon 
+                                            sx={{ 
+                                                color: theme.palette.primary.contrastText,
+                                                width: '18px',
+                                                height: '18px',
+                                            }} />
+                                    </IconButton>
+                                </Tooltip>
                             </div>
-
-                        </Paper>
+                            <CodeBlock
+                                editorRef={editorRef}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="max-w-screen-xl w-full flex justify-between flex-col md:flex-row">

@@ -72,7 +72,6 @@ const config: Config = {
       {property: 'og:title', content: 'Developer Portal | Softwarez at its Best, Inc.'},
       {property: 'og:description', content: 'A guide to developing in Cardano with .NET, the SAIB Cardano Developer Portal contains detailed documentation and examples of key tools - Chrysalis, Argus, Razor, and more!'},
       {property: 'og:type', content: 'website'},
-      {property: 'og:image', content: 'https://docs.saib.dev/saib_portal-og.webp'},
       {property: 'twitter:card', content: 'summary_large_image'},
       {property: 'twitter:title', content: 'Developer Portal | Softwarez at its Best, Inc.'},
       {property: 'twitter:description', content: 'A guide to developing in Cardano with .NET, the SAIB Cardano Developer Portal contains detailed documentation and examples of key tools - Chrysalis, Argus, Razor, and more!'}

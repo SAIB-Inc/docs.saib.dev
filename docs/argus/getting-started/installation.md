@@ -371,6 +371,10 @@ Run your application to begin indexing the blockchain:
 dotnet run
 ```
 
+When successfully running, you should see the Argus dashboard:
+
+![Argus Running](/img/docs/argus/getting-started/argus_running.png)
+
 ### 3. Verify the Installation
 
 To confirm that Argus is running correctly:

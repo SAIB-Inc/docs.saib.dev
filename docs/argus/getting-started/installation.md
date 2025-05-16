@@ -22,15 +22,19 @@ Before installing Argus, ensure your development environment meets the following
 
 ### Hardware Recommendations
 
-For optimal performance, especially when processing the entire Cardano blockchain, we recommend:
+For running Argus itself, the minimum requirements are modest:
 
-- **CPU**: 4+ cores
-- **RAM**: 8+ GB
-- **Storage**: 100+ GB SSD (depending on indexing scope)
+- **CPU**: 2+ cores
+- **RAM**: 4+ GB
+- **Storage**: 50+ GB SSD (depending on indexing scope)
 - **Network**: Stable internet connection
 
+:::note Important
+These requirements are for Argus alone. If you're running a local Cardano node on the same machine (required for UnixSocket connections), you'll need to account for the node's additional requirements (8+ GB RAM, 4+ cores, 100+ GB storage for mainnet).
+:::
+
 :::tip Performance Optimization
-Running Argus on the same machine as your Cardano node using the UnixSocket provider significantly improves performance by reducing network latency.
+Running Argus on the same machine as your Cardano node using the UnixSocket provider significantly improves performance by reducing network latency. If you're using a remote node through gRPC, you won't need to meet the Cardano node hardware requirements locally.
 :::
 
 ## Installation Process
@@ -480,27 +484,6 @@ Enable enhanced logging to troubleshoot issues:
   }
 }
 ```
-
-## Next Steps
-
-Now that you have successfully installed and configured Argus, you can:
-
-1. Implement [custom reducers](/docs/argus/reducers/general) for your specific use cases
-2. Explore [advanced data models](/docs/argus/data-models) for blockchain data representation
-3. Create [API endpoints](/docs/argus/api-integration) to expose your indexed data
-4. Learn about [dApp integrations](/docs/argus/reducers/dapp) for popular Cardano applications
-
-:::note
-For more detailed documentation on specific topics, refer to the dedicated sections in the navigation menu.
-:::
-
-## Support Resources
-
-If you encounter any issues during installation or have questions:
-
-- Check the [GitHub repository](https://github.com/SAIB-Inc/Argus) for the latest updates
-- Join our [Discord community](https://discord.gg/saib) for real-time assistance
-- Report bugs and suggest features through [GitHub Issues](https://github.com/SAIB-Inc/Argus/issues)
 
 ---
 

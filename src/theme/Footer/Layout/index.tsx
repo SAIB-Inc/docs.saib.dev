@@ -1,9 +1,7 @@
 import React, { type ReactNode } from 'react';
-import clsx from 'clsx';
 import type { Props } from '@theme/Footer/Layout';
 import { Icon, IconButton, Link, Paper, useTheme } from '@mui/material';
 import { useColorMode } from '@docusaurus/theme-common';
-import BackgroundLines from '../../../../static/img/Footer/background_lines.svg';
 import FooterWizard from '@site/static/img/Footer/wizard';
 import GithubIcon from '@site/static/img/Footer/github';
 import XIcon from '@site/static/img/Footer/x';
@@ -33,7 +31,7 @@ export default function FooterLayout({
         <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/Footer/background_dark.webp)]" : "bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
           <div className="container !px-4 md:!pt-67 md:h-[1021px]">
             {/* {links} */}
-            <div className='flex gap-x-20 h-full flex-col-reverse lg:justify-between lg:gap-x-10 lg:flex-row'>
+            <div className='flex gap-x-20 h-full flex-col-reverse lg:justify-between lg:gap-x-3 lg:flex-row xl:gap-x-10'>
               <div className='flex flex-col gap-y-8 lg:justify-between lg:!mb-[21.83px]'>
                 <div className='relative w-max mx-auto sm:!hidden'>
                   <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[90px] top-[14px]' />
@@ -109,14 +107,14 @@ export default function FooterLayout({
                     </div>
                   </div>
                   <div className='hidden lg:block'>
-                    <div className='flex self-end lg:gap-x-6'>
+                    <div className='flex self-end lg:gap-x-4 xl:gap-x-6'>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
                         <p className='md:!text-[14.8px]'>Philippines</p>
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE</p>
-                        <p className='md:!text-[14.8px]'>+63 XXX XXX XXX</p>
+                        <p className='md:!text-[14.8px]'>+63 952 471 9025</p>
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>EMAIL</p>
@@ -132,7 +130,7 @@ export default function FooterLayout({
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] !text-[11px] md:!text-[12.71px]'>PHONE</p>
-                        <p className='!text-sm md:!text-[17.8px] md:leading-[17.92px]'>+63 XXX XXX XXX</p>
+                        <p className='!text-sm md:!text-[17.8px] md:leading-[17.92px]'>+63 952 471 9025</p>
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] !text-[11px] md:!text-[12.71px]'>EMAIL</p>
@@ -350,23 +348,6 @@ export default function FooterLayout({
                     </div>
                   </div>
                 </div>
-
-                {/* <div className='hidden lg:block'>
-                  <div className='flex self-end !mb-[21.83px] lg:gap-x-6 xl:gap-x-15'>
-                    <div>
-                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
-                      <p className='md:!text-[17.8px] md:leading-[17.92px]'>Philippines</p>
-                    </div>
-                    <div>
-                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE</p>
-                      <p className='md:!text-[17.8px] md:leading-[17.92px]'>+63 XXX XXX XXX</p>
-                    </div>
-                    <div>
-                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>EMAIL</p>
-                      <p className='md:!text-[17.8px] md:leading-[17.92px]'>accounts@saib.dev</p>
-                    </div>
-                  </div>
-                </div> */}
                 <div className='gap-x-[10px] flex-row-reverse !mb-[21.83px] self-end justify-end hidden lg:justify-start lg:flex-row lg:flex'>
                     <div>
                       <IconButton 

@@ -126,7 +126,7 @@ export default function Section2(): ReactNode {
                             className="w-83 sm:w-100 md:w-120 lg:w-auto"
                         />
                     </div>
-                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[360px] 2xl:w-130">
+                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[360px] 2xl:w-110">
                         <div className="flex flex-col justify-end pr-[6px]">
                             <nav>
                                 <ul className="!m-0 !p-0 hidden lg:block">
@@ -147,7 +147,7 @@ export default function Section2(): ReactNode {
                                                 <p
                                                     className="text-[26.01px] leading-[28.611px] select-none !tracking-[1.17045px] cursor-pointer !mb-[40px] text-right"
                                                     style={{
-                                                        fontFamily: "Space Mono",
+                                                        fontFamily: "monospace",
                                                         color: currentProject === index
                                                             ? theme.palette.text.primary
                                                             : alpha(theme.palette.text.primary, 0.2)

@@ -6,7 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
-    "build:css": "bunx @tailwindcss/cli -i ./tailwind/app.css -o ./src/styles/app.css --minify --optimize",
+    "build:css": "bunx @tailwindcss/cli -i ./tailwind/app.css -o ./src/styles/app.css --minify",
     "watch:css": "bunx @tailwindcss/cli -i ./tailwind/app.css -o ./src/styles/app.css --watch",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",

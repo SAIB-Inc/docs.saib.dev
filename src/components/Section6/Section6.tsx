@@ -19,7 +19,7 @@ export default function Section6(): ReactNode {
                     </div>
                     <div className="flex items-center">
                         <BtnMore 
-                            LinkComponent='a' href="/docs/Chrysalis/overview"
+                            LinkComponent='a' href="/docs/chrysalis/overview"
                             sx={{
                                 color: theme.palette.grey[50],
                                 '&:hover': {

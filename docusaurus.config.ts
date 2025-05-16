@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Developer Portal | Softwarez at its Best, Inc.',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Softwarez at its Best | Cardano Tooling',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -65,7 +65,18 @@ const config: Config = {
     colorMode: {
       defaultMode: 'dark',
     },
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/saib_portal_og.webp',
+    metadata: [
+      {name: 'description', content: 'A guide to developing in Cardano with .NET, the SAIB Cardano Developer Portal contains detailed documentation and examples of key tools - Chrysalis, Argus, Razor, and more!'},
+      {name: 'keywords', content: 'Cardano, SAIB, Chrysalis, Argus, Razor, COMP, Futura, .NET, Documentation, Development'},
+      {property: 'og:title', content: 'Developer Portal | Softwarez at its Best, Inc.'},
+      {property: 'og:description', content: 'A guide to developing in Cardano with .NET, the SAIB Cardano Developer Portal contains detailed documentation and examples of key tools - Chrysalis, Argus, Razor, and more!'},
+      {property: 'og:type', content: 'website'},
+      {property: 'og:image', content: 'https://docs.saib.dev/saib_portal-og.webp'},
+      {property: 'twitter:card', content: 'summary_large_image'},
+      {property: 'twitter:title', content: 'Developer Portal | Softwarez at its Best, Inc.'},
+      {property: 'twitter:description', content: 'A guide to developing in Cardano with .NET, the SAIB Cardano Developer Portal contains detailed documentation and examples of key tools - Chrysalis, Argus, Razor, and more!'}
+    ],
     navbar: {
       title: '',
       logo: {

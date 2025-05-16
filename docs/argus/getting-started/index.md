@@ -4,7 +4,7 @@ sidebar_position: 1
 hide_title: true
 ---
   
-![Argus logo](https://hackmd.io/_uploads/Hk7BL6R0kg.png)
+![Argus logo](/img/argus.png)
 
 ---
 

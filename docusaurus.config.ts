@@ -54,7 +54,10 @@ const config: Config = {
           onUntruncatedBlogPosts: 'warn',
         },
         theme: {
-          customCss: './src/styles/app.css',
+          customCss: [
+            './src/styles/app.css',
+            './src/css/custom.css'
+          ],
         },
       } satisfies Preset.Options,
     ],

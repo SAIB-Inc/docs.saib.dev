@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import Popularity from "../../../static/img/Section7/popularity";
 import Performance from "../../../static/img/Section7/performance";
 import Versatility from "../../../static/img/Section7/versatility";

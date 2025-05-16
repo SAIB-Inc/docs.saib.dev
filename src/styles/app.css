@@ -2773,11 +2773,6 @@
       height: 654px !important;
     }
   }
-  .xl\:h-\[1000px\] {
-    @media (width >= 80rem) {
-      height: 1000px;
-    }
-  }
   .xl\:h-\[1076px\] {
     @media (width >= 80rem) {
       height: 1076px;
@@ -2786,16 +2781,6 @@
   .xl\:h-\[1080px\] {
     @media (width >= 80rem) {
       height: 1080px;
-    }
-  }
-  .xl\:h-\[1100px\] {
-    @media (width >= 80rem) {
-      height: 1100px;
-    }
-  }
-  .xl\:h-\[1171px\] {
-    @media (width >= 80rem) {
-      height: 1171px;
     }
   }
   .xl\:h-\[calc\(100\%-382px\)\] {
@@ -2958,11 +2943,6 @@
       height: calc(100% - 300px);
     }
   }
-  .\32 xl\:h-full {
-    @media (width >= 96rem) {
-      height: 100%;
-    }
-  }
   .\32 xl\:\!w-134 {
     @media (width >= 96rem) {
       width: calc(var(--spacing) * 134) !important;
@@ -3081,10 +3061,12 @@ p {
 [data-theme='dark'] {
   --futura-color-primary: #936FB6;
   --comp-color-primary: #FF8F71;
+  background-color: #191919;
 }
 [data-theme='light'] {
   --futura-color-primary: #4B0082;
   --comp-color-primary: #F83C01;
+  background-color: #ffffff;
 }
 @media only screen and (max-width: 997px) {
   .navbar-icon {

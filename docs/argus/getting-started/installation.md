@@ -95,8 +95,8 @@ Add your database connection details to `appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "CardanoContext": "Host=localhost;Database=argus_db;Username=postgres;Password=your_password;Port=5432",
-    "CardanoContextSchema": "public"
+    "CardanoContext": "Host=localhost;Database=argus;Username=postgres;Password=password;Port=5432",
+    "CardanoContextSchema": "cardanoindexer"
   }
 }
 ```
@@ -127,14 +127,22 @@ Add your Cardano node connection details to `appsettings.json`:
 ```json
 {
   "CardanoNodeConnection": {
-    "ConnectionType": "gRPC",
-    "gRPC": {
-      "Endpoint": "https://cardano-preview.utxorpc-m1.demeter.run",
-      "ApiKey": "your_api_key"
+    "ConnectionType": "UnixSocket",
+    "UnixSocket": {
+      "Path": "/path/to/node.socket"
     },
-    "NetworkMagic": 2,
-    "Slot": 64239299,
-    "Hash": "e3a57544f2140c014691644a90021d0af36b2c6a1ef4bad713891e17dea90cae"
+    "NetworkMagic": 764824073,
+    "MaxRollbackSlots": 1000,
+    "RollbackBuffer": 10,
+    "Slot": 139522569,
+    "Hash": "3fd9925888302fca267c580d8fe6ebc923380d0b984523a1dfbefe88ef089b66"
+  },
+  "Sync": {
+    "Dashboard": {
+      "TuiMode": true,
+      "RefreshInterval": 5000,
+      "DisplayType": "sync"
+    }
   }
 }
 ```
@@ -207,33 +215,22 @@ using Argus.Sync.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace MyArgusIndexer.Data
+public class MyDbContext(
+    DbContextOptions options,
+    IConfiguration configuration
+) : CardanoDbContext(options, configuration)
 {
-    // Define your DbContext interface
-    public interface IMyDbContext
-    {
-        // Your DbSets will be defined here
-    }
+    public DbSet<BlockInfo> Blocks => Set<BlockInfo>();
 
-    // Implement the database context
-    public class MyDbContext : CardanoDbContext, IMyDbContext
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public MyDbContext(
-            DbContextOptions<MyDbContext> options,
-            IConfiguration configuration
-        ) : base(options, configuration)
-        {
-        }
+        base.OnModelCreating(modelBuilder);
 
-        // DbSet properties will be added as you create reducers
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        modelBuilder.Entity<BlockInfo>(entity =>
         {
-            // Call the base implementation first
-            base.OnModelCreating(modelBuilder);
-            
-            // Add your model configurations here
-        }
+            entity.HasKey(e => e.Hash);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
+        });
     }
 }
 ```
@@ -243,52 +240,15 @@ namespace MyArgusIndexer.Data
 Update your `Program.cs` file to register Argus services:
 
 ```csharp
-using Microsoft.EntityFrameworkCore;
-using MyArgusIndexer.Data;
 using Argus.Sync.Extensions;
-using Argus.Sync.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add controllers and other services
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Add database context
-builder.Services.AddDbContextFactory<MyDbContext>((serviceProvider, options) =>
-{
-    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-    options.UseNpgsql(
-        configuration.GetConnectionString("CardanoContext"),
-        npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(
-            "__EFMigrationsHistory", 
-            configuration.GetValue<string>("ConnectionStrings:CardanoContextSchema")
-        )
-    );
-});
-
-// Add Argus to the dependency injection container
+// Register Argus services
 builder.Services.AddCardanoIndexer<MyDbContext>(builder.Configuration);
-
-// Register reducers (you'll implement these in the next section)
-builder.Services.AddReducers<MyDbContext, IReducerModel>([
-    // Your reducers will be listed here
-]);
+builder.Services.AddReducers<MyDbContext, IReducerModel>(builder.Configuration);
 
 var app = builder.Build();
-
-// Configure middleware
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-
 app.Run();
 ```
 
@@ -301,57 +261,34 @@ Reducers are the core components that process blockchain data. Here's how to cre
 Create a new file called `BlockReducer.cs`:
 
 ```csharp
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Argus.Sync.Interfaces;
-using Cardano.Node.Models;
+using Argus.Sync.Reducers;
+using Chrysalis.Cbor.Types.Cardano.Core;
 using Microsoft.EntityFrameworkCore;
-using MyArgusIndexer.Data;
-using MyArgusIndexer.Models;
 
-namespace MyArgusIndexer.Reducers
+public class BlockReducer(IDbContextFactory<MyDbContext> dbContextFactory)
+    : IReducer<BlockInfo>
 {
-    public class BlockReducer : IReducer<BlockInfo>
+    public async Task RollForwardAsync(Block block)
     {
-        private readonly IDbContextFactory<MyDbContext> dbContextFactory;
+        // Extract block data
+        string hash = block.Header().Hash();
+        ulong number = block.Header().HeaderBody().BlockNumber();
+        ulong slot = block.Header().HeaderBody().Slot();
 
-        public BlockReducer(IDbContextFactory<MyDbContext> dbContextFactory)
-        {
-            this.dbContextFactory = dbContextFactory;
-        }
+        // Store in database
+        using var db = dbContextFactory.CreateDbContext();
+        db.Blocks.Add(new BlockInfo(hash, number, slot, DateTime.UtcNow));
+        await db.SaveChangesAsync();
+    }
 
-        public async Task RollForwardAsync(Block block)
-        {
-            // Extract data from the block
-            string hash = block.Header().Hash();
-            ulong slot = block.Header().HeaderBody().Slot();
-            
-            // Store it in your database
-            using var db = await dbContextFactory.CreateDbContextAsync();
-            db.Blocks.Add(new BlockInfo
-            {
-                Hash = hash,
-                Slot = slot,
-                ProcessedAt = DateTime.UtcNow
-            });
-            await db.SaveChangesAsync();
-        }
-
-        public async Task RollBackwardAsync(ulong slot)
-        {
-            // Handle rollbacks when chain reorganizations occur
-            using var db = await dbContextFactory.CreateDbContextAsync();
-            var blocksToRemove = await db.Blocks
-                .Where(b => b.Slot >= slot)
-                .ToListAsync();
-                
-            if (blocksToRemove.Any())
-            {
-                db.Blocks.RemoveRange(blocksToRemove);
-                await db.SaveChangesAsync();
-            }
-        }
+    public async Task RollBackwardAsync(ulong slot)
+    {
+        // Remove any blocks at or after the rollback slot
+        using var db = dbContextFactory.CreateDbContext();
+        db.Blocks.RemoveRange(
+            db.Blocks.Where(b => b.Slot >= slot)
+        );
+        await db.SaveChangesAsync();
     }
 }
 ```
@@ -361,26 +298,15 @@ namespace MyArgusIndexer.Reducers
 Create a new file called `BlockInfo.cs`:
 
 ```csharp
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Argus.Sync.Models;
+using Argus.Sync.Data.Models;
 
-namespace MyArgusIndexer.Models
-{
-    [Table("Blocks")]
-    public class BlockInfo : IReducerModel
-    {
-        [Key]
-        public string Hash { get; set; }
-        
-        [Required]
-        public ulong Slot { get; set; }
-        
-        [Required]
-        public DateTime ProcessedAt { get; set; }
-    }
-}
+// Define your model
+public record BlockInfo(
+    string Hash,       // Block hash
+    ulong Number,      // Block number
+    ulong Slot,        // Block slot number
+    DateTime CreatedAt // Timestamp
+) : IReducerModel;
 ```
 
 ### 3. Update Your DbContext
@@ -406,7 +332,10 @@ public class MyDbContext : CardanoDbContext, IMyDbContext
 Update your `Program.cs` file to register the new reducer:
 
 ```csharp
-// Register reducers
+// Register reducers automatically from the assembly
+builder.Services.AddReducers<MyDbContext, IReducerModel>(builder.Configuration);
+
+// Alternatively, register specific reducers
 builder.Services.AddReducers<MyDbContext, IReducerModel>([
     typeof(BlockReducer)
 ]);
@@ -416,15 +345,15 @@ builder.Services.AddReducers<MyDbContext, IReducerModel>([
 
 Now that everything is set up, you can start your Argus indexer.
 
-### 1. Create the Database
+### 1. Create and Apply Migrations
 
-Run migrations to create your database schema:
+Generate and apply Entity Framework migrations:
 
 ```bash
-# Create a migration
-dotnet ef migrations add InitialCreate --context MyDbContext
+# Create the initial migration
+dotnet ef migrations add InitialMigration
 
-# Apply the migration
+# Apply the migration to the database
 dotnet ef database update
 ```
 
@@ -445,8 +374,45 @@ To confirm that Argus is running correctly:
 3. Use a database tool like pgAdmin to view indexed data
 
 :::tip Monitoring Progress
-Argus includes a dashboard for tracking synchronization progress. You can access it at `/api/dashboard` in your application.
+Argus includes a dashboard for tracking synchronization progress. When TuiMode is enabled in your configuration, you'll see a terminal-based dashboard showing synchronization status.
 :::
+
+### 4. Build APIs with Your Indexed Data
+
+Once you have blockchain data indexed, you can easily build APIs to expose this data:
+
+```csharp
+// Add to your Program.cs
+app.MapGet("/api/blocks/latest", async (IDbContextFactory<MyDbContext> dbContextFactory) =>
+{
+    using var db = dbContextFactory.CreateDbContext();
+    return await db.Blocks
+        .OrderByDescending(b => b.Number)
+        .Take(10)
+        .ToListAsync();
+});
+
+app.MapGet("/api/blocks/{hash}", async (string hash, IDbContextFactory<MyDbContext> dbContextFactory) =>
+{
+    using var db = dbContextFactory.CreateDbContext();
+    var block = await db.Blocks.FindAsync(hash);
+    return block is null ? Results.NotFound() : Results.Ok(block);
+});
+
+// If you track transactions
+app.MapGet("/api/transactions/by-block/{blockHash}", async (string blockHash, IDbContextFactory<MyDbContext> dbContextFactory) =>
+{
+    using var db = dbContextFactory.CreateDbContext();
+    return await db.Transactions
+        .Where(tx => tx.BlockHash == blockHash)
+        .ToListAsync();
+});
+```
+
+With these endpoints, you've created a blockchain API that can:
+- Return the latest 10 blocks
+- Look up block details by hash
+- List transactions in a specific block
 
 ## Advanced Configuration
 
@@ -465,11 +431,15 @@ Add these settings to your `appsettings.json` file for performance tuning:
 
 ```json
 {
-  "CardanoIndexerOptions": {
+  "Sync": {
+    "Dashboard": {
+      "TuiMode": true,
+      "RefreshInterval": 5000,
+      "DisplayType": "sync"
+    },
     "MaxConcurrency": 4,
     "MaxItemsPerBatch": 1000,
-    "PollingIntervalMs": 1000,
-    "EnableDashboard": true
+    "PollingIntervalMs": 1000
   }
 }
 ```

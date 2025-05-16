@@ -1,3 +1,5 @@
+@tailwind utilities;
+@config "../tailwind.config.ts";
 @import "tailwindcss";
 
 body {
@@ -18,36 +20,32 @@ p
     margin-bottom: 0px !important;
 }
 
-@theme {
-    --animate-blink: blink 1s steps(1) infinite;
-
+@layer utilities {
     @keyframes blink {
-
-        0%,
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0;
-        }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
-
-}
+  
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  
+    .animate-blink {
+      animation: blink 1s steps(1) infinite;
+    }
+  
+    .animate-bounce2 {
+      animation: bounce 2s infinite;
+    }
+  
+    .animate-bounce3 {
+      animation: bounce 2.5s infinite ease-in-out;
+    }
+  }
 
 @theme {
-    --animate-bounce2: bounce 2s infinite;
-    --animate-bounce3: bounce 2.5s infinite ease-In-Out;
-    @keyframes bounce {
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-10px);
-        }
-    }
+    --container-2xl: 1320px !important
 }
 
 .section4::after{
@@ -140,3 +138,9 @@ p
         display: none;
     }
 }
+
+@layer components {
+    .container {
+      @apply container max-w-[100%] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1140px] 2xl:max-w-[1320px];
+    }
+  }

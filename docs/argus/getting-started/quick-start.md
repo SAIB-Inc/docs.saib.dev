@@ -4,17 +4,17 @@ sidebar_position: 2
 description: Get up and running with Argus in minutes
 ---
 
-# Quick Start Guide
+# 🚀 Quick Start Guide
 
 This quick start will help you set up a minimal Argus indexer in just a few minutes.
 
-## Prerequisites
+## 📋 Prerequisites
 
 - **.NET 9.0 SDK** or later
 - **PostgreSQL** database
 - **Entity Framework Core**
 
-## Step 1: Create Project & Install Packages
+## 🏗️ Step 1: Create Project & Install Packages
 
 ```bash
 # Create a new project
@@ -27,23 +27,23 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 ```
 
-## Step 2: Add Minimal Code
+## 📝 Step 2: Add Minimal Code
 
 Create these three files:
 
-**BlockInfo.cs**
+**BlockInfo.cs** - *Your blockchain data model*
 ```csharp
 using Argus.Sync.Data.Models;
 
 public record BlockInfo(
-    string Hash,
-    ulong Number,
-    ulong Slot,
-    DateTime CreatedAt
+    string Hash,      // 🔑 Block identifier
+    ulong Number,     // 🔢 Block height
+    ulong Slot,       // ⏱️ Slot number
+    DateTime CreatedAt // 📅 Timestamp
 ) : IReducerModel;
 ```
 
-**MyDbContext.cs**
+**MyDbContext.cs** - *Database access layer*
 ```csharp
 using Argus.Sync.Data;
 using Microsoft.EntityFrameworkCore;
@@ -62,7 +62,7 @@ public class MyDbContext(DbContextOptions options, IConfiguration configuration)
 }
 ```
 
-**BlockReducer.cs**
+**BlockReducer.cs** - *Data transformation logic*
 ```csharp
 using Argus.Sync.Reducers;
 using Chrysalis.Cbor.Types.Cardano.Core;
@@ -71,6 +71,7 @@ using Microsoft.EntityFrameworkCore;
 public class BlockReducer(IDbContextFactory<MyDbContext> dbContextFactory)
     : IReducer<BlockInfo>
 {
+    // ⬆️ Called when processing new blocks
     public async Task RollForwardAsync(Block block)
     {
         using var db = dbContextFactory.CreateDbContext();
@@ -83,6 +84,7 @@ public class BlockReducer(IDbContextFactory<MyDbContext> dbContextFactory)
         await db.SaveChangesAsync();
     }
 
+    // ⬇️ Called during chain reorganizations
     public async Task RollBackwardAsync(ulong slot)
     {
         using var db = dbContextFactory.CreateDbContext();
@@ -92,25 +94,28 @@ public class BlockReducer(IDbContextFactory<MyDbContext> dbContextFactory)
 }
 ```
 
-## Step 3: Configuration
+## ⚙️ Step 3: Configuration
 
 Replace **appsettings.json** with:
 
 ```json
 {
   "ConnectionStrings": {
+    // 🗄️ Database settings
     "CardanoContext": "Host=localhost;Database=argus;Username=postgres;Password=password;Port=5432",
     "CardanoContextSchema": "cardanoindexer"
   },
   "CardanoNodeConnection": {
+    // 🔗 Blockchain connection (using gRPC for simplicity)
     "ConnectionType": "gRPC",
     "gRPC": {
       "Endpoint": "https://cardano-preview.utxorpc-m1.demeter.run",
       "ApiKey": "your_api_key"
     },
-    "NetworkMagic": 2
+    "NetworkMagic": 2  // 🧪 Preview testnet magic
   },
   "Sync": {
+    // 📊 Dashboard settings
     "Dashboard": {
       "TuiMode": true,
       "RefreshInterval": 5000
@@ -124,15 +129,19 @@ Replace **Program.cs** with:
 ```csharp
 using Argus.Sync.Extensions;
 
+// 🏗️ Build the application
 var builder = WebApplication.CreateBuilder(args);
+
+// 🔌 Register Argus services
 builder.Services.AddCardanoIndexer<MyDbContext>(builder.Configuration);
 builder.Services.AddReducers<MyDbContext, IReducerModel>(builder.Configuration);
 
+// 🚀 Launch!
 var app = builder.Build();
 app.Run();
 ```
 
-## Step 4: Run
+## 🚀 Step 4: Run
 
 ```bash
 # Create and apply migrations
@@ -147,6 +156,6 @@ When successfully running, you'll see the Argus dashboard:
 
 ![Argus Running](/img/docs/argus/getting-started/argus_running.png)
 
-## What's Next?
+## 🔮 What's Next?
 
 - Learn about advanced [Configuration Options](./configuration)

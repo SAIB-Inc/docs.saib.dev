@@ -4,29 +4,29 @@ sidebar_position: 3
 description: Detailed configuration options for Argus
 ---
 
-# Argus Configuration
+# ⚙️ Argus Configuration
 
 This guide covers the advanced configuration options available in Argus. For basic setup, see the [Quick Start Guide](./quick-start).
 
-## Configuration File Structure
+## 📄 Configuration File Structure
 
 Argus configuration is managed through the standard .NET `appsettings.json` file. The main sections relevant to Argus are:
 
 ```json
 {
   "ConnectionStrings": {
-    // Database connection settings
+    // 🗄️ Database connection settings
   },
   "CardanoNodeConnection": {
-    // Cardano node connection settings
+    // 🔗 Cardano node connection settings
   },
   "Sync": {
-    // Synchronization and dashboard settings
+    // 🔄 Synchronization and dashboard settings
   }
 }
 ```
 
-## Database Connection
+## 🗄️ Database Connection
 
 Configure your database connection in the `ConnectionStrings` section:
 
@@ -37,26 +37,18 @@ Configure your database connection in the `ConnectionStrings` section:
 }
 ```
 
-### Connection String Parameters
+### 🔧 Connection String Parameters
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
-| `Host` | PostgreSQL server hostname or IP | Required |
-| `Database` | Database name | Required |
-| `Username` | Database user | Required |
-| `Password` | User password | Required |
-| `Port` | PostgreSQL server port | 5432 |
-| `CardanoContextSchema` | Database schema | "public" |
+| `Host` | 🖥️ PostgreSQL server hostname or IP | Required |
+| `Database` | 💾 Database name | Required |
+| `Username` | 👤 Database user | Required |
+| `Password` | 🔑 User password | Required |
+| `Port` | 🔌 PostgreSQL server port | 5432 |
+| `CardanoContextSchema` | 📋 Database schema | "public" |
 
-### Connection Pooling
-
-For production environments, you can add connection pooling parameters:
-
-```json
-"CardanoContext": "Host=localhost;Database=argus;Username=postgres;Password=password;Port=5432;Maximum Pool Size=100;Minimum Pool Size=10"
-```
-
-## Node Connection
+## 🔗 Node Connection
 
 Configure your connection to the Cardano blockchain in the `CardanoNodeConnection` section:
 
@@ -66,19 +58,19 @@ Configure your connection to the Cardano blockchain in the `CardanoNodeConnectio
   "UnixSocket": {
     "Path": "/path/to/node.socket"
   },
-  "NetworkMagic": 764824073,
-  "MaxRollbackSlots": 1000,
-  "RollbackBuffer": 10,
-  "Slot": 139522569,
-  "Hash": "3fd9925888302fca267c580d8fe6ebc923380d0b984523a1dfbefe88ef089b66"
+  "NetworkMagic": 764824073,  // 🌐 Mainnet
+  "MaxRollbackSlots": 1000,    // 🛡️ Rollback protection
+  "RollbackBuffer": 10,        // 🛡️ Extra safety buffer
+  "Slot": 139522569,           // 🏁 Starting slot
+  "Hash": "3fd9925888302fca267c580d8fe6ebc923380d0b984523a1dfbefe88ef089b66"  // 🏁 Starting block
 }
 ```
 
-### Connection Types
+### 🔌 Connection Types
 
 Argus supports three connection types:
 
-#### 1. gRPC Provider (U5CProvider)
+#### 1. 🌐 gRPC Provider (U5CProvider)
 
 Remote connection using UtxoRPC:
 
@@ -90,7 +82,7 @@ Remote connection using UtxoRPC:
 }
 ```
 
-#### 2. Unix Socket Provider (N2CProvider)
+#### 2. 🔌 Unix Socket Provider (N2CProvider)
 
 Direct connection to a local Cardano node:
 
@@ -101,7 +93,7 @@ Direct connection to a local Cardano node:
 }
 ```
 
-#### 3. TCP Provider (N2NProvider)
+#### 3. 🌐 TCP Provider (N2NProvider)
 
 Network connection to a remote Cardano node:
 
@@ -113,24 +105,24 @@ Network connection to a remote Cardano node:
 }
 ```
 
-### Network Magic Values
+### 🌍 Network Magic Values
 
 Set the `NetworkMagic` parameter according to your target Cardano network:
 
 | Network | Magic Value | Use Case |
 |---------|-------------|----------|
-| **Mainnet** | 764824073 | Production applications |
-| **Preview Testnet** | 2 | Testing and development |
-| **PreProd Testnet** | 1 | Pre-production testing |
+| **Mainnet** | 764824073 | 🏢 Production applications |
+| **Preview Testnet** | 2 | 🧪 Testing and development |
+| **PreProd Testnet** | 1 | 🔍 Pre-production testing |
 
-### Rollback Settings
+### 🛡️ Rollback Settings
 
 ```json
 "MaxRollbackSlots": 1000,  // Maximum number of slots to rollback (hard limit)
-"RollbackBuffer": 10,       // Conservative buffer to handle potential rollbacks
+"RollbackBuffer": 10,      // Conservative buffer to handle potential rollbacks
 ```
 
-### Starting Point
+### 🏁 Starting Point
 
 You can specify a starting point for synchronization:
 
@@ -141,71 +133,41 @@ You can specify a starting point for synchronization:
 
 If omitted, Argus will start from the genesis block or the current chain tip.
 
-## Synchronization Settings
+## 🔄 Synchronization Settings
 
 Configure synchronization behavior in the `Sync` section:
 
 ```json
 "Sync": {
   "Dashboard": {
-    "TuiMode": true,
-    "RefreshInterval": 5000,
-    "DisplayType": "sync"
+    "TuiMode": true,             // 📊 Terminal-based UI
+    "RefreshInterval": 5000,     // ⏱️ Update frequency
+    "DisplayType": "sync"        // 📈 Dashboard style
   }
 }
 ```
 
-### Dashboard Settings
+### 📊 Dashboard Settings
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| `TuiMode` | Enable terminal-based dashboard | true |
-| `RefreshInterval` | Dashboard refresh interval (ms) | 5000 |
-| `DisplayType` | Dashboard display type ("sync" or "detail") | "sync" |
+| `TuiMode` | 📺 Enable terminal-based dashboard | true |
+| `RefreshInterval` | ⏱️ Dashboard refresh interval (ms) | 5000 |
+| `DisplayType` | 📈 Dashboard display type ("sync" or "detail") | "sync" |
 
-## Environment Variables
-
-For production environments, you can use environment variables instead of hardcoding values in the configuration:
-
-```json
-"CardanoNodeConnection": {
-  "gRPC": {
-    "ApiKey": "${UTXORPC_API_KEY}"
-  }
-}
-```
-
-Then set the environment variable:
-
-```bash
-export UTXORPC_API_KEY="your-secret-api-key"
-```
-
-## Logging Configuration
-
-Customize logging levels in the `Logging` section:
-
-```json
-"Logging": {
-  "LogLevel": {
-    "Default": "Information",
-    "Argus.Sync": "Debug",
-    "Microsoft.EntityFrameworkCore": "Warning"
-  }
-}
-```
-
-## Complete Configuration Example
+## 📋 Complete Configuration Example
 
 Here's a complete configuration example with all available options:
 
 ```json
 {
   "ConnectionStrings": {
-    "CardanoContext": "Host=localhost;Database=argus;Username=postgres;Password=password;Port=5432;Maximum Pool Size=100;Minimum Pool Size=10",
+    // 🗄️ Database settings
+    "CardanoContext": "Host=localhost;Database=argus;Username=postgres;Password=password;Port=5432",
     "CardanoContextSchema": "cardanoindexer"
   },
   "CardanoNodeConnection": {
+    // 🔗 Blockchain connection
     "ConnectionType": "UnixSocket",
     "UnixSocket": {
       "Path": "/path/to/node.socket"
@@ -217,17 +179,11 @@ Here's a complete configuration example with all available options:
     "Hash": "3fd9925888302fca267c580d8fe6ebc923380d0b984523a1dfbefe88ef089b66"
   },
   "Sync": {
+    // 🔄 Synchronization settings
     "Dashboard": {
       "TuiMode": true,
       "RefreshInterval": 5000,
       "DisplayType": "sync"
-    }
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Argus.Sync": "Debug",
-      "Microsoft.EntityFrameworkCore": "Warning"
     }
   }
 }

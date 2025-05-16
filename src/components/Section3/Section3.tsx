@@ -33,7 +33,7 @@ export default function Section3(): ReactNode {
                             <img src="/img/Section3/arrow.webp" />
                         </div>
                         <div className="items-center my-2 mx-2 hidden sm:flex lg:mx-4 xl:mx-10">
-                            <p className="font-semibold md:text-xl lg:leading-[34.8px] lg:text-2xl ">Used By</p>   
+                            <p className="font-semibold w-max md:text-xl lg:leading-[34.8px] lg:text-2xl ">Used By</p>   
                         </div>
                         <div className="hidden w-27 sm:block md:w-40 lg:w-auto">
                             <img src="/img/Section3/arrow.webp" className="scale-x-[-1] mr-1 md:mr-10 lg:mr-10 xl:mr-[80px]" />
@@ -59,8 +59,8 @@ export default function Section3(): ReactNode {
                                 <span className="font-semibold text-3xl sm:!text-5xl md:!text-[56px] lg:!text-[40px] lg:leading-[53.76px] xl:!text-[56px]"> - The .NET Cardano Indexing Framework</span>
                             </h1>
                         </div>
-                        <div className="flex flex-col items-center lg:items-end lg:w-[557px]">
-                            <div className="h-[60px] mt-[2px] mb-[20.06px] flex flex-col text-center lg:text-start lg:justify-end lg:w-108 lg:h-auto lg:gap-y-6" >
+                        <div className="flex flex-col items-center sm:mt-6 lg:mt-0 lg:items-end lg:w-[557px]">
+                            <div className="h-[60px] mt-[2px] mb-[20.06px] flex flex-col text-center sm:h-auto lg:text-start lg:justify-end lg:w-108 lg:gap-y-6" >
                                 <div>
                                     <p
                                         className="text-[16px] font-normal leading-[20.48px] "

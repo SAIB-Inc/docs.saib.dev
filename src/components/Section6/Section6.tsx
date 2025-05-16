@@ -170,7 +170,7 @@ export default function Section6(): ReactNode {
                     >
                         <div className="flex flex-col justify-between h-full gap-4 lg:gap-6 2xl:gap-0">
                             <div>
-                                <h3 style={{color: theme.palette.grey[600]}} className="!font-semibold !text-2xl sm:!text-3xl md:!text-xl xl:!text-[26px] 2xl:!text-[30px] lg:leading-[33px] lg:!mb-[24px]">CHRYSALIS.NETWORK</h3>
+                                <h3 style={{color: theme.palette.grey[600]}} className="!font-semibold leading-5 flex flex-wrap !text-2xl sm:!text-3xl md:!text-xl xl:!text-[26px] 2xl:!text-[30px] lg:leading-[33px] lg:!mb-[24px]"><span>CHRYSALIS</span><span>.</span><span>NETWORK</span></h3>
                                 <p style={{color: theme.palette.grey[600]}} className="!text-sm sm:!text-lg md:!text-sm lg:!text-base">
                                     Streamline data exchange through<br className="max-2xl:hidden"/>
                                     serializing or (de)serializing Cardano<br className="max-2xl:hidden"/>

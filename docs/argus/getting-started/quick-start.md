@@ -150,4 +150,3 @@ When successfully running, you'll see the Argus dashboard:
 ## What's Next?
 
 - Learn about advanced [Configuration Options](./configuration)
-- Explore [Built-in Reducers](../reducers/general) for common use cases

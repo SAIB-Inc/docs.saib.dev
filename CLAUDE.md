@@ -17,46 +17,46 @@ This repository contains a documentation website for Softwarez at its Best, Inc.
 ### Installation
 
 ```bash
-# Install dependencies using yarn
-yarn
-
-# Alternative: use bun if available (faster)
+# Install dependencies using bun (preferred for speed)
 bun install
+
+# Alternative: use yarn if bun is not available
+yarn
 ```
 
 ### Development Server
 
 ```bash
 # Start local development server
-yarn start
+bun start
 
 # For CSS changes (tailwind)
-yarn watch:css
+bun watch:css
 ```
 
 ### Build and Deployment
 
 ```bash
 # Build the CSS files
-yarn build:css
+bun build:css
 
 # Build the static site
-yarn build
+bun build
 
 # Serve the built website locally
-yarn serve
+bun serve
 
 # Deploy to GitHub Pages
-GIT_USER=<Your GitHub username> yarn deploy
+GIT_USER=<Your GitHub username> bun deploy
 # Or with SSH
-USE_SSH=true yarn deploy
+USE_SSH=true bun deploy
 ```
 
 ### Type Checking
 
 ```bash
 # Run TypeScript type checking
-yarn typecheck
+bun typecheck
 ```
 
 ## Architecture

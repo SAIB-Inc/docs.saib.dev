@@ -127,10 +127,12 @@ p
 [data-theme='dark'] {
     --futura-color-primary: #936FB6;
     --comp-color-primary: #FF8F71;
+    background-color: #191919;
 }
 [data-theme='light'] {
     --futura-color-primary: #4B0082;
     --comp-color-primary: #F83C01;
+    background-color: #ffffff;
 }
 
 @media only screen and (max-width: 997px) {

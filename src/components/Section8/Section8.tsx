@@ -1,13 +1,7 @@
-import { useColorMode } from "@docusaurus/theme-common";
-import { ClassNames } from "@emotion/react";
 import { useTheme } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 
 export default function Section8(): ReactNode {
-    const theme = useTheme();
-    const { colorMode } = useColorMode();
-    const [selectedItem, setSelectedItem] = useState(0);
-
     const imageList = [
         {
             alt: "Da Nang Group Photo",
@@ -36,6 +30,28 @@ export default function Section8(): ReactNode {
         }
     ]
 
+    const theme = useTheme();
+    const [selectedItem, setSelectedItem] = useState(0);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+        const deltaX = touchEndX.current - touchStartX.current;
+        if (deltaX > 50) {
+            setSelectedItem((prev) => Math.max(prev - 1, 0));
+        } else if (deltaX < -50) {
+            setSelectedItem((prev) => Math.min(prev + 1, imageList.length - 1))
+        }
+    };
+
     return(
         <section style={{ backgroundColor:theme.palette.background.default }} className="bg-[url(/img/Section8/eighth_background.webp)] bg-cover md:!pt-[137px] md:h-[1113px]">
             <div className="container">
@@ -60,6 +76,10 @@ export default function Section8(): ReactNode {
                         return(
                             <div
                                 id={datum.alt}
+                                key={datum.alt}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={handleTouchMove}
+                                onTouchEnd={handleTouchEnd}
                                 style={{
                                     transform: `translateX(calc(-${selectedItem * 100}% - ${selectedItem * 11}px))`,
                                     transition: 'transform 0.5s ease'

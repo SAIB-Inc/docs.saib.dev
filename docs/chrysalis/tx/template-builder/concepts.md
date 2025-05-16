@@ -25,7 +25,7 @@ Under the hood, templates leverage the same builder methods and extension helper
   4. Optionally assigns an `Id` for later referential use
 
 - **Build Time Invocation:** When you call `.Build()`, the builder:
-  1. **Fetches UTxOs** for each registered party from the provider(learn more about provider in the [provider](provider.com) section)
+  1. **Fetches UTxOs** for each registered party from the provider (learn more about providers in the [provider](/docs/chrysalis/tx/providers) section)
   3. **Executes** each stored lambda in the order of registration, building up a low-level `TransactionBuilder` invocation sequence
   4. **Resolves** any **redeemer builders** or **datum factories** by passing in a mapping from option `Id` → actual input/output index, along with your parameter object
   5. **Constructs** and **signs** the transaction body, witnesses, and optionally auxiliary data

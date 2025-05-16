@@ -850,13 +850,3 @@ public class MyReducer : IReducer<MyModel>
 ```
 
 By understanding these Cardano data structures and how to access them in Argus (via Chrysalis), you can build sophisticated indexers that extract and transform blockchain data according to your application's needs.
-
-&nbsp;
-
-## 🔍 Next Steps
-
-Now that you understand the core Cardano data structures in Argus, you might want to explore:
-
-- [General Reducers](../reducers/general/index.md): Common reducer patterns for Cardano data
-- [dApp Reducers](../reducers/dapp/index.md): Specialized reducers for decentralized applications
-- [Building APIs](../api-integration/index.md): Creating APIs with your indexed data

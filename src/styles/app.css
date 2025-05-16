@@ -744,6 +744,9 @@
   .gap-x-2 {
     column-gap: calc(var(--spacing) * 2);
   }
+  .gap-x-4 {
+    column-gap: calc(var(--spacing) * 4);
+  }
   .gap-x-20 {
     column-gap: calc(var(--spacing) * 20);
   }
@@ -2422,6 +2425,16 @@
       column-gap: calc(var(--spacing) * 0);
     }
   }
+  .lg\:gap-x-3 {
+    @media (width >= 64rem) {
+      column-gap: calc(var(--spacing) * 3);
+    }
+  }
+  .lg\:gap-x-4 {
+    @media (width >= 64rem) {
+      column-gap: calc(var(--spacing) * 4);
+    }
+  }
   .lg\:gap-x-6 {
     @media (width >= 64rem) {
       column-gap: calc(var(--spacing) * 6);
@@ -2831,6 +2844,16 @@
   .xl\:gap-6 {
     @media (width >= 80rem) {
       gap: calc(var(--spacing) * 6);
+    }
+  }
+  .xl\:gap-x-6 {
+    @media (width >= 80rem) {
+      column-gap: calc(var(--spacing) * 6);
+    }
+  }
+  .xl\:gap-x-10 {
+    @media (width >= 80rem) {
+      column-gap: calc(var(--spacing) * 10);
     }
   }
   .xl\:gap-x-15 {

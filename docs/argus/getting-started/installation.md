@@ -196,6 +196,8 @@ Argus supports three main connection types, each with its own advantages:
 
 Set the `NetworkMagic` parameter according to your target Cardano network:
 
+<br/>
+
 | Network | Magic Value | Purpose |
 |---------|-------------|---------|
 | **Mainnet** | 764824073 | Production environment |

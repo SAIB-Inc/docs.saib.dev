@@ -651,59 +651,15 @@ transaction_metadata_value =
 Chrysalis provides extension methods for working with transaction metadata:
 
 ```csharp
-if (tx.HasMetadata())
-{
-    var metadata = tx.Metadata();
+    var auxDataSet = block.AuxilliaryDataSet();
     
     // Process metadata by label
-    foreach (var entry in metadata)
+    foreach (var entry in auxDataSet)
     {
-        ulong label = entry.Key();
-        var value = entry.Value();
-        
-        // Handle specific metadata labels
-        switch (label)
-        {
-            case 674: // Stake pool metadata
-                // Process pool metadata
-                break;
-                
-            case 721: // NFT metadata (CIP-25)
-                if (value.IsMap())
-                {
-                    var nftData = value.AsMap();
-                    
-                    // Extract NFT information
-                    foreach (var policyEntry in nftData)
-                    {
-                        string policyId = policyEntry.Key().AsString();
-                        var assets = policyEntry.Value().AsMap();
-                        
-                        foreach (var assetEntry in assets)
-                        {
-                            string assetName = assetEntry.Key().AsString();
-                            var assetDetails = assetEntry.Value().AsMap();
-                            
-                            // Extract name, description, image, etc.
-                            string name = assetDetails["name"]?.AsString();
-                            string description = assetDetails["description"]?.AsString();
-                            string image = assetDetails["image"]?.AsString();
-                            
-                            // Process NFT metadata
-                        }
-                    }
-                }
-                break;
-                
-            case 20: // Message metadata
-                string message = value.AsString();
-                // Process message
-                break;
-                
-            // Handle other metadata labels
-        }
+        var metadata = entry.MetaData();
+        // your medata logic
     }
-}
+
 ```
 
 ### Important Metadata Fields and Extension Methods

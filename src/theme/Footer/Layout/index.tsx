@@ -116,7 +116,7 @@ export default function FooterLayout({
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE</p>
-                        <p className='md:!text-[14.8px]'>+63 XXX XXX XXX</p>
+                        <p className='md:!text-[14.8px]'>+63 952 471 9025</p>
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>EMAIL</p>
@@ -132,7 +132,7 @@ export default function FooterLayout({
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] !text-[11px] md:!text-[12.71px]'>PHONE</p>
-                        <p className='!text-sm md:!text-[17.8px] md:leading-[17.92px]'>+63 XXX XXX XXX</p>
+                        <p className='!text-sm md:!text-[17.8px] md:leading-[17.92px]'>+63 952 471 9025</p>
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] !text-[11px] md:!text-[12.71px]'>EMAIL</p>
@@ -350,23 +350,6 @@ export default function FooterLayout({
                     </div>
                   </div>
                 </div>
-
-                {/* <div className='hidden lg:block'>
-                  <div className='flex self-end !mb-[21.83px] lg:gap-x-6 xl:gap-x-15'>
-                    <div>
-                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
-                      <p className='md:!text-[17.8px] md:leading-[17.92px]'>Philippines</p>
-                    </div>
-                    <div>
-                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE</p>
-                      <p className='md:!text-[17.8px] md:leading-[17.92px]'>+63 XXX XXX XXX</p>
-                    </div>
-                    <div>
-                      <p style={{color: theme.palette.grey[100]}} className='!text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>EMAIL</p>
-                      <p className='md:!text-[17.8px] md:leading-[17.92px]'>accounts@saib.dev</p>
-                    </div>
-                  </div>
-                </div> */}
                 <div className='gap-x-[10px] flex-row-reverse !mb-[21.83px] self-end justify-end hidden lg:justify-start lg:flex-row lg:flex'>
                     <div>
                       <IconButton 

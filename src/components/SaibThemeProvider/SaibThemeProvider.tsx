@@ -88,7 +88,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
       } else {
         root.setAttribute('data-theme-variant', 'home');
       }
-    }, [isArgus, isChrysalis, isRazor, isComp]);
+    }, [isArgus, isChrysalis, isRazor, isComp, isFutura]);
 
     return (
         <ThemeProvider theme={darkTheme}>

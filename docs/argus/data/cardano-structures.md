@@ -90,8 +90,8 @@ foreach (var tx in block.TransactionBodies())
         // Process NFT minting transactions
     }
     
-    if (tx.Withdrawals().Any) {
-        // Process stake reward withdrawals
+    if (tx.Outputs().Any) {
+        // Process outputs
     }
 }
 ```
@@ -393,11 +393,12 @@ Chrysalis provides extension methods for transaction inputs and outputs:
 // Processing inputs (UTxOs being spent)
 foreach (var input in tx.Inputs())
 {
-    string txId = input.TxId();     // Transaction that created this UTxO
-    uint index = input.Index();     // Index of output in that transaction
+    byte[] txIdBytes = input.TransactionId; // Transaction that created this UTxO
+    string txIdHex = Convert.ToHexString(txIdBytes)    
+    uint index = input.Index;     // Index of output in that transaction
     
     // Combine to form a unique UTxO reference
-    string utxoRef = $"{txId}#{index}";
+    string utxoRef = $"{txIdHex}#{index}";
 }
 
 // Processing outputs (new UTxOs being created)

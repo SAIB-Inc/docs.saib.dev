@@ -98,7 +98,7 @@ export default function Section6(): ReactNode {
                             sx={{
                                 color: theme.palette.grey[50]
                             }}
-                            className="text-[80px] sm:text-[124px]! md:text-[124px]! xl:text-[192px]!"
+                            className="text-[80px] !sm:text-[124px] !md:text-[124px] !xl:text-[192px]"
                         />
                     </Paper>
                     <Paper sx={{
@@ -166,7 +166,8 @@ export default function Section6(): ReactNode {
                         borderRadius: '24px',
                         boxShadow: 0
                     }}
-                    className="!p-6 w-full md:!w-[calc(33%-8px)] lg:!p-8 lg:h-[300.4px] 2xl:h-[304px]"
+                    className="!p-6 
+                    w-full md:!w-[calc(33%-8px)] lg:!p-8 lg:h-[300.4px] 2xl:h-[304px]"
                     >
                         <div className="flex flex-col justify-between h-full gap-4 lg:gap-6 2xl:gap-0">
                             <div>

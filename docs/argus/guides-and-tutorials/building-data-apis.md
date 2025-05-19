@@ -120,7 +120,7 @@ Minimal APIs offer a concise style, perfect for building focused and performant 
 
 ### Method 2: The Controller-Based Approach 🏛️ (Alternative)
 
-While our focus is Minimal APIs, the classic controller approach is still perfectly valid and often preferred for complex APIs with many actions or when more traditional OO structure is desired.
+While our focus is Minimal APIs, the classic controller approach is still perfectly valid and often preferred for complex APIs with many actions or when more traditional Object oriented structure is desired.
 
 1. **Crafting Your API Controller**:
     In your API project (or Argus project if combined), create a C# class in a `Controllers` folder (e.g., `CardanoDataController.cs`).

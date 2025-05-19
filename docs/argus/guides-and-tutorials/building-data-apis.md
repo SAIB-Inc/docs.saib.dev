@@ -14,10 +14,12 @@ Before crafting APIs, ensure your Argus.Sync environment is configured and your 
 
 ### Prerequisites Checklist
 
-* **An Active Argus.Sync Project**: Your .NET project should have Argus.Sync installed and configured.
+* **An Active Argus.Sync Project**: 
+  * Your .NET project should have Argus.Sync installed and configured.
   * For a complete walkthrough of setting up a new Argus project—including defining data models (`IReducerModel`), implementing a basic reducer, and configuring your `DbContext` (e.g., `MyDbContext`)—please refer to our comprehensive [**Quick Start Guide**](../getting-started/quick-start.md).
   * For general setup information, see the [Setup Guides overview](./index.md).
-* **Understanding of Reducers**: Familiarity with how reducers (custom or built-in) populate your database.
+* **Understanding of Reducers**: 
+  * Familiarity with how reducers (custom or built-in) populate your database.
   * Explore the functionality of [**Built-in Reducers**](../usage-guides/builtin-reducers.md).
 * **ASP.NET Core Web API Basics**: A working knowledge of creating API endpoints, particularly using Minimal API syntax for this guide's primary focus.
 * **Database Fundamentals**: A basic understanding of database indexes will be beneficial for the optimization sections.

@@ -6,7 +6,7 @@ description: Learn how to build effective APIs to access and serve Cardano data 
 
 # 📄 Building Data APIs
 
-This documentation outlines the process for developing robust and performant APIs to serve Cardano blockchain data previously indexed using the Argus.Sync framework. The guide focuses on practical implementation techniques using ASP.NET Core Minimal or Controller-based APIs, enabling developers to effectively integrate this indexed data into a variety of applications, such as front-end interfaces, backend microservices, or external developer tools.
+Unlock the power of your Argus.Sync indexed Cardano data by building robust and performant APIs. This guide walks you through practical ASP.NET Core techniques, from streamlined Minimal APIs to traditional Controllers. Learn to effectively serve blockchain data to your front-end interfaces, microservices, or other developer tools.
 
 ## 🎯 Introduction & Prerequisites
 
@@ -14,11 +14,11 @@ Before crafting APIs, ensure your Argus.Sync environment is configured and your 
 
 ### Prerequisites Checklist
 
-* **An Active Argus.Sync Project**: 
+* **An Active Argus.Sync Project**:
   * Your .NET project should have Argus.Sync installed and configured.
   * For a complete walkthrough of setting up a new Argus project—including defining data models (`IReducerModel`), implementing a basic reducer, and configuring your `DbContext` (e.g., `MyDbContext`)—please refer to our comprehensive [**Quick Start Guide**](../getting-started/quick-start.md).
   * For general setup information, see the [Setup Guides overview](./index.md).
-* **Understanding of Reducers**: 
+* **Understanding of Reducers**:
   * Familiarity with how reducers (custom or built-in) populate your database.
   * Explore the functionality of [**Built-in Reducers**](../usage-guides/builtin-reducers.md).
 * **ASP.NET Core Web API Basics**: A working knowledge of creating API endpoints, particularly using Minimal API syntax for this guide's primary focus.
@@ -133,20 +133,20 @@ Minimal APIs offer a concise style for building focused endpoints directly in yo
 
 Controllers offer a traditional structure, often preferred for complex APIs.
 
-1. **Crafting Your API Controller**:
+1. **Creating Your API Controller**:
     In your API project, create `CardanoDataController.cs`.
 
     ```csharp
-    // using Microsoft.AspNetCore.Mvc;
-    // using Microsoft.EntityFrameworkCore;
-    // using YourSharedDataProject.Data; 
-    // using YourSharedDataProject.Models; // e.g., BlockBySlot
-    // using YourApiProject.Dtos; // e.g., BlockSummaryDto
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using YourSharedDataProject.Data; 
+    using YourSharedDataProject.Models; // e.g., BlockBySlot
+    using YourApiProject.Dtos; // e.g., BlockSummaryDto
 
-    // namespace YourApiProject.Controllers { ... }
-    // [ApiController]
-    // [Route("api/v1/data")] // Consistent versioning
-    // public class CardanoDataController : ControllerBase { ... }
+    namespace YourApiProject.Controllers { ... }
+    [ApiController]
+    [Route("api/v1/data")] // Consistent versioning
+    public class CardanoDataController : ControllerBase { ... }
     ```
 
     *Inside the controller:*
@@ -376,11 +376,46 @@ Empowering clients to request precisely the data they need is crucial for an eff
         * Example: `GET /api/v1/blocks?minSlot={slotNumber}&maxSlot={slotNumber}`
     * **Implementation**: In your API endpoints, accept these query parameters and apply corresponding `Where()` clauses to your LINQ queries.
     * **Validation**: Always validate and sanitize filter inputs to prevent errors and potential security issues (e.g., ensure numeric inputs are indeed numbers, trim string inputs).
+    ```csharp
+        // Minimal API Example Fragment for Filtering Transactions
+        // (within an app.MapGet("/api/v1/transactions", async (...) => { ... }) handler)
+        
+        IQueryable<TransactionEntity> query = dbContext.Transactions.AsQueryable();
+        
+        if (httpContext.Request.Query.TryGetValue("address", out var addressValue))
+        {
+            query = query.Where(tx => tx.SomeAddressField == addressValue);
+        }
+        if (httpContext.Request.Query.TryGetValue("minAmount", out var minAmountStr) && ulong.TryParse(minAmountStr, out var minAmount))
+        {
+            query = query.Where(tx => tx.Amount >= minAmount);
+        }
+        var results = await query.Select(tx => new TransactionDto(...)).ToListAsync();
+        ```
+    * **Validation**: Always validate and sanitize filter inputs to prevent errors and potential security issues (e.g., ensure numeric inputs are indeed numbers, trim string inputs).
 
 * **Sorting Strategies**:
     * **Query Parameters**: Allow clients to specify the field to sort by and the direction (ascending/descending).
         * Example: `GET /api/v1/blocks?sortBy=slot&order=desc`
     * **Implementation**: Dynamically apply `OrderBy()` or `OrderByDescending()` to your LINQ queries. Be cautious about allowing sorting on unindexed fields for large datasets due to performance implications.
+    ```csharp
+        // Minimal API Example Fragment for Sorting Blocks
+        // (within an app.MapGet("/api/v1/blocks", async (...) => { ... }) handler)
+        //
+        IQueryable<BlockBySlot> query = dbContext.BlocksBySlot.AsQueryable();
+        string sortBy = httpContext.Request.Query["sortBy"].FirstOrDefault() ?? "slot";
+        bool descending = (httpContext.Request.Query["order"].FirstOrDefault() ?? "asc").Equals("desc", StringComparison.OrdinalIgnoreCase);
+        
+        query = sortBy.ToLowerInvariant() switch
+        {
+            "epoch" => descending ? query.OrderByDescending(b => b.EpochNo) : query.OrderBy(b => b.EpochNo),
+            "size" => descending ? query.OrderByDescending(b => b.Size) : query.OrderBy(b => b.Size),
+            _ => descending ? query.OrderByDescending(b => b.Slot) : query.OrderBy(b => b.Slot), // Default to slot
+        };
+        var results = await query.Select(b => new BlockSummaryDto(...)).ToListAsync();
+        ```
+    * **Advanced Filtering**: For complex scenarios (e.g., dynamic logical operators `AND`/`OR`, nested property filtering), consider libraries like `Sieve` or `QueryKit` that integrate with Entity Framework Core, or explore specifications like OData. These can simplify building dynamic queries but add a dependency.
+
 
 ### Error Handling
 
@@ -410,20 +445,6 @@ As your application evolves, your API will likely need to change. Introducing br
     * Provides a clear path for clients to migrate to newer API versions at their own pace.
     * Facilitates better API lifecycle management and deprecation strategies.
 * **Implementation**: In ASP.NET Core, route prefixes (as shown in examples with `/api/v1`) are a simple way to achieve URL-based versioning. For more advanced scenarios, consider libraries like `Microsoft.AspNetCore.Mvc.Versioning`.
-
-### Caching Strategies
-
-Caching can significantly improve API performance and reduce database load by storing frequently accessed, rarely changing data in a faster-to-access location.
-
-* **Types of Caching**:
-    * **Response Caching**: Cache the entire HTTP response on the server or via a CDN. ASP.NET Core provides response caching middleware. This is effective for data that is identical for multiple users and changes infrequently.
-    * **In-Memory Caching**: Store data directly in your API application's memory using `IMemoryCache`. Suitable for small to moderately sized datasets that are frequently accessed.
-    * **Distributed Caching**: For scaled-out API instances, use a distributed cache (e.g., Redis, Memcached) to ensure cache consistency across all instances.
-* **Cache Invalidation**: This is a crucial aspect of caching. Develop a clear strategy for how and when cached data is updated or removed to prevent serving stale data. Strategies include time-to-live (TTL) expirations and event-driven invalidation.
-* **Considerations**:
-    * Determine what data is suitable for caching (read-heavy, low-volatility).
-    * Define appropriate cache durations.
-    * Be mindful of memory usage, especially with in-memory caching.
 
 ### Optimizing the Core: Database Query Performance
 

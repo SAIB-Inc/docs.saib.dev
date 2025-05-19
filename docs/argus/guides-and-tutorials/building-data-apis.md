@@ -8,7 +8,7 @@ description: Learn how to build effective APIs to access and serve Cardano data 
 
 Welcome! This guide is your launchpad for transforming raw, Argus-indexed Cardano data into accessible and powerful APIs. Whether you're building front-end applications, supporting other services, or enabling third-party developers, these steps will help you serve your blockchain data efficiently and elegantly, with a primary focus on ASP.NET Core Minimal APIs.
 
-## 🎯 Chapter 1: Laying the Groundwork - Introduction & Prerequisites
+## 🎯 Introduction & Prerequisites
 
 Before crafting APIs, ensure your Argus.Sync environment is configured and your data models are defined. This foundation is key to a smooth development process.
 
@@ -26,7 +26,7 @@ Before crafting APIs, ensure your Argus.Sync environment is configured and your 
 Currently, Argus.Sync exclusively supports **PostgreSQL** as its database backend. Ensure your environment and `DbContext` are configured accordingly.
 :::
 
-## 🛠️ Chapter 2: Architecting Your API - Step-by-Step Construction
+## 🛠️ Step-by-Step API Construction
 
 Let's build the API endpoints! We'll focus on the streamlined Minimal APIs approach, noting controller-based methods as alternatives.
 
@@ -173,7 +173,7 @@ Controllers offer a traditional structure, often preferred for complex APIs.
 
 2. **`DbContextFactory` Registration**: Same as Minimal APIs, ensure it's available via DI.
 
-## 💡 Chapter 3: Showcasing Your Data - Minimal API Examples & Use Cases
+## 💡 Minimal API Examples & Use Cases
 
 Let's illustrate with practical Minimal API examples.
 
@@ -316,7 +316,7 @@ Example DTOs (place these in a `Dtos` folder in your API or Shared Core project)
     .WithTags("DEX API");
     ```
 
-## ✨ Chapter 4: API Best Practices
+## ✨ API Best Practices
 
 Elevate your API design with these practices. See also our [Applications Guide](./applications.md#--best-practices-for-integrating-argus).
 
@@ -431,7 +431,7 @@ Efficient database queries are crucial for API speed.
 Proper indexing and efficient queries are key to a scalable API.
 :::
 
-## 🚀 Chapter 5: Conclusion & Next Steps
+## 🚀 Conclusion & Next Steps
 
 You've now journeyed through building APIs with Argus-indexed data! By applying these principles, you can develop robust, performant services.
 

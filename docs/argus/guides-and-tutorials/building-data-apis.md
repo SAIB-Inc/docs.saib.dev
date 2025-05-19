@@ -1,12 +1,12 @@
 ---
 title: Building Data APIs
-sidebar_position: 3 
+sidebar_position: 3
 description: Learn how to build effective APIs to access and serve Cardano data indexed by Argus.Sync, focusing on Minimal APIs, controller alternatives, DTOs, and query optimization.
 ---
 
 # 📄 Building Data APIs
 
-Welcome! This guide is your launchpad for transforming raw, Argus-indexed Cardano data into accessible and powerful APIs. Whether you're building front-end applications, supporting other services, or enabling third-party developers, these steps will help you serve your blockchain data efficiently and elegantly, with a primary focus on ASP.NET Core Minimal APIs.
+This documentation outlines the process for developing robust and performant APIs to serve Cardano blockchain data previously indexed using the Argus.Sync framework. The guide focuses on practical implementation techniques using ASP.NET Core Minimal or Controller-based APIs, enabling developers to effectively integrate this indexed data into a variety of applications, such as front-end interfaces, backend microservices, or external developer tools.
 
 ## 🎯 Introduction & Prerequisites
 
@@ -30,9 +30,11 @@ Currently, Argus.Sync exclusively supports **PostgreSQL** as its database backen
 
 Let's build the API endpoints! We'll focus on the streamlined Minimal APIs approach, noting controller-based methods as alternatives.
 
-### Architectural Crossroads: Separate API Project?
+### Separate API Project Architecture?
 
 For larger or production-grade systems, consider creating your **API in a separate project** rather than directly within your Argus indexer project. This modular approach offers several advantages:
+
+&nbsp;
 
 **Why a Separate API Project is Often Better:**
 
@@ -176,6 +178,8 @@ Controllers offer a traditional structure, often preferred for complex APIs.
 ## 💡 Minimal API Examples & Use Cases
 
 Let's illustrate with practical Minimal API examples.
+
+&nbsp;
 
 :::info Data Transfer Objects (DTOs)
 Using DTOs (simple classes/records representing the data shape for your API) is highly recommended. They allow you to:
@@ -360,37 +364,64 @@ Paginate endpoints returning many items.
     .WithTags("Blocks API");
     ```
 
-### Refining Results: Filtering and Sorting
+### Filtering and Sorting
 
-Allow clients to filter and sort data via query parameters (e.g., `?status=active&sortBy=date`).
+Empowering clients to request precisely the data they need is crucial for an efficient API. Implementing robust filtering and sorting capabilities reduces data transfer, offloads processing from the client, and enhances the user experience.
 
-### Consistent by Design: Response Structure
+* **Filtering Strategies**:
+    * **Query Parameters**: The most common method. Allow clients to filter collections based on specific field values.
+        * Example: `GET /api/v1/transactions?address={address}&type=outgoing&minAmount=1000000`
+        * Example: `GET /api/v1/blocks?minSlot={slotNumber}&maxSlot={slotNumber}`
+    * **Implementation**: In your API endpoints, accept these query parameters and apply corresponding `Where()` clauses to your LINQ queries.
+    * **Validation**: Always validate and sanitize filter inputs to prevent errors and potential security issues (e.g., ensure numeric inputs are indeed numbers, trim string inputs).
 
-Adopt a uniform structure for responses. A **custom standardized response wrapper** is often beneficial, containing fields like a boolean `success` flag, a `data` payload, and an `error` object.
+* **Sorting Strategies**:
+    * **Query Parameters**: Allow clients to specify the field to sort by and the direction (ascending/descending).
+        * Example: `GET /api/v1/blocks?sortBy=slot&order=desc`
+    * **Implementation**: Dynamically apply `OrderBy()` or `OrderByDescending()` to your LINQ queries. Be cautious about allowing sorting on unindexed fields for large datasets due to performance implications.
 
-### Graceful Degradation: Error Handling
+### Error Handling
 
-Employ standard HTTP status codes. Use `try-catch` for unexpected issues, returning `Results.Problem` or `Problem()`.
+* **Use Standard HTTP Status Codes**: These are the first indication to the client about the outcome of their request.
+    * `2xx` (Success): `200 OK`, `201 Created`, `204 No Content`
+    * `4xx` (Client Errors):
+        * `400 Bad Request`: For general client errors, often due to invalid input or malformed requests. The response body should ideally detail the validation failures.
+        * `401 Unauthorized`: Authentication is required and has failed or has not yet been provided.
+        * `403 Forbidden`: The authenticated client does not have permission to access the requested resource.
+        * `404 Not Found`: The requested resource could not be found.
+    * `5xx` (Server Errors):
+        * `500 Internal Server Error`: A generic error message for unexpected server-side conditions. Avoid leaking sensitive stack traces or internal error details to the client in production environments.
+
+&nbsp;
 
 :::tip Custom vs. Built-in Responses
 ASP.NET Core's built-in `Results` (Minimal APIs) and `ActionResults` (controllers) are ideal for setting correct HTTP status codes. However, for a superior developer experience, consider pairing them with a **custom response wrapper** (see "Consistent by Design"). This wrapper ensures a consistent response body structure for data and errors, making client-side parsing more reliable, while standard HTTP status codes still convey the overall outcome.
 :::
 
-### Versioning for Evolution: API Versioning
+### API Versioning
 
-Version your API from day one (e.g., `/api/v1/...`).
+As your application evolves, your API will likely need to change. Introducing breaking changes to an unversioned API can disrupt existing client integrations. Therefore, **versioning your API from day one is a critical best practice.**
 
-### Optimizing Delivery: Caching Strategies
+* **Strategy**: URL-based versioning is common and straightforward (e.g., `/api/v1/...`, `/api/v2/...`). Other strategies include header-based or query string parameter versioning.
+* **Benefits**:
+    * Allows you to introduce new features or breaking changes in a new version without affecting consumers of older versions.
+    * Provides a clear path for clients to migrate to newer API versions at their own pace.
+    * Facilitates better API lifecycle management and deprecation strategies.
+* **Implementation**: In ASP.NET Core, route prefixes (as shown in examples with `/api/v1`) are a simple way to achieve URL-based versioning. For more advanced scenarios, consider libraries like `Microsoft.AspNetCore.Mvc.Versioning`.
 
-Cache frequently accessed, rarely changing data.
+### Caching Strategies
 
-### Asynchronous All the Way: Async Operations
+Caching can significantly improve API performance and reduce database load by storing frequently accessed, rarely changing data in a faster-to-access location.
 
-Use `async` and `await` for I/O-bound operations.
-
-### Fortifying Your Endpoints: Security Measures
-
-Implement authentication, authorization, input validation, rate limiting, and always use HTTPS in production.
+* **Types of Caching**:
+    * **Response Caching**: Cache the entire HTTP response on the server or via a CDN. ASP.NET Core provides response caching middleware. This is effective for data that is identical for multiple users and changes infrequently.
+    * **In-Memory Caching**: Store data directly in your API application's memory using `IMemoryCache`. Suitable for small to moderately sized datasets that are frequently accessed.
+    * **Distributed Caching**: For scaled-out API instances, use a distributed cache (e.g., Redis, Memcached) to ensure cache consistency across all instances.
+* **Cache Invalidation**: This is a crucial aspect of caching. Develop a clear strategy for how and when cached data is updated or removed to prevent serving stale data. Strategies include time-to-live (TTL) expirations and event-driven invalidation.
+* **Considerations**:
+    * Determine what data is suitable for caching (read-heavy, low-volatility).
+    * Define appropriate cache durations.
+    * Be mindful of memory usage, especially with in-memory caching.
 
 ### Optimizing the Core: Database Query Performance
 

@@ -148,7 +148,7 @@ export default function Section2(): ReactNode {
                                                 <p
                                                     className="text-[26.01px] leading-[28.611px] select-none !tracking-[1.17045px] cursor-pointer !mb-[40px] text-right"
                                                     style={{
-                                                        fontFamily: "monospace",
+                                                        fontFamily: "Space Mono",
                                                         color: currentProject === index
                                                             ? theme.palette.text.primary
                                                             : alpha(theme.palette.text.primary, 0.2)

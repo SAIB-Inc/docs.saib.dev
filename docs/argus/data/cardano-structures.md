@@ -374,7 +374,6 @@ Cardano's extended UTxO model offers several advantages:
 - **Determinism** - Transaction outcomes are predictable before submission
 - **Privacy** - UTxOs provide better isolation between user activities
 - **Smart contract capability** - Datums and validators enable complex logic
-- **Lower fees** - No storage rent for UTxOs (unlike account storage)
 
 For Argus developers, this means you can efficiently track asset flows, account balances, and contract states by following UTxO consumption and creation.
 </details>
@@ -502,6 +501,9 @@ Additional useful output methods:
 ## 📜 Certificates
 
 Certificates are special transaction components that perform various operations in the Cardano system, particularly related to staking, pool management, and governance.
+
+
+&nbsp; 
 
 :::info Certificate Purpose
 Certificates provide a standardized way to interact with Cardano's non-UTxO state components, such as the stake distribution, stake pool registry, and governance system. They represent commands that modify the ledger state in specific, predefined ways.
@@ -655,6 +657,8 @@ Common certificate methods:
 ## 📝 Datums and Script References
 
 Datums and script references are critical components enabling Cardano's smart contract capabilities through the extended UTxO model.
+
+&nbsp;
 
 :::info Smart Contracts in eUTxO
 Unlike account-based blockchains where contracts have persistent storage, Cardano's eUTxO model uses **datums** to carry state between transactions and **validators** (scripts) to control when UTxOs can be spent. This design enables deterministic, parallelizable smart contracts.
@@ -814,6 +818,8 @@ Script-specific methods:
 ## 💰 Withdrawals
 
 Withdrawals represent the claiming of staking rewards from the reward account to a regular address.
+
+&nbsp;
 
 :::info Reward System
 In Cardano, staking rewards don't automatically appear in your wallet. They accumulate in special reward accounts (identified by stake credentials) and must be explicitly withdrawn via transactions containing withdrawal entries.

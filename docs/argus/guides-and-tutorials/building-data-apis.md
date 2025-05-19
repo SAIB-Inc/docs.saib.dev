@@ -318,7 +318,7 @@ Example DTOs (place these in a `Dtos` folder in your API or Shared Core project)
 
 ## ✨ API Best Practices
 
-Elevate your API design with these practices. See also our [Applications Guide](./applications.md#--best-practices-for-integrating-argus).
+Elevate your API design with these practices. See also our [Applications Guide](./applications.md#-best-practices-for-integrating-argus).
 
 ### Navigating Large Datasets: Pagination
 
@@ -399,7 +399,7 @@ Efficient database queries are crucial for API speed.
 * **The Power of Indexing**:
   * **Key Columns**: Index columns in `WHERE`, `JOIN`, `ORDER BY` clauses (e.g., `Address`, `Slot`, `TxHash`).
   * **Argus's Default Indexing**: Built-in reducers often create indexed primary keys.
-  * **Custom Indexes**: Define in `DbContext.OnModelCreating`. See [Efficient Database Design](./applications.md#--efficient-database-design).
+  * **Custom Indexes**: Define in `DbContext.OnModelCreating`. See [Efficient Database Design](./applications.md#-efficient-database-design).
 
     ```csharp
     // Inside YourDbContext.cs 

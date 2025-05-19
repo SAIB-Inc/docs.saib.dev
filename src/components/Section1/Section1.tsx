@@ -21,11 +21,11 @@ export default function Section1(): ReactNode {
                 <div>
                     <h1 className="!text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
                         <span className="inline-flex items-center -translate-y-1 sm:-translate-y-2 md:-translate-y-4 ">
-                            <span className="tracking-[-9.62px] leading-[-20px] mr-[24px] text-[30px] lg:text-[52.88px]" style={{ fontFamily: "Space Mono" }}>
+                            <span className="min-w-6 tracking-[-9.62px] leading-[-20px] text-[30px] mr-4 md:mr-6 md:text-[46px] lg:text-[52.88px]" style={{ fontFamily: "Space Mono" }}>
                                 <span> &gt; _</span>
                                 <span
                                     style={{ color: theme.palette.primary.main }}
-                                    className="text-[35px] lg:text-[55px] animate-blink inline-block ml-[9.62px]"> |</span>
+                                    className="text-2xl sm:text-[35px] lg:text-[55px] animate-blink inline-block ml-[9.62px]"> |</span>
                             </span>
                         </span>
                         <span

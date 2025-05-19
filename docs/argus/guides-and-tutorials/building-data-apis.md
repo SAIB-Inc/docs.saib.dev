@@ -1,5 +1,5 @@
 ---
-title: Building Basic APIs Using Indexed Data
+title: Building Data APIs
 sidebar_position: 3 
 description: Learn how to build basic APIs to access and serve Cardano data indexed by Argus.Sync, using Minimal API approaches primarily, with notes on controller-based alternatives and query optimization.
 ---

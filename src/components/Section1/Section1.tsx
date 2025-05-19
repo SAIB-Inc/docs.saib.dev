@@ -62,7 +62,7 @@ export default function Section1(): ReactNode {
                     </Button>
                 </div>
                 <div className="flex justify-center mt-10 md:mt-12">
-                    <Wizard sx={{ color: theme.palette.text.secondary }} className="text-[120px]! lg:text-[140px]!" />
+                    <Wizard sx={{ color: theme.palette.text.secondary }} className="!lg:text-[140px] !text-[120px]" />
                 </div>
             </div>
             <div

@@ -66,7 +66,7 @@ export default function Section7(): ReactNode {
                                 sx={{
                                     color: theme.palette.text.secondary
                                 }}
-                                className="text-[130px] bottom-[-4.74px] md:absolute -right-33 !hidden md:!block"
+                                className="!text-[130px] bottom-[-4.74px] md:absolute -right-33 hidden md:!block"
                             />
                         </h1>
                         <SeventhWizard 

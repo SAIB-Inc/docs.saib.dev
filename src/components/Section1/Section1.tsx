@@ -25,7 +25,7 @@ export default function Section1(): ReactNode {
                                 <span> &gt; _</span>
                                 <span
                                     style={{ color: theme.palette.primary.main }}
-                                    className="text-[35px] lg:text-[55px] animate-blink inline-block ml-[9.62px]"> |</span>
+                                    className="text-2xl sm:text-[35px] lg:text-[55px] animate-blink inline-block ml-[9.62px]"> |</span>
                             </span>
                         </span>
                         <span

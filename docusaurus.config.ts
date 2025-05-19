@@ -30,6 +30,13 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  
+  stylesheets: [
+    {
+      href: "https://fonts.googleapis.com/css2?family=Space+Mono&display=swap",
+      type: "text/css",
+    },
+  ],
 
   presets: [
     [

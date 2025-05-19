@@ -19,7 +19,7 @@ export default function Section1(): ReactNode {
         <section id="section-1" style={{ backgroundColor: theme.palette.background.default }} className={`relative grid place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} pt-12 md:pt-0 md:min-h-210 md:h-screen`}>
             <div className="container mx-auto text-center">
                 <div>
-                    <h1 className="!text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
+                    <h1 className="text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
                         <span className="inline-flex items-center -translate-y-1 sm:-translate-y-2 md:-translate-y-4 ">
                             <span className="tracking-[-9.62px] leading-[-20px] mr-[24px] text-[30px] lg:text-[52.88px]" style={{ fontFamily: "Space Mono" }}>
                                 <span> &gt; _</span>

@@ -43,7 +43,7 @@ export default function Section4(): ReactNode {
                     </div>
                     <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col items-center bg-[url(/img/Section4/purple_bg_mobile.svg)] rounded-[24px] gap-6 md:gap-2 lg:rounded-[48px] md:h-100 md:flex-row md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
                         <div className="z-10 mt-14 w-full md:mt-0 lg:w-[661px]">
-                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl !mb-0 min-[345px]:!text-5xl text-center md:text-start md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
+                            <h1 style={{color: theme.palette.grey[50]}} className="text-3xl !mb-0 min-[345px]:!text-5xl text-center md:text-start md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
                                 <span>
                                     Streamline <br/>
                                 </span>

@@ -56,7 +56,7 @@ export default function Section8(): ReactNode {
         <section style={{ backgroundColor:theme.palette.background.default }} className="bg-[url(/img/Section8/eighth_background.webp)] bg-cover md:!pt-[137px] md:h-[1113px]">
             <div className="container">
                 <div className="flex items-center flex-col justify-center text-center lg:text-start lg:justify-between lg:flex-row">
-                    <h1 className="!text-3xl sm:!text-5xl md:!text-[56px] md:leading-[54.88px]">
+                    <h1 className="text-3xl sm:!text-5xl md:!text-[56px] md:leading-[54.88px]">
                         <span>
                             Let's&nbsp;
                         </span>
@@ -64,7 +64,7 @@ export default function Section8(): ReactNode {
                             Build Together
                         </span>
                     </h1>
-                    <p className="!mb-0 !text-base lg:!text-xl lg:leading-[25.6px]">
+                    <p className="!mb-0 text-base lg:!text-xl lg:leading-[25.6px]">
                         We’re proud to be part of the Cardano community<br  className="hidden lg:block"/>
                         —constantly building, collaborating, and <br className="hidden lg:block"/>
                         connecting with others who share the vision.

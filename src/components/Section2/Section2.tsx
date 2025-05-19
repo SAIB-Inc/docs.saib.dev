@@ -106,7 +106,7 @@ export default function Section2(): ReactNode {
             <div className="container flex flex-col h-full">
                 <div className="flex justify-between flex-col lg:flex-row lg:h-[calc(100%-230px)] xl:h-[calc(100%-382px)] 2xl:h-[calc(100%-300px)]">
                     <div className="!mt-18 md:!mt-26">
-                        <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[40px]">
+                        <h1 className="font-semibold tracking-[0.56px] text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[40px]">
                             <span>Check Out </span><br className="hidden lg:block xl:hidden"/>
                             <span>The </span>
                             <span style={{ color: theme.palette.text.secondary }} >Latest Resources</span>

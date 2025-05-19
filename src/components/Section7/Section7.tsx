@@ -53,7 +53,7 @@ export default function Section7(): ReactNode {
             <div className="container !py-20 md:!pt-[274.77px] md:!pb-[152.23px]">
                 <div className="flex flex-col justify-center !pb-8 md:!pb-15">
                     <div className="relative flex flex-col-reverse gap-4  items-center md:gap-0">
-                        <h1 className="relative text-center font-semibold !text-3xl sm:!text-5xl md:leading-[53.76px] md:tracking-[0.56px] md:!text-[56px]">
+                        <h1 className="relative text-center font-semibold text-3xl sm:!text-5xl md:leading-[53.76px] md:tracking-[0.56px] md:!text-[56px]">
                             <span>
                                 Why&nbsp;
                             </span>
@@ -66,7 +66,7 @@ export default function Section7(): ReactNode {
                                 sx={{
                                     color: theme.palette.text.secondary
                                 }}
-                                className="!text-[130px] bottom-[-4.74px] md:absolute -right-33 !hidden md:!block"
+                                className="text-[130px] bottom-[-4.74px] md:absolute -right-33 !hidden md:!block"
                             />
                         </h1>
                         <SeventhWizard 
@@ -78,7 +78,7 @@ export default function Section7(): ReactNode {
                     </div>
 
                     <div className="md:mt-[38px]">
-                        <p className="text-center !text-base lg:!text-lg">
+                        <p className="text-center text-base lg:!text-lg">
                             .NET is a powerful, open-source development platform backed by a vast global community.<br className="hidden lg:block"/>
                             It offers a comprehensive ecosystem of tools and libraries, enabling developers to build <br className="hidden lg:block"/>
                             high-performance, scalable applications across various platforms.
@@ -123,7 +123,7 @@ export default function Section7(): ReactNode {
                                         style={{
                                             color: theme.palette.grey[50]
                                         }}
-                                        className="!text-[40px] leading-[48px] !mb-4 lg:!text-[34px] lg:!mb-7 xl:!mb-[38px] xl:!text-[40px]"
+                                        className="text-[40px] leading-[48px] !mb-4 lg:!text-[34px] lg:!mb-7 xl:!mb-[38px] xl:!text-[40px]"
                                     >{datum.title}</h4>
                                     <p 
                                         style={{
@@ -183,7 +183,7 @@ export default function Section7(): ReactNode {
                                     style={{
                                         color: theme.palette.grey[50]
                                     }}
-                                    className="!text-[32px] leading-12 !mb-6"
+                                    className="text-[32px] leading-12 !mb-6"
                                 >
                                     {datum.title}
                                 </h4>

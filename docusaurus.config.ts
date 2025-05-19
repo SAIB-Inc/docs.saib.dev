@@ -95,7 +95,7 @@ const config: Config = {
       },
       items: [
         {
-          docId: 'chrysalis',
+          docid: 'chrysalis',
           type: "docSidebar",
           sidebarId: "chrysalis",
           position: "left",
@@ -103,7 +103,7 @@ const config: Config = {
           className: "hover:text-[#049E96]!"
         },
         {
-          docId: 'argus',
+          docid: 'argus',
           type: 'docSidebar',
           sidebarId: 'argusSidebar',
           position: 'left',
@@ -111,7 +111,7 @@ const config: Config = {
           className: "hover:text-[#813ADF]!"
         },
         {
-          docId: 'razor',
+          docid: 'razor',
           type: 'docSidebar',
           sidebarId: 'razor',
           position: 'left',
@@ -119,7 +119,7 @@ const config: Config = {
           className: "hover:text-[#649DCA]!"
         },
         {
-          docId: 'comp',
+          docid: 'comp',
           type: 'docSidebar',
           sidebarId: 'comp',
           position: 'left',
@@ -127,7 +127,7 @@ const config: Config = {
           className: "hover:text-[var(--comp-color-primary)]!"
         },
         {
-          docId: 'futura',
+          docid: 'futura',
           type: 'docSidebar',
           sidebarId: 'futura',
           position: 'left',

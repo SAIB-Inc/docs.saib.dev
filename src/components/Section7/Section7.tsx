@@ -90,6 +90,7 @@ export default function Section7(): ReactNode {
                     {section7Items.map((datum, index) => {
                         return (
                             <div
+                                key={`${datum.title}-${index}`}
                                 id={datum.title}
                                 className={`h-full ${index===2 ? "col-span-2 lg:col-span-1" : "col-span-1"}`}
                             >
@@ -142,7 +143,7 @@ export default function Section7(): ReactNode {
                     {section7Items.map((datum, index) => {
                         return (
                         <div
-                            key={datum.title}
+                            key={`${datum.title}-${index}`}
                             id={datum.title}
                             onTouchStart={handleTouchStart}
                             onTouchMove={handleTouchMove}

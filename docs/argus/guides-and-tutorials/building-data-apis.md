@@ -12,7 +12,7 @@ Welcome! This guide is your launchpad for transforming raw, Argus-indexed Cardan
 
 Before crafting APIs, ensure your Argus.Sync environment is configured and your data models are defined. This foundation is key to a smooth development process.
 
-### Prerequisites Checklist ✅
+### ✅ Prerequisites Checklist
 
 * **An Active Argus.Sync Project**: Your .NET project should have Argus.Sync installed and configured.
   * For a complete walkthrough of setting up a new Argus project—including defining data models (`IReducerModel`), implementing a basic reducer, and configuring your `DbContext` (e.g., `MyDbContext`)—please refer to our comprehensive [**Quick Start Guide**](../getting-started/quick-start.md).
@@ -30,7 +30,7 @@ Currently, Argus.Sync exclusively supports **PostgreSQL** as its database backen
 
 Let's build the API endpoints! We'll focus on the streamlined Minimal APIs approach, noting controller-based methods as alternatives.
 
-### Architectural Crossroads: Separate API Project? 🤔
+### 🤔 Architectural Crossroads: Separate API Project?
 
 For larger or production-grade systems, consider creating your **API in a separate project** rather than directly within your Argus indexer project. This modular approach offers several advantages:
 
@@ -51,7 +51,7 @@ For larger or production-grade systems, consider creating your **API in a separa
 For simplicity, the examples in this guide demonstrate adding API endpoints as if they might be in the same project. However, the core principles apply universally. We strongly recommend a separate API project for production applications.
 :::
 
-### Method 1: Minimal APIs - Lean & Direct 🚀
+### 🚀 Method 1: Minimal APIs - Lean & Direct
 
 Minimal APIs offer a concise style for building focused endpoints directly in your `Program.cs` or organized route files.
 
@@ -125,7 +125,7 @@ Minimal APIs offer a concise style for building focused endpoints directly in yo
     For larger applications, group related Minimal API endpoints using `RouteGroupBuilder` (as shown with `apiV1`) or explore libraries like Carter or FastEndpoints for advanced modularity.
     :::
 
-### Method 2: The Controller-Based Approach 🏛️ (Alternative)
+### 🏛️ Method 2: The Controller-Based Approach (Alternative)
 
 Controllers offer a traditional structure, often preferred for complex APIs.
 
@@ -195,7 +195,7 @@ Example DTOs (place these in a `Dtos` folder in your API or Shared Core project)
 // public record DexPriceDto(string TokenX, string TokenY, decimal PriceXPerY, decimal PriceYPerX, DateTimeOffset Timestamp);
 :::
 
-### Example 1: Fetching a Specific Block 🧱
+### 🧱 Example 1: Fetching a Specific Block
 
 * **Relevant Reducer**: `BlockBySlotReducer`
 * **Minimal API Endpoint (within `apiV1` group)**:
@@ -221,7 +221,7 @@ Example DTOs (place these in a `Dtos` folder in your API or Shared Core project)
     .WithTags("Blocks API");
     ```
 
-### Example 2: Retrieving Account Balances 💰
+### 💰 Example 2: Retrieving Account Balances
 
 * **Relevant Reducer**: `BalanceByAddressReducer`
 * **Minimal API Endpoint (within `apiV1` group)**:
@@ -254,7 +254,7 @@ Example DTOs (place these in a `Dtos` folder in your API or Shared Core project)
     .WithTags("Accounts API");
     ```
 
-### Example 3: Listing UTXOs for an Address 🪙
+### 🪙 Example 3: Listing UTXOs for an Address
 
 * **Relevant Reducer**: Assumes a custom reducer populates a `DetailedUtxoRecord` table. `UtxoByAddressReducer` tracks references.
 * **Minimal API Endpoint (within `apiV1` group)**:
@@ -283,7 +283,7 @@ Example DTOs (place these in a `Dtos` folder in your API or Shared Core project)
     .WithTags("Accounts API");
     ```
 
-### Example 4: Querying DEX Token Prices (e.g., SundaeSwap) 📈
+### 📈 Example 4: Querying DEX Token Prices
 
 * **Relevant Reducer**: `SundaePriceByTokenReducer`
 * **Minimal API Endpoint (within `apiV1` group)**:
@@ -320,7 +320,7 @@ Example DTOs (place these in a `Dtos` folder in your API or Shared Core project)
 
 Elevate your API design with these practices. See also our [Applications Guide](./applications.md#--best-practices-for-integrating-argus).
 
-### Navigating Large Datasets: Pagination 📚
+### 📚 Navigating Large Datasets: Pagination
 
 Paginate endpoints returning many items.
 
@@ -360,15 +360,15 @@ Paginate endpoints returning many items.
     .WithTags("Blocks API");
     ```
 
-### Refining Results: Filtering and Sorting 🔍
+### 🔍 Refining Results: Filtering and Sorting
 
 Allow clients to filter and sort data via query parameters (e.g., `?status=active&sortBy=date`).
 
-### Consistent by Design: Response Structure 📐
+### 📐 Consistent by Design: Response Structure
 
 Adopt a uniform structure for responses. A **custom standardized response wrapper** is often beneficial, containing fields like a boolean `success` flag, a `data` payload, and an `error` object.
 
-### Graceful Degradation: Error Handling 🛡️
+### 🛡️ Graceful Degradation: Error Handling
 
 Employ standard HTTP status codes. Use `try-catch` for unexpected issues, returning `Results.Problem` or `Problem()`.
 
@@ -376,23 +376,23 @@ Employ standard HTTP status codes. Use `try-catch` for unexpected issues, return
 ASP.NET Core's built-in `Results` (Minimal APIs) and `ActionResults` (controllers) are ideal for setting correct HTTP status codes. However, for a superior developer experience, consider pairing them with a **custom response wrapper** (see "Consistent by Design"). This wrapper ensures a consistent response body structure for data and errors, making client-side parsing more reliable, while standard HTTP status codes still convey the overall outcome.
 :::
 
-### Versioning for Evolution: API Versioning 🛣️
+### 🛣️ Versioning for Evolution: API Versioning
 
 Version your API from day one (e.g., `/api/v1/...`).
 
-### Optimizing Delivery: Caching Strategies ⚡
+### ⚡ Optimizing Delivery: Caching Strategies
 
 Cache frequently accessed, rarely changing data.
 
-### Asynchronous All the Way: Async Operations 🔄
+### 🔄 Asynchronous All the Way: Async Operations
 
 Use `async` and `await` for I/O-bound operations.
 
-### Fortifying Your Endpoints: Security Measures 🔒
+### 🔒 Fortifying Your Endpoints: Security Measures
 
 Implement authentication, authorization, input validation, rate limiting, and always use HTTPS in production.
 
-### Optimizing the Core: Database Query Performance 🚀
+### 🚀 Optimizing the Core: Database Query Performance
 
 Efficient database queries are crucial for API speed.
 
@@ -401,23 +401,23 @@ Efficient database queries are crucial for API speed.
   * **Argus's Default Indexing**: Built-in reducers often create indexed primary keys.
   * **Custom Indexes**: Define in `DbContext.OnModelCreating`. See [Efficient Database Design](./applications.md#--efficient-database-design).
 
-        ```csharp
-        // Inside YourDbContext.cs 
-        // modelBuilder.Entity<YourModel>().HasIndex(e => e.PropertyToİndex);
-        ```
+    ```csharp
+    // Inside YourDbContext.cs 
+    // modelBuilder.Entity<YourModel>().HasIndex(e => e.PropertyToİndex);
+    ```
 
   * **Migrations**: `dotnet ef migrations add MyNewIndexes`, `dotnet ef database update`.
 
 * **Writing Smart LINQ Queries**:
   * **Precision with `.Select()` (Querying Only Needed Data)**: Fetch only the columns (materialize only the data) your API endpoint actually needs by projecting to DTOs or anonymous types. This is vital for performance.
 
-        ```csharp
-        var blockSummaries = await dbContext.BlocksBySlot
-            .OrderByDescending(b => b.Slot)
-            .Take(10)
-            .Select(b => new BlockSummaryDto(b.Slot, b.Hash, b.BlockTime)) // Use DTO
-            .ToListAsync();
-        ```
+    ```csharp
+    var blockSummaries = await dbContext.BlocksBySlot
+        .OrderByDescending(b => b.Slot)
+        .Take(10)
+        .Select(b => new BlockSummaryDto(b.Slot, b.Hash, b.BlockTime)) // Use DTO
+        .ToListAsync();
+    ```
 
   * **Read-Only Speed with `.AsNoTracking()`**: Use for queries that don't change data.
   * **Database-Side Filtering**: Apply `Where` clauses early.
@@ -443,5 +443,3 @@ Argus structures blockchain data for easy querying. Well-designed APIs unlock th
 * **Advanced API Patterns**: Consider WebSockets, GraphQL, or HATEOAS.
 * **Rigorous Testing**: Implement unit, integration, and load tests.
 * **API Documentation**: Use Swagger/OpenAPI for interactive documentation.
-
-Happy building, and may your APIs be fast, reliable, and a joy to use! 🎉

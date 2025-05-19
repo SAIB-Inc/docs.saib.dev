@@ -78,23 +78,19 @@ The extension methods abstract away the era-specific differences, providing a co
 <summary>Common Block Processing Patterns</summary>
 
 ```csharp
-// Calculate block time from slot
-DateTime blockTime = GenesisParameters.ShelleyStart.AddSeconds(slot * GenesisParameters.SlotLengthInSeconds);
 
 // Count total transactions
 int txCount = block.TransactionBodies().Length;
 
-// Get block producer (pool)
-string poolId = BitConverter.ToString(block.Header().HeaderBody().IssuerVkey()).Replace("-", "").ToLowerInvariant();
 
 // Process only certain transaction types
 foreach (var tx in block.TransactionBodies())
 {
-    if (tx.HasMint()) {
+    if (tx.Mint().Any()) {
         // Process NFT minting transactions
     }
     
-    if (tx.HasWithdrawals()) {
+    if (tx.Withdrawals().Any) {
         // Process stake reward withdrawals
     }
 }
@@ -239,50 +235,51 @@ var inputs = txBody.Inputs();
 var outputs = txBody.Outputs();
 
 // Check for optional components
-if (txBody.HasCertificates())
+if (txBody.Certificates().Any())
 {
     var certificates = txBody.Certificates();
     // Process certificates
 }
 
-if (txBody.HasWithdrawals())
+if (txBody.Withdrawals().Any())
 {
     var withdrawals = txBody.Withdrawals();
     // Process withdrawals
 }
 
-if (txBody.HasMint())
+if (txBody.Mints().Any())
 {
     var mint = txBody.Mint();
     // Process token minting/burning
 }
 
 // Access the witness set from the block
-var witnessSet = block.TransactionWitnessSets()[index];  // Get witness set at same index as body
+var witnessSet = block.TransactionWitnessSets().ToList()[index];  // Get witness set at same index as body
 
 // Process signatures
-if (witnessSet.HasVKeyWitnesses())
+if (witnessSet.VkeyWitnessSet().Any())
 {
-    var signatures = witnessSet.VKeyWitnesses();
     // Process signatures
 }
 
 // Process Plutus scripts
-if (witnessSet.HasPlutusScripts())
+if (witnessSet.PlutusV1ScriptSet().Any()
+    || witnessSet.PlutusV2ScriptSet().Any()
+    || witnessSet.PlutusV3ScriptSet().Any()
+)
 {
-    var plutusScripts = witnessSet.PlutusScripts();
     // Process Plutus scripts
 }
 
 // Process datums
-if (witnessSet.HasPlutusData())
+if (witnessSet.PlutusDataSet().Any())
 {
-    var datums = witnessSet.PlutusData();
+    var datums = witnessSet.PlutusDataSet();
     // Process datums
 }
 
 // Process redeemers
-if (witnessSet.HasRedeemers())
+if (witnessSet.Redeemers() is not null)
 {
     var redeemers = witnessSet.Redeemers();
     // Process redeemers
@@ -290,9 +287,9 @@ if (witnessSet.HasRedeemers())
 
 // Access metadata from the auxiliary data set
 var auxDataSet = block.AuxiliaryDataSet();
-if (auxDataSet.ContainsKey(txHash))
+foreach (auxData in auxDataSet)
 {
-    var metadata = auxDataSet[txHash];
+    var metadata = auxData.Metadata();
     // Process metadata
 }
 ```
@@ -318,28 +315,18 @@ It's crucial to remember that transaction bodies, witness sets, and auxiliary da
 | 13: collateral_inputs | `tx.Collateral()` | Get collateral inputs |
 | 16: reference_inputs | `tx.ReferenceInputs()` | Get reference inputs |
 
+
 ### Important Witness Set Methods
 
 | Component | Extension Method | Description |
 |-----------|------------------|-------------|
-| VKey Witnesses | `witnessSet.VKeyWitnesses()` | Get signatures |
-| Native Scripts | `witnessSet.NativeScripts()` | Get native scripts |
-| Plutus Scripts | `witnessSet.PlutusScripts()` | Get Plutus scripts |
-| Plutus Data | `witnessSet.PlutusData()` | Get datums |
+| VKey Witnesses | `witnessSet.VKeyWitnessesSet()` | Get signatures |
+| Native Scripts | `witnessSet.NativeScriptsSet()` | Get native scripts |
+| Plutus Scripts | `witnessSet.PlutusV1ScriptSet()` | Get Plutus V1 scripts |
+| Plutus Scripts | `witnessSet.PlutusV2ScriptSet()` | Get Plutus V2 scripts |
+| Plutus Scripts | `witnessSet.PlutusV3ScriptSet()` | Get Plutus V3 scripts |
+| Plutus Data | `witnessSet.PlutusDataSet()` | Get datums |
 | Redeemers | `witnessSet.Redeemers()` | Get redeemers |
-
-### Additional Useful Transaction Methods
-
-| Method | Description |
-|--------|-------------|
-| `tx.Hash()` | Get the transaction hash |
-| `tx.HasMetadata()` | Check if the transaction has metadata |
-| `tx.HasMint()` | Check if the transaction mints/burns tokens |
-| `tx.HasCertificates()` | Check if transaction has certificates |
-| `tx.HasWithdrawals()` | Check if transaction has withdrawals |
-| `tx.HasReferenceInputs()` | Check if the transaction has reference inputs |
-| `tx.HasScriptDataHash()` | Check if the transaction has a script data hash |
-| `tx.Raw?.ToArray()` | Get the raw transaction bytes (if available) |
 
 ## 🔗 Inputs and UTxOs
 
@@ -417,21 +404,21 @@ foreach (var input in tx.Inputs())
 foreach (var output in tx.Outputs())
 {
     string address = output.Address();     // Recipient address
-    ulong adaAmount = output.Amount();     // ADA amount in lovelace
+    ulong amount = output.Amount();     // amount in lovelace or with multiAsset
     
     // Process multi-asset outputs
-    if (output.HasMultiAsset())
+    if (output is LovelaceWithMultiAsset value)
     {
-        var multiAsset = output.MultiAsset();
-        foreach (var policy in multiAsset)
+        var multiasset = value.MultiAsset.Value
+        foreach (var asset in multiAsset)
         {
-            string policyId = policy.Key();     // Policy ID (script hash)
-            var assets = policy.Value();        // Assets under this policy
+            byte[] policyId = asset.Key     // Policy ID (script hash)
+            var assets = asset.Value.Value;        // Assets under this policy
             
             foreach (var asset in assets)
             {
-                byte[] assetNameBytes = asset.Key();   // Asset name as bytes
-                ulong quantity = asset.Value();        // Quantity of this asset
+                byte[] assetNameBytes = asset.Key;   // Asset name as bytes
+                ulong quantity = asset.Value;        // Quantity of this asset
                 
                 // Process each asset in the UTxO
             }
@@ -439,21 +426,19 @@ foreach (var output in tx.Outputs())
     }
     
     // Process script-locked outputs
-    if (output.HasDatum())
+    if (output.DatumOption() is not null)
     {
-        if (output.HasInlineDatum())
+        if(output.DatumOption() is DatumHashOption datumHash)
         {
-            var datum = output.InlineDatum();     // Full datum (Babbage+)
-            // Process inline datum
+            // Process datum hash
         }
         else
         {
-            string datumHash = output.DatumHash();    // Just the hash
-            // Process datum hash
+            // Process Inline datum
         }
     }
     
-    if (output.HasScriptRef())
+    if (output.ScriptRef() is not null)
     {
         var scriptRef = output.ScriptRef();    // Reference script (CIP-33)
         // Process script reference
@@ -484,19 +469,6 @@ This approach enables efficient address balance queries, tracking of specific as
 
 &nbsp;
 
-Additional useful output methods:
-
-&nbsp;
-
-
-| Method | Description |
-|--------|-------------|
-| `output.HasMultiAsset()` | Check if the output contains non-ADA assets |
-| `output.HasDatum()` | Check if the output has a datum |
-| `output.HasInlineDatum()` | Check if the output has an inline datum |
-| `output.InlineDatum()` | Get the inline datum data |
-| `output.DatumHash()` | Get the datum hash |
-| `output.HasScriptRef()` | Check if the output has a script reference |
 
 ## 📜 Certificates
 
@@ -563,58 +535,35 @@ certificate =
 Chrysalis provides extension methods for working with certificates:
 
 ```csharp
-if (tx.HasCertificates())
+if (txBody.Certificates().Any())
 {
     foreach (var cert in tx.Certificates())
     {
         // Get certificate type
-        var certType = cert.Type();
         
         // Process based on certificate type
-        switch (certType)
+        switch (cert)
         {
-            case CertificateType.StakeRegistration:
-                var stakeKeyHash = cert.StakeRegistration().KeyHash();
+            case StakeRegistration:
                 // Process stake registration (new delegation capability)
                 break;
                 
-            case CertificateType.StakeDeregistration:
-                var deregKeyHash = cert.StakeDeregistration().KeyHash();
+            case StakeDeregistration:
                 // Process stake deregistration (removing delegation)
                 break;
                 
-            case CertificateType.StakeDelegation:
-                var delegator = cert.StakeDelegation().KeyHash();
-                var poolId = cert.StakeDelegation().PoolHash();
+            case StakeDelegation:
                 // Process delegation certificate (delegating to a pool)
                 break;
                 
-            case CertificateType.PoolRegistration:
-                var poolParams = cert.PoolRegistration();
-                var poolIdHash = poolParams.PoolKeyHash();
-                var vrfKeyHash = poolParams.VrfKeyHash();
-                var pledge = poolParams.Pledge();
-                var cost = poolParams.Cost();
-                var margin = poolParams.Margin();
-                var rewardAcct = poolParams.RewardAccount();
-                var poolOwners = poolParams.PoolOwners();
-                var relays = poolParams.Relays();
-                var poolMetadata = poolParams.PoolMetadata();
+            case PoolRegistration:
                 // Process pool registration (new or updated pool)
                 break;
                 
-            case CertificateType.PoolRetirement:
-                var retiringPoolId = cert.PoolRetirement().PoolKeyHash();
-                var retirementEpoch = cert.PoolRetirement().Epoch();
+            case PoolRetirement:
                 // Process pool retirement (scheduled shutdown)
                 break;
                 
-            // Conway-era governance certificates
-            case CertificateType.DRepRegistration:
-                // Process DRep registration
-                break;
-                
-            // And other certificate types...
         }
     }
 }
@@ -632,27 +581,12 @@ Certificates enable powerful indexing applications, such as:
 
 | Certificate Type | Extension Method | Description |
 |------------------|------------------|-------------|
-| Stake Registration | `cert.StakeRegistration()` | Get stake registration data |
-| Stake Deregistration | `cert.StakeDeregistration()` | Get stake deregistration data |
-| Stake Delegation | `cert.StakeDelegation()` | Get stake delegation data |
-| Pool Registration | `cert.PoolRegistration()` | Get pool registration data |
-| Pool Retirement | `cert.PoolRetirement()` | Get pool retirement data |
+| Stake Registration | `cert.StakeCredential()` | Get stake credentials |
+| Stake Deregistration | `cert.DRepCredential()` | Get drep credential data |
+| Stake Delegation | `cert.PoolKeyHash()` | Get pool key hash |
+
 
 &nbsp;
-
-Common certificate methods:
-
-&nbsp;
-
-
-| Method | Description |
-|--------|-------------|
-| `cert.Type()` | Get the certificate type |
-| `cert.StakeRegistration().KeyHash()` | Get the stake key hash |
-| `cert.StakeDelegation().KeyHash()` | Get the delegator's key hash |
-| `cert.StakeDelegation().PoolHash()` | Get the pool's key hash |
-| `cert.PoolRegistration().PoolKeyHash()` | Get the pool's key hash |
-| `cert.PoolRetirement().Epoch()` | Get the retirement epoch |
 
 ## 📝 Datums and Script References
 
@@ -711,72 +645,22 @@ Chrysalis provides extension methods for working with datums and script referenc
 foreach (var output in tx.Outputs())
 {
     // Check for and access datums
-    if (output.HasDatum())
+    if (output.DatumOption() is not null)
     {
-        if (output.HasInlineDatum())
+        if (output.DatumOption() is InlineDatumOption inlineDatum)
         {
-            var inlineDatum = output.InlineDatum();
-            
             // Process the inline datum based on its structure
-            if (inlineDatum.IsConstr())
-            {
-                // Constructor structure (common for custom types)
-                var constr = inlineDatum.AsConstr();
-                var tag = constr.Tag();        // Type identifier
-                var fields = constr.Fields();  // Field values
-                // Process constructor fields
-            }
-            else if (inlineDatum.IsList())
-            {
-                // List structure
-                var list = inlineDatum.AsList();
-                // Process list items
-            }
-            // Handle other Plutus data types (integers, bytes, maps)
         }
         else
         {
-            // Only the datum hash is available
-            string datumHash = output.DatumHash();
             // Process the datum hash (you might need to look up the actual datum)
         }
     }
     
     // Check for and access script references
-    if (output.HasScriptRef())
+    if (output.ScriptRef() is not null)
     {
-        var scriptRef = output.ScriptRef();
-        
-        if (scriptRef.IsNativeScript())
-        {
-            // Process native script (multi-sig, timelock)
-            var nativeScript = scriptRef.AsNativeScript();
-            
-            switch (nativeScript.Type())
-            {
-                case NativeScriptType.ScriptPubkey:
-                    // Single-signature script
-                    var keyHash = nativeScript.AsScriptPubkey().KeyHash();
-                    // Process pubkey script
-                    break;
-                    
-                case NativeScriptType.ScriptAll:
-                    // AND condition (all scripts must pass)
-                    var allScripts = nativeScript.AsScriptAll().Scripts();
-                    // Process all-of scripts
-                    break;
-                    
-                // Handle other native script types
-            }
-        }
-        else if (scriptRef.IsPlutusScript())
-        {
-            // Process Plutus script (smart contract)
-            var plutusScript = scriptRef.AsPlutusScript();
-            var version = plutusScript.Version(); // 1, 2, or 3
-            byte[] scriptBytes = plutusScript.Bytes();
-            // Process Plutus script
-        }
+       // process Script Reference
     }
 }
 ```
@@ -792,28 +676,11 @@ When tracking script-related UTxOs, be careful with datum handling:
 
 | Type | Extension Method | Description |
 |------|------------------|-------------|
-| Datum | `output.HasDatum()` | Check if the output has a datum |
-| Datum | `output.HasInlineDatum()` | Check if the output has an inline datum |
-| Datum | `output.InlineDatum()` | Get the inline datum |
-| Datum | `output.DatumHash()` | Get the datum hash |
-| Script | `output.HasScriptRef()` | Check if the output has a script reference |
-| Script | `output.ScriptRef()` | Get the script reference |
+| Datum | `output.DatumOption()` | Retrieves the datum wether it's an Inline Datum or DatumHash |
+| Script | `output.ScriptRef()` | Retrieve the script from the output |
 
 &nbsp;
 
-Script-specific methods:
-
-&nbsp;
-
-
-| Method | Description |
-|--------|-------------|
-| `scriptRef.IsNativeScript()` | Check if it's a native script |
-| `scriptRef.IsPlutusScript()` | Check if it's a Plutus script |
-| `scriptRef.AsNativeScript()` | Get as native script |
-| `scriptRef.AsPlutusScript()` | Get as Plutus script |
-| `plutusScript.Version()` | Get Plutus language version |
-| `plutusScript.Bytes()` | Get raw script bytes |
 
 ## 💰 Withdrawals
 
@@ -858,25 +725,14 @@ Each entry maps a reward account (stake credential address) to a coin amount (lo
 Chrysalis provides extension methods for working with withdrawals:
 
 ```csharp
-if (tx.HasWithdrawals())
+if (tx.Withdrawals().Any())
 {
     var withdrawals = tx.Withdrawals();
     
     // Process each withdrawal
     foreach (var withdrawal in withdrawals)
     {
-        string stakeAddress = withdrawal.Key();  // Stake address withdrawing from
-        ulong amount = withdrawal.Value();       // Amount in lovelace being withdrawn
-        
         // Process the withdrawal
-        // Example: Track reward withdrawals by address
-        using var db = await dbContextFactory.CreateDbContextAsync();
-        db.StakeRewards.Add(new StakeReward(
-            Slot = slot,
-            StakeAddress = stakeAddress,
-            Amount = amount,
-            TxHash = txHash
-        ));
     }
 }
 ```
@@ -888,25 +744,6 @@ Tracking withdrawals can provide valuable insights for:
 - **Tax tools** that need to identify reward income events
 - **Pool performance** metrics combining delegation and reward data
 :::
-
-### Important Withdrawal Fields and Extension Methods
-
-| CDDL Field | Extension Method | Description |
-|------------|------------------|-------------|
-| reward_account | `withdrawal.Key()` | Get the stake address |
-| coin | `withdrawal.Value()` | Get the withdrawal amount |
-
-&nbsp;
-
-Additional useful methods:
-
-&nbsp;
-
-
-| Method | Description |
-|--------|-------------|
-| `tx.HasWithdrawals()` | Check if the transaction has withdrawals |
-| `tx.Withdrawals()` | Get all withdrawals in the transaction |
 
 ## 🏷️ Metadata
 
@@ -967,50 +804,10 @@ Chrysalis provides extension methods for working with transaction metadata:
 ```csharp
 var auxDataSet = block.AuxiliaryDataSet();
     
-// Process metadata by transaction hash (key) and metadata object (value)
 foreach (var entry in auxDataSet)
-{
-    string txHash = entry.Key();       // Transaction hash
-    var metadata = entry.Value();      // All metadata for this transaction
-    
-    // Process metadata by label
-    foreach (var labelEntry in metadata)
-    {
-        uint label = labelEntry.Key();  // Metadata label (number)
-        var value = labelEntry.Value(); // Metadata value (complex structure)
-        
-        // Process specific metadata types
-        if (label == 721) // CIP-25 NFT Metadata
-        {
-            if (value.IsMap())
-            {
-                var nftMetadata = value.AsMap();
-                // Process NFT metadata according to CIP-25
-            }
-        }
-        
-        // Process based on value type
-        if (value.IsInt())
-        {
-            long intValue = value.AsInt();
-            // Process integer metadata
-        }
-        else if (value.IsString())
-        {
-            string strValue = value.AsString();
-            // Process string metadata
-        }
-        else if (value.IsList())
-        {
-            var listValue = value.AsList();
-            // Process list metadata
-        }
-        else if (value.IsMap())
-        {
-            var mapValue = value.AsMap();
-            // Process map metadata
-        }
-    }
+{      // Transaction hash
+    var metadata = entry.Metadata();      
+    // process metadata
 }
 ```
 
@@ -1024,29 +821,6 @@ Consider building specialized indexers for common metadata types:
 These applications can extract specific metadata patterns and make them searchable in ways the blockchain itself doesn't support.
 :::
 
-### Important Metadata Fields and Extension Methods
-
-| CDDL Field | Extension Method | Description |
-|------------|------------------|-------------|
-| metadata_label | `entry.Key()` | Get the metadata label |
-| metadata_value | `entry.Value()` | Get the metadata value |
-
-&nbsp;
-
-Value-specific methods:
-
-| Method | Description |
-|--------|-------------|
-| `value.IsInt()` | Check if value is an integer |
-| `value.IsBytes()` | Check if value is bytes |
-| `value.IsString()` | Check if value is a string |
-| `value.IsList()` | Check if value is a list |
-| `value.IsMap()` | Check if value is a map |
-| `value.AsInt()` | Get value as an integer |
-| `value.AsBytes()` | Get value as bytes |
-| `value.AsString()` | Get value as a string |
-| `value.AsList()` | Get value as a list |
-| `value.AsMap()` | Get value as a map |
 
 ## 🪙 Minting
 
@@ -1100,66 +874,25 @@ Where:
 Chrysalis provides extension methods for working with token minting:
 
 ```csharp
-if (tx.HasMint())
+if (tx.Mint().Any())
 {
     var mint = tx.Mint();
-    
     // Process each policy
-    foreach (var policy in mint)
+    foreach (var asset in mint)
     {
-        string policyId = policy.Key();     // Policy ID (script hash)
-        var assets = policy.Value();        // Assets under this policy
-        
-        // Process each asset within the policy
+        byte[] policyId = asset.Key     // Policy ID (script hash)
+        var assets = asset.Value.Value;        // Assets under this policy
+
         foreach (var asset in assets)
         {
-            byte[] assetNameBytes = asset.Key();   // Asset name as bytes
-            string assetNameHex = BytesToHex(assetNameBytes);  // Hex representation
-            string assetNameUtf8 = TryDecodeUtf8(assetNameBytes);  // Text if valid UTF-8
-            long quantity = asset.Value();         // Amount minted (+ create, - burn)
+            byte[] assetNameBytes = asset.Key;   // Asset name as bytes
+            ulong quantity = asset.Value;        // Quantity of this asset
             
-            if (quantity > 0)
-            {
-                // Token minting operation
-                Console.WriteLine($"Minted {quantity} of {policyId}.{assetNameHex}");
-            }
-            else if (quantity < 0)
-            {
-                // Token burning operation
-                Console.WriteLine($"Burned {-quantity} of {policyId}.{assetNameHex}");
-            }
-            
-            // Store minting operation in database
-            using var db = await dbContextFactory.CreateDbContextAsync();
-            db.TokenEvents.Add(new TokenEvent(
-                Slot = slot,
-                BlockNumber = blockNumber,
-                TxHash = txHash,
-                PolicyId = policyId,
-                AssetName = assetNameHex,
-                Quantity = quantity
-            ));
+            // Process each asset in the UTxO
         }
     }
 }
 
-// Helper methods
-private string BytesToHex(byte[] bytes)
-{
-    return BitConverter.ToString(bytes).Replace("-", "").ToLowerInvariant();
-}
-
-private string TryDecodeUtf8(byte[] bytes)
-{
-    try
-    {
-        return Encoding.UTF8.GetString(bytes);
-    }
-    catch
-    {
-        return null; // Not valid UTF-8
-    }
-}
 ```
 
 :::tip Token-Tracking Applications
@@ -1172,24 +905,6 @@ Minting tracking enables powerful applications:
 Consider using CIP-14 asset fingerprints for standardized token identification across your application.
 :::
 
-### Important Minting Fields and Extension Methods
-
-| CDDL Field | Extension Method | Description |
-|------------|------------------|-------------|
-| policy_id | `policy.Key()` | Get the policy ID |
-| asset_name | `asset.Key()` | Get the asset name (bytes) |
-| int64 | `asset.Value()` | Get the minting quantity |
-
-&nbsp;
-
-Additional useful methods:
-
-| Method | Description |
-|--------|-------------|
-| `tx.HasMint()` | Check if the transaction mints/burns tokens |
-| `tx.Mint()` | Get the minting information |
-
-## 🛠️ Creating Reducers for Cardano Data
 
 When building Argus reducers to process these Cardano structures, follow this pattern:
 

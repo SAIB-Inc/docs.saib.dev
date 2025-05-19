@@ -4,7 +4,7 @@ sidebar_position: 3
 description: Learn how to build effective APIs to access and serve Cardano data indexed by Argus.Sync, focusing on Minimal APIs, controller alternatives, DTOs, and query optimization.
 ---
 
-# 📄 Building Data APIs: Unleashing Your Argus-Indexed Cardano Data
+# 📄 Building Data APIs
 
 Welcome! This guide is your launchpad for transforming raw, Argus-indexed Cardano data into accessible and powerful APIs. Whether you're building front-end applications, supporting other services, or enabling third-party developers, these steps will help you serve your blockchain data efficiently and elegantly, with a primary focus on ASP.NET Core Minimal APIs.
 

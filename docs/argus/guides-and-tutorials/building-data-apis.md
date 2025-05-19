@@ -194,11 +194,11 @@ Using DTOs (simple classes/records representing the data shape for your API) is 
 Example DTOs (place these in a `Dtos` folder in your API or Shared Core project):
 
 ```csharp
-// public record BlockSummaryDto(ulong Slot, string Hash, DateTimeOffset BlockTime);
-// public record AccountBalanceDto(string Address, ulong Lovelace, Dictionary<string, ulong> Assets, ulong UpdatedAtSlot);
-// public record UtxoDto(string TxHash, uint Index, string Address, ulong LovelaceAmount /*, other asset details */);
-// public record BlockDetailDto(ulong Slot, string Hash, DateTimeOffset BlockTime, int Size, ulong EpochNo, ulong EpochSlot /* ... other fields ... */);
-// public record DexPriceDto(string TokenX, string TokenY, decimal PriceXPerY, decimal PriceYPerX, DateTimeOffset Timestamp);
+public record BlockSummaryDto(ulong Slot, string Hash, DateTimeOffset BlockTime);
+public record AccountBalanceDto(string Address, ulong Lovelace, Dictionary<string, ulong> Assets, ulong UpdatedAtSlot);
+public record UtxoDto(string TxHash, uint Index, string Address, ulong LovelaceAmount /*, other asset details */);
+public record BlockDetailDto(ulong Slot, string Hash, DateTimeOffset BlockTime, int Size, ulong EpochNo, ulong EpochSlot /* ... other fields ... */);
+public record DexPriceDto(string TokenX, string TokenY, decimal PriceXPerY, decimal PriceYPerX, DateTimeOffset Timestamp);
 :::
 
 ### Example 1: Fetching a Specific Block

@@ -1,6 +1,9 @@
 ---
 title: Overview
-sidebar_position: 5
+sidebar_position: 1
+hide_title: true
 ---
 
-# Futura
+![Futura Banner](/img/docs/futura/futura-banner.webp)
+
+## Documentation coming soon...

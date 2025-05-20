@@ -870,6 +870,7 @@ Argus.Sync provides the structured data foundation; well-designed APIs are the k
 ### Blogs and Articles
 
 - [Best Practices for REST API Design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
-- [RESTful API Design: 13 Best Practices](https://florimond.dev/en/posts/2018/08/restful-api-design-13-best-practices-to-make-your-api-robust/)
+- [RESTful API Design: 13 Best Practices](https://florimond.dev/en/posts/2018/08/restful-api-design-13-best-practices-to-make-your-users-happy)
 - [Performance Best Practices for EF Core](https://docs.microsoft.com/en-us/ef/core/performance/efficient-querying)
+
 </details>

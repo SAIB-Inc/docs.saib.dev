@@ -28,7 +28,7 @@ export default function FooterLayout({
   return (
     <footer style={{backgroundColor: theme.palette.background.default}} className={!location.pathname.startsWith('/docs') ? "!pt-30 lg:!pt-0 md:h-[1078px]" : ""}>
       {!location.pathname.startsWith('/docs') && (
-        <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/Footer/background_dark.webp)]" : "bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
+        <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/footer/background_dark.webp)]" : "bg-[url(/img/footer/background_light.webp)]"} bg-cover bg-no-repeat bg-center`}>
           <div className="container !px-4 md:!pt-67 md:h-[1021px]">
             {/* {links} */}
             <div className='flex gap-x-20 h-full flex-col-reverse lg:justify-between lg:gap-x-3 lg:flex-row xl:gap-x-10'>
@@ -45,7 +45,7 @@ export default function FooterLayout({
                     borderRadius: '16px',
                   }}
                 >
-                  <div className='!pb-0 !mt-[30.51px] !mb-20 lg:!mb-[160.49px]'>
+                  <div className='!pb-0 !mt-[30.51px] !mb-20'>
                     <p style={{color: theme.palette.grey[50]}} className='!font-medium !mb-10 !text-2xl md:leading-[42.72px] md:tracking-[-0.356px] md:!text-[35.6px]'>
                       Fueling the future <br className='hidden lg:block'/>
                       with bold ideas and <br className='hidden lg:block'/>
@@ -145,7 +145,7 @@ export default function FooterLayout({
 
               <div className='relative flex flex-col justify-between'>
                 <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[210.14px] absolute right-[44.5px] top-[-138.14px] !hidden lg:!block'/>
-                <img src={`${colorMode=='dark'? "img/Footer/logo_styled_dark.svg" : "img/Footer/logo_styled_light.svg"}`} alt="logo styled" className='absolute hidden lg:block lg:w-80 lg:top-[274.18px] lg:left-[18.5px] xl:top-[275.18px] 2xl:top-[226.18px] xl:left-[70.5px] 2xl:left-[126.5px] 2xl:w-auto' />
+                <img src={`${colorMode=='dark'? "img/Footer/logo_styled_dark.svg" : "img/Footer/logo_styled_light.svg"}`} alt="logo styled" className='absolute hidden lg:block lg:w-80 lg:top-76 lg:left-[18.5px] 2xl:top-70 xl:left-[70.5px] 2xl:left-[126.5px] 2xl:w-auto' />
                 <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[141px] top-[-127px] hidden lg:block' />
 
                 <div className='mb-10 lg:mb-0'>

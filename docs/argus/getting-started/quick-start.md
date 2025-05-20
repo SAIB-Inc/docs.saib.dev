@@ -5,7 +5,7 @@ description: Get up and running with Argus in minutes
 hide_title: true
 ---
 
-![Quick Start Banner](/img/docs/argus/getting-started/quick-start-banner.png)
+![Quick Start Banner](/img/docs/argus/getting-started/quick-start-banner.webp)
 
 This quick start will help you set up a minimal Argus indexer in just a few minutes.
 

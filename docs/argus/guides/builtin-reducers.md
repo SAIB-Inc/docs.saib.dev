@@ -4,7 +4,7 @@ sidebar_position: 2
 hide_title: true
 ---
 
-![Argus Built-in Reducers](/img/docs/argus/guides-and-tutorials/builtin-reducers-banner.webp)
+![Argus Built-in Reducers](/img/docs/argus/guides/builtin-reducers-banner.webp)
 
 This guide explains the built-in reducers available in Argus and how to use them to efficiently index and query Cardano blockchain data for your applications.
 

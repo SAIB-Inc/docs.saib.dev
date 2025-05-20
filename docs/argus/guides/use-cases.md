@@ -1,11 +1,14 @@
 ---
 title: Use Cases
 sidebar_position: 2
+hide_title: true
 ---
 
-# Applications and Use Cases
+![Argus Use Cases Banner](/img/docs/argus/guides/argus-use-cases-banner.webp)
 
 This guide explores practical applications of Argus and provides best practices for integrating it into your Cardano blockchain projects. You'll discover real-world use cases and implementation patterns that leverage Argus's powerful indexing capabilities.
+
+---
 
 ## Example Use Cases
 

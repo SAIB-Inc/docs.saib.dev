@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # 📄 Building Data APIs
 
-Unlock the power of your Argus.Sync indexed Cardano data by building robust and performant APIs. This guide walks you through practical ASP.NET Core techniques, from streamlined Minimal APIs to traditional Controllers. Learn to effectively serve blockchain data to your front-end interfaces, microservices, or other developer tools.
+This guide details the development of Application Programming Interfaces (APIs) for serving Cardano blockchain data indexed by the Argus.Sync framework. It covers practical implementation strategies using ASP.NET Core, including both Minimal APIs and traditional controller-based designs. The objective is to enable developers to integrate indexed blockchain data effectively into various applications, such as front-end UIs, backend services, and external developer tooling.
 
 ## 🎯 Introduction & Prerequisites
 

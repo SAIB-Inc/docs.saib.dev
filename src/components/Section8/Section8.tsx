@@ -53,7 +53,7 @@ export default function Section8(): ReactNode {
     };
 
     return(
-        <section style={{ backgroundColor:theme.palette.background.default }} className="bg-[url(/img/Section8/eighth_background.webp)] bg-cover pt-15 md:!pt-[137px] md:h-[1113px]">
+        <section style={{ backgroundColor:theme.palette.background.default }} className="bg-[url(/img/Section8/eighth_background.webp)] bg-cover pt-15 pb-20 md:pb-0 md:!pt-[137px] md:h-[1113px]">
             <div className="container">
                 <div className="flex items-center flex-col justify-center text-center lg:text-start lg:justify-between lg:flex-row">
                     <h1 className="text-3xl sm:!text-5xl md:!text-[56px] md:leading-[54.88px]">

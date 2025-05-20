@@ -94,7 +94,7 @@ export default function Section6(): ReactNode {
                             sx={{
                                 color: theme.palette.grey[50]
                             }}
-                            className="text-[80px] !sm:text-[124px] !md:text-[124px] !xl:text-[192px]"
+                            className="!text-[80px] !sm:text-[124px] !md:text-[124px] !xl:text-[192px]"
                         />
                     </Paper>
                     <Paper sx={{

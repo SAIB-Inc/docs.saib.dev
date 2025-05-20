@@ -25,7 +25,7 @@ export default function Section4(): ReactNode {
     };
 
     return (
-        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col relative overflow-x-hidden items-center w-screen pt-2 pb-15 sm:pb-auto sm:pt-0 lg:h-[952.98px]">
+        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col relative overflow-hidden items-center w-screen pt-2 pb-15 sm:pb-auto sm:pt-0 md:overflow-visible lg:h-[952.98px]">
             <div className="absolute -top-2 hidden xl:block">
                 <img src={colorMode === 'dark' ? '/img/Section3/background_connector_dark.webp' : '/img/Section3/background_connector_light.webp'} alt="background connector"/>
             </div>

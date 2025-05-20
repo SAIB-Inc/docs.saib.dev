@@ -8,9 +8,9 @@ import CardanoLogo from "@site/static/img/cardano_logo";
 export default function Section6(): ReactNode {
     const theme = useTheme();
     return (
-        <section style={{ backgroundColor:theme.palette.background.default }} className="w-screen lg:h-[956px]">
+        <section style={{ backgroundColor:theme.palette.background.default }} className="w-screen mb-12 md:mb-0 lg:h-[956px]">
             <div className="container place-content-between !pt-20 md:!pt-[148px]">
-                <div className="flex justify-between h-[72px] items-center flex-col mb-6 lg:mb-20 md:flex-row">
+                <div className="flex justify-between items-center flex-col mb-0 md:h-[72px] lg:mb-20 md:flex-row">
                     <div>
                         <h1 className="text-3xl text-center sm:!text-5xl lg:text-start lg:!leading-[72px] lg:tracking-[0.64px] lg:!text-[64px]">
                             <span>Built On... </span>
@@ -36,7 +36,7 @@ export default function Section6(): ReactNode {
 
                 </div>
 
-                <div className="flex justify-between flex-wrap gap-4 !mt-14 md:mt-10 xl:mt-30">
+                <div className="flex justify-between flex-wrap gap-4 !mt-12 md:mt-10 xl:mt-30">
                     <Paper 
                         sx={{
                             backgroundImage: "url('/img/Section6/chrysalis_bg.webp')",

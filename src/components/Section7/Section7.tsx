@@ -49,9 +49,9 @@ export default function Section7(): ReactNode {
     };
     
     return (
-        <section style={{ backgroundColor: theme.palette.background.default }} className={`place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1080px]`}>
-            <div className="container py-20 md:!pt-[274.77px] md:!pb-[152.23px]">
-                <div className="flex flex-col justify-center !pb-8 md:!pb-15">
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`place-content-center bg-cover md:!pt-[274.77px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1080px]`}>
+            <div className="container">
+                <div className="flex flex-col justify-center pt-20 !pb-8 md:!pb-15 md:!pt-[152.23px]">
                     <div className="relative flex flex-col-reverse gap-4  items-center md:gap-0">
                         <h1 className="relative text-center font-semibold text-3xl sm:!text-5xl md:leading-[53.76px] md:tracking-[0.56px] md:!text-[56px]">
                             <span>
@@ -193,7 +193,7 @@ export default function Section7(): ReactNode {
                         );
                     })}
                 </div>
-                <div className="flex gap-2 items-center mt-6 md:hidden">
+                <div className="flex gap-2 items-center md:hidden">
                     {section7Items.map((_, i) => (
                         <div 
                             key={i}

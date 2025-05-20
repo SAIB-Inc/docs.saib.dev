@@ -1,5 +1,5 @@
 ---
-title: Setup
+title: Create a Reducer
 sidebar_position: 1
 hide_title: true
 ---
@@ -60,8 +60,6 @@ dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 
 These packages supply all the necessary tools to connect with a Cardano node, handle blockchain data processing, and save the data in a PostgreSQL database:
 
-<br/>
-
 - **Argus.Sync**: The core library that provides blockchain indexing functionality.
 - **Microsoft.EntityFrameworkCore.Design**: Required for EF Core migrations and database schema generation.
 - **Npgsql.EntityFrameworkCore.PostgreSQL**: PostgreSQL provider for Entity Framework Core.
@@ -78,7 +76,6 @@ public record BlockInfo(
     string Hash,       // Block hash
     ulong Number,      // Block number
     ulong Slot,        // Block slot number
-    DateTime CreatedAt // Timestamp
 ) : IReducerModel;
 ```
 
@@ -117,8 +114,6 @@ public class MyDbContext(
 
 :::info What is CardanoDbContext?
 The `CardanoDbContext` is a specialized Entity Framework Core `DbContext` that needs to be inherited by your database context. This inheritance provides the essential Argus framework integration, allowing your database to interact with the blockchain data processing pipeline.
-
-<br/>
 
 We connect to our database schema by defining a DbSet, which corresponds to the `BlockInfo` model we created earlier.
 :::
@@ -168,8 +163,6 @@ The `IReducer<T>` interface is at the core of Argus's data processing pipeline. 
 
 `IReducer<T>` requires implementing two key methods:
 
-<br/>
-
 | Method | Purpose | Parameters |
 |--------|---------|------------|
 | **RollForwardAsync** | Called when new blocks are discovered, allowing you to extract and store blockchain data. | `Block` object |
@@ -180,8 +173,6 @@ By implementing these methods, your reducer actively tracks the evolving state o
 ### 5. Configure Application Settings
 
 Argus requires specific configuration settings to connect to a Cardano node and manage synchronization. Create an `appsettings.json` file with the following key sections:
-
-<br/>
 
 - **ConnectionStrings**: Database connection information
 - **CardanoNodeConnection**: Settings for connecting to the Cardano node
@@ -246,8 +237,6 @@ app.Run();
 
 These two extension methods connect all the components you've created:
 
-<br/>
-
 | Method | Purpose |
 |--------|---------|
 | **AddCardanoIndexer** | Configures database connection, node connection, and synchronization services |
@@ -283,36 +272,95 @@ dotnet run
 When your application starts, you'll see the Argus dashboard in your terminal showing synchronization progress. Initial synchronization from the genesis block can take substantial time, so consider starting from a more recent block using the `Slot` and `Hash` settings in your configuration.
 :::
 
+## Argus Integration Best Practices
 
-## Next Steps
+### Effective Reducer Design
 
-With your basic Argus implementation in place, you can now explore more advanced features of the framework:
+**Use slot-based tracking**:
+```csharp
+// Store the slot with each record for rollback support
+public record TokenTransfer(
+    string TxHash,
+    int TxIndex,
+    ulong Slot,      // Critical for chain rollback handling
+    string PolicyId,
+    string AssetName,
+    string FromAddress,
+    string ToAddress,
+    ulong Amount,
+    ulong Lovelace
+) : IReducerModel;
+```
 
-### Expand Your Data Model
+:::info Rollback Handling
+Storing the block slot with each record is essential for Argus's chain rollback handling:
+- Slot numbers uniquely identify blockchain positions
+- During rollbacks, Argus provides the exact slot to roll back to
+- All records with slots greater than the rollback point must be reversed
+:::
 
-Argus can process various blockchain elements beyond blocks. Consider extending your implementation to capture:
+Storing the block slot with each record is crucial for Argus’s effective chain rollback management, as slot numbers uniquely mark blockchain positions. This allows Argus to precisely identify rollback points and reverse all records from slots beyond the rollback, ensuring accurate state restoration.
 
-- **Transaction Data**: Track spending patterns, token transfers, and script executions
-- **Metadata**: Process on-chain metadata for various protocols and standards
-- **Native Tokens**: Index token minting, burning, and transfers
-- **Smart Contract Data**: Extract data from Plutus scripts and their execution results
+**Maintain data integrity with Argus’s transactional processing:**
 
-### Leverage Argus Features
+```csharp
+public async Task RollForwardAsync(Block block)
+{
+    using var db = dbContextFactory.CreateDbContext();
+    
+    // Process all operations within the same transaction
+    foreach (var tx in block.TransactionBodies())
+    {
+        ProcessInputs(db, tx);
+        ProcessOutputs(db, tx);
+        ProcessMetadata(db, tx);
+    }
+    
+    await db.SaveChangesAsync();
+}
+```
 
-The framework provides several built-in capabilities to enhance your blockchain data processing:
+:::info Transaction Consistency
+Argus provides important transaction guarantees:
+- Each block is processed in an isolated transaction
+- All your reducers are synchronized to maintain cross-entity consistency
+:::
 
-- **Built-in Reducers**: Utilize pre-built components for common Cardano data structures
-- **Multi-era Support**: Process data across different Cardano protocol versions
-- **Chain Reorganization Handling**: Robust support for handling blockchain forks
-- **Parallel Processing**: Configure Argus for optimal performance with high-volume data
+Argus ensures robust transaction guarantees by processing each block within an isolated transaction and synchronizing all reducers to maintain consistent state across multiple entities. This approach provides reliable and consistent data handling essential for blockchain applications.
 
-### Integration Possibilities
+### Argus-Specific Data Patterns
 
-Argus works well as part of a larger ecosystem:
+**Use active-historical architecture for Cardano's UTxO model:**
 
-- **Extend with APIs**: Build web services that expose your indexed data
-- **Connect to Analytics Tools**: Feed your blockchain data into business intelligence platforms
-- **Event-driven Architecture**: Implement webhooks or message queues for real-time notifications
-- **Cross-chain Integration**: Combine with other blockchain data sources for comprehensive applications
+```csharp
+// Active state
+public class ActiveUtxo
+{
+    public string TxHash { get; set; }  // Transaction hash
+    public int Index { get; set; }      // Output index
+    public string Address { get; set; } // Owner address
+    public long Lovelace { get; set; }  // ADA amount in lovelace
+    public string[] Assets { get; set; } // Native tokens
+    public ulong Slot { get; set; } // Block slot
+}
 
-For more detailed guidance, refer to the other sections of our documentation that cover specific Argus features and advanced usage patterns.
+// Historical state
+public class HistoricalUtxo 
+{
+    public string TxHash { get; set; }
+    public int Index { get; set; }
+    public string OutRef { get; set; } // Consumed UTxO
+    public string Address { get; set; }
+    public long Lovelace { get; set; }
+    public string[] Assets { get; set; }
+    public ulong Slot { get; set; }
+}
+```
+
+:::info Dual-State Architecture
+This dual-state approach aligns perfectly with Cardano's UTxO model:
+- **Active State**: Tracks the current UTxO (Unspent Transaction Output)
+- **History State**: Records a transaction that has been executed
+:::
+
+This dual-state approach complements Cardano’s UTxO model by maintaining an Active State for tracking current unspent outputs and a History State for recording completed transactions, ensuring accurate and efficient ledger management.

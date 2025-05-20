@@ -23,7 +23,7 @@ export default function Section3(): ReactNode {
                         <p className="leading-[34.8px] font-semibold w-max! text-2xl sm:hidden">Used By</p>
                     </div>
                     <div className="flex items-center gap-8 sm:gap-4">
-                        <div className="sm:w-30 lg:w-auto">
+                        <div className="w-32 sm:w-30 lg:w-40">
                             <img 
                                 alt="Buriza" 
                                 src={colorMode === 'dark' ? '/img/Section3/buriza_dark.webp' : '/img/Section3/buriza_light.webp'} 
@@ -38,7 +38,7 @@ export default function Section3(): ReactNode {
                         <div className="hidden w-27 sm:block md:w-40 lg:w-auto">
                             <img src="/img/Section3/arrow.webp" className="scale-x-[-1] mr-1 md:mr-10 lg:mr-10 xl:mr-[80px]" />
                         </div>
-                        <div className="sm:w-30 lg:w-auto">
+                        <div className="w-32 sm:w-30 lg:w-40">
                             <img 
                                 src='/img/Section3/levvy.webp' 
                                 alt="levvy"

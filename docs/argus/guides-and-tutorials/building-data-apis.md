@@ -1,10 +1,9 @@
 ---
 title: Building Data APIs
 sidebar_position: 3
-hide_title: true
 ---
 
-# ![Building Data APIs](/img/docs/argus/guides-and-tutorials/data_api_banner.webp)
+# Building Data APIs
 
 This guide walks through creating Application Programming Interfaces (APIs) for Cardano blockchain data indexed by Argus.Sync. We'll focus on practical implementation strategies using ASP.NET Core Minimal APIs, which provide a concise and straightforward approach to serving your indexed blockchain data to front-end UIs, backend services, and developer tools.
 
@@ -184,15 +183,23 @@ To begin creating your API endpoints:
 
 This section provides practical examples of Minimal API endpoints, illustrating common data retrieval scenarios based on Argus-indexed data.
 
-:::info Data Transfer Objects (DTOs) are Key for Argus APIs
-When building APIs on top of Argus.Sync, using DTOs is particularly crucial. Argus reducers, both built-in and custom, are designed to comprehensively capture blockchain data, which might include fields not relevant for all API consumers or fields you might not want to expose directly. DTOs allow you to:
+When building APIs on top of Argus.Sync, consider whether Data Transfer Objects (DTOs) are appropriate for your specific use case. While not always mandatory, DTOs can provide several benefits when working with blockchain data:
 
-- **Shape Data Precisely**: Expose only the necessary fields from Argus models (e.g., `BlockBySlot`, `BalanceByAddress`).
-- **Decouple**: Your API contract (DTOs) remains stable even if the underlying Argus database schema or reducer logic evolves.
-- **Optimize Payloads**: Reduce data transfer by sending only what the client needs.
-- **Improve Security**: Avoid accidentally exposing internal data structures or sensitive information that Argus might store.
+<details>
+<summary><strong>Using DTOs with Argus.Sync (Optional)</strong></summary>
+    :::info Benefits of Using DTOs
+    - **Shape Data Precisely:** When needed, expose only specific fields from Argus models instead of entire entities
+    - **Decouple:** Keep your API contract stable even if your internal database schema evolves
+    - **Optimize Payloads:** Reduce network transfer by sending only what clients actually need
+    - **Improve Security:** Control exactly which data is exposed through your API endpoints
+    :::
+    DTOs are particularly valuable when:
+    - Your database schema contains more information than clients need
+    - You want to combine data from multiple reducers into a single response
+    - Your API and data layer are maintained by different teams
+    - You need to transform or calculate values before presenting them
 
-**Example DTOs (place these in a `Dtos` folder in your API or Shared Core project):**
+However, if your database is already well-structured for client consumption or you're building simpler endpoints with direct mappings, you can access Argus.Sync models directly without the extra abstraction layer.
 
 ```csharp
 // Summarized block information, leaner than the full BlockBySlot Argus model
@@ -211,8 +218,18 @@ public record BlockDetailDto(ulong Slot, string Hash, DateTimeOffset BlockTime, 
 public record DexPriceDto(string TokenX, string TokenY, decimal PriceXPerY, decimal PriceYPerX, DateTimeOffset Timestamp);
 ```
 
-Always project to these DTOs in your LINQ queries against Argus-populated tables.
-:::
+When using DTOs, consider projecting directly to them in your LINQ queries for optimal performance:
+
+```csharp
+// Example of projecting directly to a DTO
+var blockDto = await dbContext.BlocksBySlot 
+    .AsNoTracking()
+    .Where(b => b.Slot == slot)
+    .Select(b => new BlockDetailDto(b.Slot, b.Hash, b.BlockTime, b.Size, b.EpochNo, b.EpochSlot))
+    .FirstOrDefaultAsync();
+```
+
+</details>
 
 ### Example 1: Fetching a Specific Block
 

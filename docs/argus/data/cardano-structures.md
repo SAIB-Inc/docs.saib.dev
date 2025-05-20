@@ -6,27 +6,28 @@ hide_title: true
 
 ![Cardano Data Structures Banner](/img/docs/argus/data-models/data-models-banner.webp)
 
-&nbsp;
-
 This document explains the Cardano blockchain data structures exposed in Argus and how they map to the official CDDL specification. Understanding these structures is essential for building effective reducers that can extract and process blockchain data.
 
-## 🔍 Introduction
+---
+
+## Introduction
 
 Cardano uses CBOR (Concise Binary Object Representation) for serializing blockchain data and CDDL (Concise Data Definition Language) to specify the format of this data. Argus leverages the Chrysalis library, which provides strongly-typed C# representations of Cardano data structures.
-
-&nbsp;
 
 :::info
 The Chrysalis library handles the complex CBOR serialization/deserialization process, providing easy-to-use extension methods that let you work with Cardano data in an object-oriented way without having to understand the intricacies of the binary format.
 :::
 
-## 📦 Block Structure
+---
+
+## Block Structure
 
 Blocks are the fundamental units of the Cardano blockchain, containing a header and multiple transactions.
 
 ### What is a Block?
 
 A block in Cardano contains:
+
 - A **header** with metadata about the block (hash, number, slot, issuer)
 - A set of **transaction bodies** (the ledger state changes)
 - **Transaction witness sets** (signatures, scripts, datums, redeemers)
@@ -62,7 +63,7 @@ public async Task RollForwardAsync(Block block)
     string blockHash = block.Header().Hash();
     ulong blockNumber = block.Header().HeaderBody().BlockNumber();
     ulong slot = block.Header().HeaderBody().Slot();
-    
+
     // Access transactions in the block
     foreach (var tx in block.TransactionBodies())
     {
@@ -75,45 +76,39 @@ public async Task RollForwardAsync(Block block)
 
 The extension methods abstract away the era-specific differences, providing a consistent interface regardless of the block's era.
 
-&nbsp;
-
 ### Important Block Fields and Extension Methods
 
-| CDDL Field | Extension Method | Description |
-|------------|------------------|-------------|
-| header | `block.Header()` | Get the block header |
-| transaction_bodies | `block.TransactionBodies()` | Get all transactions in the block |
-| transaction_witness_sets | `block.TransactionWitnessSets()` | Get transaction witnesses |
-| auxiliary_data_set | `block.AuxiliaryDataSet()` | Get transaction metadata |
-| invalid_transactions | `block.InvalidTransactions()` | Get invalid transactions |
-
-&nbsp;
+| CDDL Field               | Extension Method                 | Description                       |
+| ------------------------ | -------------------------------- | --------------------------------- |
+| header                   | `block.Header()`                 | Get the block header              |
+| transaction_bodies       | `block.TransactionBodies()`      | Get all transactions in the block |
+| transaction_witness_sets | `block.TransactionWitnessSets()` | Get transaction witnesses         |
+| auxiliary_data_set       | `block.AuxiliaryDataSet()`       | Get transaction metadata          |
+| invalid_transactions     | `block.InvalidTransactions()`    | Get invalid transactions          |
 
 Additional useful header extension methods:
 
-&nbsp;
+| Method                                        | Description                               |
+| --------------------------------------------- | ----------------------------------------- |
+| `block.Header().Hash()`                       | Get the block hash                        |
+| `block.Header().HeaderBody().BlockNumber()`   | Get the block number                      |
+| `block.Header().HeaderBody().Slot()`          | Get the slot number                       |
+| `block.Header().HeaderBody().BlockBodySize()` | Get the block size in bytes               |
+| `block.Header().HeaderBody().IssuerVkey()`    | Get the block producer's verification key |
 
+---
 
-| Method | Description |
-|--------|-------------|
-| `block.Header().Hash()` | Get the block hash |
-| `block.Header().HeaderBody().BlockNumber()` | Get the block number |
-| `block.Header().HeaderBody().Slot()` | Get the slot number |
-| `block.Header().HeaderBody().BlockBodySize()` | Get the block size in bytes |
-| `block.Header().HeaderBody().IssuerVkey()` | Get the block producer's verification key |
-
-## 💸 Transactions
+## Transactions
 
 Transactions are the primary mechanism for state changes in Cardano. Each transaction consists of three main components that work together to create a valid ledger update.
 
-&nbsp;
-
 :::note Transaction Tripartite Structure
 A complete Cardano transaction consists of:
+
 1. **Transaction Body** - Contains the core state changes (inputs, outputs, fees)
 2. **Transaction Witness Set** - Contains validation data (signatures, scripts, datums)
 3. **Auxiliary Data** - Contains optional metadata (labels and values)
-:::
+   :::
 
 ### Transaction Structure
 
@@ -189,12 +184,14 @@ auxiliary_data = {
 <summary>Why This Three-Part Structure Matters</summary>
 
 Cardano's transaction design has several advantages:
+
 - **Separation of concerns** - Core state changes are distinct from validation data
 - **Bandwidth efficiency** - Scripts and metadata don't need to be passed around during transaction construction
 - **Simpler validation** - The transaction body defines the ledger update, while witnesses just prove authorization
 - **Metadata isolation** - Optional data doesn't affect consensus rules
 
 For Argus developers, this means you need to understand which component contains the data you're interested in indexing.
+
 </details>
 
 ### Using Transactions in Argus
@@ -286,39 +283,38 @@ It's crucial to remember that transaction bodies, witness sets, and auxiliary da
 
 ### Important Transaction Body Fields and Extension Methods
 
-| CDDL Field | Extension Method | Description |
-|------------|------------------|-------------|
-| 0: inputs | `tx.Inputs()` | Get transaction inputs |
-| 1: outputs | `tx.Outputs()` | Get transaction outputs |
-| 2: fee | `tx.Fee()` | Get transaction fee in lovelace |
-| 3: ttl | `tx.ValidTo()` | Get transaction time-to-live |
-| 4: certificates | `tx.Certificates()` | Get certificates |
-| 5: withdrawals | `tx.Withdrawals()` | Get reward withdrawals |
-| 7: auxiliary_data_hash | `tx.AuxiliaryDataHash()` | Get hash of metadata |
-| 8: validity_interval_start | `tx.ValidFrom()` | Get validity start (slot) |
-| 9: script_data_hash | `tx.ScriptDataHash()` | Get hash of script data |
-| 11: required_signers | `tx.RequiredSigners()` | Get required signers |
-| 13: collateral_inputs | `tx.Collateral()` | Get collateral inputs |
-| 16: reference_inputs | `tx.ReferenceInputs()` | Get reference inputs |
-
+| CDDL Field                 | Extension Method         | Description                     |
+| -------------------------- | ------------------------ | ------------------------------- |
+| 0: inputs                  | `tx.Inputs()`            | Get transaction inputs          |
+| 1: outputs                 | `tx.Outputs()`           | Get transaction outputs         |
+| 2: fee                     | `tx.Fee()`               | Get transaction fee in lovelace |
+| 3: ttl                     | `tx.ValidTo()`           | Get transaction time-to-live    |
+| 4: certificates            | `tx.Certificates()`      | Get certificates                |
+| 5: withdrawals             | `tx.Withdrawals()`       | Get reward withdrawals          |
+| 7: auxiliary_data_hash     | `tx.AuxiliaryDataHash()` | Get hash of metadata            |
+| 8: validity_interval_start | `tx.ValidFrom()`         | Get validity start (slot)       |
+| 9: script_data_hash        | `tx.ScriptDataHash()`    | Get hash of script data         |
+| 11: required_signers       | `tx.RequiredSigners()`   | Get required signers            |
+| 13: collateral_inputs      | `tx.Collateral()`        | Get collateral inputs           |
+| 16: reference_inputs       | `tx.ReferenceInputs()`   | Get reference inputs            |
 
 ### Important Witness Set Methods
 
-| Component | Extension Method | Description |
-|-----------|------------------|-------------|
-| VKey Witnesses | `witnessSet.VKeyWitnessesSet()` | Get signatures |
-| Native Scripts | `witnessSet.NativeScriptsSet()` | Get native scripts |
+| Component      | Extension Method                 | Description           |
+| -------------- | -------------------------------- | --------------------- |
+| VKey Witnesses | `witnessSet.VKeyWitnessesSet()`  | Get signatures        |
+| Native Scripts | `witnessSet.NativeScriptsSet()`  | Get native scripts    |
 | Plutus Scripts | `witnessSet.PlutusV1ScriptSet()` | Get Plutus V1 scripts |
 | Plutus Scripts | `witnessSet.PlutusV2ScriptSet()` | Get Plutus V2 scripts |
 | Plutus Scripts | `witnessSet.PlutusV3ScriptSet()` | Get Plutus V3 scripts |
-| Plutus Data | `witnessSet.PlutusDataSet()` | Get datums |
-| Redeemers | `witnessSet.Redeemers()` | Get redeemers |
+| Plutus Data    | `witnessSet.PlutusDataSet()`     | Get datums            |
+| Redeemers      | `witnessSet.Redeemers()`         | Get redeemers         |
 
-## 🔗 Inputs and UTxOs
+---
+
+## Inputs and UTxOs
 
 Cardano uses an extended UTxO model (eUTxO), a powerful evolution of Bitcoin's UTxO approach that enables complex smart contracts while maintaining the benefits of the original model.
-
-&nbsp;
 
 :::info The eUTxO Model
 Unlike account-based systems (like Ethereum), Cardano's eUTxO model tracks individual "coins" rather than account balances. Each transaction consumes existing UTxOs as inputs and creates new UTxOs as outputs. This approach offers better scalability, predictability, and parallelism.
@@ -329,13 +325,11 @@ Unlike account-based systems (like Ethereum), Cardano's eUTxO model tracks indiv
 - **Input**: Reference to a UTxO being spent, consisting of:
   - Transaction ID that created the UTxO
   - Output index within that transaction
-  
 - **UTxO**: Unspent Transaction Output, a "coin" that can be spent, containing:
   - Address (recipient)
   - Value (ADA and native tokens)
   - Optional datum (for smart contracts)
   - Optional script reference (for reference scripts)
-  
 - **Output**: New UTxO created by a transaction
 
 <details>
@@ -349,6 +343,7 @@ Cardano's extended UTxO model offers several advantages:
 - **Smart contract capability** - Datums and validators enable complex logic
 
 For Argus developers, this means you can efficiently track asset flows, account balances, and contract states by following UTxO consumption and creation.
+
 </details>
 
 ### CDDL Definition
@@ -365,7 +360,7 @@ transaction_output =
   ]
 
 ; In Alonzo era and earlier
-transaction_output = 
+transaction_output =
   [ address
   , amount : value
   ]
@@ -387,9 +382,9 @@ public async Task RollForwardAsync(Block block)
         foreach (var input in tx.Inputs())
         {
             byte[] txIdBytes = input.TransactionId; // Transaction that created this UTxO
-            string txIdHex = Convert.ToHexString(txIdBytes)    
+            string txIdHex = Convert.ToHexString(txIdBytes)
             uint index = input.Index;     // Index of output in that transaction
-            
+
             // Combine to form a unique UTxO reference
             string utxoRef = $"{txIdHex}#{index}";
         }
@@ -399,7 +394,7 @@ public async Task RollForwardAsync(Block block)
         {
             string address = output.Address();     // Recipient address
             ulong amount = output.Amount();     // amount in lovelace or with multiAsset
-            
+
             // Process multi-asset outputs
             if (output is LovelaceWithMultiAsset value)
             {
@@ -408,17 +403,17 @@ public async Task RollForwardAsync(Block block)
                 {
                     byte[] policyId = asset.Key     // Policy ID (script hash)
                     var assets = asset.Value.Value;        // Assets under this policy
-                    
+
                     foreach (var asset in assets)
                     {
                         byte[] assetNameBytes = asset.Key;   // Asset name as bytes
                         ulong quantity = asset.Value;        // Quantity of this asset
-                        
+
                         // Process each asset in the UTxO
                     }
                 }
             }
-            
+
             // Process script-locked outputs
             if (output.DatumOption() is not null)
             {
@@ -431,7 +426,7 @@ public async Task RollForwardAsync(Block block)
                     // Process Inline datum
                 }
             }
-            
+
             if (output.ScriptRef() is not null)
             {
                 var scriptRef = output.ScriptRef();    // Reference script (CIP-33)
@@ -444,6 +439,7 @@ public async Task RollForwardAsync(Block block)
 
 :::tip Building UTxO-Aware Applications
 When building Argus indexers, consider creating a UTxO-tracking database that:
+
 1. Adds new UTxOs when they appear in transaction outputs
 2. Marks UTxOs as spent when they're used as inputs
 3. Maintains a current "UTxO set" for any address
@@ -453,25 +449,21 @@ This approach enables efficient address balance queries, tracking of specific as
 
 ### Important Input/UTxO Fields and Extension Methods
 
-| CDDL Field | Extension Method | Description |
-|------------|------------------|-------------|
-| transaction_id | `input.TxId()` | Get the transaction ID |
-| index | `input.Index()` | Get the output index |
-| address | `output.Address()` | Get the recipient address |
-| amount (ADA) | `output.Amount()` | Get ADA amount in lovelace |
-| amount (assets) | `output.MultiAsset()` | Get non-ADA assets |
-| datum_option | `output.Datum()` | Get the datum (if any) |
-| script_reference | `output.ScriptRef()` | Get the script reference (if any) |
+| CDDL Field       | Extension Method      | Description                       |
+| ---------------- | --------------------- | --------------------------------- |
+| transaction_id   | `input.TxId()`        | Get the transaction ID            |
+| index            | `input.Index()`       | Get the output index              |
+| address          | `output.Address()`    | Get the recipient address         |
+| amount (ADA)     | `output.Amount()`     | Get ADA amount in lovelace        |
+| amount (assets)  | `output.MultiAsset()` | Get non-ADA assets                |
+| datum_option     | `output.Datum()`      | Get the datum (if any)            |
+| script_reference | `output.ScriptRef()`  | Get the script reference (if any) |
 
-&nbsp;
+---
 
-
-## 📜 Certificates
+## Certificates
 
 Certificates are special transaction components that perform various operations in the Cardano system, particularly related to staking, pool management, and governance.
-
-
-&nbsp; 
 
 :::info Certificate Purpose
 Certificates provide a standardized way to interact with Cardano's non-UTxO state components, such as the stake distribution, stake pool registry, and governance system. They represent commands that modify the ledger state in specific, predefined ways.
@@ -482,11 +474,13 @@ Certificates provide a standardized way to interact with Cardano's non-UTxO stat
 Certificates are used for:
 
 - **Stake Management**
+
   - Registering stake addresses (enabling delegation)
   - Deregistering stake addresses (to recover deposit)
   - Delegating stake to pools (to earn rewards)
 
 - **Pool Operations**
+
   - Registering stake pools (creating a new pool)
   - Updating pool parameters (changing margin, cost, etc.)
   - Retiring pools (removing from active set)
@@ -528,30 +522,30 @@ public async Task RollForwardAsync(Block block)
             foreach (var cert in tx.Certificates())
             {
                 // Get certificate type
-                
+
                 // Process based on certificate type
                 switch (cert)
                 {
                     case StakeRegistration:
                         // Process stake registration (new delegation capability)
                         break;
-                        
+
                     case StakeDeregistration:
                         // Process stake deregistration (removing delegation)
                         break;
-                        
+
                     case StakeDelegation:
                         // Process delegation certificate (delegating to a pool)
                         break;
-                        
+
                     case PoolRegistration:
                         // Process pool registration (new or updated pool)
                         break;
-                        
+
                     case PoolRetirement:
                         // Process pool retirement (scheduled shutdown)
                         break;
-                        
+
                 }
             }
         }
@@ -561,28 +555,26 @@ public async Task RollForwardAsync(Block block)
 
 :::tip Certificate Tracking Applications
 Certificates enable powerful indexing applications, such as:
+
 - **Delegation dashboards** that track stake movements between pools
 - **Pool analytics** showing registrations, parameter changes, and retirements
 - **Governance platforms** monitoring DRep registrations and vote delegations
 - **Reward calculators** that use delegation certificates to project staking returns
-:::
+  :::
 
 ### Important Certificate Fields and Extension Methods
 
-| Certificate Type | Extension Method | Description |
-|------------------|------------------|-------------|
-| Stake Registration | `cert.StakeCredential()` | Get stake credentials |
-| Stake Deregistration | `cert.DRepCredential()` | Get drep credential data |
-| Stake Delegation | `cert.PoolKeyHash()` | Get pool key hash |
+| Certificate Type     | Extension Method         | Description              |
+| -------------------- | ------------------------ | ------------------------ |
+| Stake Registration   | `cert.StakeCredential()` | Get stake credentials    |
+| Stake Deregistration | `cert.DRepCredential()`  | Get drep credential data |
+| Stake Delegation     | `cert.PoolKeyHash()`     | Get pool key hash        |
 
+---
 
-&nbsp;
-
-## 📝 Datums and Script References
+## Datums and Script References
 
 Datums and script references are critical components enabling Cardano's smart contract capabilities through the extended UTxO model.
-
-&nbsp;
 
 :::info Smart Contracts in eUTxO
 Unlike account-based blockchains where contracts have persistent storage, Cardano's eUTxO model uses **datums** to carry state between transactions and **validators** (scripts) to control when UTxOs can be spent. This design enables deterministic, parallelizable smart contracts.
@@ -594,7 +586,6 @@ Unlike account-based blockchains where contracts have persistent storage, Cardan
   - Provides input to validation scripts
   - Carries state information for contracts
   - Stores user-specific parameters
-  
 - **Script Reference**: Reference to a script that:
   - Defines the conditions for spending a UTxO
   - Can be a native script (multi-sig, timelock) or Plutus script (smart contract)
@@ -610,17 +601,18 @@ Datum handling has evolved across Cardano eras:
 - **Conway Era**: Enhanced script capabilities with Plutus V3, enabling more advanced datum usage
 
 Similarly, script references (CIP-33) were introduced in Babbage to reduce transaction sizes by allowing scripts to be referenced rather than included in each transaction.
+
 </details>
 
 ### CDDL Definition
 
 ```
-datum_option = 
+datum_option =
   [ 0, datum_hash : $hash32 ]  // Hash of the datum
   / [ 1, datum : plutus_data ] // Inline datum (Babbage+)
   / [ 2 ]                      // No datum
 
-script_reference = 
+script_reference =
   [ 0, native_script ]        // Reference to a native script
   / [ 1, plutus_v1_script ]   // Reference to a Plutus V1 script
   / [ 2, plutus_v2_script ]   // Reference to a Plutus V2 script
@@ -651,7 +643,7 @@ public async Task RollForwardAsync(Block block)
                     // Process the datum hash (you might need to look up the actual datum)
                 }
             }
-            
+
             // Check for and access script references
             if (output.ScriptRef() is not null)
             {
@@ -664,26 +656,24 @@ public async Task RollForwardAsync(Block block)
 
 :::warning Datum Handling
 When tracking script-related UTxOs, be careful with datum handling:
+
 1. For hash-only datums, you'll need to find the actual datum data in the transaction that spends the UTxO
 2. Inline datums are directly accessible but might be complex Plutus data structures
 3. Different contracts use different datum formats, so you may need contract-specific parsing logic
-:::
+   :::
 
 ### Important Datum/Script Fields and Extension Methods
 
-| Type | Extension Method | Description |
-|------|------------------|-------------|
-| Datum | `output.DatumOption()` | Retrieves the datum wether it's an Inline Datum or DatumHash |
-| Script | `output.ScriptRef()` | Retrieve the script from the output |
+| Type   | Extension Method       | Description                                                  |
+| ------ | ---------------------- | ------------------------------------------------------------ |
+| Datum  | `output.DatumOption()` | Retrieves the datum wether it's an Inline Datum or DatumHash |
+| Script | `output.ScriptRef()`   | Retrieve the script from the output                          |
 
-&nbsp;
+---
 
-
-## 💰 Withdrawals
+## Withdrawals
 
 Withdrawals represent the claiming of staking rewards from the reward account to a regular address.
-
-&nbsp;
 
 :::info Reward System
 In Cardano, staking rewards don't automatically appear in your wallet. They accumulate in special reward accounts (identified by stake credentials) and must be explicitly withdrawn via transactions containing withdrawal entries.
@@ -692,6 +682,7 @@ In Cardano, staking rewards don't automatically appear in your wallet. They accu
 ### What are Withdrawals?
 
 Withdrawals allow stake address owners to:
+
 - Claim accumulated staking rewards from delegation
 - Access pledge returns for pool operators
 - Retrieve treasury funds (in Conway era governance)
@@ -707,6 +698,7 @@ The withdrawal process works as follows:
 4. The reward account balance is reduced accordingly
 
 Withdrawals require a signature from the stake credential's private key to prevent unauthorized access to rewards.
+
 </details>
 
 ### CDDL Definition
@@ -730,7 +722,7 @@ public async Task RollForwardAsync(Block block)
         if (tx.Withdrawals().Any())
         {
             var withdrawals = tx.Withdrawals();
-            
+
             // Process each withdrawal
             foreach (var withdrawal in withdrawals)
             {
@@ -743,17 +735,18 @@ public async Task RollForwardAsync(Block block)
 
 :::tip Withdrawal Analytics
 Tracking withdrawals can provide valuable insights for:
+
 - **Reward analytics** platforms showing earnings history
 - **Staking dashboards** calculating actual claimed vs. unclaimed rewards
 - **Tax tools** that need to identify reward income events
 - **Pool performance** metrics combining delegation and reward data
-:::
+  :::
 
-## 🏷️ Metadata
+---
+
+## Metadata
 
 Transaction metadata allows attaching arbitrary data to transactions, enabling a rich ecosystem of off-chain applications and integrations.
-
-&nbsp;
 
 :::info Beyond The Ledger
 Metadata doesn't affect transaction validation or the ledger state. It's a place to store information that needs blockchain permanence but doesn't directly relate to token transfers or script execution.
@@ -762,26 +755,29 @@ Metadata doesn't affect transaction validation or the ledger state. It's a place
 ### What is Metadata?
 
 Metadata is additional information attached to a transaction that:
+
 - Doesn't affect transaction validation
 - Is stored permanently on the blockchain
 - Can be used for various purposes:
 
-| Use Case | Common Labels | Description |
-|----------|---------------|-------------|
-| NFT Properties | 721 (CIP-25) | Asset attributes, images, names |
-| Social Media | 1587-1589 | Decentralized social posts |
-| Document Notarization | Various | Document hashes and timestamps |
-| DApp-specific Data | Various | Application state and events |
-| Voting Records | Various | Governance votes and proposals |
+| Use Case              | Common Labels | Description                     |
+| --------------------- | ------------- | ------------------------------- |
+| NFT Properties        | 721 (CIP-25)  | Asset attributes, images, names |
+| Social Media          | 1587-1589     | Decentralized social posts      |
+| Document Notarization | Various       | Document hashes and timestamps  |
+| DApp-specific Data    | Various       | Application state and events    |
+| Voting Records        | Various       | Governance votes and proposals  |
 
 <details>
 <summary>Metadata Structure and Standards</summary>
 
 Metadata uses a flexible, hierarchical structure:
+
 - **Labels**: Integer identifiers for different metadata types
 - **Values**: Structured content (integers, strings, bytes, arrays, maps)
 
 Several community standards define common metadata formats:
+
 - **CIP-25**: NFT Metadata Standard
 - **CIP-20**: Transaction Message/Comment Metadata
 - **CIP-13**: Cardano Address Metadata Pointer
@@ -809,10 +805,10 @@ Chrysalis provides extension methods for working with transaction metadata:
 public async Task RollForwardAsync(Block block)
 {
     var auxDataSet = block.AuxiliaryDataSet();
-        
+
     foreach (var entry in auxDataSet)
     {      // Transaction hash
-        var metadata = entry.Metadata();      
+        var metadata = entry.Metadata();
         // process metadata
     }
 }
@@ -820,6 +816,7 @@ public async Task RollForwardAsync(Block block)
 
 :::tip Metadata-Aware Applications
 Consider building specialized indexers for common metadata types:
+
 - **NFT marketplaces** tracking CIP-25 metadata for display and search
 - **Social platforms** aggregating posts from metadata
 - **Document verification** systems monitoring notarized document hashes
@@ -828,12 +825,11 @@ Consider building specialized indexers for common metadata types:
 These applications can extract specific metadata patterns and make them searchable in ways the blockchain itself doesn't support.
 :::
 
+---
 
-## 🪙 Minting
+## Minting
 
 Minting is the process of creating or destroying native tokens in Cardano, one of the blockchain's most powerful features for assets beyond ADA.
-
-&nbsp;
 
 :::info Native Assets
 Unlike many blockchains that require smart contracts for tokens, Cardano supports native multi-assets directly in the protocol. This means tokens have the same security, execution efficiency, and ease of use as ADA itself.
@@ -842,13 +838,12 @@ Unlike many blockchains that require smart contracts for tokens, Cardano support
 ### What is Minting?
 
 Minting allows for:
+
 - **Creating new tokens** (positive quantities)
 - **Burning existing tokens** (negative quantities)
 - **Implementing custom token policies** (via scripts)
 
 Each policy is controlled by a script (native or Plutus) whose hash serves as the policy ID. This script defines the conditions under which tokens can be minted or burned.
-
-&nbsp;
 
 <details>
 <summary>Minting Mechanics</summary>
@@ -861,6 +856,7 @@ The minting process works as follows:
 4. The resulting tokens typically appear in transaction outputs
 
 Unlike many blockchains with fixed token supplies, Cardano allows policy-controlled token inflation or deflation through minting and burning operations.
+
 </details>
 
 ### CDDL Definition
@@ -870,6 +866,7 @@ mint = { + policy_id => { + asset_name => int64 } }
 ```
 
 Where:
+
 - `policy_id` is the hash of the minting policy script
 - `asset_name` is a byte string (up to 32 bytes) identifying the asset
 - `int64` quantity value indicates:
@@ -899,7 +896,7 @@ public async Task RollForwardAsync(Block block)
                 {
                     byte[] assetNameBytes = asset.Key;   // Asset name as bytes
                     ulong quantity = asset.Value;        // Quantity of this asset
-                    
+
                     // Process each asset in the UTxO
                 }
             }
@@ -911,6 +908,7 @@ public async Task RollForwardAsync(Block block)
 
 :::tip Token-Tracking Applications
 Minting tracking enables powerful applications:
+
 - **Token explorers** showing creation/burn events and circulating supply
 - **NFT platforms** detecting mints of new collections
 - **Asset dashboards** monitoring token distribution and activity
@@ -919,5 +917,6 @@ Minting tracking enables powerful applications:
 Consider using CIP-14 asset fingerprints for standardized token identification across your application.
 :::
 
+---
 
 By understanding these Cardano data structures and how to access them in Argus (via Chrysalis), you can build sophisticated indexers that extract and transform blockchain data according to your application's needs.

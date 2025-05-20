@@ -1,6 +1,6 @@
 ---
 title: Using Built-in Reducers
-sidebar_position: 2
+sidebar_position: 3
 hide_title: true
 ---
 
@@ -27,13 +27,13 @@ While you can always create custom reducers for specialized needs, built-in redu
 
 These reducers handle fundamental blockchain data structures that are useful for most applications:
 
-| Reducer | Description |
-| ------- | ----------- |
-| **BlockBySlotReducer** | Indexes blocks by their slot number for fast lookups |
-| **TxBySlotReducer** | Indexes transactions chronologically by slot for historical analysis |
-| **UtxoByAddressReducer** | Tracks UTXOs for specific addresses to monitor balances and activity |
-| **OutputBySlotReducer** | Indexes transaction outputs by slot for historical output analysis |
-| **BalanceByAddressReducer** | Tracks address balances for both ADA and native assets |
+| Reducer                     | Description                                                          |
+| --------------------------- | -------------------------------------------------------------------- |
+| **BlockBySlotReducer**      | Indexes blocks by their slot number for fast lookups                 |
+| **TxBySlotReducer**         | Indexes transactions chronologically by slot for historical analysis |
+| **UtxoByAddressReducer**    | Tracks UTXOs for specific addresses to monitor balances and activity |
+| **OutputBySlotReducer**     | Indexes transaction outputs by slot for historical output analysis   |
+| **BalanceByAddressReducer** | Tracks address balances for both ADA and native assets               |
 
 :::tip Why Use General Reducers
 General reducers provide the foundation for most blockchain applications. They handle common tasks like finding transactions, tracking UTXOs, and monitoring address balances, saving you from implementing these patterns from scratch.
@@ -66,6 +66,7 @@ DApp-specific reducers handle the complex logic of parsing specialized transacti
 - **Automatic updates** when protocols evolve
 
 Instead of building custom parsing logic for each DApp, you can use these reducers as building blocks for advanced applications like price aggregators, trading tools, and DeFi dashboards.
+
 </details>
 
 ---
@@ -134,7 +135,7 @@ Configure your application in `appsettings.json`:
   "Sync": {
     "Dashboard": {
       "TuiMode": true,
-      "RefreshInterval": 5000, 
+      "RefreshInterval": 5000,
       "DisplayType": "Full"
     },
     "State": {
@@ -190,11 +191,12 @@ using (var context = await _dbContextFactory.CreateDbContextAsync())
 
 :::tip Block Lookup Use Cases
 This reducer is particularly useful for:
+
 - Building block explorers
 - Implementing time-based queries
 - Converting slot numbers to timestamps
 - Tracking chain reorganizations
-:::
+  :::
 
 ### TxBySlot
 
@@ -237,6 +239,7 @@ When using the TxBySlot reducer:
 - Use in combination with other reducers for more advanced queries
 
 This reducer provides the chronological backbone for transaction history, while other reducers can index specific transaction aspects.
+
 </details>
 
 ### OutputBySlot
@@ -306,11 +309,12 @@ using (var context = await _dbContextFactory.CreateDbContextAsync())
 
 :::tip Balance Tracking Applications
 This reducer is essential for:
+
 - Wallet applications tracking user balances
 - Analytics dashboards monitoring large addresses
 - DeFi applications tracking liquidity positions
 - Trading tools monitoring asset movements
-:::
+  :::
 
 ---
 
@@ -370,6 +374,7 @@ The SundaePriceByToken reducer:
 - Provides timestamps for time-based analysis
 
 This data can power price charts, trading volume analytics, and arbitrage tools specifically for the SundaeSwap ecosystem.
+
 </details>
 
 ### MinswapPriceByToken
@@ -451,12 +456,13 @@ Console.WriteLine($"Average sale price: {avgPrice} ₳");
 
 :::tip NFT Market Analysis
 This reducer is perfect for:
+
 - Tracking floor prices for collections
 - Analyzing NFT market trends
 - Monitoring specific assets or collections
 - Building rarity-based pricing models
 - Identifying whale buyers and sellers
-:::
+  :::
 
 ### SplashPriceByToken
 
@@ -512,6 +518,7 @@ A powerful approach is to use multiple DEX reducers together to:
 5. Build comprehensive trading dashboards
 
 Each reducer provides protocol-specific data, but combining them gives you a complete view of the Cardano DeFi ecosystem.
+
 </details>
 
 ---

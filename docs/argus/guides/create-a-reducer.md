@@ -13,6 +13,7 @@ This guide will walk you through the process of setting up and using Argus, from
 ## Prerequisites
 
 Before getting started, ensure you have the following:
+
 ```
 - .NET 8.0 SDK or later installed
 - PostgreSQL database installed and running
@@ -169,10 +170,10 @@ The `IReducer<T>` interface is at the core of Argus' data processing pipeline. I
 
 `IReducer<T>` requires implementing two key methods:
 
-| Method | Purpose | Parameters |
-|--------|---------|------------|
-| **RollForwardAsync** | Called when new blocks are discovered, allowing you to extract and store blockchain data. | `Block` object |
-| **RollBackwardAsync** | Called during chain rollbacks, enabling you to remove or update data from blocks that are no longer part of the canonical chain. | `ulong slot` |
+| Method                | Purpose                                                                                                                          | Parameters     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| **RollForwardAsync**  | Called when new blocks are discovered, allowing you to extract and store blockchain data.                                        | `Block` object |
+| **RollBackwardAsync** | Called during chain rollbacks, enabling you to remove or update data from blocks that are no longer part of the canonical chain. | `ulong slot`   |
 
 By implementing these methods, your reducer actively tracks the evolving state of the blockchain. Together, they provide a robust mechanism to keep your database synchronized with the canonical chain, enabling reliable and up-to-date blockchain data management.
 
@@ -222,6 +223,7 @@ Argus supports multiple connection methods:
 
 Choose the option that works best for your environment.
 :::
+
 ### 6. Register Services
 
 Register Argus services in your `Program.cs`:
@@ -243,10 +245,10 @@ app.Run();
 
 These two extension methods connect all the components you've created:
 
-| Method | Purpose |
-|--------|---------|
+| Method                | Purpose                                                                       |
+| --------------------- | ----------------------------------------------------------------------------- |
 | **AddCardanoIndexer** | Configures database connection, node connection, and synchronization services |
-| **AddReducers** | Registers your reducers and connects them to your data models |
+| **AddReducers**       | Registers your reducers and connects them to your data models                 |
 
 These methods automate the wiring of components, allowing you to focus on your custom data models and reducers rather than infrastructure setup.
 
@@ -285,6 +287,7 @@ When your application starts, you'll see the Argus dashboard in your terminal sh
 ### Effective Reducer Design
 
 **Use slot-based tracking**:
+
 ```csharp
 // Store the slot with each record for rollback support
 public record TokenTransfer(
@@ -302,10 +305,11 @@ public record TokenTransfer(
 
 :::info Rollback Handling
 Storing the block slot with each record is essential for Argus's chain rollback handling:
+
 - Slot numbers uniquely identify blockchain positions
 - During rollbacks, Argus provides the exact slot to roll back to
 - All records with slots greater than the rollback point must be reversed
-:::
+  :::
 
 Storing the block slot with each record is crucial for Argus’s effective chain rollback management, as slot numbers uniquely mark blockchain positions. This allows Argus to precisely identify rollback points and reverse all records from slots beyond the rollback, ensuring accurate state restoration.
 
@@ -315,7 +319,7 @@ Storing the block slot with each record is crucial for Argus’s effective chain
 public async Task RollForwardAsync(Block block)
 {
     using var db = dbContextFactory.CreateDbContext();
-    
+
     // Process all operations within the same transaction
     foreach (var tx in block.TransactionBodies())
     {
@@ -323,16 +327,17 @@ public async Task RollForwardAsync(Block block)
         ProcessOutputs(db, tx);
         ProcessMetadata(db, tx);
     }
-    
+
     await db.SaveChangesAsync();
 }
 ```
 
 :::info Transaction Consistency
 Argus provides important transaction guarantees:
+
 - Each block is processed in an isolated transaction
 - All your reducers are synchronized to maintain cross-entity consistency
-:::
+  :::
 
 Argus ensures robust transaction guarantees by processing each block within an isolated transaction and synchronizing all reducers to maintain consistent state across multiple entities. This approach provides reliable and consistent data handling essential for blockchain applications.
 
@@ -353,7 +358,7 @@ public class ActiveUtxo
 }
 
 // Historical state
-public class HistoricalUtxo 
+public class HistoricalUtxo
 {
     public string TxHash { get; set; }
     public int Index { get; set; }
@@ -367,8 +372,9 @@ public class HistoricalUtxo
 
 :::info Dual-State Architecture
 This dual-state approach aligns perfectly with Cardano's UTxO model:
+
 - **Active State**: Tracks the current UTxO (Unspent Transaction Output)
 - **History State**: Records a transaction that has been executed
-:::
+  :::
 
 This dual-state approach complements Cardano’s UTxO model by maintaining an Active State for tracking current unspent outputs and a History State for recording completed transactions, ensuring accurate and efficient ledger management.

@@ -126,7 +126,7 @@ export default function Section2(): ReactNode {
                             className="w-83 sm:w-100 md:w-120 lg:w-auto"
                         />
                     </div>
-                    <div className="mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[360px] 2xl:w-110">
+                    <div className="mt-[40px] lg:!mt-[102.22px] lg:w-[441px] xl:w-[286.5px] 2xl:w-110">
                         <div className="flex flex-col justify-end pr-[6px]">
                             <nav>
                                 <ul className="!m-0 !p-0 hidden lg:block">

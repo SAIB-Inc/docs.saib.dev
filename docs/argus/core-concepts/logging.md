@@ -1,8 +1,10 @@
 ---
 title: Logging
-sidebar_label: Logging
 sidebar_position: 4
+hide_title: true
 ---
+
+![Reducers](/img/docs/argus/core-concepts/logging.webp)
 
 Argus provides built-in logging and an optional terminal UI dashboard to help you monitor sync progress and debug issues. You can configure logging behavior and enable or disable the TUI in your `appsettings.json`.
 

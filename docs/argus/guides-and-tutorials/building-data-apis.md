@@ -8,11 +8,11 @@ hide_title: true
 
 This guide walks through creating Application Programming Interfaces (APIs) for Cardano blockchain data indexed by Argus.Sync. We'll focus on practical implementation strategies using ASP.NET Core Minimal APIs, which provide a concise and straightforward approach to serving your indexed blockchain data to front-end UIs, backend services, and developer tools.
 
-## Core Prerequisites
+---
+
+## Prerequisites
 
 Before developing APIs with Argus.Sync, ensure your environment and data models are ready. A solid foundation here is key for a smooth development process.
-
-&nbsp;
 
 - **Active Argus.Sync Project**: Your .NET project must have Argus.Sync installed and configured. For a full setup walkthrough (including data models like `IReducerModel`, basic reducer implementation, and `DbContext` configuration, e.g., `MyDbContext`), consult the comprehensive [**Quick Start Guide**](../getting-started/quick-start.md). General setup details can be found in the [Setup Guides overview](./index.md).
 - **Understanding of Argus Reducers**: You should be familiar with how reducers, whether custom or [built-in](../usage-guides/builtin-reducers.md), operate to populate your database with blockchain data.
@@ -36,6 +36,8 @@ When designing APIs for blockchain data, consider these special factors:
 
 </details>
 
+---
+
 ## Getting Started with Minimal APIs
 
 This section focuses on building API endpoints using the streamlined Minimal APIs approach in ASP.NET Core.
@@ -43,8 +45,6 @@ This section focuses on building API endpoints using the streamlined Minimal API
 ### Architectural Consideration: Separate API Project
 
 For larger or production-grade systems, consider creating your **API in a separate project** rather than directly within your Argus indexer project. This modular approach offers several advantages:
-
-&nbsp;
 
 **Why a Separate API Project is Often Better:**
 
@@ -178,7 +178,9 @@ To begin creating your API endpoints:
    For larger applications, group related Minimal API endpoints using `RouteGroupBuilder` (as shown with `apiV1`) or explore libraries like Carter or FastEndpoints for advanced modularity.
    :::
 
-## Minimal API Examples & Use Cases
+---
+
+## Minimal API Examples
 
 This section provides practical examples of Minimal API endpoints, illustrating common data retrieval scenarios based on Argus-indexed data.
 
@@ -212,7 +214,7 @@ public record DexPriceDto(string TokenX, string TokenY, decimal PriceXPerY, deci
 Always project to these DTOs in your LINQ queries against Argus-populated tables.
 :::
 
-### Example 1: Fetching a Specific Block (DTO-based)
+### Example 1: Fetching a Specific Block
 
 - **Relevant Argus Reducer**: `BlockBySlotReducer` (populates `DbContext.BlocksBySlot`).
 
@@ -223,6 +225,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   apiV1.MapGet("/block-details/{slot:ulong}", async (ulong slot, IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var blockDto = await dbContext.BlocksBySlot 
           .AsNoTracking()
           .Where(b => b.Slot == slot)
@@ -248,6 +251,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   apiV1.MapGet("/account/balance/{address}", async (string address, IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var balanceEntity = await dbContext.BalanceByAddress 
           .AsNoTracking()
           .FirstOrDefaultAsync(b => b.Address == address);
@@ -282,6 +286,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   apiV1.MapGet("/account/utxos/{address}", async (string address, IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var utxos = await dbContext.OutputBySlot 
           .AsNoTracking()
           .Where(o => o.Address == address) 
@@ -301,7 +306,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   :::warning Important Note on UTXO Data
   The built-in `OutputBySlotReducer` stores the raw CBOR of the output. The `Amount` (Value) and `Datum` are transient and not directly stored as simple columns. To serve detailed UTXO asset information easily via an API, you would typically:
 
-  1. Create a **custom Argus reducer** that processes `TransactionOutput`s, extracts Lovelace and native asset quantities, and stores them in dedicated table columns.
+  1. Create a **custom Argus reducer** that processes `TransactionOutputs`, extracts Lovelace and native asset quantities, and stores them in dedicated table columns.
   2. Or, use the Chrysalis library (which Argus leverages for CBOR processing) to deserialize the `RawCbor` field from the `OutputBySlot` table.
   :::
 
@@ -313,11 +318,12 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
 
   ```csharp
   apiV1.MapGet("/dex/price/sundae", async (
-      [FromQuery] string tokenASubject,
-      [FromQuery] string tokenBSubject,
+      string tokenASubject,
+      string tokenBSubject,
       IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var latestPriceEntity = await dbContext.SundaePriceByToken
           .AsNoTracking()
           .Where(p => (p.TokenXSubject == tokenASubject && p.TokenYSubject == tokenBSubject) ||
@@ -329,6 +335,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
       {
           return Results.NotFound($"Price data not found for pair {tokenASubject}/{tokenBSubject}.");
       }
+
       var priceDto = new DexPriceDto(
           latestPriceEntity.TokenXSubject, 
           latestPriceEntity.TokenYSubject, 
@@ -336,12 +343,15 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
           latestPriceEntity.TokenYPerTokenX, 
           latestPriceEntity.Timestamp
       );
+
       return Results.Ok(priceDto);
   })
   .Produces<DexPriceDto>()
   .Produces(StatusCodes.Status404NotFound)
   .WithTags("DEX API");
   ```
+
+---
 
 ## Argus.Sync API Best Practices
 
@@ -368,8 +378,6 @@ Argus reducers, like the built-in `BlockBySlotReducer`, `TxBySlotReducer`, or `B
 
 Efficiently querying the database populated by Argus is key.
 
-&nbsp;
-
 **Targeted Indexing**:
 
 - Argus's built-in reducers typically define primary keys on their tables (e.g., `BlockBySlot.Slot`, `TxBySlot.Hash`, `BalanceByAddress.Address`) which are automatically indexed.
@@ -385,8 +393,6 @@ Efficiently querying the database populated by Argus is key.
 - Remember to create and apply migrations after adding indexes: `dotnet ef migrations add AddCustomIndexes`, `dotnet ef database update`.
 
 **Efficient Querying Techniques**:
-
-&nbsp;
 
 - For read-only API endpoints (most `GET` requests), always use `.AsNoTracking()` when querying Argus data. This prevents Entity Framework Core from tracking changes, leading to faster query execution.
 - Apply filtering conditions (`Where` clauses) as early as possible in your LINQ queries. This allows the database to perform the filtering efficiently, especially on indexed columns of Argus tables. Practices
@@ -579,19 +585,6 @@ apiV1.MapGet("/contracts/transactions", async (
 Remember that Argus.Sync's built-in PredicateBuilder focuses on the `Or` operation. For more complex query needs, you may consider extending it with additional methods or using the more fully-featured LinqKit package alongside it.
 </details>
 
-## Conclusion
-
-Building APIs for Cardano blockchain data enables you to create powerful applications that leverage the rich data indexed by Argus.Sync. By following these best practices and examples, you can create performant, maintainable APIs that serve your users' needs effectively.
-
-Remember these key points:
-
-1. **Use DTOs** to shape your data appropriately for API consumers
-2. **Implement pagination** for large datasets
-3. **Add proper database indexes** to optimize query performance
-4. **Use caching** for immutable blockchain data
-5. **Leverage PredicateBuilder** for complex dynamic queries with multiple conditions
-6. **Minimize database roundtrips** by batching related queries
-7. **Handle errors consistently** across your API
-8. **Version your API** from the beginning
+---
 
 With these guidelines in mind, you'll be well-equipped to build robust APIs that make your indexed Cardano blockchain data accessible and useful for a wide range of applications.

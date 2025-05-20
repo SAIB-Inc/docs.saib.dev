@@ -173,7 +173,7 @@ To begin creating your API endpoints:
    For larger applications, group related Minimal API endpoints using `RouteGroupBuilder` (as shown with `apiV1`) or explore libraries like Carter or FastEndpoints for advanced modularity.
    :::
 
-## Minimal API Examples & Use Cases
+## Minimal API Examples
 
 This section provides practical examples of Minimal API endpoints, illustrating common data retrieval scenarios based on Argus-indexed data.
 
@@ -218,6 +218,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   apiV1.MapGet("/block-details/{slot:ulong}", async (ulong slot, IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var blockDto = await dbContext.BlocksBySlot 
           .AsNoTracking()
           .Where(b => b.Slot == slot)
@@ -243,6 +244,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   apiV1.MapGet("/account/balance/{address}", async (string address, IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var balanceEntity = await dbContext.BalanceByAddress 
           .AsNoTracking()
           .FirstOrDefaultAsync(b => b.Address == address);
@@ -277,6 +279,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   apiV1.MapGet("/account/utxos/{address}", async (string address, IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var utxos = await dbContext.OutputBySlot 
           .AsNoTracking()
           .Where(o => o.Address == address) 
@@ -296,7 +299,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   :::warning Important Note on UTXO Data
   The built-in `OutputBySlotReducer` stores the raw CBOR of the output. The `Amount` (Value) and `Datum` are transient and not directly stored as simple columns. To serve detailed UTXO asset information easily via an API, you would typically:
 
-  1. Create a **custom Argus reducer** that processes `TransactionOutput`s, extracts Lovelace and native asset quantities, and stores them in dedicated table columns.
+  1. Create a **custom Argus reducer** that processes `TransactionOutputs`, extracts Lovelace and native asset quantities, and stores them in dedicated table columns.
   2. Or, use the Chrysalis library (which Argus leverages for CBOR processing) to deserialize the `RawCbor` field from the `OutputBySlot` table.
   :::
 
@@ -308,11 +311,12 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
 
   ```csharp
   apiV1.MapGet("/dex/price/sundae", async (
-      [FromQuery] string tokenASubject,
-      [FromQuery] string tokenBSubject,
+      string tokenASubject,
+      string tokenBSubject,
       IDbContextFactory<MyDbContext> dbFactory) =>
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
+
       var latestPriceEntity = await dbContext.SundaePriceByToken
           .AsNoTracking()
           .Where(p => (p.TokenXSubject == tokenASubject && p.TokenYSubject == tokenBSubject) ||
@@ -324,6 +328,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
       {
           return Results.NotFound($"Price data not found for pair {tokenASubject}/{tokenBSubject}.");
       }
+
       var priceDto = new DexPriceDto(
           latestPriceEntity.TokenXSubject, 
           latestPriceEntity.TokenYSubject, 
@@ -331,6 +336,7 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
           latestPriceEntity.TokenYPerTokenX, 
           latestPriceEntity.Timestamp
       );
+
       return Results.Ok(priceDto);
   })
   .Produces<DexPriceDto>()

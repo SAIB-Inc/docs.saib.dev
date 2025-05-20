@@ -149,16 +149,16 @@ export default function FooterLayout({
                 <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[141px] top-[-127px] hidden lg:block' />
 
                 <div className='mb-10 lg:mb-0'>
-                  <div className='flex flex-col text-center mb-10 sm:flex-row sm:gap-x-5 xl:gap-x-[31px] md:mb-[61.02px]'>
+                  <div className='flex w-full justify-center text-center mb-10 gap-x-5 sm:justify-start xl:gap-x-[31px] md:mb-[61.02px]'>
                     <h3 className='leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0 text-base md:!text-xl lg:!text-[25.43px]'>For Inquiries</h3>
-                    <h3 style={{color: theme.palette.grey[100]}} className='leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0 text-[25.43px] hidden sm:block'>/</h3>
+                    <h3 style={{color: theme.palette.grey[100]}} className='leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0 text-[25.43px]'>/</h3>
                     <h3 className='leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0 text-base md:!text-xl lg:!text-[25.43px]'>For Developer</h3>
                   </div>
 
-                  <div className='flex justify-between flex-col sm:justify-start sm:gap-18 sm:flex-row lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[429px]'>
-                    <div className='text-center sm:text-start'>
+                  <div className='flex justify-center gap-8 sm:justify-start sm:gap-14 lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[429px]'>
+                    <div>
                       <div className='md:mb-10 lg:mb-[60.64px]'>
-                        <p style={{color: theme.palette.grey[100]}} className='text-[12.71px] leading-[17.794px] tracking-[0.5084px] font-medium !mb-[10.17px] md:!mb-0'>INFO</p>
+                        <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] font-medium !mb-[10.17px] text-[12px] sm:!text-[12.71px] md:!mb-0'>INFO</p>
                       </div>
                       <div>
                         <div className='flex flex-col gap-y-[10.17px]'>
@@ -178,7 +178,7 @@ export default function FooterLayout({
                                 color: theme.palette.text.primary,
                               },
                             }}
-                            className='text-base md:!text-xl lg:!text-[25.43px]'
+                            className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                             underline="none">
                             Contact Us
                           </Link>
@@ -196,7 +196,7 @@ export default function FooterLayout({
                                 color: theme.palette.text.primary,
                               },
                             }}
-                            className='text-base md:!text-xl lg:!text-[25.43px]'
+                            className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                             underline="none">
                             Documentation
                           </Link>
@@ -222,7 +222,7 @@ export default function FooterLayout({
                                 color: theme.palette.text.primary,
                               },
                             }}
-                            className='text-base justify-center sm:!justify-start md:!text-xl lg:!text-[25.43px]'
+                            className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                             underline="none"
                           >
                             SAIB
@@ -230,17 +230,17 @@ export default function FooterLayout({
                               sx={{
                                 color:theme.palette.text.primary,
                               }}
-                              className='text-base md:!text-xl lg:!text-2xl'
+                              className='text-sm sm:!text-base md:!text-xl lg:!text-2xl'
                             />
                           </Link>
                         </div>
                       </div>
                     </div>
                     <div className='sm:w-full lg:w-auto'>
-                      <div className='flex items-center justify-center mt-10 md:block sm:!justify-start sm:!mt-0 md:mb-10 lg:mb-[60.64px]'>
-                        <p style={{color: theme.palette.grey[100]}} className='text-[12.71px] leading-[17.794px] tracking-[0.5084px] font-medium !mb-[7.63px] md:!mb-0'>DOCUMENTATION LINKS</p>
+                      <div className='flex items-center justify-center md:block sm:!justify-start md:mb-10 lg:mb-[60.64px]'>
+                        <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] font-medium !mb-[7.63px] text-[12px] sm:!text-[12.71px] md:!mb-0'>DOCUMENTATION</p>
                       </div>
-                      <div className='flex flex-col items-center gap-y-[7.63px] sm:items-start'>
+                      <div className='flex flex-col gap-y-[7.63px]'>
                         <Link
                           href="/docs/argus/intro"
                           sx={{
@@ -255,7 +255,7 @@ export default function FooterLayout({
                               color: theme.palette.text.primary,
                             },
                           }}
-                          className='text-base md:!text-xl lg:!text-[25.43px]'
+                          className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                           underline="none"
                         >
                           Argus
@@ -274,7 +274,7 @@ export default function FooterLayout({
                               color: theme.palette.text.primary,
                             },
                           }}
-                          className='text-base md:!text-xl lg:!text-[25.43px]'
+                          className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                           underline="none"
                         >
                           Chrysalis
@@ -295,7 +295,7 @@ export default function FooterLayout({
                               color: theme.palette.text.primary,
                             },
                           }}
-                          className='text-base md:!text-xl lg:!text-[25.43px]'
+                          className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                           underline="none"
                         >
                           COMP
@@ -314,7 +314,7 @@ export default function FooterLayout({
                               color: theme.palette.text.primary,
                             },
                           }}
-                          className='text-base md:!text-xl lg:!text-[25.43px]'
+                          className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                           underline="none"
                         >
                           Futura
@@ -335,7 +335,7 @@ export default function FooterLayout({
                               color: theme.palette.text.primary,
                             },
                           }}
-                          className='text-base md:!text-xl lg:!text-[25.43px]'
+                          className='text-sm sm:!text-base md:!text-xl lg:!text-[25.43px]'
                           underline="none"
                         >
                           Razor

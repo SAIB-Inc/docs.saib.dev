@@ -1,5 +1,5 @@
 ---
-title: Argus Overview
+title: Overview
 sidebar_position: 1
 hide_title: true
 ---
@@ -104,7 +104,7 @@ The modular design allows for new providers to be added when new connection meth
 
 ---
 
-##  Performance
+## Performance
 
 Performance is critical for blockchain applications that need to process large volumes of data efficiently. Argus has been engineered with performance as a central design principle:
 
@@ -128,7 +128,7 @@ By leveraging Entity Framework Core, Argus provides powerful data access capabil
 
 ---
 
-##  What Can You Build with Argus?
+## What Can You Build with Argus?
 
 Argus serves as a foundation for building a wide range of blockchain applications. Here are some of the key use cases that Argus is particularly well-suited for:
 
@@ -163,5 +163,3 @@ Argus serves as a foundation for building a wide range of blockchain application
 
 - **Custom Analytics Platforms**  
   Build specialized data pipelines for particular business needs with Cardano blockchain data
-
-

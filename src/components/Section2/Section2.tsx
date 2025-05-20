@@ -133,6 +133,7 @@ export default function Section2(): ReactNode {
                                     {projects.map((datum, index) => {
                                         return (
                                             <li
+                                                key={`${datum.name}-${index}`}
                                                 id={datum.name}
                                                 onClick={() => {
                                                     if (index !== currentProject) {
@@ -147,7 +148,7 @@ export default function Section2(): ReactNode {
                                                 <p
                                                     className="text-[26.01px] leading-[28.611px] select-none !tracking-[1.17045px] cursor-pointer !mb-[40px] text-right"
                                                     style={{
-                                                        fontFamily: "monospace",
+                                                        fontFamily: "Space Mono",
                                                         color: currentProject === index
                                                             ? theme.palette.text.primary
                                                             : alpha(theme.palette.text.primary, 0.2)
@@ -217,11 +218,9 @@ export default function Section2(): ReactNode {
                             Our Developers:
                         </p>
                         <div className="flex justify-center items-center relative left-16 top-1 sm:left-15 md:static md:justify-start">
-                            {developerList.map((datum, index) => {
-                                return (
-                                    <AvatarButton datum={datum} index={index}/> 
-                                );
-                            })}
+                            {developerList.map((datum, index) => (
+                                <AvatarButton key={`${datum.alt}-${index}`} datum={datum} index={index} />
+                            ))}
                         </div>
                     </div>
                     <div className="w-[305px] flex flex-col items-center text-center gap-6 md:w-[465px] md:text-end md:items-end md:gap-4 lg:gap-6">

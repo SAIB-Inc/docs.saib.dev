@@ -4,7 +4,9 @@ sidebar_position: 1
 hide_title: true
 ---
 
-# Setup
+![Argus Guides Banner](/img/docs/argus/guides-and-tutorials/argus-guides-banner.webp)
+
+<br/>
 
 This guide will walk you through the process of setting up and using Argus, from installation to running your first blockchain indexer application. You'll learn how to transform raw Cardano blockchain data into structured database records that can be easily queried and analyzed.
 
@@ -161,7 +163,7 @@ public class BlockReducer(IDbContextFactory<MyDbContext> dbContextFactory)
 ```
 
 :::info What is IReducer?
-The `IReducer<T>` interface is at the core of Argus's data processing pipeline. It defines how blockchain data is transformed and stored in your database. The `T` in `IReducer<T>` is your model type that implements `IReducerModel`.
+The `IReducer<T>` interface is at the core of Argus' data processing pipeline. It defines how blockchain data is transformed and stored in your database. The `T` in `IReducer<T>` is your model type that implements `IReducerModel`.
 :::
 
 #### Required Methods

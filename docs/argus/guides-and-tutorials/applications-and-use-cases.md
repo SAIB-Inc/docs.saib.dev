@@ -1,15 +1,18 @@
 ---
 title: Applications and Use Cases
 sidebar_position: 2
+hide_title: true
 ---
 
-# Applications and Use Cases
+![Argus Applications Banner](/img/docs/argus/guides-and-tutorials/argus-application-banner.webp)
 
-This guide explores practical applications of Argus and provides best practices for integrating it into your Cardano blockchain projects. You'll discover real-world use cases and implementation patterns that leverage Argus's powerful indexing capabilities.
+<br/>
+
+This guide explores practical applications of Argus and provides best practices for integrating it into your Cardano blockchain projects. You'll discover real-world use cases and implementation patterns that leverage Argus' powerful indexing capabilities.
 
 ## Example Use Cases
 
-Argus's flexible architecture makes it suitable for a wide range of blockchain applications. Here are some concrete examples with implementation details.
+Argus' flexible architecture makes it suitable for a wide range of blockchain applications. Here are some concrete examples with implementation details.
 
 ### Balance By Address Reducer
 
@@ -150,7 +153,7 @@ public record TokenTransfer(
 ```
 
 :::info Rollback Handling
-Storing the block slot with each record is essential for Argus's chain rollback handling:
+Storing the block slot with each record is essential for Argus' chain rollback handling:
 - Slot numbers uniquely identify blockchain positions
 - During rollbacks, Argus provides the exact slot to roll back to
 - All records with slots greater than the rollback point must be reversed

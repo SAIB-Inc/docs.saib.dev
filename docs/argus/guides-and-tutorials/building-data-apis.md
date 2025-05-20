@@ -575,14 +575,15 @@ Empowering clients to request precisely the data they need is crucial for an eff
 ### Error Handling
 
 **Use Standard HTTP Status Codes**: These are the first indication to the client about the outcome of their request.
+
 - `2xx` (Success): `200 OK`, `201 Created`, `204 No Content`
 - `4xx` (Client Errors):
-    - `400 Bad Request`: For general client errors, often due to invalid input or malformed requests. The response body should ideally detail the validation failures.
-    - `401 Unauthorized`: Authentication is required and has failed or has not yet been provided.
-    - `403 Forbidden`: The authenticated client does not have permission to access the requested resource.
-    - `404 Not Found`: The requested resource could not be found.
+  - `400 Bad Request`: For general client errors, often due to invalid input or malformed requests. The response body should ideally detail the validation failures.
+  - `401 Unauthorized`: Authentication is required and has failed or has not yet been provided.
+  - `403 Forbidden`: The authenticated client does not have permission to access the requested resource.
+  - `404 Not Found`: The requested resource could not be found.
 - `5xx` (Server Errors):
-    - `500 Internal Server Error`: A generic error message for unexpected server-side conditions. Avoid leaking sensitive stack traces or internal error details to the client in production environments.
+  - `500 Internal Server Error`: A generic error message for unexpected server-side conditions. Avoid leaking sensitive stack traces or internal error details to the client in production environments.
 
 &nbsp;
 

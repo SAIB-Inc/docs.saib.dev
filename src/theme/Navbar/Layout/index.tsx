@@ -53,7 +53,7 @@ export default function NavbarLayout({children}: Props): ReactNode {
           'navbar-sidebar--show': mobileSidebar.shown,
         },
         'w-[100vw]',
-        'p-0!',
+        'p-0!'
       )}>
       {children}
       <NavbarBackdrop onClick={mobileSidebar.toggle} />

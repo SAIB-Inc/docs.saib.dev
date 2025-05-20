@@ -74,30 +74,6 @@ The extension methods abstract away the era-specific differences, providing a co
 
 &nbsp;
 
-<details>
-<summary>Common Block Processing Patterns</summary>
-
-```csharp
-
-// Count total transactions
-int txCount = block.TransactionBodies().Length;
-
-
-// Process only certain transaction types
-foreach (var tx in block.TransactionBodies())
-{
-    if (tx.Mint().Any()) {
-        // Process NFT minting transactions
-    }
-    
-    if (tx.Outputs().Any) {
-        // Process outputs
-    }
-}
-```
-
-</details>
-
 ### Important Block Fields and Extension Methods
 
 | CDDL Field | Extension Method | Description |
@@ -186,7 +162,7 @@ transaction_witness_set = {
   ? 0 : [* vkey_witness],      // Verification key witnesses (signatures)
   ? 1 : [* native_script],     // Native scripts
   ? 2 : [* bootstrap_witness], // Byron-era witnesses
-  ? 3 : [* plutus_script],     // Plutus scripts
+  ? 3 : [* plutus_v1_script],     // Plutus V1 scripts
   ? 4 : [* plutus_data],       // Datums for Plutus scripts
   ? 5 : redeemers,             // Redeemers for Plutus scripts
   ? 6 : [* plutus_v2_script],  // Plutus V2 scripts (Babbage era)
@@ -223,74 +199,81 @@ For Argus developers, this means you need to understand which component contains
 Chrysalis provides extension methods to access all three components:
 
 ```csharp
+public async Task RollForwardAsync(Block block)
+{
 // Get the transaction body
-var txBody = tx;  // tx is already the transaction body in the RollForwardAsync method
+    var transactionBodies = block.TransactionBodies();
 
-// Basic transaction information from the body
-string txHash = txBody.Hash();
-ulong fee = txBody.Fee();
+    foreach (var tx in transactionBodies){
+        var txBody = tx;  // tx is already the transaction body in the RollForwardAsync method
 
-// Access transaction body components
-var inputs = txBody.Inputs();
-var outputs = txBody.Outputs();
+        // Basic transaction information from the body
+        string txHash = txBody.Hash();
+        ulong fee = txBody.Fee();
 
-// Check for optional components
-if (txBody.Certificates().Any())
-{
-    var certificates = txBody.Certificates();
-    // Process certificates
-}
+        // Access transaction body components
+        var inputs = txBody.Inputs();
+        var outputs = txBody.Outputs();
 
-if (txBody.Withdrawals().Any())
-{
-    var withdrawals = txBody.Withdrawals();
-    // Process withdrawals
-}
+        // Check for optional components
+        if (txBody.Certificates().Any())
+        {
+            var certificates = txBody.Certificates();
+            // Process certificates
+        }
 
-if (txBody.Mints().Any())
-{
-    var mint = txBody.Mint();
-    // Process token minting/burning
-}
+        if (txBody.Withdrawals().Any())
+        {
+            var withdrawals = txBody.Withdrawals();
+            // Process withdrawals
+        }
 
-// Access the witness set from the block
-var witnessSet = block.TransactionWitnessSets().ToList()[index];  // Get witness set at same index as body
+        if (txBody.Mints().Any())
+        {
+            var mint = txBody.Mint();
+            // Process token minting/burning
+        }
+    }
 
-// Process signatures
-if (witnessSet.VkeyWitnessSet().Any())
-{
+    // Access the witness set from the block
+    var witnessSet = block.TransactionWitnessSets().ToList()[index];  // Get witness set at same index as body
+
     // Process signatures
-}
+    if (witnessSet.VkeyWitnessSet().Any())
+    {
+        // Process signatures
+    }
 
-// Process Plutus scripts
-if (witnessSet.PlutusV1ScriptSet().Any()
-    || witnessSet.PlutusV2ScriptSet().Any()
-    || witnessSet.PlutusV3ScriptSet().Any()
-)
-{
     // Process Plutus scripts
-}
+    if (witnessSet.PlutusV1ScriptSet().Any()
+        || witnessSet.PlutusV2ScriptSet().Any()
+        || witnessSet.PlutusV3ScriptSet().Any()
+    )
+    {
+        // Process Plutus scripts
+    }
 
-// Process datums
-if (witnessSet.PlutusDataSet().Any())
-{
-    var datums = witnessSet.PlutusDataSet();
     // Process datums
-}
+    if (witnessSet.PlutusDataSet().Any())
+    {
+        var datums = witnessSet.PlutusDataSet();
+        // Process datums
+    }
 
-// Process redeemers
-if (witnessSet.Redeemers() is not null)
-{
-    var redeemers = witnessSet.Redeemers();
     // Process redeemers
-}
+    if (witnessSet.Redeemers() is not null)
+    {
+        var redeemers = witnessSet.Redeemers();
+        // Process redeemers
+    }
 
-// Access metadata from the auxiliary data set
-var auxDataSet = block.AuxiliaryDataSet();
-foreach (auxData in auxDataSet)
-{
-    var metadata = auxData.Metadata();
-    // Process metadata
+    // Access metadata from the auxiliary data set
+    var auxDataSet = block.AuxiliaryDataSet();
+    foreach (auxData in auxDataSet)
+    {
+        var metadata = auxData.Metadata();
+        // Process metadata
+    }
 }
 ```
 
@@ -390,59 +373,68 @@ transaction_output =
 Chrysalis provides extension methods for transaction inputs and outputs:
 
 ```csharp
-// Processing inputs (UTxOs being spent)
-foreach (var input in tx.Inputs())
+public async Task RollForwardAsync(Block block)
 {
-    byte[] txIdBytes = input.TransactionId; // Transaction that created this UTxO
-    string txIdHex = Convert.ToHexString(txIdBytes)    
-    uint index = input.Index;     // Index of output in that transaction
-    
-    // Combine to form a unique UTxO reference
-    string utxoRef = $"{txIdHex}#{index}";
-}
+    // Get all the transactions
+    var transactionBodies = block.TransactionBodies();
 
-// Processing outputs (new UTxOs being created)
-foreach (var output in tx.Outputs())
-{
-    string address = output.Address();     // Recipient address
-    ulong amount = output.Amount();     // amount in lovelace or with multiAsset
-    
-    // Process multi-asset outputs
-    if (output is LovelaceWithMultiAsset value)
+    foreach(var tx in transactionBodies)
     {
-        var multiasset = value.MultiAsset.Value
-        foreach (var asset in multiAsset)
+        // Processing inputs (UTxOs being spent)
+        foreach (var input in tx.Inputs())
         {
-            byte[] policyId = asset.Key     // Policy ID (script hash)
-            var assets = asset.Value.Value;        // Assets under this policy
+            byte[] txIdBytes = input.TransactionId; // Transaction that created this UTxO
+            string txIdHex = Convert.ToHexString(txIdBytes)    
+            uint index = input.Index;     // Index of output in that transaction
             
-            foreach (var asset in assets)
+            // Combine to form a unique UTxO reference
+            string utxoRef = $"{txIdHex}#{index}";
+        }
+
+        // Processing outputs (new UTxOs being created)
+        foreach (var output in tx.Outputs())
+        {
+            string address = output.Address();     // Recipient address
+            ulong amount = output.Amount();     // amount in lovelace or with multiAsset
+            
+            // Process multi-asset outputs
+            if (output is LovelaceWithMultiAsset value)
             {
-                byte[] assetNameBytes = asset.Key;   // Asset name as bytes
-                ulong quantity = asset.Value;        // Quantity of this asset
-                
-                // Process each asset in the UTxO
+                var multiasset = value.MultiAsset.Value
+                foreach (var asset in multiAsset)
+                {
+                    byte[] policyId = asset.Key     // Policy ID (script hash)
+                    var assets = asset.Value.Value;        // Assets under this policy
+                    
+                    foreach (var asset in assets)
+                    {
+                        byte[] assetNameBytes = asset.Key;   // Asset name as bytes
+                        ulong quantity = asset.Value;        // Quantity of this asset
+                        
+                        // Process each asset in the UTxO
+                    }
+                }
+            }
+            
+            // Process script-locked outputs
+            if (output.DatumOption() is not null)
+            {
+                if(output.DatumOption() is DatumHashOption datumHash)
+                {
+                    // Process datum hash
+                }
+                else
+                {
+                    // Process Inline datum
+                }
+            }
+            
+            if (output.ScriptRef() is not null)
+            {
+                var scriptRef = output.ScriptRef();    // Reference script (CIP-33)
+                // Process script reference
             }
         }
-    }
-    
-    // Process script-locked outputs
-    if (output.DatumOption() is not null)
-    {
-        if(output.DatumOption() is DatumHashOption datumHash)
-        {
-            // Process datum hash
-        }
-        else
-        {
-            // Process Inline datum
-        }
-    }
-    
-    if (output.ScriptRef() is not null)
-    {
-        var scriptRef = output.ScriptRef();    // Reference script (CIP-33)
-        // Process script reference
     }
 }
 ```
@@ -501,19 +493,6 @@ Certificates are used for:
   - Committee member registrations/resignations
   - Vote delegations
 
-<details>
-<summary>Certificate Lifecycle</summary>
-
-Most certificates follow a typical lifecycle:
-
-1. **Creation** - A certificate is included in a transaction
-2. **Validation** - Ledger rules verify the certificate is valid
-3. **Effect** - The certificate modifies the ledger state
-4. **Persistence** - The change remains until another certificate modifies it
-
-For example, a stake registration certificate enables an address to delegate, and this registration persists until a deregistration certificate is processed.
-</details>
-
 ### CDDL Definition
 
 ```
@@ -536,35 +515,42 @@ certificate =
 Chrysalis provides extension methods for working with certificates:
 
 ```csharp
-if (txBody.Certificates().Any())
+public async Task RollForwardAsync(Block block)
 {
-    foreach (var cert in tx.Certificates())
+    var transactionBodies = block.TransactionBodies()
+    foreach(var tx in transactionBodies)
     {
-        // Get certificate type
-        
-        // Process based on certificate type
-        switch (cert)
+        if (tx.Certificates().Any())
         {
-            case StakeRegistration:
-                // Process stake registration (new delegation capability)
-                break;
+            foreach (var cert in tx.Certificates())
+            {
+                // Get certificate type
                 
-            case StakeDeregistration:
-                // Process stake deregistration (removing delegation)
-                break;
-                
-            case StakeDelegation:
-                // Process delegation certificate (delegating to a pool)
-                break;
-                
-            case PoolRegistration:
-                // Process pool registration (new or updated pool)
-                break;
-                
-            case PoolRetirement:
-                // Process pool retirement (scheduled shutdown)
-                break;
-                
+                // Process based on certificate type
+                switch (cert)
+                {
+                    case StakeRegistration:
+                        // Process stake registration (new delegation capability)
+                        break;
+                        
+                    case StakeDeregistration:
+                        // Process stake deregistration (removing delegation)
+                        break;
+                        
+                    case StakeDelegation:
+                        // Process delegation certificate (delegating to a pool)
+                        break;
+                        
+                    case PoolRegistration:
+                        // Process pool registration (new or updated pool)
+                        break;
+                        
+                    case PoolRetirement:
+                        // Process pool retirement (scheduled shutdown)
+                        break;
+                        
+                }
+            }
         }
     }
 }
@@ -643,25 +629,32 @@ script_reference =
 Chrysalis provides extension methods for working with datums and script references:
 
 ```csharp
-foreach (var output in tx.Outputs())
+public async Task RollForwardAsync(Block block)
 {
-    // Check for and access datums
-    if (output.DatumOption() is not null)
+    var transactionBodies = block.TransactionBodies()
+    foreach(var tx in transactionBodies)
     {
-        if (output.DatumOption() is InlineDatumOption inlineDatum)
+        foreach (var output in tx.Outputs())
         {
-            // Process the inline datum based on its structure
+            // Check for and access datums
+            if (output.DatumOption() is not null)
+            {
+                if (output.DatumOption() is InlineDatumOption inlineDatum)
+                {
+                    // Process the inline datum based on its structure
+                }
+                else
+                {
+                    // Process the datum hash (you might need to look up the actual datum)
+                }
+            }
+            
+            // Check for and access script references
+            if (output.ScriptRef() is not null)
+            {
+            // process Script Reference
+            }
         }
-        else
-        {
-            // Process the datum hash (you might need to look up the actual datum)
-        }
-    }
-    
-    // Check for and access script references
-    if (output.ScriptRef() is not null)
-    {
-       // process Script Reference
     }
 }
 ```
@@ -726,14 +719,21 @@ Each entry maps a reward account (stake credential address) to a coin amount (lo
 Chrysalis provides extension methods for working with withdrawals:
 
 ```csharp
-if (tx.Withdrawals().Any())
+public async Task RollForwardAsync(Block block)
 {
-    var withdrawals = tx.Withdrawals();
-    
-    // Process each withdrawal
-    foreach (var withdrawal in withdrawals)
+    var transactionBodies = block.TransactionBodies()
+    foreach(var tx in transactionBodies)
     {
-        // Process the withdrawal
+        if (tx.Withdrawals().Any())
+        {
+            var withdrawals = tx.Withdrawals();
+            
+            // Process each withdrawal
+            foreach (var withdrawal in withdrawals)
+            {
+                // Process the withdrawal
+            }
+        }
     }
 }
 ```
@@ -803,12 +803,15 @@ transaction_metadata_value =
 Chrysalis provides extension methods for working with transaction metadata:
 
 ```csharp
-var auxDataSet = block.AuxiliaryDataSet();
-    
-foreach (var entry in auxDataSet)
-{      // Transaction hash
-    var metadata = entry.Metadata();      
-    // process metadata
+public async Task RollForwardAsync(Block block)
+{
+    var auxDataSet = block.AuxiliaryDataSet();
+        
+    foreach (var entry in auxDataSet)
+    {      // Transaction hash
+        var metadata = entry.Metadata();      
+        // process metadata
+    }
 }
 ```
 
@@ -875,21 +878,28 @@ Where:
 Chrysalis provides extension methods for working with token minting:
 
 ```csharp
-if (tx.Mint().Any())
+public async Task RollForwardAsync(Block block)
 {
-    var mint = tx.Mint();
-    // Process each policy
-    foreach (var asset in mint)
+    var transactionBodies = block.TransactionBodies()
+    foreach(var tx in transactionBodies)
     {
-        byte[] policyId = asset.Key     // Policy ID (script hash)
-        var assets = asset.Value.Value;        // Assets under this policy
-
-        foreach (var asset in assets)
+        if (tx.Mint().Any())
         {
-            byte[] assetNameBytes = asset.Key;   // Asset name as bytes
-            ulong quantity = asset.Value;        // Quantity of this asset
-            
-            // Process each asset in the UTxO
+            var mint = tx.Mint();
+            // Process each policy
+            foreach (var asset in mint)
+            {
+                byte[] policyId = asset.Key     // Policy ID (script hash)
+                var assets = asset.Value.Value;        // Assets under this policy
+
+                foreach (var asset in assets)
+                {
+                    byte[] assetNameBytes = asset.Key;   // Asset name as bytes
+                    ulong quantity = asset.Value;        // Quantity of this asset
+                    
+                    // Process each asset in the UTxO
+                }
+            }
         }
     }
 }
@@ -906,63 +916,5 @@ Minting tracking enables powerful applications:
 Consider using CIP-14 asset fingerprints for standardized token identification across your application.
 :::
 
-
-When building Argus reducers to process these Cardano structures, follow this pattern:
-
-```csharp
-public class MyReducer : IReducer<MyModel>
-{
-    private readonly IDbContextFactory<MyDbContext> _dbContextFactory;
-    
-    public MyReducer(IDbContextFactory<MyDbContext> dbContextFactory)
-    {
-        _dbContextFactory = dbContextFactory;
-    }
-    
-    public async Task RollForwardAsync(Block block)
-    {
-        // Extract block-level data
-        string blockHash = block.Header().Hash();
-        ulong blockNumber = block.Header().HeaderBody().BlockNumber();
-        ulong slot = block.Header().HeaderBody().Slot();
-        
-        using var db = await _dbContextFactory.CreateDbContextAsync();
-        
-        // Process transactions
-        foreach (var tx in block.TransactionBodies())
-        {
-            // Extract and process transaction data
-            string txHash = tx.Hash();
-            
-            // Access other components as needed
-            // ...
-            
-            // Store in database
-            db.MyModels.Add(new MyModel(
-                // Populate model properties
-            ));
-        }
-        
-        await db.SaveChangesAsync();
-    }
-    
-    public async Task RollBackwardAsync(ulong slot)
-    {
-        // Handle rollbacks for data consistency
-        using var db = await _dbContextFactory.CreateDbContextAsync();
-        
-        // Remove data from slots ≥ the rollback point
-        db.MyModels.RemoveRange(
-            db.MyModels.Where(m => m.Slot >= slot)
-        );
-        
-        await db.SaveChangesAsync();
-    }
-}
-```
-
-:::important Rollback Handling
-Always implement proper `RollBackwardAsync` logic. Chain reorganizations can happen in Cardano, and your indexer must be able to reliably "undo" the effects of blocks that are no longer part of the canonical chain.
-:::
 
 By understanding these Cardano data structures and how to access them in Argus (via Chrysalis), you can build sophisticated indexers that extract and transform blockchain data according to your application's needs.

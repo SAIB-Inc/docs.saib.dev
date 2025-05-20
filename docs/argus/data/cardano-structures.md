@@ -4,7 +4,7 @@ sidebar_position: 1
 hide_title: true
 ---
 
-![Cardano Data Structures Banner](/img/docs/argus/data-models/data-models-banner.png)
+![Cardano Data Structures Banner](/img/docs/argus/data-models/data-models-banner.webp)
 
 &nbsp;
 

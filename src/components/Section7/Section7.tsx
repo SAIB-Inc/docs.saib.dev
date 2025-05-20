@@ -105,7 +105,7 @@ export default function Section7(): ReactNode {
                                         }}
                                             className="border-r-8 border-b-8 w-14 aspect-square absolute top-2 -right-2 rounded-br-3xl lg:w-12 lg:top-[6px]"
                                         />
-                                        <p className="text-[32px] leading-8  inset-0 top-6 left-6 lg:left-4 lg:top-4">0{index + 1}</p>
+                                        <p className="text-[40px] leading-8  inset-0 top-6 left-6 lg:left-4 lg:top-4">0{index + 1}</p>
                                     </div>
                                     <div
                                         style={{
@@ -124,7 +124,7 @@ export default function Section7(): ReactNode {
                                         style={{
                                             color: theme.palette.grey[50]
                                         }}
-                                        className="text-[40px] leading-[48px] !mb-4 lg:!text-[34px] lg:!mb-7 xl:!mb-[38px] xl:!text-[40px]"
+                                        className="text-[32px] leading-[48px] !mb-4  md:!text-[34px] lg:!text-[34px] lg:!mb-7 xl:!mb-[38px] xl:!text-[40px]"
                                     >{datum.title}</h4>
                                     <p 
                                         style={{
@@ -184,7 +184,7 @@ export default function Section7(): ReactNode {
                                     style={{
                                         color: theme.palette.grey[50]
                                     }}
-                                    className="!text-[40px] leading-12 !mb-6"
+                                    className="!text-[32px] leading-12 !mb-6"
                                 >
                                     {datum.title}
                                 </h4>
@@ -194,7 +194,7 @@ export default function Section7(): ReactNode {
                         );
                     })}
                 </div>
-                <div className="flex gap-2 items-center md:hidden">
+                <div className="flex gap-2 items-center md:hidden mt-6">
                     {section7Items.map((_, i) => (
                         <div 
                             key={i}

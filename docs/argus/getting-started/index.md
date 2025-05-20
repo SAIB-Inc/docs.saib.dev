@@ -6,7 +6,9 @@ hide_title: true
 
 ![Argus Banner](/img/docs/argus/getting-started/argus.png)
 
-## 🔍 What is Argus?
+---
+
+## What is Argus?
 
 Argus is a .NET library that simplifies interactions with the Cardano blockchain by providing an efficient indexing framework. It processes block data into structured, queryable formats stored in a database, making blockchain data easier to work with for .NET developers.
 
@@ -14,7 +16,9 @@ Argus is a .NET library that simplifies interactions with the Cardano blockchain
 For a detailed explanation and demo of Argus, check out [this video walkthrough](https://x.com/clarkalesna/status/1859042521856532883)!
 :::
 
-## 🧩 Key Components
+---
+
+## Key Components
 
 Argus is built around several core components that work together to provide a complete indexing solution:
 
@@ -24,7 +28,9 @@ Argus is built around several core components that work together to provide a co
 - **CardanoIndexWorker** - Coordinates the synchronization process
 - **CardanoDbContext** - Manages database operations via Entity Framework Core
 
-## ✨ Features
+---
+
+## Features
 
 - **Customizable Reducers** - Define exactly how blockchain data should be processed and stored
 - **Flexible Connectivity Options** - Connect to Cardano in the way that suits you best
@@ -32,7 +38,9 @@ Argus is built around several core components that work together to provide a co
 - **Comprehensive Monitoring** - Track indexing progress with built-in dashboard
 - **Developer-Friendly Integration** - Built for .NET developers with full Entity Framework Core support
 
-## ⚙️ How Argus Works
+---
+
+## How Argus Works
 
 Argus follows a straightforward yet powerful pattern to process blockchain data:
 
@@ -52,7 +60,7 @@ public class BlockReducer : IReducer<BlockInfo>
         // Extract data from the block
         string hash = block.Header().Hash();
         ulong slot = block.Header().HeaderBody().Slot();
-        
+
         // Store it in your database
         using var db = dbContextFactory.CreateDbContext();
         db.Blocks.Add(new BlockInfo(hash, slot, DateTime.UtcNow));
@@ -69,16 +77,18 @@ public class BlockReducer : IReducer<BlockInfo>
 }
 ```
 
-## 🏗️ Architecture
+---
+
+## Architecture
 
 Argus consists of several specialized components working together:
 
-| Component | Description |
-| --------- | ----------- |
-| **Chain Providers** | Connect to the Cardano blockchain through various protocols |
-| **Reducers** | Process and transform blockchain data |
-| **CardanoIndexWorker** | Manages the synchronization process |
-| **CardanoDbContext** | Base context for database operations |
+| Component              | Description                                                 |
+| ---------------------- | ----------------------------------------------------------- |
+| **Chain Providers**    | Connect to the Cardano blockchain through various protocols |
+| **Reducers**           | Process and transform blockchain data                       |
+| **CardanoIndexWorker** | Manages the synchronization process                         |
+| **CardanoDbContext**   | Base context for database operations                        |
 
 #### Chain Providers
 
@@ -92,7 +102,9 @@ The modular design allows for new providers to be added when new connection meth
 
 ![Argus Architecture](/img/docs/argus/getting-started/argus_architecture.png)
 
-## ⚡ Performance
+---
+
+##  Performance
 
 Performance is critical for blockchain applications that need to process large volumes of data efficiently. Argus has been engineered with performance as a central design principle:
 
@@ -114,7 +126,9 @@ By leveraging Entity Framework Core, Argus provides powerful data access capabil
 - **Advanced Data Operations** - Support for complex filtering, sorting, and pagination
 - **Projections and Aggregations** - Retrieve exactly the data you need in the format you need it
 
-## 🛠️ What Can You Build with Argus?
+---
+
+##  What Can You Build with Argus?
 
 Argus serves as a foundation for building a wide range of blockchain applications. Here are some of the key use cases that Argus is particularly well-suited for:
 
@@ -149,3 +163,5 @@ Argus serves as a foundation for building a wide range of blockchain application
 
 - **Custom Analytics Platforms**  
   Build specialized data pipelines for particular business needs with Cardano blockchain data
+
+

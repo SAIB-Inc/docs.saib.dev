@@ -41,11 +41,12 @@ When a transaction occurs on the blockchain, the balance by address reducer proc
 
 :::info Balance Tracker Applications
 A balance tracker serves as the foundation for:
+
 - Wallet dashboards showing real-time assets
 - Portfolio tracking applications
 - Transaction history and activity monitors
 - Analytics for address behavior patterns
-:::
+  :::
 
 ### DeFi Reducer
 
@@ -71,10 +72,11 @@ The `DexPoolByIdReducer` captures the dynamic activity of decentralized exchange
 
 :::info DEX Reducer Capabilities
 With this model structure, your application can:
+
 - Track liquidity across multiple DEX protocols
 - Calculate and compare swap prices in real-time
 - Generate market depth charts for trading pairs
-:::
+  :::
 
 ### NFT Asset Reducer
 
@@ -105,7 +107,8 @@ This approach centers on tracking the current state of each NFT asset, capturing
 
 :::info NFT Asset Tracking Applications
 With this individual asset-focused approach, you can build features like:
+
 - Ownership verification and history validation
 - Individual asset valuation based on transaction history
 - Metadata exploration and visualization
-:::
+  :::

@@ -1,6 +1,6 @@
 ---
 title: Building Data APIs
-sidebar_position: 3
+sidebar_position: 4
 hide_title: true
 ---
 
@@ -133,10 +133,10 @@ To begin creating your API endpoints:
        {
            await using var dbContext = await dbFactory.CreateDbContextAsync();
            var takeCount = count ?? 10;
-           var latestBlocks = await dbContext.BlocksBySlot 
+           var latestBlocks = await dbContext.BlocksBySlot
                .OrderByDescending(b => b.Slot)
                .Take(takeCount)
-               .Select(b => new BlockSummaryDto(b.Slot, b.Hash, b.BlockTime)) 
+               .Select(b => new BlockSummaryDto(b.Slot, b.Hash, b.BlockTime))
                .ToListAsync();
            return Results.Ok(latestBlocks);
        }
@@ -166,9 +166,9 @@ To begin creating your API endpoints:
        // Exposing the database entity directly is generally discouraged.
        // For this basic example, we'll return it, but prefer DTOs (see DTO info box below).
        var blockDto = new BlockDetailDto(blockEntity.Slot, blockEntity.Hash, blockEntity.BlockTime, blockEntity.Size, blockEntity.EpochNo, blockEntity.EpochSlot);
-       return Results.Ok(blockDto); 
+       return Results.Ok(blockDto);
    })
-   .Produces<BlockDetailDto>() 
+   .Produces<BlockDetailDto>()
    .Produces(StatusCodes.Status404NotFound);
 
    // app.Run();
@@ -223,7 +223,7 @@ When using DTOs, consider projecting directly to them in your LINQ queries for o
 
 ```csharp
 // Example of projecting directly to a DTO
-var blockDto = await dbContext.BlocksBySlot 
+var blockDto = await dbContext.BlocksBySlot
     .AsNoTracking()
     .Where(b => b.Slot == slot)
     .Select(b => new BlockDetailDto(b.Slot, b.Hash, b.BlockTime, b.Size, b.EpochNo, b.EpochSlot))
@@ -244,14 +244,14 @@ var blockDto = await dbContext.BlocksBySlot
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
 
-      var blockDto = await dbContext.BlocksBySlot 
+      var blockDto = await dbContext.BlocksBySlot
           .AsNoTracking()
           .Where(b => b.Slot == slot)
-          .Select(b => new BlockDetailDto(b.Slot, b.Hash, b.BlockTime, b.Size, b.EpochNo, b.EpochSlot)) 
+          .Select(b => new BlockDetailDto(b.Slot, b.Hash, b.BlockTime, b.Size, b.EpochNo, b.EpochSlot))
           .FirstOrDefaultAsync();
 
       if (blockDto is null) return Results.NotFound($"Block {slot} not found.");
-      
+
       return Results.Ok(blockDto);
   })
   .Produces<BlockDetailDto>()
@@ -270,7 +270,7 @@ var blockDto = await dbContext.BlocksBySlot
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
 
-      var balanceEntity = await dbContext.BalanceByAddress 
+      var balanceEntity = await dbContext.BalanceByAddress
           .AsNoTracking()
           .FirstOrDefaultAsync(b => b.Address == address);
 
@@ -280,7 +280,7 @@ var blockDto = await dbContext.BlocksBySlot
       }
 
       var assetsDictionary = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ulong>>(balanceEntity.Assets ?? "{}");
-      
+
       var balanceDto = new AccountBalanceDto(
           balanceEntity.Address,
           balanceEntity.Lovelace,
@@ -305,11 +305,11 @@ var blockDto = await dbContext.BlocksBySlot
   {
       await using var dbContext = await dbFactory.CreateDbContextAsync();
 
-      var utxos = await dbContext.OutputBySlot 
+      var utxos = await dbContext.OutputBySlot
           .AsNoTracking()
-          .Where(o => o.Address == address) 
+          .Where(o => o.Address == address)
           .OrderByDescending(o => o.Slot)
-          .Select(o => new UtxoDto(o.Id, (uint)o.Index, o.Address, 0 /* Placeholder; see note on UTXO data */ )) 
+          .Select(o => new UtxoDto(o.Id, (uint)o.Index, o.Address, 0 /* Placeholder; see note on UTXO data */ ))
           .ToListAsync();
 
       return !utxos.Any()
@@ -326,7 +326,7 @@ var blockDto = await dbContext.BlocksBySlot
 
   1. Create a **custom Argus reducer** that processes `TransactionOutputs`, extracts Lovelace and native asset quantities, and stores them in dedicated table columns.
   2. Or, use the Chrysalis library (which Argus leverages for CBOR processing) to deserialize the `RawCbor` field from the `OutputBySlot` table.
-  :::
+     :::
 
 ### Example 4: Querying DEX Token Prices
 
@@ -355,10 +355,10 @@ var blockDto = await dbContext.BlocksBySlot
       }
 
       var priceDto = new DexPriceDto(
-          latestPriceEntity.TokenXSubject, 
-          latestPriceEntity.TokenYSubject, 
-          latestPriceEntity.TokenXPerTokenY, 
-          latestPriceEntity.TokenYPerTokenX, 
+          latestPriceEntity.TokenXSubject,
+          latestPriceEntity.TokenYSubject,
+          latestPriceEntity.TokenXPerTokenY,
+          latestPriceEntity.TokenYPerTokenX,
           latestPriceEntity.Timestamp
       );
 
@@ -402,11 +402,11 @@ Efficiently querying the database populated by Argus is key.
 - However, your API's query patterns might require additional custom indexes. For example, if you frequently query the table populated by `UtxoByAddressReducer` by `Slot` range, or a custom dApp reducer's table by a specific metadata attribute, ensure those columns are indexed.
 - Define custom indexes in your `DbContext.OnModelCreating`:
 
-    ```csharp
-    // Inside YourDbContext.OnModelCreating(ModelBuilder modelBuilder)
-    modelBuilder.Entity<YourCustomDappData>().HasIndex(d => d.RelevantMetadataField);
-    modelBuilder.Entity<BalanceByAddress>().HasIndex(b => b.UpdatedAtSlot);
-    ```
+  ```csharp
+  // Inside YourDbContext.OnModelCreating(ModelBuilder modelBuilder)
+  modelBuilder.Entity<YourCustomDappData>().HasIndex(d => d.RelevantMetadataField);
+  modelBuilder.Entity<BalanceByAddress>().HasIndex(b => b.UpdatedAtSlot);
+  ```
 
 - Remember to create and apply migrations after adding indexes: `dotnet ef migrations add AddCustomIndexes`, `dotnet ef database update`.
 
@@ -458,11 +458,11 @@ foreach (var asset in assets)
 {
     var metadata = await dbContext.TokenMetadata
         .FirstOrDefaultAsync(t => t.PolicyId + t.AssetName == asset.Key);
-        
+
     var price = await dbContext.TokenPrices
         .OrderByDescending(p => p.Timestamp)
         .FirstOrDefaultAsync(p => p.AssetId == asset.Key);
-        
+
     assetDetails.Add(new AssetDetailDto(
         asset.Key,
         metadata?.Name ?? "Unknown",
@@ -507,7 +507,7 @@ var pricesList = await dbContext.TokenPrices
     .AsNoTracking()
     .Where(pricePredicate)
     .ToListAsync();
-    
+
 // Process prices to get just the latest for each asset
 var latestPrices = pricesList
     .GroupBy(p => p.AssetId)
@@ -520,7 +520,7 @@ var latestPrices = pricesList
 var assetDetails = assets.Select(asset => {
     metadataDict.TryGetValue(asset.Key, out var metadata);
     latestPrices.TryGetValue(asset.Key, out var price);
-    
+
     return new AssetDetailDto(
         asset.Key,
         metadata?.Name ?? "Unknown",
@@ -544,29 +544,29 @@ apiV1.MapGet("/contracts/transactions", async (
     IDbContextFactory<MyDbContext> dbFactory) =>
 {
     await using var dbContext = await dbFactory.CreateDbContextAsync();
-    
+
     // Build script hash predicate
     var predicate = PredicateBuilder.False<Transaction>();
     foreach (var hash in scriptHashes)
     {
         // Capture variable to avoid closure issues
         string scriptHash = hash;
-        predicate = predicate.Or(tx => 
+        predicate = predicate.Or(tx =>
             tx.Outputs.Any(o => o.ScriptHash == scriptHash));
     }
-    
+
     // Apply slot range if provided
     var query = dbContext.Transactions.AsNoTracking();
-    
+
     if (fromSlot.HasValue)
         query = query.Where(tx => tx.Slot >= fromSlot.Value);
-        
+
     if (toSlot.HasValue)
         query = query.Where(tx => tx.Slot <= toSlot.Value);
-    
+
     // Apply the contract interaction predicate
     query = query.Where(predicate);
-    
+
     // Get results
     var results = await query
         .OrderByDescending(tx => tx.Slot)
@@ -575,11 +575,11 @@ apiV1.MapGet("/contracts/transactions", async (
             tx.Hash,
             tx.Slot,
             tx.BlockTime,
-            scriptHashes.FirstOrDefault(sh => 
+            scriptHashes.FirstOrDefault(sh =>
                 tx.Outputs.Any(o => o.ScriptHash == sh))
         ))
         .ToListAsync();
-        
+
     return Results.Ok(results);
 })
 .WithName("GetContractTransactions");
@@ -590,17 +590,18 @@ apiV1.MapGet("/contracts/transactions", async (
 
 :::info Common Use Cases for PredicateBuilder
 
-| Scenario | Example |
-|----------|---------|
-| **Multiple OR conditions** | Searching for transactions matching any of several criteria |
-| **Multi-address operations** | Finding transactions across a set of related wallet addresses |
-| **Token collections** | Querying assets belonging to a specific policy ID group |
+| Scenario                        | Example                                                        |
+| ------------------------------- | -------------------------------------------------------------- |
+| **Multiple OR conditions**      | Searching for transactions matching any of several criteria    |
+| **Multi-address operations**    | Finding transactions across a set of related wallet addresses  |
+| **Token collections**           | Querying assets belonging to a specific policy ID group        |
 | **Smart contract interactions** | Identifying transactions that interact with specific contracts |
-| **Dynamic filter criteria** | Handling variable search parameters in API endpoints |
+| **Dynamic filter criteria**     | Handling variable search parameters in API endpoints           |
 
 :::
 
 Remember that Argus.Sync's built-in PredicateBuilder focuses on the `Or` operation. For more complex query needs, you may consider extending it with additional methods or using the more fully-featured LinqKit package alongside it.
+
 </details>
 
 ---

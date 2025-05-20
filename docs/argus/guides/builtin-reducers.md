@@ -324,6 +324,44 @@ This reducer is essential for:
 
 Tracks token prices and swaps on SundaeSwap DEX.
 
+#### On-chain Datum Structure
+
+SundaeSwap uses a pool datum to track liquidity information. In Chrysalis, this is represented by the following C# class:
+
+```csharp
+[CborConverter(typeof(ConstrConverter))]
+[CborOptions(Index = 0)]
+public record SundaeSwapLiquidityPool(
+    [CborIndex(0)]
+    CborBytes Identifier,
+
+    [CborIndex(1)]
+    AssetClassTuple Assets,
+
+    [CborIndex(2)]
+    CborUlong CirculatingLp,
+
+    [CborIndex(3)]
+    CborUlong BidFeesPer10Thousand,
+
+    [CborIndex(4)]
+    CborUlong AskFeesPer10Thousand,
+
+    [CborIndex(5)]
+    Option<MultisigScript> FeeManager,
+
+    [CborIndex(6)]
+    CborUlong MarketOpen,
+
+    [CborIndex(7)]
+    CborUlong ProtocolFees
+) : CborBase;
+```
+
+The SundaeSwap reducer detects swaps by analyzing transactions interacting with SundaeSwap pools, calculating the exchange rates based on the input and output values.
+
+#### Database Model
+
 | Property        | Type           | Description                                   |
 | --------------- | -------------- | --------------------------------------------- |
 | Slot            | ulong          | Block slot number (part of composite key)     |
@@ -381,6 +419,50 @@ This data can power price charts, trading volume analytics, and arbitrage tools 
 
 Monitors prices on Minswap DEX pools.
 
+#### On-chain Datum Structure
+
+Minswap uses a different pool model. In Chrysalis, the pool datum is represented by:
+
+```csharp
+[CborConverter(typeof(ConstrConverter))]
+[CborOptions(Index = 0)]
+public record MinswapLiquidityPool(
+    [CborIndex(0)]
+    Inline<Credential> StakeCredential,
+
+    [CborIndex(1)]
+    AssetClass AssetX,
+
+    [CborIndex(2)]
+    AssetClass AssetY,
+
+    [CborIndex(3)]
+    CborUlong TotalLiquidity,
+
+    [CborIndex(4)]
+    CborUlong ReserveA,
+
+    [CborIndex(5)]
+    CborUlong ReserveB,
+
+    [CborIndex(6)]
+    CborUlong BaseFeeAnumerator,
+
+    [CborIndex(7)]
+    CborUlong BaseFeeBNumerator,
+
+    [CborIndex(8)]
+    Option<CborUlong> FeeSharingNumeratorOpt,
+
+    [CborIndex(9)]
+    Bool AllowDynamicFee
+) : CborBase;
+```
+
+The Minswap reducer tracks swap events by monitoring transactions that interact with Minswap pool addresses, identifying the tokens being exchanged and calculating the effective exchange rate.
+
+#### Database Model
+
 | Property        | Type           | Description                                   |
 | --------------- | -------------- | --------------------------------------------- |
 | Slot            | ulong          | Block slot number (part of composite key)     |
@@ -423,6 +505,39 @@ Note that the Minswap reducer includes an additional `PoolId` field not present 
 ### JpgPriceByToken
 
 Tracks NFT sales on JPG Store marketplace.
+
+#### On-chain Datum Structure
+
+JPG Store uses a listing datum for its NFT marketplace. In Chrysalis, this is defined as:
+
+```csharp
+[CborConverter(typeof(ConstrConverter))]
+[CborOptions(Index = 0)]
+public record Listing(
+    [CborIndex(0)]
+    CborIndefList<ListingPayout> Payouts,
+
+    [CborIndex(1)]
+    CborBytes OwnerPkh
+) : CborBase;
+
+// Listing payout structure
+[CborConverter(typeof(ConstrConverter))]
+[CborOptions(Index = 1)]
+public record ListingPayout(
+    [CborIndex(0)]
+    Address Address,
+
+    [CborIndex(1)]
+    CborUlong Amount
+) : CborBase;
+```
+
+JPG Store uses both datum-based listings and a recognizable transaction pattern for purchases:
+
+The JPG Store reducer analyzes these transaction patterns to extract NFT sale information, focusing on single-asset transfers with payment flows typical of marketplace transactions.
+
+#### Database Model
 
 | Property        | Type           | Description                               |
 | --------------- | -------------- | ----------------------------------------- |
@@ -467,6 +582,53 @@ This reducer is perfect for:
 ### SplashPriceByToken
 
 Tracks token prices on the Splash DEX.
+
+#### On-chain Datum Structure
+
+Splash is a DEX on Cardano. In Chrysalis, the pool datum is defined as:
+
+```csharp
+[CborConverter(typeof(ConstrConverter))]
+[CborOptions(Index = 0)]
+public record SplashLiquidityPool(
+    [CborIndex(0)]
+    AssetClass PoolNft,
+
+    [CborIndex(1)]
+    AssetClass AssetX,
+
+    [CborIndex(2)]
+    AssetClass AssetY,
+
+    [CborIndex(3)]
+    AssetClass AssetLq,
+
+    [CborIndex(4)]
+    CborUlong Fee1,
+
+    [CborIndex(5)]
+    CborUlong Fee2,
+
+    [CborIndex(6)]
+    CborUlong Fee3,
+
+    [CborIndex(7)]
+    CborUlong Fee4,
+
+    [CborIndex(8)]
+    CborMaybeIndefList<Inline<Credential>> Verification,
+
+    [CborIndex(9)]
+    CborUlong MarketOpen,
+
+    [CborIndex(10)]
+    CborBytes Last
+) : CborBase;
+```
+
+The Splash reducer works by detecting swap events in transactions that interact with Splash protocol addresses, computing the effective exchange rates from the input and output differences.
+
+#### Database Model
 
 | Property        | Type           | Description                                   |
 | --------------- | -------------- | --------------------------------------------- |

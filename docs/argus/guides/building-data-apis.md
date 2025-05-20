@@ -4,7 +4,7 @@ sidebar_position: 4
 hide_title: true
 ---
 
-# ![Building Data APIs](/img/docs/argus/guides/data_api_banner.webp)
+![Building Data APIs](/img/docs/argus/guides/data-api-banner.webp)
 
 This guide walks through creating Application Programming Interfaces (APIs) for Cardano blockchain data indexed by Argus.Sync. We'll focus on practical implementation strategies using ASP.NET Core Minimal APIs, which provide a concise and straightforward approach to serving your indexed blockchain data to front-end UIs, backend services, and developer tools.
 
@@ -14,7 +14,7 @@ This guide walks through creating Application Programming Interfaces (APIs) for 
 
 Before developing APIs with Argus.Sync, ensure your environment and data models are ready. A solid foundation here is key for a smooth development process.
 
-- **Active Argus.Sync Project**: Your .NET project must have Argus.Sync installed and configured. For a full setup walkthrough (including data models like `IReducerModel`, basic reducer implementation, and `DbContext` configuration, e.g., `MyDbContext`), consult the comprehensive [**Quick Start Guide**](../getting-started/quick-start.md). General setup details can be found in the [Setup Guides overview](./index.md).
+- **Active Argus.Sync Project**: Your .NET project must have Argus.Sync installed and configured. For a full setup walkthrough (including data models like `IReducerModel`, basic reducer implementation, and `DbContext` configuration, e.g., `MyDbContext`), consult the comprehensive [**Quick Start Guide**](../getting-started/quick-start.md). General setup details can be found in the [Create a Reducer guide](../guides/create-a-reducer.md).
 - **Understanding of Argus Reducers**: You should be familiar with how reducers, whether custom or [built-in](../guides/builtin-reducers.md), operate to populate your database with blockchain data.
 - **ASP.NET Core Web API Knowledge**: A working knowledge of creating API endpoints using ASP.NET Core is essential. This guide particularly emphasizes the Minimal API syntax.
 - **Database Fundamentals**: A basic understanding of database concepts, especially the role of indexes, will be beneficial when reviewing the optimization sections.

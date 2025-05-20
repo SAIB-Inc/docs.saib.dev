@@ -29,7 +29,7 @@ export default function Section4(): ReactNode {
             <div className="absolute -top-2 hidden xl:block">
                 <img src={colorMode === 'dark' ? '/img/Section3/background_connector_dark.webp' : '/img/Section3/background_connector_light.webp'} alt="background connector"/>
             </div>
-            <div className="container mx-auto">
+            <div className="container mx-auto !mt-15">
                 <div className="relative sm:my-16 pt-20 md:pt-40">
                     <div
                         style={{ backgroundColor: theme.palette.primary.main }}
@@ -60,7 +60,7 @@ export default function Section4(): ReactNode {
                             style={{
                                 backgroundColor: theme.palette.grey[300]
                             }}
-                            className="w-full !h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
+                            className="w-full h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
                         >
                             <div className="absolute top-2 right-2 z-10">
                             <Tooltip

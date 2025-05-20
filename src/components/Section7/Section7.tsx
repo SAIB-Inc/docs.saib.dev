@@ -50,7 +50,7 @@ export default function Section7(): ReactNode {
     
     return (
         <section style={{ backgroundColor: theme.palette.background.default }} className={`place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1080px]`}>
-            <div className="container !py-20 md:!pt-[274.77px] md:!pb-[152.23px]">
+            <div className="container py-20 md:!pt-[274.77px] md:!pb-[152.23px]">
                 <div className="flex flex-col justify-center !pb-8 md:!pb-15">
                     <div className="relative flex flex-col-reverse gap-4  items-center md:gap-0">
                         <h1 className="relative text-center font-semibold text-3xl sm:!text-5xl md:leading-[53.76px] md:tracking-[0.56px] md:!text-[56px]">
@@ -117,7 +117,7 @@ export default function Section7(): ReactNode {
                                 </div>
                                 <div
                                     style={{backgroundColor: theme.palette.primary.main}}
-                                    className={`rounded-b-[24px] px-6 pt-6 pb-10 lg:pl-8 lg:pr-[46px] lg:pt-10 xl:pt-[57px] xl:pb-[50px] rounded-tl-3xl ${index===2 ? "lg:!h-[391px]" : "!h-75 lg:!h-[391px]"} xl:h-auto`}
+                                    className={`rounded-b-[24px] px-6 pt-6 pb-10 lg:pl-8 lg:pr-[46px] lg:pt-10 xl:pt-[57px] xl:pb-[50px] rounded-tl-3xl ${index===2 ? "lg:!h-[391px]" : "h-75 lg:!h-[391px]"} xl:h-auto`}
                                 >
                                     <h4 
                                         style={{
@@ -183,7 +183,7 @@ export default function Section7(): ReactNode {
                                     style={{
                                         color: theme.palette.grey[50]
                                     }}
-                                    className="text-[32px] leading-12 !mb-6"
+                                    className="!text-[40px] leading-12 !mb-6"
                                 >
                                     {datum.title}
                                 </h4>

@@ -16,7 +16,7 @@ export default function Section5(): ReactNode {
                     </h1>
                 </div>
 
-                <div className="w-auto flex flex-col gap-4 mt-5 !md:mt-10 !md:flex-row">
+                <div className="w-auto flex flex-col gap-4 mt-5 md:mt-10 md:flex-row">
                     <Paper
 
                         className="!p-6 !block !overflow-hidden shadow-lg! md:!p-10 md:!pb-0 md:h-100 lg:!pt-20 lg:h-[655px] xl:!pl-[49px] xl:!w-[646px] xl:!h-[654px] xl:!pr-[45.74px]"
@@ -54,9 +54,9 @@ export default function Section5(): ReactNode {
                             </div>
                         </Paper>
                         <Paper
-                            className="!p-6 lg:!pt-20 !block shadow-lg! md:!hidden lg:!block lg:!pl-12 lg:!pr-10 lg:!pb-10 lg:!w-[636px] lg:!h-[319px]"
+                            className="!p-6 lg:!pt-20 block shadow-lg! md:!hidden lg:!block lg:!pl-12 lg:!pr-10 lg:!pb-10 lg:!w-[636px] lg:!h-[319px]"
                         >
-                            <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] text-3xl md:!text-5xl lg:!mb-[48px] ">Customizability</h2>
+                            <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] text-3xl md:!text-5xl lg:!mb-[48px]">Customizability</h2>
                             <div className="flex gap-4 lg:justify-between">
                                 <p className="text-sm sm:!text-lg lg:!text-xl lg:!leading-[28px]">
                                     Leverage built-in reducers or create <br className="hidden lg:block" />
@@ -74,7 +74,7 @@ export default function Section5(): ReactNode {
                     sx={{
                         justifyContent: 'space-between',
                     }}
-                    className="!p-6 gap-20 mt-4 !hidden w-full md:!flex md:h-60 md:items-center md:!p-10 lg:!hidden"
+                    className="!p-6 gap-20 mt-4 hidden w-full md:flex md:h-60 md:items-center md:!p-10 lg:!hidden"
                 >
                     <div>
                         <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] !text-3xl md:!text-5xl lg:!mb-[48px] ">Customizability</h2>

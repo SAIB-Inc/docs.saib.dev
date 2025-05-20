@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 import Editor from '@monaco-editor/react';
-import { useTheme } from '@mui/material';
 
 export default function CodeBlock({ editorRef }) {
-  const muiTheme = useTheme();
   const { colorMode } = useColorMode();
 
   let currentEditor = null;
@@ -62,7 +60,6 @@ export default function CodeBlock({ editorRef }) {
     });
   };
 
-  // Switch Monaco theme based on color mode
   useEffect(() => {
     if (currentMonaco) {
       currentMonaco.editor.setTheme(
@@ -98,27 +95,17 @@ export default function CodeBlock({ editorRef }) {
           const addCustomDecorations = () => {
             const text = model.getValue();
             const customStyleTerms = {
-              'AppDbContext': '#C478FF',
               'dbContextFactory': '#3FA4FF',
-              'blockSlot': '#3FA4FF',
-              'blockCbor': '#3FA4FF',
-              'block': '#3FA4FF',
-              'slot': '#3FA4FF',
-              'blockDataEntry': '#3FA4FF',
+              '_validatorScriptHash': '#3FA4FF',
+              'dbContext': '#3FA4FF',
+              'blockDataQuery': '#3FA4FF',
+              'outputs': '#3FA4FF',
+              'outputAddress': '#3FA4FF',
+              'configuration': '#3FA4FF',
               'RollForwardAsync': '#FFAC60',
               'RollBackwardAsync': '#FFAC60',
-              'CborSerializer': '#FFAC60',
-              'Serialize': '#1AC69C',
-              'Header': '#1AC69C',
-              'HeaderBody': '#1AC69C',
               'Slot': '#1AC69C',
-              'Raw': '#1AC69C',
-              'Value': '#C478FF',
-              'ToArray': '#1AC69C',
-              'BlockData': '#C478FF',
-              'Add': '#1AC69C',
               'SaveChangesAsync': '#1AC69C',
-              'IDbContextFactory': '#FFFFFF',
             };
 
             const decorations = [];

@@ -11,8 +11,6 @@ This guide walks through creating Application Programming Interfaces (APIs) for 
 
 Before developing APIs with Argus.Sync, ensure your environment and data models are ready. A solid foundation here is key for a smooth development process.
 
-&nbsp;
-
 - **Active Argus.Sync Project**: Your .NET project must have Argus.Sync installed and configured. For a full setup walkthrough (including data models like `IReducerModel`, basic reducer implementation, and `DbContext` configuration, e.g., `MyDbContext`), consult the comprehensive [**Quick Start Guide**](../getting-started/quick-start.md). General setup details can be found in the [Setup Guides overview](./index.md).
 - **Understanding of Argus Reducers**: You should be familiar with how reducers, whether custom or [built-in](../usage-guides/builtin-reducers.md), operate to populate your database with blockchain data.
 - **ASP.NET Core Web API Knowledge**: A working knowledge of creating API endpoints using ASP.NET Core is essential. This guide particularly emphasizes the Minimal API syntax.
@@ -42,8 +40,6 @@ This section focuses on building API endpoints using the streamlined Minimal API
 ### Architectural Consideration: Separate API Project
 
 For larger or production-grade systems, consider creating your **API in a separate project** rather than directly within your Argus indexer project. This modular approach offers several advantages:
-
-&nbsp;
 
 **Why a Separate API Project is Often Better:**
 
@@ -367,8 +363,6 @@ Argus reducers, like the built-in `BlockBySlotReducer`, `TxBySlotReducer`, or `B
 
 Efficiently querying the database populated by Argus is key.
 
-&nbsp;
-
 **Targeted Indexing**:
 
 - Argus's built-in reducers typically define primary keys on their tables (e.g., `BlockBySlot.Slot`, `TxBySlot.Hash`, `BalanceByAddress.Address`) which are automatically indexed.
@@ -384,8 +378,6 @@ Efficiently querying the database populated by Argus is key.
 - Remember to create and apply migrations after adding indexes: `dotnet ef migrations add AddCustomIndexes`, `dotnet ef database update`.
 
 **Efficient Querying Techniques**:
-
-&nbsp;
 
 - For read-only API endpoints (most `GET` requests), always use `.AsNoTracking()` when querying Argus data. This prevents Entity Framework Core from tracking changes, leading to faster query execution.
 - Apply filtering conditions (`Where` clauses) as early as possible in your LINQ queries. This allows the database to perform the filtering efficiently, especially on indexed columns of Argus tables. Practices

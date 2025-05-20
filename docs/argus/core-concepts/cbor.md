@@ -4,7 +4,7 @@ sidebar_position: 2
 hide_title: true
 ---
 
-![CBOR Deserialization](/img/docs/argus/core-concepts/reducer.webp)
+![CBOR Deserialization](/img/docs/argus/core-concepts/cbor.webp)
 
 **CBOR deserialization** is essential for working with on-chain data in Argus. It enables you to convert between Cardano's CBOR-encoded blockchain data and strongly-typed C# objects that your application can easily work with.
 
@@ -62,7 +62,7 @@ public partial record SundaeSwapLiquidityPoolDatum(
     [CborOrder(1)] AssetClassTuple Assets,
     [CborOrder(2)] ulong CirculatingLp,
     [CborOrder(3)] ulong BidFeesPer10Thousand,
-    [CborOrder(4)] ulong AskFeesPer10Thousand, 
+    [CborOrder(4)] ulong AskFeesPer10Thousand,
     [CborOrder(5)] Option<MultisigScript> FeeManager,
     [CborOrder(6)] ulong MarketOpen,
     [CborOrder(7)] ulong ProtocolFees
@@ -125,13 +125,13 @@ public async Task RollForwardAsync(Block block)
         for (int idx = 0; idx < outputs.Count; idx++)
         {
             var output = outputs[idx];
-            
+
             // Try to deserialize the datum as a SundaeSwap pool datum
             if (TryDeserializeDatum(output, out SundaeSwapLiquidityPoolDatum datum))
             {
-                // Create UTxO reference 
+                // Create UTxO reference
                 string outRef = $"{txHash}#{idx}";
-                
+
                 // Process the datum and store in database
                 var pool = new SundaeSwapPool
                 {
@@ -140,9 +140,9 @@ public async Task RollForwardAsync(Block block)
                     TxOutputRaw = output.Raw?.ToArray()!,
                     // Map fields from datum to your entity
                     Identifier = Convert.ToHexString(datum.Identifier),
-                    Asset1 = Convert.ToHexString(datum.Assets.Asset1.PolicyId) + "." + 
+                    Asset1 = Convert.ToHexString(datum.Assets.Asset1.PolicyId) + "." +
                              Convert.ToHexString(datum.Assets.Asset1.AssetName),
-                    Asset2 = Convert.ToHexString(datum.Assets.Asset2.PolicyId) + "." + 
+                    Asset2 = Convert.ToHexString(datum.Assets.Asset2.PolicyId) + "." +
                              Convert.ToHexString(datum.Assets.Asset2.AssetName),
                     CirculatingLp = datum.CirculatingLp,
                     BidFeesPer10Thousand = datum.BidFeesPer10Thousand,
@@ -172,7 +172,7 @@ private bool TryDeserializeDatum(TransactionOutput txOut, out SundaeSwapLiquidit
         // Only process UTXOs for your specific script address
         var address = new WalletAddress(txOut.Address());
         var scriptHash = address.GetPaymentKeyHash() ?? Array.Empty<byte>();
-        
+
         // Check if this output belongs to the contract we're interested in
         if (Convert.ToHexString(scriptHash).ToLowerInvariant() != _targetScriptHash)
             return false;
@@ -184,13 +184,13 @@ private bool TryDeserializeDatum(TransactionOutput txOut, out SundaeSwapLiquidit
 
         // Deserialize the datum
         var inlineDatum = new CborEncodedValue(datumOption.Data());
-        
+
         // Option 1: Using generated reader method
         datum = SundaeSwapLiquidityPoolDatum.Read(inlineDatum.GetValue());
-        
+
         // Option 2: Using the generic serializer
         // datum = CborSerializer.Deserialize<SundaeSwapLiquidityPoolDatum>(inlineDatum.GetValue());
-        
+
         return datum is not null;
     }
     catch (Exception)
@@ -207,11 +207,11 @@ private bool TryDeserializeDatum(TransactionOutput txOut, out SundaeSwapLiquidit
 
 Chrysalis provides several useful types for working with CBOR data:
 
-| Type | Description |
-|------|-------------|
-| `CborEncodedValue` | Wrapper for raw CBOR bytes with helper methods |
-| `Option<T>` | Represents optional values (similar to Rust/Aiken Option) |
-| `CborBase` | Base class that provides serialization functionality |
+| Type               | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `CborEncodedValue` | Wrapper for raw CBOR bytes with helper methods            |
+| `Option<T>`        | Represents optional values (similar to Rust/Aiken Option) |
+| `CborBase`         | Base class that provides serialization functionality      |
 
 When your types are decorated with CBOR attributes, Chrysalis automatically generates strongly-typed serialization code during compilation, making CBOR handling much more reliable than manual approaches.
 

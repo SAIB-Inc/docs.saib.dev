@@ -49,11 +49,11 @@ export default function Section7(): ReactNode {
     };
     
     return (
-        <section style={{ backgroundColor: theme.palette.background.default }} className={`place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1080px]`}>
-            <div className="container !py-20 md:!pt-[274.77px] md:!pb-[152.23px]">
-                <div className="flex flex-col justify-center !pb-8 md:!pb-15">
+        <section style={{ backgroundColor: theme.palette.background.default }} className={`bg-cover md:!pt-[274.77px] ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} xl:h-[1080px]`}>
+            <div className="container">
+                <div className="flex flex-col justify-center pt-20 !pb-8 md:!pb-15 md:!pt-0">
                     <div className="relative flex flex-col-reverse gap-4  items-center md:gap-0">
-                        <h1 className="relative text-center font-semibold !text-3xl sm:!text-5xl md:leading-[53.76px] md:tracking-[0.56px] md:!text-[56px]">
+                        <h1 className="relative text-center font-semibold text-3xl sm:!text-5xl md:leading-[53.76px] md:tracking-[0.56px] md:!text-[56px]">
                             <span>
                                 Why&nbsp;
                             </span>
@@ -78,7 +78,7 @@ export default function Section7(): ReactNode {
                     </div>
 
                     <div className="md:mt-[38px]">
-                        <p className="text-center !text-base lg:!text-lg">
+                        <p className="text-center text-base lg:!text-lg">
                             .NET is a powerful, open-source development platform backed by a vast global community.<br className="hidden lg:block"/>
                             It offers a comprehensive ecosystem of tools and libraries, enabling developers to build <br className="hidden lg:block"/>
                             high-performance, scalable applications across various platforms.
@@ -105,7 +105,7 @@ export default function Section7(): ReactNode {
                                         }}
                                             className="border-r-8 border-b-8 w-14 aspect-square absolute top-2 -right-2 rounded-br-3xl lg:w-12 lg:top-[6px]"
                                         />
-                                        <p className="text-[32px] leading-8  inset-0 top-6 left-6 lg:left-4 lg:top-4">0{index + 1}</p>
+                                        <p className="text-[40px] leading-8  inset-0 top-6 left-6 lg:left-4 lg:top-4">0{index + 1}</p>
                                     </div>
                                     <div
                                         style={{
@@ -118,13 +118,13 @@ export default function Section7(): ReactNode {
                                 </div>
                                 <div
                                     style={{backgroundColor: theme.palette.primary.main}}
-                                    className={`rounded-b-[24px] px-6 pt-6 pb-10 lg:pl-8 lg:pr-[46px] lg:pt-10 xl:pt-[57px] xl:pb-[50px] rounded-tl-3xl ${index===2 ? "lg:!h-[391px]" : "!h-75 lg:!h-[391px]"} xl:h-auto`}
+                                    className={`rounded-b-[24px] px-6 pt-6 pb-10 lg:pl-8 lg:pr-[46px] lg:pt-10 xl:pt-[57px] xl:pb-[50px] rounded-tl-3xl ${index===2 ? "lg:!h-[391px]" : "h-75 lg:!h-[391px]"} xl:h-auto`}
                                 >
                                     <h4 
                                         style={{
                                             color: theme.palette.grey[50]
                                         }}
-                                        className="!text-[40px] leading-[48px] !mb-4 lg:!text-[34px] lg:!mb-7 xl:!mb-[38px] xl:!text-[40px]"
+                                        className="text-[32px] leading-[48px] !mb-4  md:!text-[34px] lg:!text-[34px] lg:!mb-7 xl:!mb-[38px] xl:!text-[40px]"
                                     >{datum.title}</h4>
                                     <p 
                                         style={{
@@ -194,7 +194,7 @@ export default function Section7(): ReactNode {
                         );
                     })}
                 </div>
-                <div className="flex gap-2 items-center mt-6 md:hidden">
+                <div className="flex gap-2 items-center md:hidden mt-6">
                     {section7Items.map((_, i) => (
                         <div 
                             key={i}

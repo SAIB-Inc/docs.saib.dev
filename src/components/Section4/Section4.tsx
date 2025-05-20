@@ -25,11 +25,11 @@ export default function Section4(): ReactNode {
     };
 
     return (
-        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col relative items-center w-screen overflow-hidden md:overflow-visible lg:h-[952.98px]">
+        <section id="section-4" style={{ backgroundColor: theme.palette.background.default }} className="flex flex-col relative overflow-hidden items-center w-screen pt-2 pb-15 sm:pb-auto sm:pt-0 md:overflow-visible lg:h-[952.98px]">
             <div className="absolute -top-2 hidden xl:block">
                 <img src={colorMode === 'dark' ? '/img/Section3/background_connector_dark.webp' : '/img/Section3/background_connector_light.webp'} alt="background connector"/>
             </div>
-            <div className="container mx-auto">
+            <div className="container mx-auto !sm:mt-15 !md:mt-0">
                 <div className="relative sm:my-16 pt-20 md:pt-40">
                     <div
                         style={{ backgroundColor: theme.palette.primary.main }}
@@ -41,9 +41,9 @@ export default function Section4(): ReactNode {
                     <div className="absolute right-7 z-10 w-16 -top-2 sm:-right-7 sm:w-auto sm:-top-14 md:right-0 md:top-6">
                         <Section4Wizard className="!text-[110px] sm:!text-[163px]"/>
                     </div>
-                    <div className="relative overflow-hidden bg-cover bg-center p-4 flex justify-between flex-col items-center bg-[url(/img/Section4/purple_bg_mobile.svg)] rounded-[24px] gap-6 md:gap-2 lg:rounded-[48px] md:h-100 md:flex-row md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
+                    <div className="relative overflow-x-hidden bg-cover bg-center p-4 flex justify-between flex-col items-center bg-[url(/img/Section4/purple_bg_mobile.svg)] rounded-[24px] gap-6 md:gap-2 lg:rounded-[48px] md:h-100 md:flex-row md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">
                         <div className="z-10 mt-14 w-full md:mt-0 lg:w-[661px]">
-                            <h1 style={{color: theme.palette.grey[50]}} className="!text-3xl !mb-0 min-[345px]:!text-5xl text-center md:text-start md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
+                            <h1 style={{color: theme.palette.grey[50]}} className="text-3xl !mb-0 min-[345px]:!text-5xl text-center md:text-start md:text-4xl lg:!text-[64px] lg:!leading-[60px]">
                                 <span>
                                     Streamline <br/>
                                 </span>
@@ -60,7 +60,7 @@ export default function Section4(): ReactNode {
                             style={{
                                 backgroundColor: theme.palette.grey[300]
                             }}
-                            className="w-full !h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
+                            className="w-full h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
                         >
                             <div className="absolute top-2 right-2 z-10">
                             <Tooltip

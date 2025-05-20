@@ -105,8 +105,8 @@ export default function Section2(): ReactNode {
         <section id="section-2" style={{ backgroundColor: theme.palette.background.default }} className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
             <div className="container flex flex-col h-full">
                 <div className="flex justify-between flex-col lg:flex-row lg:h-[calc(100%-230px)] xl:h-[calc(100%-382px)] 2xl:h-[calc(100%-300px)]">
-                    <div className="!mt-18 md:!mt-26">
-                        <h1 className="font-semibold tracking-[0.56px] !text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[40px]">
+                    <div className="mt-18 md:!mt-26">
+                        <h1 className="font-semibold tracking-[0.56px] text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[40px]">
                             <span>Check Out </span><br className="hidden lg:block xl:hidden"/>
                             <span>The </span>
                             <span style={{ color: theme.palette.text.secondary }} >Latest Resources</span>
@@ -126,7 +126,7 @@ export default function Section2(): ReactNode {
                             className="w-83 sm:w-100 md:w-120 lg:w-auto"
                         />
                     </div>
-                    <div className="!mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[360px] 2xl:w-110">
+                    <div className="mt-[40px] lg:!mt-[102.22px] lg:w-116 xl:w-[360px] 2xl:w-110">
                         <div className="flex flex-col justify-end pr-[6px]">
                             <nav>
                                 <ul className="!m-0 !p-0 hidden lg:block">

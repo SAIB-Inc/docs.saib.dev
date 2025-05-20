@@ -18,11 +18,11 @@ export default function Section3(): ReactNode {
     return (
         <section style={{ backgroundColor:theme.palette.background.default }} className={`bg-lines relative flex flex-col items-center bg-center ${colorMode === 'dark' ? 'bg-[url(/img/Section3/background_dark.webp)]' : 'bg-[url(/img/Section3/background_light.webp)]'} pb-20 sm:pb-20 lg:pb-0 lg:h-[1088.02px]`}>
             <div className="container flex flex-col justify-center items-center z-10">
-                <div className="text-center flex items-center w-full justify-between mt-[36px] gap-6 flex-col sm:flex-row sm:gap-4 mb-28 sm:justify-start sm:w-auto lg:gap-0 lg:mb-[178px] lg:h-[64px]">
+                <div className="text-center flex items-center w-full justify-between mt-[36px] flex-col sm:flex-row mb-28 sm:justify-start sm:w-auto lg:gap-0 lg:mb-[178px] lg:h-[64px]">
                     <div className="w-max!">
                         <p className="leading-[34.8px] font-semibold w-max! text-2xl sm:hidden">Used By</p>
                     </div>
-                    <div className="flex items-center gap-8 sm:gap-4">
+                    <div className="flex items-center gap-8 sm:gap-2 md:gap-4">
                         <div className="w-32 sm:w-30 lg:w-40">
                             <img 
                                 alt="Buriza" 

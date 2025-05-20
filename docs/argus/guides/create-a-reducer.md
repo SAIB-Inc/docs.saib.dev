@@ -4,9 +4,11 @@ sidebar_position: 1
 hide_title: true
 ---
 
-# Setup
+![Argus Creater Reducer Banner](/img/docs/argus/guides/argus-create-reducer-banner.webp)
 
 This guide will walk you through the process of setting up and using Argus, from installation to running your first blockchain indexer application. You'll learn how to transform raw Cardano blockchain data into structured database records that can be easily queried and analyzed.
+
+---
 
 ## Prerequisites
 
@@ -21,6 +23,8 @@ Before getting started, ensure you have the following:
 If you don't have a local Cardano node, you can use remote node services like those offered by Demeter.run. This guide works with both local and remote node options.
 :::
 
+---
+
 ## Overview of Argus
 
 Argus is a blockchain indexing framework that transforms raw Cardano blockchain data into structured database records. Before diving into the implementation details, here's a high-level overview of how Argus works:
@@ -34,6 +38,8 @@ Argus is a blockchain indexing framework that transforms raw Cardano blockchain 
 5. **Services** - Register and configure the components for automatic operation
 
 Argus simplifies blockchain data processing by connecting to a Cardano node, reading blockchain data, processing it through reducers, and storing results in your database. The framework handles synchronization tracking, chain rollbacks, and data integrity automatically. By following this guide, you'll create a complete indexing application customized to your specific data needs.
+
+---
 
 ## Step-by-Step Guide
 
@@ -156,7 +162,7 @@ public class BlockReducer(IDbContextFactory<MyDbContext> dbContextFactory)
 ```
 
 :::info What is IReducer?
-The `IReducer<T>` interface is at the core of Argus's data processing pipeline. It defines how blockchain data is transformed and stored in your database. The `T` in `IReducer<T>` is your model type that implements `IReducerModel`.
+The `IReducer<T>` interface is at the core of Argus' data processing pipeline. It defines how blockchain data is transformed and stored in your database. The `T` in `IReducer<T>` is your model type that implements `IReducerModel`.
 :::
 
 #### Required Methods
@@ -271,6 +277,8 @@ dotnet run
 :::tip Synchronization Progress
 When your application starts, you'll see the Argus dashboard in your terminal showing synchronization progress. Initial synchronization from the genesis block can take substantial time, so consider starting from a more recent block using the `Slot` and `Hash` settings in your configuration.
 :::
+
+---
 
 ## Argus Integration Best Practices
 

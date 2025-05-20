@@ -1,6 +1,7 @@
 ---
 title: Setup
 sidebar_position: 1
+hide_title: true
 ---
 
 # Setup
@@ -58,7 +59,9 @@ dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 #### What are these packages for?
 
 These packages supply all the necessary tools to connect with a Cardano node, handle blockchain data processing, and save the data in a PostgreSQL database:
+
 <br/>
+
 - **Argus.Sync**: The core library that provides blockchain indexing functionality.
 - **Microsoft.EntityFrameworkCore.Design**: Required for EF Core migrations and database schema generation.
 - **Npgsql.EntityFrameworkCore.PostgreSQL**: PostgreSQL provider for Entity Framework Core.
@@ -114,7 +117,9 @@ public class MyDbContext(
 
 :::info What is CardanoDbContext?
 The `CardanoDbContext` is a specialized Entity Framework Core `DbContext` that needs to be inherited by your database context. This inheritance provides the essential Argus framework integration, allowing your database to interact with the blockchain data processing pipeline.
+
 <br/>
+
 We connect to our database schema by defining a DbSet, which corresponds to the `BlockInfo` model we created earlier.
 :::
 
@@ -162,6 +167,7 @@ The `IReducer<T>` interface is at the core of Argus's data processing pipeline. 
 #### Required Methods
 
 `IReducer<T>` requires implementing two key methods:
+
 <br/>
 
 | Method | Purpose | Parameters |
@@ -174,7 +180,9 @@ By implementing these methods, your reducer actively tracks the evolving state o
 ### 5. Configure Application Settings
 
 Argus requires specific configuration settings to connect to a Cardano node and manage synchronization. Create an `appsettings.json` file with the following key sections:
+
 <br/>
+
 - **ConnectionStrings**: Database connection information
 - **CardanoNodeConnection**: Settings for connecting to the Cardano node
 - **Sync**: Configuration for the synchronization process
@@ -237,7 +245,9 @@ app.Run();
 #### Extension Methods
 
 These two extension methods connect all the components you've created:
+
 <br/>
+
 | Method | Purpose |
 |--------|---------|
 | **AddCardanoIndexer** | Configures database connection, node connection, and synchronization services |

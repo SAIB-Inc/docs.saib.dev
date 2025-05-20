@@ -130,8 +130,12 @@ Set the `NetworkMagic` parameter according to your target Cardano network:
 
 ```json
 "MaxRollbackSlots": 1000,  // Maximum number of slots to rollback (hard limit)
-"RollbackBuffer": 10,      // Conservative buffer to handle potential rollbacks
+"RollbackBuffer": 10,      // Number of recent intersections to maintain
 ```
+
+The `MaxRollbackSlots` parameter sets the limit for how far back your chain can potentially roll back during a chain reorganization. This is a security feature that prevents your application from having to process extremely deep chain reorganizations.
+
+The `RollbackBuffer` parameter specifies how many recent intersection points (block hash and slot pairs) Argus should maintain. This is critical for the ChainSync protocol to resume synchronization correctly. If you set this too low and the node cannot find any of your saved intersection points in its history, Argus would have to resynchronize from genesis.
 
 ### Starting Point
 
@@ -142,7 +146,7 @@ You can specify a starting point for synchronization:
 "Hash": "3fd9925888302fca267c580d8fe6ebc923380d0b984523a1dfbefe88ef089b66"  // Block hash at that slot
 ```
 
-If omitted, Argus will start from the genesis block or the current chain tip.
+If omitted, Argus will start synchronization from the genesis block, which will process the entire blockchain history.
 
 ---
 

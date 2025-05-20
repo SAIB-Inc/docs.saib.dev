@@ -19,7 +19,7 @@ export default function Section1(): ReactNode {
         <section id="section-1" style={{ backgroundColor: theme.palette.background.default }} className={`relative grid place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} pt-12 md:pt-0 md:min-h-210 md:h-screen`}>
             <div className="container mx-auto text-center">
                 <div>
-                    <h1 className="!text-[40px] sm:!text-[60px] md:!text-[80px] sm:leading-14 sm:mb-6 md:leading-18 md:mb-8 lg:!text-[104px] lg:mb-10 lg:leading-24">
+                    <h1 className="sm:leading-14 sm:mb-6 md:leading-18 md:mb-8  lg:mb-10 lg:leading-24">
                         <span className="inline-flex items-center -translate-y-1 sm:-translate-y-2 md:-translate-y-4 ">
                             <span className="min-w-6 tracking-[-9.62px] leading-[-20px] text-[30px] mr-4 md:mr-6 md:text-[46px] lg:text-[52.88px]" style={{ fontFamily: "Space Mono" }}>
                                 <span> &gt; _</span>
@@ -30,9 +30,12 @@ export default function Section1(): ReactNode {
                         </span>
                         <span
                             style={{ color: theme.palette.text.secondary }}
-
+                            className="text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]"
                         >SAIB </span>
-                        <span>Cardano Developer Portal</span>
+                        <span 
+                            className="text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]"
+                        >
+                            Cardano Developer Portal</span>
                     </h1>
                 </div>
                 <div>
@@ -62,7 +65,7 @@ export default function Section1(): ReactNode {
                     </Button>
                 </div>
                 <div className="flex justify-center mt-10 md:mt-12">
-                    <Wizard sx={{ color: theme.palette.text.secondary }} className="text-[120px]! lg:text-[140px]!" />
+                    <Wizard sx={{ color: theme.palette.text.secondary }} className="!text-[120px] !lg:text-[140px]" />
                 </div>
             </div>
             <div

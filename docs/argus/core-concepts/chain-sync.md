@@ -169,7 +169,7 @@ When you run Argus, it establishes a Chain-Sync connection to a Cardano node and
 ```
 ┌────────────┐    ┌───────────────────┐    ┌───────────────┐
 │  Cardano   │    │                   │    │    Argus      │
-│   Node     ├────►  Chain-Sync Flow   ├────►  (Reducers &  │
+│   Node     ├────►  Chain-Sync Flow  ├────►  (Reducers &  │
 │            │    │                   │    │   Database)   │
 └────────────┘    └───────────────────┘    └───────────────┘
 ```

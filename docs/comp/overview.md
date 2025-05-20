@@ -1,6 +1,9 @@
 ---
 title: Overview
-sidebar_position: 4
+sidebar_position: 1
+hide_title: true
 ---
 
-# COMP
+![COMP Banner](/img/docs/comp/comp-banner.webp)
+
+## Documentation coming soon...

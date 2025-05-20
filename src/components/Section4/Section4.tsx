@@ -38,7 +38,7 @@ export default function Section4(): ReactNode {
                         <img src="/img/Section4/cardano_logo.svg" alt="cardano logo" />
                     </div>
 
-                    <div className="absolute right-7 z-10 w-16 -top-2 sm:-right-7 sm:w-auto sm:-top-14 md:right-0 md:top-6">
+                    <div className="hidden absolute right-7 z-10 w-16 -top-2 sm:-right-7 sm:w-auto sm:-top-14 md:right-0 md:top-6">
                         <Section4Wizard className="!text-[110px] sm:!text-[163px]"/>
                     </div>
                     <div className="relative overflow-x-hidden bg-cover bg-center p-4 flex justify-between flex-col items-center bg-[url(/img/Section4/purple_bg_mobile.svg)] rounded-[24px] gap-6 md:gap-2 lg:rounded-[48px] md:h-100 md:flex-row md:px-10 sm:bg-[url(/img/Section4/purple_bg.svg)] lg:h-[498px] lg:px-12">

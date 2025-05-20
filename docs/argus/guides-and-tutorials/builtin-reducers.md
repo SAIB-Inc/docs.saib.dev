@@ -1,5 +1,5 @@
 ---
-title: Built-in Reducers
+title: Using Built-in Reducers
 sidebar_position: 2
 hide_title: true
 ---
@@ -12,21 +12,12 @@ This guide explains the built-in reducers available in Argus and how to use them
 
 ## Introduction
 
-Argus provides a comprehensive collection of pre-built reducers that handle common blockchain data indexing needs. These reducers fall into two main categories:
+Argus provides a comprehensive collection of pre-built reducers that handle common blockchain data indexing needs. These reducers save significant development time by handling the complex logic of parsing and transforming raw blockchain data. They offer production-tested reliability, optimized performance through efficient database schemas, maintenance-free updates that adapt to protocol changes, and standardized models for consistent access patterns across projects.
+
+While you can always create custom reducers for specialized needs, built-in reducers provide robust, ready-to-use solutions for common indexing patterns. These reducers fall into two main categories:
 
 - [General-purpose reducers](#general-reducers) for core blockchain data
 - [DApp-specific reducers](#dapp-reducers) for specialized Cardano protocols
-
-:::info Why Use Built-in Reducers
-Built-in reducers save significant development time by handling the complex logic of parsing and transforming raw blockchain data. They offer:
-
-- **Production-tested reliability**: Used in real-world applications
-- **Optimized performance**: Efficient database schemas and indexing strategies
-- **Maintenance-free updates**: Automatically adapt to protocol changes
-- **Standardized models**: Consistent access patterns across projects
-
-While you can always create custom reducers for specialized needs, built-in reducers provide robust, ready-to-use solutions for common indexing patterns.
-:::
 
 ---
 
@@ -36,8 +27,8 @@ While you can always create custom reducers for specialized needs, built-in redu
 
 These reducers handle fundamental blockchain data structures that are useful for most applications:
 
-| Reducer | Purpose |
-|---------|---------|
+| Reducer | Description |
+| ------- | ----------- |
 | **BlockBySlotReducer** | Indexes blocks by their slot number for fast lookups |
 | **TxBySlotReducer** | Indexes transactions chronologically by slot for historical analysis |
 | **UtxoByAddressReducer** | Tracks UTXOs for specific addresses to monitor balances and activity |
@@ -52,12 +43,17 @@ General reducers provide the foundation for most blockchain applications. They h
 
 These reducers are tailored for specific Cardano DApps and protocols:
 
-| Reducer | Purpose |
-|---------|---------|
-| **SundaePriceByTokenReducer** | Tracks token prices and swaps on SundaeSwap DEX |
-| **MinswapPriceByTokenReducer** | Monitors prices on Minswap DEX pools |
-| **JpgPriceByTokenReducer** | Tracks NFT sales on JPG Store marketplace |
-| **SplashPriceByTokenReducer** | Tracks token prices on Splash DEX |
+**SundaePriceByTokenReducer**  
+Tracks token prices and swaps on SundaeSwap DEX
+
+**MinswapPriceByTokenReducer**  
+Monitors prices on Minswap DEX pools
+
+**JpgPriceByTokenReducer**  
+Tracks NFT sales on JPG Store marketplace
+
+**SplashPriceByTokenReducer**  
+Tracks token prices on Splash DEX
 
 <details>
 <summary>Why DApp-Specific Reducers Matter</summary>

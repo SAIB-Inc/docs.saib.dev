@@ -7,6 +7,8 @@ sidebar_position: 3
 
 This guide walks through creating Application Programming Interfaces (APIs) for Cardano blockchain data indexed by Argus.Sync. We'll focus on practical implementation strategies using ASP.NET Core Minimal APIs, which provide a concise and straightforward approach to serving your indexed blockchain data to front-end UIs, backend services, and developer tools.
 
+---
+
 ## Prerequisites
 
 Before developing APIs with Argus.Sync, ensure your environment and data models are ready. A solid foundation here is key for a smooth development process.
@@ -32,6 +34,8 @@ When designing APIs for blockchain data, consider these special factors:
 - **Specialized Use Cases**: Different applications have very different needs - from simple balance lookups to complex analytics. Design your API to accommodate various query patterns.
 
 </details>
+
+---
 
 ## Getting Started with Minimal APIs
 
@@ -173,6 +177,8 @@ To begin creating your API endpoints:
    For larger applications, group related Minimal API endpoints using `RouteGroupBuilder` (as shown with `apiV1`) or explore libraries like Carter or FastEndpoints for advanced modularity.
    :::
 
+---
+
 ## Minimal API Examples
 
 This section provides practical examples of Minimal API endpoints, illustrating common data retrieval scenarios based on Argus-indexed data.
@@ -207,7 +213,7 @@ public record DexPriceDto(string TokenX, string TokenY, decimal PriceXPerY, deci
 Always project to these DTOs in your LINQ queries against Argus-populated tables.
 :::
 
-### Example 1: Fetching a Specific Block (DTO-based)
+### Example 1: Fetching a Specific Block
 
 - **Relevant Argus Reducer**: `BlockBySlotReducer` (populates `DbContext.BlocksBySlot`).
 
@@ -343,6 +349,8 @@ Always project to these DTOs in your LINQ queries against Argus-populated tables
   .Produces(StatusCodes.Status404NotFound)
   .WithTags("DEX API");
   ```
+
+---
 
 ## Argus.Sync API Best Practices
 
@@ -576,19 +584,6 @@ apiV1.MapGet("/contracts/transactions", async (
 Remember that Argus.Sync's built-in PredicateBuilder focuses on the `Or` operation. For more complex query needs, you may consider extending it with additional methods or using the more fully-featured LinqKit package alongside it.
 </details>
 
-## Conclusion
-
-Building APIs for Cardano blockchain data enables you to create powerful applications that leverage the rich data indexed by Argus.Sync. By following these best practices and examples, you can create performant, maintainable APIs that serve your users' needs effectively.
-
-Remember these key points:
-
-1. **Use DTOs** to shape your data appropriately for API consumers
-2. **Implement pagination** for large datasets
-3. **Add proper database indexes** to optimize query performance
-4. **Use caching** for immutable blockchain data
-5. **Leverage PredicateBuilder** for complex dynamic queries with multiple conditions
-6. **Minimize database roundtrips** by batching related queries
-7. **Handle errors consistently** across your API
-8. **Version your API** from the beginning
+---
 
 With these guidelines in mind, you'll be well-equipped to build robust APIs that make your indexed Cardano blockchain data accessible and useful for a wide range of applications.

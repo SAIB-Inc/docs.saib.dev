@@ -1,11 +1,10 @@
 ---
-id: database
 title: Database
-sidebar_label: Database
 sidebar_position: 3
+hide_title: true
 ---
 
-# Database
+# ![Database](/img/docs/argus/core-concepts/argus-database-core-concept-banner.webp)
 
 Argus relies on a persistent store to checkpoint progress and to retain any data produced by your reducers. By default, Argus uses Entity Framework Core with PostgreSQL, but you can plug in other databases by extending `CardanoDbContext`.
 

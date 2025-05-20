@@ -4,7 +4,7 @@ sidebar_position: 3
 hide_title: true
 ---
 
-![Reducers](/img/docs/argus/core-concepts/reducer.webp)
+![Reducers](/img/docs/argus/core-concepts/reducers.webp)
 
 **Reducers** are at the heart of Argus, providing the foundation for processing blockchain data. They implement your application logic to handle each new block (rollforward) and revert state when necessary (rollback).
 

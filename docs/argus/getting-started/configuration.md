@@ -5,7 +5,7 @@ description: Detailed configuration options for Argus
 hide_title: true
 ---
 
-![Argus Configuration Banner](/img/docs/argus/getting-started/argus-config-banner.png)
+![Argus Configuration Banner](/img/docs/argus/getting-started/argus-config-banner.webp)
 
 This guide covers the advanced configuration options available in Argus. For basic setup, see the [Quick Start Guide](./quick-start).
 

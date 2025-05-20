@@ -22,7 +22,7 @@ export default function Section3(): ReactNode {
                     <div className="w-max!">
                         <p className="leading-[34.8px] font-semibold w-max! text-2xl sm:hidden">Used By</p>
                     </div>
-                    <div className="flex items-center gap-8 sm:gap-2 md:gap-4">
+                    <div className="flex items-center gap-8 sm:gap-4">
                         <div className="w-32 sm:w-30 lg:w-40">
                             <img 
                                 alt="Buriza" 

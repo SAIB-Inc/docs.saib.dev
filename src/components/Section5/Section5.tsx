@@ -39,7 +39,7 @@ export default function Section5(): ReactNode {
                     </Paper>
                     <div className="flex flex-col gap-[16px]">
                         <Paper
-                            className="p-6 lg:!pt-20 !block h-full shadow-lg! md:!p-10 md:h-100 lg:!pl-12 lg:!pr-10 lg:!pb-10 lg:!w-[636px] lg:!h-[319px]"
+                            className="p-6 !block h-full shadow-lg! md:!p-10 md:h-100 lg:!pl-12 lg:!pr-10 lg:!pb-10 lg:!w-[636px] lg:!h-[319px] lg:!pt-20"
                         >
                             <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] text-3xl md:!text-5xl lg:!mb-[48px] ">Efficiency</h2>
                             <div className="flex md:h-[calc(100%-25px)] gap-4 justify-between md:flex-col lg:flex-row lg:h-auto">
@@ -77,7 +77,7 @@ export default function Section5(): ReactNode {
                     className="!p-6 gap-20 mt-4 hidden w-full md:flex md:h-60 md:items-center md:!p-10 lg:!hidden"
                 >
                     <div>
-                        <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] !text-3xl md:!text-5xl lg:!mb-[48px] ">Customizability</h2>
+                        <h2 style={{ color: theme.palette.text.secondary }} className="font-bold !leading-[32px] text-3xl md:!text-5xl lg:!mb-[48px] ">Customizability</h2>
                         <p className="text-sm md:!text-xl lg:!leading-[28px]">
                             Leverage built-in reducers or create <br className="hidden md:block" />
                             custom ones tailored to your <br className="hidden lg:block" />

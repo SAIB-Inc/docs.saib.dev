@@ -48,9 +48,11 @@ function NavbarContentLayout({
   right: ReactNode;
 }) {
   return (
-    <div className="navbar__inner">
-      <div className="navbar__items">{left}</div>
-      <div className="navbar__items navbar__items--right">{right}</div>
+    <div className='backdrop-blur-xl! w-full px-4 py-2 flex items-center'>
+      <div className="navbar__inner">
+        <div className="navbar__items">{left}</div>
+        <div className="navbar__items navbar__items--right">{right}</div>
+      </div>
     </div>
   );
 }

@@ -325,7 +325,7 @@ var blockDto = await dbContext.BlocksBySlot
   The built-in `OutputBySlotReducer` stores the raw CBOR of the output. The `Amount` (Value) and `Datum` are transient and not directly stored as simple columns. To serve detailed UTXO asset information easily via an API, you would typically:
 
   1. Create a **custom Argus reducer** that processes `TransactionOutputs`, extracts Lovelace and native asset quantities, and stores them in dedicated table columns.
-  2. Or, use the Chrysalis library (which Argus leverages for CBOR processing) to deserialize the `RawCbor` field from the `OutputBySlot` table.
+  2. Or, use the [Chrysalis.Cbor](../../chrysalis/cbor/overview.md) library (which Argus leverages for CBOR processing) to deserialize the `RawCbor` field from the `OutputBySlot` table.
      :::
 
 ### Example 4: Querying DEX Token Prices
@@ -420,7 +420,7 @@ When building APIs for data indexed with Argus.Sync, following our recommended p
 ### Dynamic Query Construction with Argus' PredicateBuilder
 
 :::info Optimizing Complex Queries
-Argus.Sync provides a built-in `PredicateBuilder` utility specifically designed for constructing dynamic LINQ expressions when querying blockchain data. This utility simplifies building complex, dynamic queries for Cardano blockchain data.
+Argus.Sync provides a built-in `PredicateBuilder` utility specifically designed for constructing dynamic LINQ expressions. This lightweight utility simplifies building complex queries with multiple conditions, useful for any data access scenario - not just for blockchain data.
 :::
 
 ```csharp
@@ -533,7 +533,7 @@ var assetDetails = assets.Select(asset => {
 
 This approach significantly improves performance by reducing database roundtrips from `2 * assets.Count` to just 2 total queries. For large token portfolios (common in Cardano wallets), this can be the difference between an API that times out and one that performs efficiently.
 
-**Advanced Example: Finding Smart Contract Interactions**
+### Advanced Example: Finding Smart Contract Interactions
 
 ```csharp
 // Find all transactions that interact with any of several smart contracts

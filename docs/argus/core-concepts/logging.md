@@ -1,6 +1,6 @@
 ---
 title: Logging
-sidebar_position: 4
+sidebar_position: 6
 hide_title: true
 ---
 
@@ -44,11 +44,11 @@ For interactive monitoring during development or debugging, enable the TUI under
 }
 ```
 
-| Setting           | Description                                                                 | Default |
-| ----------------- | --------------------------------------------------------------------------- | :-----: |
-| TuiMode         | true to activate TUI, false for plain text logs.                        | true  |
-| DisplayType     | sync shows progress bars per reducer; full adds overall stats, CPU/mem. | sync  |
-| RefreshInterval | UI refresh rate in milliseconds.                                            | 5000  |
+| Setting         | Description                                                             | Default |
+| --------------- | ----------------------------------------------------------------------- | :-----: |
+| TuiMode         | true to activate TUI, false for plain text logs.                        |  true   |
+| DisplayType     | sync shows progress bars per reducer; full adds overall stats, CPU/mem. |  sync   |
+| RefreshInterval | UI refresh rate in milliseconds.                                        |  5000   |
 
 ### Sync Display
 

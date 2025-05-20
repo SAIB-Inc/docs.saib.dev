@@ -1,6 +1,6 @@
 ---
 title: Chain-Sync Protocol
-sidebar_position: 1
+sidebar_position: 2
 hide_title: true
 ---
 
@@ -18,13 +18,15 @@ At its core, a blockchain is a sequence of blocks linked together cryptographica
 
 :::info What is a Block?
 A block in Cardano contains:
+
 - **Header**: Metadata about the block (hash, number, slot, issuer)
 - **Transaction Bodies**: Actions that change the ledger state
 - **Transaction Witness Sets**: Signatures and scripts that validate transactions
 - **Auxiliary Data**: Optional metadata attached to transactions
-:::
+  :::
 
 Blocks are produced at regular intervals (about 20 seconds in Cardano) and are identified by:
+
 - **Slot Number**: A monotonically increasing counter representing time
 - **Block Hash**: A unique cryptographic identifier derived from the block's contents
 
@@ -46,6 +48,7 @@ Argus processes blocks sequentially to update your database. Each block represen
 - Changes to the ledger state
 
 When you implement reducers in Argus, you're defining how to transform block data into useful information for your application.
+
 </details>
 
 ### Transactions and the UTxO Model
@@ -53,10 +56,11 @@ When you implement reducers in Argus, you're defining how to transform block dat
 Cardano uses an extended Unspent Transaction Output (eUTxO) model, which differs from account-based blockchains.
 
 :::info Understanding Transactions and UTxOs
+
 - **Transaction**: A record of value transfer that consumes existing UTxOs as inputs and creates new UTxOs as outputs
 - **UTxO (Unspent Transaction Output)**: An "unspent coin" that can be used in a future transaction
 - Each UTxO includes an address (owner), value (amount), and optional data (for smart contracts)
-:::
+  :::
 
 ```
 Transaction Structure:
@@ -73,11 +77,13 @@ Transaction Structure:
 <summary><strong>eUTxO vs. Account Model</strong></summary>
 
 Unlike account-based models (like Ethereum) where you have balances, in Cardano:
+
 - You don't have a single "balance" - you have a collection of UTxOs
 - Each transaction must consume entire UTxOs and create new ones
 - This design enables more predictable transaction outcomes and better parallelism
 
 When Argus indexes address balances, it's actually tracking all UTxOs associated with that address.
+
 </details>
 
 ---
@@ -99,6 +105,7 @@ Occasionally, the blockchain may fork temporarily when two valid blocks are prod
 
 :::info What is a Chain Reorganization?
 A chain reorganization ("reorg") happens when:
+
 1. The blockchain temporarily splits into two valid chains
 2. One chain eventually becomes the canonical chain
 3. Nodes following the other chain must "roll back" and switch to the canonical chain
@@ -122,11 +129,13 @@ This is a normal part of distributed consensus - Argus handles this automaticall
 <summary><strong>How Argus Handles Reorgs</strong></summary>
 
 When a reorg occurs, Argus:
+
 1. Receives a rollback notification with a slot number
 2. Calls `RollBackwardAsync` on all reducers to revert database state
 3. Processes the new canonical blocks via `RollForwardAsync`
 
 This ensures your database always reflects the canonical chain state.
+
 </details>
 
 ---
@@ -141,11 +150,12 @@ Chain-Sync is a Cardano network protocol that allows applications to request and
 
 :::info Chain-Sync's Role in Argus
 Chain-Sync is what powers Argus's ability to:
+
 - Receive new blocks as they're produced
 - Handle chain reorganizations
 - Resume synchronization after restarts
 - Maintain consistency with the canonical blockchain
-:::
+  :::
 
 ### How Chain-Sync Works with Argus
 
@@ -164,7 +174,6 @@ When you run Argus, it establishes a Chain-Sync connection to a Cardano node and
 └────────────┘    └───────────────────┘    └───────────────┘
 ```
 
-
 ---
 
 ## Practical Implications for Your Applications
@@ -174,6 +183,7 @@ Understanding these core concepts helps you effectively use Argus for different 
 ### Tracking Assets and Balances
 
 Since Cardano uses the UTxO model, tracking an address's balance means:
+
 - Monitoring all transactions that create outputs for that address
 - Monitoring all transactions that spend outputs from that address
 - Calculating the current balance from unspent outputs
@@ -183,6 +193,7 @@ Argus's built-in reducers like `BalanceByAddressReducer` handle this complexity 
 ### Working with Smart Contracts
 
 For dApps and smart contracts, you'll often need to:
+
 - Track specific script addresses
 - Index datums and redeemers
 - Monitor for specific contract patterns
@@ -192,6 +203,7 @@ Your custom reducers can extract this data during synchronization, making it ava
 ### Real-time Data Processing
 
 Chain-Sync enables Argus to process blocks with minimal delay after they're produced on the network. This means:
+
 - Your database stays current with the blockchain
 - Applications can display near real-time information
 - You can trigger business logic based on on-chain events

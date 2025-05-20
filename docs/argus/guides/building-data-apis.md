@@ -533,7 +533,7 @@ var assetDetails = assets.Select(asset => {
 
 This approach significantly improves performance by reducing database roundtrips from `2 * assets.Count` to just 2 total queries. For large token portfolios (common in Cardano wallets), this can be the difference between an API that times out and one that performs efficiently.
 
-**Advanced Example: Finding Smart Contract Interactions**
+### Advanced Example: Finding Smart Contract Interactions
 
 ```csharp
 // Find all transactions that interact with any of several smart contracts

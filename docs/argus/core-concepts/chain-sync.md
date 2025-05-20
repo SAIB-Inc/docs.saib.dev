@@ -82,7 +82,7 @@ When Argus indexes address balances, it's actually tracking all UTxOs associated
 
 ---
 
-## Synchronization Concepts
+## Chain-Sync Concepts
 
 ### Chain History and State
 

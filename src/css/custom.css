@@ -2,31 +2,343 @@
  * Custom styles to override Tailwind defaults for markdown content
  */
 
-/* Target markdown content container */
+/* Base styling for markdown content */
 .markdown {
-  /* Restore default list styles */
+  /* Base font settings inspired by Vue.js docs */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #213547; /* Default light mode text color */
+  
+  /* Content spacing */
+  max-width: 48rem;
+  margin: 0 auto;
+  
+  /* Spacing between block elements */
+  > * + * {
+    margin-top: 1.2rem;
+  }
+  
+  /* Paragraph styling */
+  p {
+    margin-bottom: 1.2em;
+    line-height: 1.7;
+  }
+  
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 1.5em;
+    margin-bottom: 1.2em;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin-top: 0.5em;
+    padding-bottom: 0.3em;
+  }
+  
+  h2 {
+    font-size: 1.65rem;
+    padding-bottom: 0.3em;
+  }
+  
+  h3 {
+    font-size: 1.35rem;
+  }
+  
+  h4 {
+    font-size: 1.15rem;
+  }
+
+  /* Lists styling */
+  ul, ol {
+    padding-left: 1.25em;
+    margin-left: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
   ul {
     list-style-type: disc;
-    margin-left: 2em;
   }
   
   ol {
     list-style-type: decimal;
-    margin-left: 2em;
   }
   
-  /* Add some spacing between list items */
   li {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.6em;
+    line-height: 1.7;
   }
   
-  /* Add back margins for paragraphs */
-  p {
-    margin-bottom: 1em;
+  li > ul, li > ol {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
   }
   
-  /* Improve code block styling */
+  /* Code styling - light mode */
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 0.85em;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+    color: #476582;
+  }
+  
   pre {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 0.85em;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    background-color: #f8f8f8;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.4;
+  }
+  
+  pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em;
+  }
+  
+  /* Link styling - light mode */
+  a {
+    color: #936FB6; /* Purple to match theme */
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Table styling - light mode */
+  table {
+    width: 100%;
+    border-collapse: collapse;
     margin: 1em 0;
+    display: block;
+    overflow-x: auto;
+  }
+  
+  tr {
+    border-top: 1px solid #dfe2e5;
+    background-color: white !important;
+  }
+  
+  tr:nth-child(2n) {
+    background-color: white !important;
+  }
+  
+  th, td {
+    padding: 0.6em 1em;
+    border: 1px solid #dfe2e5;
+    background-color: white !important;
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: #f6f8fa !important;
+  }
+  
+  /* Blockquote styling - light mode */
+  blockquote {
+    margin: 1em 0;
+    padding: 0.25em 1em;
+    border-left: 4px solid #936FB6;
+    color: #6a8bad;
+    background-color: rgba(147, 111, 182, 0.05);
+  }
+  
+  /* Admonition styles - light mode */
+  .theme-admonition {
+    border-radius: 8px;
+    padding: 16px 16px 16px 20px;
+    margin: 1.6em 0;
+    background-color: #f8f8f8;
+    border-left: 3px solid #936FB6;
+    color: #2c3e50;
+  }
+
+  .admonition-heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .admonition-heading h5 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .admonition-icon {
+    display: inline-flex;
+    padding-right: 0.5rem;
+    color: #936FB6;
+  }
+
+  .theme-admonition a {
+    color: #936FB6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .theme-admonition a:hover {
+    text-decoration: underline;
+  }
+
+  .admonition-content {
+    color: #2c3e50;
+    line-height: 1.5;
+  }
+
+  .alert--info, .alert--success {
+    background-color: rgba(147, 111, 182, 0.05);
+    border-color: #936FB6;
+  }
+
+  /* Details styling - light mode */
+  details {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1.0rem;
+    margin: 2em 0;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease;
+  }
+
+  details summary::before {
+    content: '►';
+    font-size: 0.8em;
+    color: #936FB6 !important; /* Purple arrow for collapsed state */
+    display: inline-block;
+    border-width: 0;
+    margin-top: -3px;
+    width: 1em;
+    margin-right: 2em;
+    transition: transform 0.2s;
+  }
+
+  .details_b_Ee {
+    --docusaurus-details-decoration-color: #935FB6;
+  }
+
+  details[open] > summary::before {
+    transform: rotate(90deg);
+    color: #936FB6 !important; /* Keep the same purple color when open */
+  }
+
+  
+  
+  /* Horizontal rule styling - light mode */
+  hr {
+    height: 1px;
+    border: none;
+    margin: 2rem 0;
+    background-color: rgba(147, 111, 182, 0.3);
+  }
+}
+
+/* DARK MODE OVERRIDES */
+html[data-theme='dark'] .markdown {
+  color: rgba(255, 255, 255, 0.87); /* Dark mode text color */
+  
+  /* Heading borders for dark mode */
+  h1, h2 {
+    border-bottom-color: rgba(84, 84, 84, 0.48);
+  }
+  
+  /* Code styling - dark mode */
+  code {
+    color: #a1b6cf;
+  }
+  
+  pre {
+    background-color: #292d3e;
+  }
+  
+  pre code {
+    color: #d4d4d4;
+  }
+  
+  /* Link styling - dark mode */
+  a {
+    color: #b392d6;
+  }
+  
+  /* Table styling - dark mode */
+  table {
+    border-color: #3c3c3c;
+  }
+  
+  tr {
+    border-top-color: #3c3c3c;
+    background-color: #1e2125 !important;
+  }
+  
+  tr:nth-child(2n) {
+    background-color: #1e2125 !important;
+  }
+  
+  th, td {
+    border-color: #3c3c3c;
+    background-color: #1e2125 !important;
+  }
+  
+  th {
+    background-color: #242424 !important;
+  }
+  
+  /* Blockquote styling - dark mode */
+  blockquote {
+    color: #8ba5c8;
+    background-color: rgba(147, 111, 182, 0.1);
+  }
+  
+  /* Admonition styles - dark mode */
+  .theme-admonition {
+    background-color: #1e2125;
+    border-left: 3px solid #936FB6;
+    color: #e1e5ea;
+  }
+
+  .admonition-heading h5 {
+    color: #e1e5ea;
+  }
+
+  .admonition-content {
+    color: #b4b8be;
+  }
+
+  .alert--info, .alert--success {
+    background-color: #1e2125;
+    border-color: #936FB6;
+  }
+  
+  /* Details styling - dark mode */
+  details {
+    background-color: #242424;
+    border-color: #3c3c3c;
+  }
+  
+  summary {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  details[open] > summary {
+    border-bottom-color: #3c3c3c;
+  }
+  
+  /* Horizontal rule styling - dark mode */
+  hr {
+    background-color: rgba(147, 111, 182, 0.5);
   }
 }

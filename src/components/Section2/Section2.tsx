@@ -133,6 +133,7 @@ export default function Section2(): ReactNode {
                                     {projects.map((datum, index) => {
                                         return (
                                             <li
+                                                key={`${datum.name}-${index}`}
                                                 id={datum.name}
                                                 onClick={() => {
                                                     if (index !== currentProject) {
@@ -217,11 +218,9 @@ export default function Section2(): ReactNode {
                             Our Developers:
                         </p>
                         <div className="flex justify-center items-center relative left-16 top-1 sm:left-15 md:static md:justify-start">
-                            {developerList.map((datum, index) => {
-                                return (
-                                    <AvatarButton datum={datum} index={index}/> 
-                                );
-                            })}
+                            {developerList.map((datum, index) => (
+                                <AvatarButton key={`${datum.alt}-${index}`} datum={datum} index={index} />
+                            ))}
                         </div>
                     </div>
                     <div className="w-[305px] flex flex-col items-center text-center gap-6 md:w-[465px] md:text-end md:items-end md:gap-4 lg:gap-6">

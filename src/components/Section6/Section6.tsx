@@ -44,13 +44,9 @@ export default function Section6(): ReactNode {
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
                             borderRadius: '24px',
-                            paddingTop: '40px',
-                            paddingLeft: '41px',
-                            paddingRight: '74.14px',
-                            paddingBottom: '48px',
                             boxShadow: 0
                         }} 
-                        className="!p-6 w-full md:w-[calc(75%-8px)]  2xl:h-[304px]"
+                        className="!p-6 w-full md:w-[calc(75%-8px)] lg:!p-8 2xl:h-[304px]"
                     >
                         <div className="flex h-full justify-between gap-3! items-center ">
                             <div className="h-full flex flex-col justify-center">
@@ -92,7 +88,7 @@ export default function Section6(): ReactNode {
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}
-                        className="w-[calc(50%-8px)] !p-6 md:!w-[calc(25%-8px)]"
+                        className="w-[calc(50%-8px)] !p-6 md:!w-[calc(25%-8px)] lg:!p-8"
                     >
                         <CardanoLogo 
                             sx={{
@@ -138,8 +134,8 @@ export default function Section6(): ReactNode {
                             <h3 style={{color: theme.palette.grey[50]}} className="!font-semibold text-2xl sm:!text-3xl md:!text-xl lg:leading-[33px] lg:!mb-[24px] xl:!text-[26px] 2xl:!text-[30px]">CHRYSALIS.TX</h3>
                                 <p style={{color: theme.palette.grey[50]}} className="text-sm sm:!text-lg md:!text-sm lg:!text-base">
                                     Enables transaction creation, signing, <br className="hidden 2xl:block"/>
-                                    and management directly in C# .
-                                    Chrysalis Transaction Builder.
+                                    and management directly in C# with the 
+                                    Chyrsalis Transaction Builder.
                                 </p>
                             </div>
                             <div className="flex justify-between items-end">
@@ -173,9 +169,8 @@ export default function Section6(): ReactNode {
                             <div>
                                 <h3 style={{color: theme.palette.grey[600]}} className="!font-semibold leading-5 flex flex-wrap text-2xl sm:!text-3xl md:!text-xl xl:!text-[26px] 2xl:!text-[30px] lg:leading-[33px] lg:!mb-[24px]"><span>CHRYSALIS</span><span>.</span><span>NETWORK</span></h3>
                                 <p style={{color: theme.palette.grey[600]}} className="text-sm sm:!text-lg md:!text-sm lg:!text-base">
-                                    Streamline data exchange through<br className="max-2xl:hidden"/>
-                                    serializing or (de)serializing Cardano<br className="max-2xl:hidden"/>
-                                    data structures.
+                                    Facilitates communication with Cardano <br className="max-2xl:hidden"/>
+                                    via C#, utilizing the Ouroboros protocol.
                                 </p>
                             </div>
                             <div className="flex justify-between items-end">

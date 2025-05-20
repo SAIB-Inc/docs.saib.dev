@@ -4,7 +4,7 @@ sidebar_position: 1
 hide_title: true
 ---
 
-![Cardano Data Structures Banner](/img/docs/argus/data-models/data-models-banner.webp)
+![Cardano Data Structures Banner](/img/docs/argus/core-concepts/data-models-banner.webp)
 
 This document explains the Cardano blockchain data structures exposed in Argus and how they map to the official CDDL specification. Understanding these structures is essential for building effective reducers that can extract and process blockchain data.
 

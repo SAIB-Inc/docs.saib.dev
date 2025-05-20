@@ -1,6 +1,6 @@
 ---
 title: CBOR Deserialization
-sidebar_position: 2
+sidebar_position: 4
 hide_title: true
 ---
 

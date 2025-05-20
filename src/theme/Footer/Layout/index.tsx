@@ -26,7 +26,7 @@ export default function FooterLayout({
     }
 };
   return (
-    <footer style={{backgroundColor: theme.palette.background.default}} className={!location.pathname.startsWith('/docs') ? "!pt-30 lg:!pt-0 md:h-[1078px]" : ""}>
+    <footer style={{backgroundColor: theme.palette.background.default}} className={!location.pathname.startsWith('/docs') ? "lg:!pt-0 md:h-[1078px]" : ""}>
       {!location.pathname.startsWith('/docs') && (
         <div className={`place-items-center relative ${colorMode === 'dark' ? "bg-[url(/img/Footer/background_dark.webp)]" : "bg-[url(/img/Footer/background_light.webp)]"} bg-cover bg-no-repeat `}>
           <div className="container !px-4 md:!pt-67 md:h-[1021px]">

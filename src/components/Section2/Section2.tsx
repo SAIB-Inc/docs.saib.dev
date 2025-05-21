@@ -50,6 +50,13 @@ export default function Section2(): ReactNode {
             description: "Futura is the DSL that compiles UPLC - Cardano smart contract development on .NET.",
             link: "/docs/futura/overview",
             class: "-top-45 w-48 sm:w-52 sm:-top-48 md:w-72 md:-top-70 lg:w-80 lg:top-58 xl:w-full xl:top-44 2xl:top-64"
+        },
+        {
+            name: "buriza",
+            logo: "/img/Section2/Logos/buriza.webp",
+            description: "Buriza is our cross-platform, open-source wallet built for security and seamless user experience.",
+            link: "/docs/buriza/overview",
+            class: "-top-50 w-34 sm:w-38 sm:-top-50 md:w-48 md:-top-66 lg:w-58 lg:top-50 xl:w-64 xl:top-26 2xl:top-50"
         }
     ];
 

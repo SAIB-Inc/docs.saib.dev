@@ -34,11 +34,11 @@ export default function FooterLayout({
             <div className='flex gap-x-20 h-full flex-col-reverse lg:justify-between lg:gap-x-3 lg:flex-row xl:gap-x-10'>
               <div className='flex flex-col gap-y-8 lg:justify-between lg:!mb-[21.83px]'>
                 <div className='relative w-max mx-auto sm:!hidden'>
-                  <div>
-                    <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[90px] top-[14px]' />
+                  <div className='absolute right-[90px] top-[14px]'>
+                    <img src="img/Footer/logo_icon.svg" alt="Logo Icon"/>
                   </div>
                   <div className='!relative md:hidden'>
-                  <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[210.14px]'/>
+                    <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[210.14px]'/>
                   </div>
                 </div>
                 <Paper
@@ -151,11 +151,11 @@ export default function FooterLayout({
                 <div className='absolute right-[44.5px] top-[-138.14px] hidden lg:!block'>
                   <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[210.14px]'/>
                 </div>
-                <div>
-                  <img src={`${colorMode=='dark'? "img/Footer/logo_styled_dark.svg" : "img/Footer/logo_styled_light.svg"}`} alt="logo styled" className='absolute hidden lg:block lg:w-80 lg:top-76 lg:left-[18.5px] 2xl:top-70 xl:left-[70.5px] 2xl:left-[126.5px] 2xl:w-auto' />
+                <div className='absolute hidden lg:block lg:w-80 lg:top-76 lg:left-[18.5px] 2xl:top-70 xl:left-[70.5px] 2xl:left-[126.5px] 2xl:w-auto'>
+                  <img src={`${colorMode=='dark'? "img/Footer/logo_styled_dark.svg" : "img/Footer/logo_styled_light.svg"}`} alt="logo styled"/>
                 </div>
-                <div>
-                  <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[141px] top-[-127px] hidden lg:block' />  
+                <div className='absolute right-[141px] top-[-127px] hidden lg:block' >
+                  <img src="img/Footer/logo_icon.svg" alt="Logo Icon" />  
                 </div>
                 <div className='mb-10 lg:mb-0'>
                   <div className='flex w-full justify-center text-center mb-10 gap-x-5 sm:justify-start xl:gap-x-[31px] md:mb-[61.02px]'>
@@ -352,10 +352,10 @@ export default function FooterLayout({
                       </div>
                     </div>
                     <div className='relative w-full hidden justify-end items-center sm:flex lg:hidden'>
-                      <div>
-                        <img src="img/Footer/logo_icon.svg" alt="Logo Icon" className='absolute right-[90px] top-[14px]' />
+                      <div className='absolute right-[90px] top-[14px]'>
+                        <img src="img/Footer/logo_icon.svg" alt="Logo Icon" />
                       </div>
-                      <div className='!relative lg:!hidden'>
+                      <div className='absolute lg:!hidden'>
                         <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[210.14px]'/>
                       </div>
                     </div>

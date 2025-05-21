@@ -19,7 +19,7 @@ export default function Section1(): ReactNode {
         <section style={{ backgroundColor:theme.palette.background.default }}  className={`relative grid place-content-center bg-cover ${colorMode === 'dark' ? "bg-[url(/img/background_dark.webp)]" : "bg-[url(/img/background_light.webp)]"} pt-12 md:pt-0 md:min-h-210 md:h-screen`}>
             <div className="container mx-auto text-center">
                 <div>
-                    <h1 className="text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
+                    <h1 className="sm:leading-14  text-[40px] sm:!text-[60px] md:!text-[80px] lg:!text-[104px]">
                         <span className="inline-flex items-center -translate-y-1 sm:-translate-y-2 md:-translate-y-4 ">
                             <span className="tracking-[-9.62px] leading-[-20px] mr-[24px] text-[30px] lg:text-[52.88px]" style={{ fontFamily: "Space Mono" }}>
                                 <span> &gt; _</span>
@@ -42,7 +42,23 @@ export default function Section1(): ReactNode {
                     </p>
                 </div>
                 <div className="mt-[34px]">
-                    <Button sx={{ color: theme.palette.grey[50] }} variant="contained">Let's Get Started</Button>
+                <Button
+                        LinkComponent='a'
+                        href="/docs/chrysalis/overview"
+                        sx={{
+                            color: theme.palette.grey[50],
+                            '&:hover': {
+                                backgroundColor: theme.palette.action.hover,
+                                color: theme.palette.grey[50]
+                            },
+                            '&:active': {
+                                backgroundColor: theme.palette.action.active,
+                                color: theme.palette.grey[50]
+                            },
+                        }}
+                        variant="contained">
+                        Let's Get Started
+                    </Button>
                 </div>
                 <div className="flex justify-center mt-10 md:mt-[72.9px] lg:!hidden">
                     <Wizard sx={{ color: theme.palette.text.secondary }} className="!text-[120px]"/>

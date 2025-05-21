@@ -157,7 +157,7 @@ export default function FooterLayout({
                 <div className='absolute hidden lg:block lg:w-80 lg:top-76 lg:left-[18.5px] 2xl:top-70 xl:left-[70.5px] 2xl:left-[126.5px] 2xl:w-auto'>
                   <img src={`${colorMode=='dark'? "img/Footer/logo_styled_dark.svg" : "img/Footer/logo_styled_light.svg"}`} alt="logo styled"/>
                 </div>
-                <div className='absolute right-[92px] top-[-104px] hidden lg:block lg:top-[-100px] 2xl:w-[75px]' >
+                <div className='absolute right-[92px] top-[-104px] hidden lg:block lg:top-[-115px] xl:top-[-100px] 2xl:w-[75px]' >
                   <img src="img/Footer/logo_icon.svg" alt="Logo Icon" />  
                 </div>
                 <div className='mb-10 lg:mb-0'>

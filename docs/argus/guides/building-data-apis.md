@@ -325,7 +325,7 @@ var blockDto = await dbContext.BlocksBySlot
   The built-in `OutputBySlotReducer` stores the raw CBOR of the output. The `Amount` (Value) and `Datum` are transient and not directly stored as simple columns. To serve detailed UTXO asset information easily via an API, you would typically:
 
   1. Create a **custom Argus reducer** that processes `TransactionOutputs`, extracts Lovelace and native asset quantities, and stores them in dedicated table columns.
-  2. Or, use the [Chrysalis.Cbor](../../chrysalis/cbor/overview.md) library (which Argus leverages for CBOR processing) to deserialize the `RawCbor` field from the `OutputBySlot` table.
+  2. Or, use the Chrysalis.Cbor library (which Argus leverages for CBOR processing) to deserialize the `RawCbor` field from the `OutputBySlot` table.
      :::
 
 ### Example 4: Querying DEX Token Prices

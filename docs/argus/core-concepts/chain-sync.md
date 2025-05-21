@@ -30,13 +30,11 @@ Blocks are produced at regular intervals (about 20 seconds in Cardano) and are i
 - **Slot Number**: A monotonically increasing counter representing time
 - **Block Hash**: A unique cryptographic identifier derived from the block's contents
 
-```
-┌───────────┐      ┌───────────┐      ┌───────────┐
-│  Block 1  │      │  Block 2  │      │  Block 3  │
-│           │──────►           │──────►           │
-│ Slot: 100 │      │ Slot: 101 │      │ Slot: 102 │
-└───────────┘      └───────────┘      └───────────┘
-```
+&nbsp;
+
+![Blockchain visualization diagram](/img/docs/argus/core-concepts/blockchain-visualization-diagram.svg)
+
+&nbsp;
 
 <details>
 <summary><strong>Why Blocks Matter for Argus</strong></summary>
@@ -62,16 +60,8 @@ Cardano uses an extended Unspent Transaction Output (eUTxO) model, which differs
 - Each UTxO includes an address (owner), value (amount), and optional data (for smart contracts)
   :::
 
-```
-Transaction Structure:
-┌─────────────────┐     ┌─────────────────┐
-│     Inputs      │     │     Outputs     │
-│  (UTxOs spent)  │     │ (UTxOs created) │
-└─────────────────┘     └─────────────────┘
-        Fee: 0.17 ADA
-        Metadata: {...}
-        Scripts: {...}
-```
+![Transaction structure diagram](/img/docs/argus/core-concepts/transaction-structure-diagram.svg)
+
 
 <details>
 <summary><strong>eUTxO vs. Account Model</strong></summary>

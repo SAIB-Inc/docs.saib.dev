@@ -59,36 +59,11 @@ For larger or production-grade systems, consider creating your **API in a separa
 1. **Shared Core Project (Class Library)**: A common class library project, referenced by both the indexer and API projects, would contain your `DbContext`, data models (`IReducerModel`), DTOs, and any shared logic or services.
 2. **Unified Database**: Both the Argus indexer and the API project connect to the same PostgreSQL database.
 
-<details>
-<summary><strong>📝 Reference Architecture Diagram</strong></summary>
-
-```json
-┌───────────────────┐     ┌───────────────────┐
-│                   │     │                   │
-│  Argus Indexer    │     │    API Service    │
-│  Application      │     │    Application    │
-│                   │     │                   │
-└─────────┬─────────┘     └─────────┬─────────┘
-          │                         │
-          │                         │
-          │     ┌─────────────────────────┐
-          │     │                         │
-          ├────►│   Shared Class Library  │◄─────┐
-          │     │   (Models, DbContext)   │      │
-          │     │                         │      │
-          │     └─────────────────────────┘      │
-          │                                      │
-          │                                      │
-          │     ┌─────────────────────────┐      │
-          │     │                         │      │
-          └────►│     PostgreSQL DB       │──────┘
-                │                         │
-                └─────────────────────────┘
-```
+### Reference Architecture Diagram
 
 This architecture allows the API service to read from the same database that the Argus indexer writes to, while maintaining separation of concerns and deployment flexibility.
 
-</details>
+![API Architecture diagram](/img/docs/argus/guides/api-architecture-diagram.svg)
 
 :::info A Note on This Guide's Examples
 For simplicity, the examples in this guide demonstrate adding API endpoints as if they might be in the same project. However, the core principles apply universally. We strongly recommend a separate API project for production applications.

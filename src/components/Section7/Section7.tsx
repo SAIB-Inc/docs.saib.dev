@@ -62,19 +62,23 @@ export default function Section7(): ReactNode {
                             }}>
                                 .NET?
                             </span>
+                            <span className="bottom-[-4.74px] md:absolute -right-33 hidden md:!block">
+                                <SeventhWizard 
+                                    sx={{
+                                        color: theme.palette.text.secondary
+                                    }}
+                                    className="!text-[130px]"
+                                />
+                            </span>
+                        </h1>
+                        <span className="bottom-[-4.74px] md:absolute -right-33 md:!hidden">
                             <SeventhWizard 
                                 sx={{
                                     color: theme.palette.text.secondary
                                 }}
-                                className="!text-[130px] bottom-[-4.74px] md:absolute -right-33 !hidden md:!block"
+                                className="!text-[130px]"
                             />
-                        </h1>
-                        <SeventhWizard 
-                            sx={{
-                                color: theme.palette.text.secondary
-                            }}
-                            className="!text-[130px] bottom-[-4.74px] md:absolute -right-33 md:!hidden"
-                        />
+                        </span>
                     </div>
 
                     <div className="md:mt-[38px]">

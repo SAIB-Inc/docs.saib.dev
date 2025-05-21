@@ -90,12 +90,31 @@ export default function Section6(): ReactNode {
                         }}
                         className="w-[calc(50%-8px)] !p-6 md:!w-[calc(25%-8px)] lg:!p-8"
                     >
-                        <CardanoLogo 
-                            sx={{
-                                color: theme.palette.grey[50]
-                            }}
-                            className="!text-[80px] !sm:text-[124px] !md:text-[124px] !xl:text-[192px]"
-                        />
+                        <div className="sm:!hidden">
+                            <CardanoLogo 
+                                sx={{
+                                    color: theme.palette.grey[50]
+                                }}
+                                className="!text-[80px]"
+                            />
+                        </div>
+                        <div className="hidden sm:block xl:hidden">
+                            <CardanoLogo 
+                                sx={{
+                                    color: theme.palette.grey[50]
+                                }}
+                                className="!text-[124px]"
+                            />
+                        </div>
+                        <div className="hidden xl:block">
+                            <CardanoLogo 
+                                sx={{
+                                    color: theme.palette.grey[50]
+                                }}
+                                className=" !text-[192px]"
+                            />
+                        </div>
+                        
                     </Paper>
                     <Paper sx={{
                         backgroundColor: theme.palette.secondary.dark,

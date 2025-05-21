@@ -44,8 +44,11 @@ export default function Section1(): ReactNode {
                 <div className="mt-[34px]">
                     <Button sx={{ color: theme.palette.grey[50] }} variant="contained">Let's Get Started</Button>
                 </div>
-                <div className="flex justify-center mt-10 md:mt-[72.9px]">
-                    <Wizard sx={{ color: theme.palette.text.secondary }} className="!text-[120px] lg:text-[140px]"/>
+                <div className="flex justify-center mt-10 md:mt-[72.9px] lg:!hidden">
+                    <Wizard sx={{ color: theme.palette.text.secondary }} className="!text-[120px]"/>
+                </div>
+                <div className="hidden flex justify-center mt-10 md:mt-[72.9px] lg:block">
+                    <Wizard sx={{ color: theme.palette.text.secondary }} className="!text-[140px] "/>
                 </div>
             </div>
             <div 

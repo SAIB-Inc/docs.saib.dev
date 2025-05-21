@@ -100,7 +100,7 @@ Chain providers are the connection layer between Argus and the Cardano blockchai
 
 The modular design allows for new providers to be added when new connection methods become available. Custom providers can be implemented by extending the `ICardanoChainProvider` interface, making Argus adaptable to future Cardano network developments.
 
-![Argus Architecture](/img/docs/argus/getting-started/argus_architecture.png)
+![Argus Architecture](/img/docs/argus/getting-started/argus_architecture.svg)
 
 ---
 

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="static/img/saib_portal_og.webp" alt="SAIB Developer Portal" width="800"/>
+  <img src="static/img/docs.saib.dev.webp" alt="SAIB Developer Portal" width="800">
   
   <a href="https://github.com/SAIB-Inc/docs.saib.dev/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">

@@ -1,4 +1,4 @@
-import { Button, IconButton, Paper, Tooltip, useTheme } from "@mui/material";
+import { alpha, Button, IconButton, Paper, Tooltip, useTheme } from "@mui/material";
 import { ReactNode, useRef } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
 import ExternalLink from "../Shared/Links/ExternalLink/ExternalLink";
@@ -63,9 +63,12 @@ export default function Section4(): ReactNode {
                             style={{
                                 backgroundColor: theme.palette.grey[300]
                             }}
-                            className="w-full h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
+                            className="w-full h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl [&_.monaco-scrollable-element_.vertical]:!w-[6px] [&_.monaco-scrollable-element_.decorationsOverviewRuler]:!w-[6px] [&_.monaco-scrollable-element_.horizontal]:!h-[6px]"
                         >
-                            <div className="absolute top-2 right-2 z-10">
+                            <div 
+                                style={{backgroundColor: alpha(theme.palette.grey[300], 0.8)}}
+                                className="absolute bottom-2 right-2 z-40 rounded-full"
+                            >
                             <Tooltip
                                 title="Copy code"
                                 componentsProps={{

@@ -60,7 +60,7 @@ export default function Section4(): ReactNode {
                             style={{
                                 backgroundColor: theme.palette.grey[300]
                             }}
-                            className="w-full h-86 relative md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
+                            className="w-full h-86 relative !pt-12 md:!h-68 lg:!w-155 lg:!h-88 2xl:!w-134 2xl:!h-89 !p-4 rounded-3xl"
                         >
                             <div className="absolute top-2 right-2 z-10">
                             <Tooltip

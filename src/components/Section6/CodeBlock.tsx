@@ -149,31 +149,17 @@ export default function CodeBlock({ editorRef }) {
         readOnly: true,
         minimap: { enabled: false },
         scrollbar: {
-          vertical: 'hidden',
-          horizontal: 'hidden',
-          verticalScrollbarSize: 0,
-          horizontalScrollbarSize: 0,
-          handleMouseWheel: false,
         },
         lineNumbers: 'on',
         lineDecorationsWidth: 0,
         lineNumbersMinChars: 0,
         scrollBeyondLastLine: false,
-        wordWrap: 'on',
+        wordWrap: 'off',
         padding: { top: 10, bottom: 10 },
       }}
       defaultValue={`public class BlockReducer(IDbContextFactory<AppDbContext> dbContextFactory) : IReducer<BlockData>
 {
     private readonly string _validatorScriptHash = configuration.GetValue("ValidatorScriptHash", "fda46e81fdd2e4f1c358d27e7484b9f0860b63b0e8e12e6ab5f87e8c");
-
-    public async Task RollBackwardAsync(ulong slot)
-    {
-        IQueryable<BlockData> blockDataQuery = dbContext.BlockData
-            .Where(data => data.Slot >= slot);
-
-        dbContext.BlockData.RemoveRange(blockDataQuery);
-        await dbContext.SaveChangesAsync();
-    }
 
     public async Task RollForwardAsync(Block block)
     {
@@ -186,6 +172,15 @@ export default function CodeBlock({ editorRef }) {
             dbContext.OutputData.Add(output);
         });
 
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task RollBackwardAsync(ulong slot)
+    {
+        IQueryable<BlockData> blockDataQuery = dbContext.BlockData
+            .Where(data => data.Slot >= slot);
+
+        dbContext.BlockData.RemoveRange(blockDataQuery);
         await dbContext.SaveChangesAsync();
     }
 }`}

@@ -4,4 +4,5 @@ sidebar_position: 1
 hide_title: true
 ---
 
-![Futura Banner](/img/docs/futura/futura-banner.webp)
+![Buriza Banner](/img/docs/buriza/buriza-banner.webp)
+

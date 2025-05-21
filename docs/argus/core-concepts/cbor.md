@@ -219,4 +219,3 @@ When your types are decorated with CBOR attributes, Chrysalis automatically gene
 
 CBOR deserialization in Argus allows you to work with on-chain data in a type-safe, object-oriented way. By defining C# types that map to your on-chain data structures and using Chrysalis's serialization tools, you can easily process complex smart contract data without dealing with raw CBOR.
 
-For more detailed information on working with CBOR in Chrysalis, refer to the [Chrysalis CBOR documentation](/docs/chrysalis/cbor/overview).

@@ -5,5 +5,3 @@ hide_title: true
 ---
 
 ![COMP Banner](/img/docs/comp/comp-banner.webp)
-
-## Documentation coming soon...

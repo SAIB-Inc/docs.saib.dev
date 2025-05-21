@@ -134,6 +134,14 @@ const config: Config = {
           label: 'Futura',
           className: "hover:text-[var(--futura-color-primary)]!"
         },
+        {
+          docid: 'buriza',
+          type: 'docSidebar',
+          sidebarId: 'buriza',
+          position: 'left',
+          label: 'Buriza',
+          className: "hover:text-[#227CFF]!"
+        },
       ],
     },
     footer: {

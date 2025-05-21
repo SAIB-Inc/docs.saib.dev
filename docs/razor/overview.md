@@ -6,6 +6,3 @@ hide_title: true
 
 ![Razor Banner](/img/docs/razor/razor-banner.webp)
 
----
-
-## Documentation coming soon...

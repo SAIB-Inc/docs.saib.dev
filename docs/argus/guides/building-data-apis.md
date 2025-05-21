@@ -62,29 +62,7 @@ For larger or production-grade systems, consider creating your **API in a separa
 <details>
 <summary><strong>📝 Reference Architecture Diagram</strong></summary>
 
-```json
-┌───────────────────┐     ┌───────────────────┐
-│                   │     │                   │
-│  Argus Indexer    │     │    API Service    │
-│  Application      │     │    Application    │
-│                   │     │                   │
-└─────────┬─────────┘     └─────────┬─────────┘
-          │                         │
-          │                         │
-          │     ┌─────────────────────────┐
-          │     │                         │
-          ├────►│   Shared Class Library  │◄─────┐
-          │     │   (Models, DbContext)   │      │
-          │     │                         │      │
-          │     └─────────────────────────┘      │
-          │                                      │
-          │                                      │
-          │     ┌─────────────────────────┐      │
-          │     │                         │      │
-          └────►│     PostgreSQL DB       │──────┘
-                │                         │
-                └─────────────────────────┘
-```
+![API Architecture diagram](/img/docs/argus/guides/api-architecture-diagram.svg)
 
 This architecture allows the API service to read from the same database that the Argus indexer writes to, while maintaining separation of concerns and deployment flexibility.
 

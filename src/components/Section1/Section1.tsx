@@ -47,7 +47,7 @@ export default function Section1(): ReactNode {
                 <div className="flex justify-center mt-10 md:mt-[72.9px] lg:!hidden">
                     <Wizard sx={{ color: theme.palette.text.secondary }} className="!text-[120px]"/>
                 </div>
-                <div className="hidden flex justify-center mt-10 md:mt-[72.9px] lg:block">
+                <div className="hidden justify-center mt-10 md:mt-[72.9px] lg:flex">
                     <Wizard sx={{ color: theme.palette.text.secondary }} className="!text-[140px] "/>
                 </div>
             </div>

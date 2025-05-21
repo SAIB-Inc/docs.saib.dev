@@ -148,13 +148,16 @@ export default function FooterLayout({
               </div>
 
               <div className='relative flex flex-col justify-between'>
-                <div className='absolute right-[44.5px] top-[-138.14px] hidden lg:!block'>
+                <div className='absolute right-[5.5px] top-[-138.14px] hidden lg:block 2xl:hidden'>
                   <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[210.14px]'/>
+                </div>
+                <div className='absolute right-[23.5px] top-[-99.14px] hidden 2xl:block'>
+                  <FooterWizard sx={{ color: theme.palette.text.secondary }} className='!text-[180px]'/>
                 </div>
                 <div className='absolute hidden lg:block lg:w-80 lg:top-76 lg:left-[18.5px] 2xl:top-70 xl:left-[70.5px] 2xl:left-[126.5px] 2xl:w-auto'>
                   <img src={`${colorMode=='dark'? "img/Footer/logo_styled_dark.svg" : "img/Footer/logo_styled_light.svg"}`} alt="logo styled"/>
                 </div>
-                <div className='absolute right-[141px] top-[-127px] hidden lg:block' >
+                <div className='absolute right-[92px] top-[-104px] hidden lg:block 2xl:w-[75px]' >
                   <img src="img/Footer/logo_icon.svg" alt="Logo Icon" />  
                 </div>
                 <div className='mb-10 lg:mb-0'>
@@ -164,7 +167,7 @@ export default function FooterLayout({
                     <h3 className='leading-[30.516px] tracking-[-0.2543px] !font-normal !mb-0 text-base md:!text-xl lg:!text-[25.43px]'>For Developer</h3>
                   </div>
 
-                  <div className='flex justify-center gap-8 sm:justify-start sm:gap-14 lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[429px]'>
+                  <div className='flex justify-center gap-8 sm:justify-start sm:gap-14 lg:gap-x-47 xl:gap-x-[249px] 2xl:gap-x-[385px]'>
                     <div>
                       <div className='md:mb-10 lg:mb-[60.64px]'>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] font-medium !mb-[10.17px] text-[12px] sm:!text-[12.71px] md:!mb-0'>INFO</p>

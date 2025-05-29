@@ -111,14 +111,14 @@ export default function FooterLayout({
                     </div>
                   </div>
                   <div className='hidden lg:block'>
-                    <div className='flex self-end lg:gap-x-4 xl:gap-x-6'>
+                    <div className='flex self-end lg:gap-x-4 xl:gap-y-[10px] xl:flex-wrap 2xl:flex-nowrap 2xl:gap-y-0'>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
-                        <p className='md:!text-[14.8px]'>Philippines</p>
+                        <p className='md:!text-[14.8px]'>6/F Mabuhat Tower, Cebu IT Park, Lahug, Cebu City</p>
                       </div>
                       <div>
-                        <p style={{color: theme.palette.grey[100]}} className='text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE</p>
-                        <p className='md:!text-[14.8px]'>+63 952 471 9025</p>
+                        <p style={{color: theme.palette.grey[100]}} className='text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>PHONE | WHATSAPP</p>
+                        <p className='!w-max md:!text-[14.8px]'>+63 952 471 9025</p>
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>EMAIL</p>
@@ -130,10 +130,10 @@ export default function FooterLayout({
                     <div className='flex flex-col self-end !mb-[21.83px] gap-y-2 md:gap-x-15'>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] text-[11px] md:!text-[12.71px]'>CORPORATE OFFICE</p>
-                        <p className='text-sm md:!text-[17.8px] md:leading-[17.92px]'>Philippines</p>
+                        <p className='text-sm md:!text-[17.8px] md:leading-[17.92px]'>6/F Mabuhat Tower, Cebu IT Park, Lahug, Cebu City</p>
                       </div>
                       <div>
-                        <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] !text-[11px] md:!text-[12.71px]'>PHONE</p>
+                        <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] !text-[11px] md:!text-[12.71px]'>PHONE | WHATSAPP</p>
                         <p className='text-sm md:!text-[17.8px] md:leading-[17.92px]'>+63 952 471 9025</p>
                       </div>
                       <div>

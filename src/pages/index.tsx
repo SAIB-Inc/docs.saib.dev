@@ -14,6 +14,7 @@ import Section5 from '../components/Section5/Section5';
 import Section6 from '../components/Section6/Section6';
 import Section7 from '../components/Section7/Section7';
 import Section8 from '../components/Section8/Section8';
+import Razor from '../components/Razor/Razor';
 
 // function HomepageHeader() {
 //   const {siteConfig} = useDocusaurusContext();
@@ -46,6 +47,7 @@ export default function Home(): ReactNode {
       <Section4 />
       <Section5 />
       <Section6 />
+      <Razor />
       <Section7 />
       <Section8/>
     </Layout>

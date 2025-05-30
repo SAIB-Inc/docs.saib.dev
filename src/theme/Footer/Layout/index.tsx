@@ -114,7 +114,7 @@ export default function FooterLayout({
                     <div className='flex self-end lg:gap-x-4 flex-col lg:gap-y-[10px]'>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='text-[12.71px] leading-[17.794px] tracking-[0.5084px] !mb-[10.17px]'>CORPORATE OFFICE</p>
-                        <p className='md:!text-[14.8px]'>6/F Mabuhat Tower, Cebu IT Park, Lahug, Cebu City</p>
+                        <p className='md:!text-[14.8px]'>6/F Mabuhay Tower, Cebu IT Park, Lahug, Cebu City</p>
                       </div>
                       <div className='flex gap-x-10'>
                         <div>
@@ -132,7 +132,7 @@ export default function FooterLayout({
                     <div className='flex flex-col self-end !mb-[21.83px] gap-y-2 md:gap-x-15'>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] text-[11px] md:!text-[12.71px]'>CORPORATE OFFICE</p>
-                        <p className='text-sm md:!text-[17.8px] md:leading-[17.92px]'>6/F Mabuhat Tower, Cebu IT Park, Lahug, Cebu City</p>
+                        <p className='text-sm md:!text-[17.8px] md:leading-[17.92px]'>6/F Mabuhay Tower, Cebu IT Park, Lahug, Cebu City</p>
                       </div>
                       <div>
                         <p style={{color: theme.palette.grey[100]}} className='leading-[17.794px] tracking-[0.5084px] !mb-[10.17px] !text-[11px] md:!text-[12.71px]'>PHONE | WHATSAPP</p>

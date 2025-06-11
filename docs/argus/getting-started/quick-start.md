@@ -13,9 +13,11 @@ This quick start will help you set up a minimal Argus indexer in just a few minu
 
 ## Prerequisites
 
-- **.NET 9.0 SDK** or later
-- **PostgreSQL** database
-- **Entity Framework Core**
+| Tool / Library                            | Install link / command                                       |
+| ----------------------------------------- | ------------------------------------------------------------ |
+| **.NET SDK** ≥ 9.0                        | [.NET downloads](https://dotnet.microsoft.com/download)      |
+| **PostgreSQL** ≥ 14                       | [PostgreSQL downloads](https://www.postgresql.org/download/) |
+| **Entity Framework Core CLI** (dotnet-ef) | `dotnet tool install -g dotnet-ef`                           |
 
 ---
 
@@ -27,7 +29,7 @@ dotnet new webapi -n ArgusQuickStart
 cd ArgusQuickStart
 
 # Install packages
-dotnet add package Argus.Sync --version 0.3.1-alpha
+dotnet add package Argus.Sync --version 0.3.4-alpha
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 ```
@@ -169,6 +171,22 @@ dotnet run
 When successfully running, you'll see the Argus dashboard:
 
 ![Argus Running](/img/docs/argus/getting-started/argus_running.png)
+
+---
+
+## Commands cheat-sheet - Quick Reference
+
+Need a recap? The table below lists every CLI command used in this guide so you can copy-paste without scrolling through each step.
+
+| Command                                                         | Purpose                          |
+|-----------------------------------------------------------------|----------------------------------|
+| `dotnet new webapi -n ArgusQuickStart`                          | Scaffold a new Web API project   |
+| `dotnet add package Argus.Sync --version 0.3.4-alpha`           | Pull in the Argus sync package   |
+| `dotnet add package Microsoft.EntityFrameworkCore.Design`       | Enable EF Core tooling           |
+| `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL`      | PostgreSQL EF provider           |
+| `dotnet ef migrations add Initial`                              | Create the first migration       |
+| `dotnet ef database update`                                     | Apply migrations & create schema |
+| `dotnet run`                                                    | Launch the indexer & API         |
 
 ---
 

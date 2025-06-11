@@ -46,14 +46,15 @@ Configure your database connection in the `ConnectionStrings` section:
 
 ### Connection String Parameters
 
-| Parameter              | Description                      | Default  |
-| ---------------------- | -------------------------------- | -------- |
-| `Host`                 | PostgreSQL server hostname or IP | Required |
-| `Database`             | Database name                    | Required |
-| `Username`             | Database user                    | Required |
-| `Password`             | User password                    | Required |
-| `Port`                 | PostgreSQL server port           | 5432     |
-| `CardanoContextSchema` | Database schema                  | "public" |
+
+| Parameter              | Description                          | Default      |
+| ---------------------- |------------------------------------- |------------- |
+| `Host`                 | PostgreSQL server hostname or IP     | **required** |
+| `Database`             | Database name                        | **required** |
+| `Username`             | Database user                        | **required** |
+| `Password`             | User password                        | **required** |
+| `Port`                 | PostgreSQL server port               | 5432         |
+| `CardanoContextSchema` | Database schema to nest Argus tables | "public"     |
 
 ---
 

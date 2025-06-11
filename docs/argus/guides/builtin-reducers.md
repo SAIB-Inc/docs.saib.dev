@@ -43,17 +43,12 @@ General reducers provide the foundation for most blockchain applications. They h
 
 These reducers are tailored for specific Cardano DApps and protocols:
 
-**SundaePriceByTokenReducer**  
-Tracks token prices and swaps on SundaeSwap DEX
-
-**MinswapPriceByTokenReducer**  
-Monitors prices on Minswap DEX pools
-
-**JpgPriceByTokenReducer**  
-Tracks NFT sales on JPG Store marketplace
-
-**SplashPriceByTokenReducer**  
-Tracks token prices on Splash DEX
+| Reducer                        | Description                                                          |
+| ------------------------------ | -------------------------------------------------------------------- |
+| **SundaePriceByTokenReducer**  | Tracks token prices and swaps on SundaeSwap DEX                      |
+| **MinswapPriceByTokenReducer** | Indexes transactions chronologically by slot for historical analysis |
+| **JpgPriceByTokenReducer**     | Tracks UTXOs for specific addresses to monitor balances and activity |
+| **SplashPriceByTokenReducer**  | Indexes transaction outputs by slot for historical output analysis   |
 
 <details>
 <summary>Why DApp-Specific Reducers Matter</summary>

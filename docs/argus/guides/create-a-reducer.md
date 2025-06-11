@@ -14,11 +14,11 @@ This guide will walk you through the process of setting up and using Argus, from
 
 Before getting started, ensure you have the following:
 
-```
-- .NET 8.0 SDK or later installed
-- PostgreSQL database installed and running
-- Access to a Cardano node (local or remote)
-```
+| Tool / Library                                 | Install link                                                                                                      |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **.NET SDK** ≥ 9.0                             | [.NET downloads](https://dotnet.microsoft.com/download)                                                           |
+| **PostgreSQL** ≥ 14                            | [PostgreSQL downloads](https://www.postgresql.org/download/)                                                      |
+| **Access to a Cardano node (local or remote)** | [Cardano Developer Portal](https://developers.cardano.org/docs/get-started/cardano-node/installing-cardano-node/) |
 
 :::tip Environment Setup
 If you don't have a local Cardano node, you can use remote node services like those offered by Demeter.run. This guide works with both local and remote node options.
@@ -56,7 +56,7 @@ dotnet new web -n ArgusExample
 cd ArgusExample
 
 # Install the main package
-dotnet add package Argus.Sync --version 0.3.1-alpha
+dotnet add package Argus.Sync --version 0.3.4-alpha
 
 # Required dependencies
 dotnet add package Microsoft.EntityFrameworkCore.Design

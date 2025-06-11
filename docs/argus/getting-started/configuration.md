@@ -48,7 +48,7 @@ Configure your database connection in the `ConnectionStrings` section:
 
 
 | Parameter              | Description                          | Default      |
-| ---------------------- |------------------------------------- |------------- |
+| ---------------------- | ------------------------------------ | ------------ |
 | `Host`                 | PostgreSQL server hostname or IP     | **required** |
 | `Database`             | Database name                        | **required** |
 | `Username`             | Database user                        | **required** |
@@ -89,10 +89,17 @@ Remote connection using UtxoRPC:
 ```json
 "ConnectionType": "gRPC",
 "gRPC": {
-  "Endpoint": "https://cardano-preview.utxorpc-m1.demeter.run",
+  "Endpoint": "https://your-utxorpc-endpoint",
   "ApiKey": "your_api_key"
 }
 ```
+
+:::tip Using Demeter.run
+Demeter.run provides managed Cardano infrastructure including node endpoints. To use their services:
+1. Sign up at [demeter.run](https://demeter.run)
+2. Create a new workspace
+3. Check their documentation for specific endpoint URLs and API key setup
+:::
 
 #### 2. Unix Socket Provider (N2CProvider)
 
@@ -130,8 +137,8 @@ Set the `NetworkMagic` parameter according to your target Cardano network:
 ### Rollback Settings
 
 ```json
-"MaxRollbackSlots": 1000,  // Maximum number of slots to rollback (hard limit)
-"RollbackBuffer": 10,      // Number of recent intersections to maintain
+"MaxRollbackSlots": 1000,  // Maximum number of slots to rollback (default: 10000)
+"RollbackBuffer": 10,      // Number of recent intersections to maintain (default: 10)
 ```
 
 The `MaxRollbackSlots` parameter sets the limit for how far back your chain can potentially roll back during a chain reorganization. This is a security feature that prevents your application from having to process extremely deep chain reorganizations.
@@ -160,18 +167,18 @@ Configure synchronization behavior in the `Sync` section:
   "Dashboard": {
     "TuiMode": true,             // Terminal-based UI
     "RefreshInterval": 5000,     // Update frequency
-    "DisplayType": "sync"        // Dashboard style
+    "DisplayType": "Full"        // Dashboard style
   }
 }
 ```
 
 ### Dashboard Settings
 
-| Setting           | Description                                 | Default |
-| ----------------- | ------------------------------------------- | ------- |
-| `TuiMode`         | Enable terminal-based dashboard             | true    |
-| `RefreshInterval` | Dashboard refresh interval (ms)             | 5000    |
-| `DisplayType`     | Dashboard display type ("sync" or "detail") | "sync"  |
+| Setting           | Description                                          | Default       |
+| ----------------- | ---------------------------------------------------- | ------------- |
+| `TuiMode`         | Enable terminal-based dashboard                      | true          |
+| `RefreshInterval` | Dashboard refresh interval in ms (minimum 2000)      | 1000          |
+| `DisplayType`     | Dashboard display type (e.g., "Full")                | not specified |
 
 ---
 
@@ -203,7 +210,7 @@ Here's a complete configuration example with all available options:
     "Dashboard": {
       "TuiMode": true,
       "RefreshInterval": 5000,
-      "DisplayType": "sync"
+      "DisplayType": "Full"
     }
   }
 }

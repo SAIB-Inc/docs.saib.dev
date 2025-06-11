@@ -97,6 +97,50 @@ Chain reorganizations are normal in blockchain systems. Your reducers must handl
 
 ---
 
+## Performance Best Practices
+
+The Argus example reducers demonstrate two key performance patterns:
+
+### 1. Use AsNoTracking for Rollback Queries
+
+```csharp
+public async Task RollBackwardAsync(ulong slot)
+{
+    using TestDbContext dbContext = dbContextFactory.CreateDbContext();
+    dbContext.BlockTests.RemoveRange(
+        dbContext
+            .BlockTests
+            .AsNoTracking()  // Improves query performance
+            .Where(b => b.Slot >= slot)
+    );
+    await dbContext.SaveChangesAsync();
+}
+```
+
+The `AsNoTracking()` method tells Entity Framework Core not to track the queried entities, which improves performance when you're only reading data to determine what to delete.
+
+### 2. Batch Database Operations
+
+```csharp
+public async Task RollForwardAsync(Block block)
+{
+    using TestDbContext dbContext = dbContextFactory.CreateDbContext();
+    
+    ulong index = 0;
+    foreach (var tx in block.TransactionBodies())
+    {
+        string txHash = tx.Hash();
+        dbContext.TransactionTests.Add(new TransactionTest(...));
+    }
+    
+    await dbContext.SaveChangesAsync();  // Single save for all transactions
+}
+```
+
+Process all transactions in a block and save them with a single `SaveChangesAsync()` call. This reduces database round trips and improves throughput.
+
+---
+
 ## Advanced Rollback Mode
 
 Argus provides a configurable rollback mode for testing, debugging, or recovering from corrupted states. Configure it in your `appsettings.json`:

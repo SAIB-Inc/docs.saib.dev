@@ -13,6 +13,7 @@ export default function Section2(): ReactNode {
     const { colorMode } = useColorMode()
 
     const [currentProject, setCurrentProject] = useState(0);
+    const [isImageLoading, setIsImageLoading] = useState(false);
     const [isFading, setIsFading] = useState(false);
 
     const projects = [
@@ -111,7 +112,7 @@ export default function Section2(): ReactNode {
     return (
         <section id="section-2" style={{ backgroundColor: theme.palette.background.default }} className="w-screen pb-20 lg:pb-0 lg:h-242 xl:h-[1076px]">
             <div className="container flex flex-col h-full">
-                <div className="flex justify-between flex-col lg:flex-row lg:h-[calc(100%-230px)] xl:h-[calc(100%-382px)] 2xl:h-[calc(100%-300px)]">
+                <div className="relative flex justify-between flex-col lg:flex-row lg:h-[calc(100%-230px)] xl:h-[calc(100%-382px)] 2xl:h-[calc(100%-300px)]">
                     <div className="mt-18 md:!mt-26">
                         <h1 className="font-semibold tracking-[0.56px] text-3xl text-center sm:!text-5xl md:!text-[56px] lg:text-start lg:!text-[40px] xl:!text-[40px] xl:w-72 2xl:w-96  2xl:!text-[40px]">
                             <span>Check Out </span><br className="hidden lg:block xl:hidden"/>
@@ -120,9 +121,22 @@ export default function Section2(): ReactNode {
                         </h1>
                     </div>
                     <div className="flex flex-col justify-end items-center relative mt-54 md:mt-77 lg:mt-0">
+                        {isImageLoading && (
+                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                <div 
+                                    style={{
+                                        borderColor: theme.palette.grey[100],
+                                        borderTopColor: theme.palette.primary.main
+                                    }}
+                                    className="w-10 h-10 border-4 rounded-full animate-spin" />
+                            </div>
+                        )}
                         <div className={`absolute inset-x-0 left-1/2 transform -translate-x-1/2 flex justify-center ${projects[currentProject].class}`}>
                             <img
+                                key={projects[currentProject].logo}
                                 src={projects[currentProject].logo}
+                                loading="eager"
+                                onLoad={() => setIsImageLoading(false)}
                                 alt="razor logo"
                                 className={`transition-opacity duration-150 ${isFading ? "opacity-0" : "opacity-100"} animate-bounce3`}
                             />
@@ -145,6 +159,7 @@ export default function Section2(): ReactNode {
                                                 onClick={() => {
                                                     if (index !== currentProject) {
                                                         setIsFading(true);
+                                                        setIsImageLoading(true);
                                                         setTimeout(() => {
                                                             setCurrentProject(index);
                                                             setIsFading(false);
@@ -172,6 +187,7 @@ export default function Section2(): ReactNode {
                         <div
                             onClick={() => {
                                 setIsFading(true);
+                                setIsImageLoading(true);
                                 setTimeout(() => {
                                     setCurrentProject((currentProject + 1) % projects.length);
                                     setIsFading(false);
@@ -185,6 +201,7 @@ export default function Section2(): ReactNode {
                             <IconButton
                                 onClick={() => {
                                     setIsFading(true);
+                                    setIsImageLoading(true);
                                     setTimeout(() => {
                                         setCurrentProject((currentProject - 1 + projects.length) % projects.length);
                                         setIsFading(false);
@@ -201,6 +218,7 @@ export default function Section2(): ReactNode {
                             <IconButton
                                 onClick={() => {
                                     setIsFading(true);
+                                    setIsImageLoading(true);
                                     setTimeout(() => {
                                         setCurrentProject((currentProject + 1) % projects.length);
                                         setIsFading(false);

@@ -142,6 +142,14 @@ const config: Config = {
           label: 'Buriza',
           className: "hover:text-[#227CFF]!"
         },
+        {
+          docid: 'cardano',
+          type: 'docSidebar',
+          sidebarId: 'cardano',
+          position: 'left',
+          label: 'Cardano',
+          className: "hover:text-[#649DCA]!"
+        },
       ],
     },
     footer: {

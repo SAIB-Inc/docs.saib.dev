@@ -122,7 +122,7 @@ export default function Section2(): ReactNode {
                     </div>
                     <div className="flex flex-col justify-end items-center relative mt-54 md:mt-77 lg:mt-0">
                         {isImageLoading && (
-                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <div className="absolute left-1/2 transform -translate-x-1/2 -top-30 md:-top-40 lg:top-1/2 lg:-translate-y-1/2">
                                 <div 
                                     style={{
                                         borderColor: theme.palette.grey[100],
@@ -140,7 +140,7 @@ export default function Section2(): ReactNode {
                                 alt="razor logo"
                                 className={`transition-opacity duration-150 ${isFading ? "opacity-0" : "opacity-100"} animate-bounce3`}
                             />
-                        </div>
+                        </div>   
                         <img
                             src={colorMode === 'dark' ? "/img/Section2/base_ellipse_dark.webp" : "/img/Section2/base_ellipse_light.webp"}
                             alt="base ellipse"

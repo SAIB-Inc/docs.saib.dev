@@ -26,13 +26,13 @@ Cardano was created with a bold vision: **to provide economic identity to the bi
 
 When blockchain technology emerged, it promised to solve many problems but faced critical limitations in scaling, connecting with other systems, and maintaining itself over time. Cardano identified these as the three fundamental challenges that must be solved for blockchain to achieve mainstream adoption. These pillars represent not just technical requirements, but a holistic approach to building a global financial operating system that can serve billions of users for generations to come.
 
-### 1. **Scalability**
+### 1. Scalability
 Scalability means creating a system that can grow with humanity's needs, from thousands to billions of users. Cardano approaches this through transaction throughput optimization, network capacity improvements, and efficient data storage solutions. The platform implements both layer-one optimizations and layer-two solutions like Hydra to ensure the network can accommodate everyone without becoming slow or expensive.
 
-### 2. **Interoperability**
+### 2. Interoperability
 Interoperability addresses the reality that no single blockchain will dominate—instead, many systems must work together seamlessly. Cardano builds bridges between different blockchain networks and traditional financial infrastructure, allowing value and information to flow freely. This includes developing standards for cross-chain communication and creating frameworks where different systems can understand and trust each other.
 
-### 3. **Sustainability**
+### 3. Sustainability
 Sustainability ensures the platform can maintain and improve itself indefinitely without external dependencies. Cardano achieves this through environmental sustainability with proof-of-stake consensus that uses 99% less energy than proof-of-work systems. Economic sustainability comes from a treasury system that funds development through transaction fees, while governance sustainability enables community-driven evolution through democratic voting mechanisms.
 
 ---
@@ -79,19 +79,19 @@ Cardano's development follows a systematic roadmap divided into five eras, each 
 | **Basho** | Optimize performance and interoperability at scale |
 | **Voltaire** | Implement self-governance and self-sustainability |
 
-### **Byron** - The Foundation
+### Byron - The Foundation
 Byron established Cardano's foundational architecture, introducing the ADA cryptocurrency and basic transaction functionality. This era focused on building a robust and secure ledger with wallets like Daedalus, creating the core infrastructure for the entire ecosystem.
 
-### **Shelley** - Decentralization
+### Shelley - Decentralization
 Shelley transitioned Cardano from a federated system to a fully decentralized network operated by the community. With the introduction of stake pools and delegation mechanisms, ADA holders can now participate in network consensus and earn rewards, achieving one of the most decentralized proof-of-stake networks with over 3,000 pools globally.
 
-### **Goguen** - Smart Contracts
+### Goguen - Smart Contracts
 Goguen brought programmability to Cardano through smart contracts and native tokens. Developers can now build decentralized applications using Plutus, while Marlowe provides a domain-specific language for financial contracts, making blockchain accessible to non-programmers.
 
-### **Basho** - Optimization
+### Basho - Optimization
 Basho focuses on optimization and scaling to support global adoption. This era introduces sidechains for interoperability, implements different accounting styles for various use cases, and deploys Hydra for massive scalability improvements.
 
-### **Voltaire** - Self-Governance
+### Voltaire - Self-Governance
 Voltaire completes Cardano's journey to self-sustainability through governance and treasury mechanisms. ADA holders can propose and vote on protocol changes and funding proposals, with the treasury system ensuring continuous development without external funding dependencies.
 
 ---

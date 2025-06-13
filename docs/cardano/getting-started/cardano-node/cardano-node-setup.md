@@ -229,6 +229,19 @@ cardano-cli --version
 
 Cardano-node requires specific configuration files for each network. These files contain network parameters and genesis information.
 
+### Understanding Configuration Files
+
+Before downloading, here's what each configuration file does:
+
+| File | Purpose |
+|------|---------|
+| **config.json** | Main node configuration file containing operational parameters like logging levels, network protocol versions, and resource limits |
+| **topology.json** | Defines network topology - which peer nodes to connect to for syncing and relaying blocks |
+| **byron-genesis.json** | Genesis parameters for the Byron era (original Cardano launch) including initial UTxO distribution |
+| **shelley-genesis.json** | Parameters for the Shelley era introducing staking, delegation, and decentralization features |
+| **alonzo-genesis.json** | Configuration for the Alonzo era enabling smart contracts via Plutus scripts |
+| **conway-genesis.json** | Latest era parameters for governance features and CIP-1694 implementation |
+
 ### Mainnet Configuration
 
 #### Step 1: Create Configuration Directory

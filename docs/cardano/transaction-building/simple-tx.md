@@ -46,11 +46,15 @@ Every transaction must:
 
 ### Step 1: Query Protocol Parameters
 
+Protocol parameters are necessary for calculating the transaction fee at a later stage.
+
 ```bash
 cardano-cli latest query protocol-parameters --out-file pparams.json
 ```
 
 ### Step 2: Find Your UTxOs
+
+You will need to consume one or more UTxOs to build an actual transaction.
 
 ```bash
 cardano-cli latest query utxo --address $(cat payment.addr)
@@ -82,7 +86,7 @@ cardano-cli latest transaction build-raw \
 :::warning Fee Calculation Issue
 The `calculate-min-fee` command has a known issue where using `--fee 0` can result in underestimated fees. This happens because CBOR encoding uses fewer bytes for smaller values, affecting the transaction size.
 
-**Workaround**: Use a larger dummy fee (e.g., 300000) when building your draft. This ensures the transaction size in the draft is similar to or larger than the final transaction, preventing fee underestimation:
+> **Workaround**: Use a larger dummy fee (e.g., 300000) when building your draft. This ensures the transaction size in the draft is similar to or larger than the final transaction, preventing fee underestimation:
 
 ```bash
 # Build draft with larger dummy fee to account for size changes
@@ -107,11 +111,19 @@ cardano-cli latest transaction calculate-min-fee \
   --witness-count 1
 ```
 
-Output: `167041 Lovelace`
+**Output**: `167041 Lovelace`
 
 ### Step 5: Build Final Transaction
 
-Calculate change: `10000000000 - 1000000000 - 167041 = 8999832959`
+Calculate change:
+
+```bash
+echo $((10000000000 - 1000000000 - 167041))
+```
+
+**Output**: `8999832959`
+
+Build the final transaction with the newly calculated change:
 
 ```bash
 cardano-cli latest transaction build-raw \
@@ -186,7 +198,7 @@ cardano-cli latest transaction submit --tx-file tx.signed
 Detailed human-readable format:
 
 ```bash
-cardano-cli debug transaction view --tx-body-file tx.raw
+cardano-cli debug transaction view --tx-body-file tx.raw # or tx.signed
 ```
 
 Key fields to check:
@@ -194,6 +206,29 @@ Key fields to check:
 - **outputs** – New UTxOs being created  
 - **fee** – Transaction cost in lovelace
 - **witnesses** – Empty until signed
+
+:::tip Inspecting raw CBOR
+Need to peek under the hood? Use the web-based [CBOR Playground](https://cbor.nemo157.com/) to decode and explore a transaction’s CBOR.
+1. Extract the CBOR blob from your unsigned or signed transaction:
+
+```bash
+cat tx.signed
+```
+
+Example output (truncated):
+```json
+{
+    "type": "Witnessed Tx ConwayEra",
+    "description": "Ledger Cddl Format",
+    "cborHex": "84a300d90102818258207b4586a8d82b...f5f6"
+}
+```
+
+2. Copy the value of cborHex (everything inside the quotes).
+3. Paste it into CBOR Playground to see the decoded structure.
+
+For a precise, field-by-field explanation, cross-reference the [latest Conway CDDL](https://github.com/IntersectMBO/cardano-ledger/blob/master/eras/conway/impl/cddl-files/conway.cddl). Together, the Playground and CDDL give you a clear, low-level view of how Cardano transactions are encoded.
+:::
 
 ### Get Transaction ID
 

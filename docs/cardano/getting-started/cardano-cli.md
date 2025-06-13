@@ -29,14 +29,30 @@ export CARDANO_NODE_NETWORK_ID=2        # Preview testnet (recommended for testi
 # export CARDANO_NODE_NETWORK_ID=mainnet  # Mainnet
 ```
 
-:::note
-While these environment variables are standard, some commands may still require explicit `--testnet-magic` and `--socket-path` flags depending on your CLI version.
+### Network Selection
+
+:::note  
+If you did not set the `CARDANO_NODE_NETWORK_ID` environment variable, you **must** explicitly specify the target network with one of the flags below for every `cardano-cli` command.
 :::
+
+```bash
+# Preview testnet
+--testnet-magic 2
+
+# Preprod testnet  
+--testnet-magic 1
+
+# SanchoNet (Conway testnet)
+--testnet-magic 4
+
+# Mainnet
+--mainnet
+```
 
 Verify connection:
 
 ```bash
-cardano-cli latest query tip --testnet-magic 2
+cardano-cli latest query tip
 ```
 
 ---
@@ -102,7 +118,6 @@ Payment-only address without staking capability:
 cardano-cli latest address build \
   --payment-verification-key-file payment.vkey \
   --out-file payment.addr \
-  --testnet-magic 2
 ```
 
 Use cases:
@@ -119,31 +134,12 @@ cardano-cli latest address build \
   --payment-verification-key-file payment.vkey \
   --stake-verification-key-file stake.vkey \
   --out-file payment_stake.addr \
-  --testnet-magic 2
 ```
 
 Benefits:
 - Can receive staking rewards
 - Participate in delegation
 - Standard for user wallets
-
-### Network Selection
-
-Specify the target network:
-
-```bash
-# Preview testnet
---testnet-magic 2
-
-# Preprod testnet  
---testnet-magic 1
-
-# SanchoNet (Conway testnet)
---testnet-magic 4
-
-# Mainnet
---mainnet
-```
 
 ### Address Format
 
@@ -178,12 +174,17 @@ addr_test1qrqlsnsuz5j9kv8dp5s80pt0cgrm4m35kq0jxqw3usk7f8qhk0cxs4hnx7qpmsg4wwzrpp
 
 ### Check UTxOs
 
+Queries require a running node. Set the socket path:
+
+```bash
+export CARDANO_NODE_SOCKET_PATH=/path/to/node.socket
+```
+
 Query unspent outputs at your address:
 
 ```bash
 cardano-cli latest query utxo \
   --address $(cat payment.addr) \
-  --testnet-magic 2
 ```
 
 Output format:
@@ -191,32 +192,6 @@ Output format:
                            TxHash                                 TxIx        Amount
 --------------------------------------------------------------------------------------
 262c7891f932cde390bcc04c25805f3f422c1a5687d5d47f6681e68bb384fe6d     0        10000000000 lovelace + TxOutDatumNone
-```
-
-For programmatic use, request JSON output:
-
-```bash
-cardano-cli latest query utxo \
-  --address $(cat payment.addr) \
-  --testnet-magic 2 \
-  --output-json | jq
-```
-
-### Node Connection
-
-Queries require a running node. Set the socket path:
-
-```bash
-export CARDANO_NODE_SOCKET_PATH=/path/to/node.socket
-```
-
-Or specify explicitly:
-
-```bash
-cardano-cli latest query utxo \
-  --address $(cat payment.addr) \
-  --testnet-magic 2 \
-  --socket-path /path/to/node.socket
 ```
 
 ---
@@ -238,7 +213,6 @@ For new addresses without UTxOs:
    # After requesting funds, verify receipt
    cardano-cli latest query utxo \
      --address $(cat payment.addr) \
-     --testnet-magic 2
    ```
 
 ---

@@ -93,7 +93,7 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
     }, [isArgus, isChrysalis, isRazor, isComp, isFutura]);
 
     useEffect(() => {
-      setMounted(true);
+        setMounted(true);
     }, []);
 
     if (!mounted) return null;

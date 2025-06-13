@@ -49,10 +49,20 @@ p
     }
 
     @keyframes bounce3 {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
+    }
   
+    .animate-spin {
+      animation: spin 1s infinite linear;
+    }
+
     .animate-blink {
       animation: blink 1s steps(1) infinite;
     }

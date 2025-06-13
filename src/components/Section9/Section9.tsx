@@ -1,12 +1,12 @@
 import { ReactNode, useRef } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
-import Cardano from "../../../static/img/Section9/cardano.svg";
 import RightArrow from "../../../static/img/Section9/right_arrow.svg";
 import { alpha, Button, IconButton, Paper, Tooltip, useTheme } from "@mui/material";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FuturaCodeBlock from "./FuturaCodeBlock";
 import Futura from "@site/static/img/Section9/futura";
 import Code from "../../../static/img/Section9/code.svg";
+import Cardano from "@site/static/img/Section9/cardano";
 
 export default function Section9(): ReactNode {
     const theme = useTheme();
@@ -74,7 +74,7 @@ export default function Section9(): ReactNode {
                     </Paper>
                 </div>
 
-                <div className="relative flex sm:flex-col-reverse md:flex-col lg:flex-row lg:gap-5">
+                <div className="relative flex flex-col-reverse md:flex-col lg:flex-row lg:gap-5">
                     <div style={{ backgroundColor: theme.palette.background.default }} className="md:w-full lg:hidden">
                         <Paper
                             className="p-8"
@@ -89,7 +89,7 @@ export default function Section9(): ReactNode {
                         >
                             <div className="flex justify-between">
                                 <div className="flex flex-col justify-end">
-                                    <h1 className="!pb-0 !text-[32px]">Cardano Smart Contracts</h1>
+                                    <h1 className="!pb-0 text-2xl sm:text-[32px]">Cardano Smart Contracts</h1>
                                     <Button style={{ color: theme.palette.grey[50], borderColor: theme.palette.grey[50] }} variant="outlined" endIcon={<RightArrow />}
                                         sx={{
                                             borderRadius: '60px',
@@ -100,7 +100,7 @@ export default function Section9(): ReactNode {
                                     </Button>
                                 </div>
                                 <div>
-                                    <Cardano />
+                                    <Cardano className="!text-[93px] md:!text-[174px]"/>
                                 </div>
                             </div>
                         </Paper>
@@ -108,7 +108,7 @@ export default function Section9(): ReactNode {
 
                     <div className="flex flex-col justify-between md:flex-row md:gap-4 pt-5 lg:w-[calc(100%-350px)] lg:gap-5 xl:w-[calc(100%-400px)] 2xl:w-[calc(100%-496px)] ">
                         <Paper
-                            className="flex-1 justify-between  md:p-8"
+                            className="flex-1 justify-between p-6 md:p-8"
                             sx={{
                                 backgroundImage: "url('/img/Section9/background_small.svg')",
                                 backgroundSize: 'cover',
@@ -118,7 +118,7 @@ export default function Section9(): ReactNode {
                                 borderRadius: '24px',
                             }}
                         >
-                            <h1 className="font-semibold leading-12 md:mb-10 lg:mb-22 lg:!text-3xl xl:text-13">Interoperability</h1>
+                            <h1 className="font-semibold leading-12 text-2xl mb-8 md:mb-10 lg:mb-22 lg:!text-3xl xl:text-13">Interoperability</h1>
                             <p>
                                 Futura integrates seamlessly with
                                 other .NET languages, enabling smooth
@@ -127,7 +127,7 @@ export default function Section9(): ReactNode {
                             </p>
                         </Paper>
                         <Paper
-                            className="flex-1 justify-between md:p-8 md:pr-8"
+                            className="flex-1 justify-between p-6 md:p-8 md:pr-8"
                             sx={{
                                 backgroundImage: "url('/img/Section9/background_small.svg')",
                                 backgroundSize: 'cover',
@@ -137,7 +137,7 @@ export default function Section9(): ReactNode {
                                 borderRadius: '24px',
                             }}
                         >
-                            <h1 className="font-semibold leading-12 md:mb-10 lg:mb-22 lg:!text-3xl xl:text-13">Compile to UPLC</h1>
+                            <h1 className="font-semibold leading-12 text-2xl mb-8 md:mb-10 lg:mb-22 lg:!text-3xl xl:text-13">Compile to UPLC</h1>
                             <p>
                                 Futura compiles F# code to UPLC,
                                 unlocking the potential for <b>Cardano</b>

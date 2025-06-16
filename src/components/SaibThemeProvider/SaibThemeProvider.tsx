@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
@@ -20,6 +20,8 @@ type SaibThemeProviderProps = {
 export default function SaibThemeProvider({ children }: SaibThemeProviderProps): ReactNode {
     const { colorMode } = useColorMode();
     const location = useLocation();
+    const [mounted, setMounted] = useState(false);
+
     const isChrysalis = location.pathname.startsWith('/docs/chrysalis');
     const isArgus = location.pathname.startsWith('/docs/argus');
     const isRazor = location.pathname.startsWith('/docs/razor');
@@ -81,22 +83,28 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
     , [colorMode]);
 
     useEffect(() => {
-      const root = document.documentElement;
-    
-      if (isArgus) {
-        root.setAttribute('data-theme-variant', 'argus');
-      } else if (isChrysalis) {
-        root.setAttribute('data-theme-variant', 'chrysalis');
-      } else if (isRazor) {
-        root.setAttribute('data-theme-variant', 'razor'); 
-      } else if (isComp) {
-        root.setAttribute('data-theme-variant', 'comp');
-      } else if (isFutura) {
-        root.setAttribute('data-theme-variant', 'futura');
-      } else {
-        root.setAttribute('data-theme-variant', 'home');
-      }
+        const root = document.documentElement;
+
+        if (isArgus) {
+            root.setAttribute('data-theme-variant', 'argus');
+        } else if (isChrysalis) {
+            root.setAttribute('data-theme-variant', 'chrysalis');
+        } else if (isRazor) {
+            root.setAttribute('data-theme-variant', 'razor');
+        } else if (isComp) {
+            root.setAttribute('data-theme-variant', 'comp');
+        } else if (isFutura) {
+            root.setAttribute('data-theme-variant', 'futura');
+        } else {
+            root.setAttribute('data-theme-variant', 'home');
+        }
     }, [isArgus, isChrysalis, isRazor, isComp, isFutura]);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
 
     return (
         <ThemeProvider theme={darkTheme}>

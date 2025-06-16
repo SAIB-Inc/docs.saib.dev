@@ -61,7 +61,6 @@ export default function Futura(): ReactNode {
                                 <span style={{ color: theme.palette.primary.main }}>Futura</span>
                                 <span style={{ color: theme.palette.grey.A200 }} className="capitalize">- a domain-specific <br className="hidden md:block"/>language built on F#</span>
                             </h1>
-                            {/* Code */}
                             <div 
                             style={{
                                 backgroundColor: theme.palette.grey[300]

@@ -11,6 +11,7 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
 import { useLocation } from "@docusaurus/router";
+import '../../theme.d.ts';
 
 type SaibThemeProviderProps = {
     children: ReactNode;
@@ -70,6 +71,12 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
         shape: {
             borderRadius: 12,
         },
+        futura: {
+            colors: {
+                primary: '#FFF8E0',
+                secondary: '#5F28A3'
+            }
+        }
       })
     , [colorMode]);
 

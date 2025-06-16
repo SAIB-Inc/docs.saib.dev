@@ -9,7 +9,7 @@ export default function CodeBlock({ editorRef }) {
       height="100%"
       defaultLanguage="csharp"
       theme={colorMode === 'dark' ? 'purple-cool-dark' : 'purple-cool-light'}
-      onMount={(editor, monacoInstance) => {
+      onMount={(editor) => {
         if (editorRef) editorRef.current = editor;
 
         editor.updateOptions({

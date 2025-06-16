@@ -1,14 +1,13 @@
 import { ReactNode, useRef } from "react";
 import BtnMore from "../Shared/Buttons/BtnMore/BtnMore";
-import RightArrow from "../../../static/img/Section9/right_arrow.svg";
+import RightArrow from "../../../static/img/Futura/right_arrow.svg";
 import { alpha, Button, IconButton, Paper, Tooltip, useTheme } from "@mui/material";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FuturaCodeBlock from "./FuturaCodeBlock";
-import Futura from "@site/static/img/Section9/futura";
-import Code from "../../../static/img/Section9/code.svg";
-import Cardano from "@site/static/img/Section9/cardano";
+import FuturaLogo from "@site/static/img/Futura/futura";
+import Cardano from "@site/static/img/Futura/cardano";
 
-export default function Section9(): ReactNode {
+export default function Futura(): ReactNode {
     const theme = useTheme();
     const editorRef = useRef(null);
 
@@ -55,7 +54,7 @@ export default function Section9(): ReactNode {
                             />
                         </div>
                         <div>
-                            <Futura className="absolute top-60 right-20 sm:!hidden lg:!block lg:!text-[310px] lg:top-[126px] lg:right-5 xl:top-20 xl:right-10 2xl:top-[100px] 2xl:right-[87px]" />
+                            <FuturaLogo className="absolute top-60 right-20 sm:!hidden lg:!block lg:!text-[310px] lg:top-[126px] lg:right-5 xl:top-20 xl:right-10 2xl:top-[100px] 2xl:right-[87px]" />
                         </div>
                         <div className="w-full h-full p-6 flex flex-col">
                             <h1 className="text-2xl !pb-0 sm:text-[32px] lg:!mb-5 lg:!text-[40px] lg:leading-[41.6px] ">

@@ -209,7 +209,7 @@ export default function Futura(): ReactNode {
                     <div style={{ backgroundColor: theme.palette.background.default }} className="hidden absolute right-[-4px] bottom-0 pl-5 pt-5 pr-1 rounded-tl-3xl lg:block lg:!w-[350px] xl:!w-[400px] 2xl:!w-[496px]">
                         <div style={{ borderColor: theme.palette.background.default }} className="absolute top-[-48px] right-[-4px] border-r-8 border-b-8 w-14 aspect-square rounded-br-3xl lg:"></div>
                         <Paper
-                            className="md:p-8"
+                            className="md:!p-8"
                             sx={{
                                 backgroundImage: "url('/img/Section9/background_medium.svg')",
                                 backgroundSize: 'cover',
@@ -221,7 +221,7 @@ export default function Futura(): ReactNode {
                         >
                             <div>
                                 <div className="mb-[179px]">
-                                    <h1 style={{color:theme.futura?.colors.primary}} className="!pb-0 font-semibold !text-4xl xl:!text-[40px]">Cardano Smart <br /> Contracts</h1>
+                                    <h1 style={{color:theme.futura?.colors.primary}} className="!pb-0 font-semibold text-4xl lg:!text-[32px] xl:!text-[40px]">Cardano Smart Contracts</h1>
                                 </div>
 
                                 <div className="w-full relative md:gap-12">

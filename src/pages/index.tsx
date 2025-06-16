@@ -4,7 +4,6 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
 import Button from '@mui/material/Button';
 import Section1 from '../components/Section1/Section1';
 import Section3 from '../components/Section3/Section3';
@@ -14,6 +13,7 @@ import Section5 from '../components/Section5/Section5';
 import Section6 from '../components/Section6/Section6';
 import Section7 from '../components/Section7/Section7';
 import Section8 from '../components/Section8/Section8';
+import Futura from '../components/Futura/Futura';
 
 // function HomepageHeader() {
 //   const {siteConfig} = useDocusaurusContext();
@@ -40,6 +40,7 @@ export default function Home(): ReactNode {
   // const {siteConfig} = useDocusaurusContext();
   return (
     <Layout>
+      
       <Section1 />
       <Section2 />
       <Section3 />
@@ -47,6 +48,7 @@ export default function Home(): ReactNode {
       <Section5 />
       <Section6 />
       <Section7 />
+      <Futura />
       <Section8/>
     </Layout>
   );

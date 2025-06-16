@@ -11,6 +11,7 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
 import { useLocation } from "@docusaurus/router";
+import '../../theme.d.ts';
 
 type SaibThemeProviderProps = {
     children: ReactNode;
@@ -29,49 +30,56 @@ export default function SaibThemeProvider({ children }: SaibThemeProviderProps):
 
     const darkTheme = useMemo(() =>
         createTheme({
-            palette: {
-                mode: colorMode,
-                background: {
-                    default: colorMode === 'dark' ? '#191919' : '#ffffff',
-                    paper: colorMode === 'dark' ? '#24222D' : '#E9F5FF',
-                },
-                primary: {
-                    main: '#5438DC',
-                    light: '#C2B8FF',
-                    contrastText: colorMode === 'dark' ? '#ffffff' : '#5438DC'
-                },
-                secondary: {
-                    main: colorMode === 'dark' ? '#5438DC' : '#ffffff',
-                    dark: '#5438DC',
-                    light: '#7454FF',
-                    contrastText: '#59EDE0'
-                },
-                text: {
-                    primary: colorMode === 'dark' ? '#ffffff' : '#2C1A53',
-                    secondary: colorMode === 'dark' ? '#C2B8FF' : '#5438DC',
-                    disabled: colorMode === 'dark' ? '#FFFFFF99' : '#2C1A53'
-                },
-                grey: {
-                    50: '#ffffff',
-                    100: '#717171',
-                    200: '#E9F5FF',
-                    300: colorMode === 'dark' ? '#1C1C1C' : '#F7F9FB',
-                    600: '#191919',
-                    700: colorMode === 'dark' ? '#23212B' : '#E9F5FF',
-                    800: '#1F2F4E',
-                    900: '#1C3250',
-                    A100: colorMode === 'dark' ? '#151515' : '#E9F5FF',
-                },
-                action: {
-                    active: '#3A376A',
-                    hover: '#988DE2',
-                    hoverOpacity: 0.6,
-                },
+          palette: {
+            mode: colorMode,
+            background: {
+                default: colorMode === 'dark' ? '#191919' : '#ffffff',
+                paper: colorMode === 'dark' ? '#24222D' : '#E9F5FF',
             },
-            shape: {
-                borderRadius: 12,
+            primary: {
+                main: '#5438DC',
+                light: '#C2B8FF',
+                contrastText: colorMode === 'dark' ? '#ffffff' : '#5438DC'
             },
-        })
+            secondary: {
+                main: colorMode === 'dark' ? '#5438DC' : '#ffffff',
+                dark: '#5438DC',
+                light: '#7454FF',
+                contrastText: '#59EDE0'
+            },
+            text: {
+                primary: colorMode === 'dark' ? '#ffffff' : '#2C1A53',
+                secondary: colorMode === 'dark' ? '#C2B8FF' : '#5438DC',
+                disabled: colorMode === 'dark' ? '#FFFFFF99' : '#2C1A53'
+            },
+            grey: {
+                50: '#ffffff',
+                100: '#717171',
+                200: '#E9F5FF',
+                300: colorMode === 'dark' ? '#1C1C1C' : '#F7F9FB',
+                600: '#191919',
+                700: colorMode === 'dark' ? '#23212B' : '#E9F5FF',
+                800: '#1F2F4E',
+                900: '#1C3250',
+                A100: colorMode === 'dark' ? '#151515' : '#E9F5FF',
+                A200: '#000000',
+            },
+            action: {
+                active: '#3A376A',
+                hover: '#988DE2',
+                hoverOpacity: 0.6,
+            },
+        },
+        shape: {
+            borderRadius: 12,
+        },
+        futura: {
+            colors: {
+                primary: '#FFF8E0',
+                secondary: '#5F28A3'
+            }
+        }
+      })
     , [colorMode]);
 
     useEffect(() => {

@@ -53,8 +53,8 @@ export default function Futura(): ReactNode {
                                 }}
                             />
                         </div>
-                        <div>
-                            <FuturaLogo className="absolute top-60 right-20 sm:!hidden lg:!block lg:!text-[310px] lg:top-[126px] lg:right-5 xl:top-20 xl:right-10 2xl:top-[100px] 2xl:right-[87px]" />
+                        <div className="hidden lg:block">
+                            <FuturaLogo className="absolute lg:!text-[310px] lg:top-[126px] lg:right-5 xl:top-20 xl:right-10 2xl:top-[100px] 2xl:right-[87px]" />
                         </div>
                         <div className="w-full h-full p-6 flex flex-col">
                             <h1 className="text-2xl !pb-0 sm:text-[32px] lg:!mb-5 lg:!text-[40px] lg:leading-[41.6px] ">
@@ -149,7 +149,7 @@ export default function Futura(): ReactNode {
                         >
                             <div className="flex justify-between">
                                 <div className="flex flex-col justify-end gap-18">
-                                    <h1 className="!pb-0 text-2xl sm:!text-[32px]">Cardano Smart Contracts</h1>
+                                    <h1 className="!pb-0 text-2xl lg:!text-[32px] xl:!text-4xl">Cardano Smart Contracts</h1>
                                     <Button style={{ color: theme.palette.grey[50], borderColor: theme.palette.grey[50] }} variant="outlined" endIcon={<RightArrow />}
                                         sx={{
                                             borderRadius: '60px',
@@ -210,7 +210,7 @@ export default function Futura(): ReactNode {
                     <div style={{ backgroundColor: theme.palette.background.default }} className="hidden absolute right-[-4px] bottom-0 pl-5 pt-5 pr-1 rounded-tl-3xl lg:block lg:!w-[350px] xl:!w-[400px] 2xl:!w-[496px]">
                         <div style={{ borderColor: theme.palette.background.default }} className="absolute top-[-48px] right-[-4px] border-r-8 border-b-8 w-14 aspect-square rounded-br-3xl lg:"></div>
                         <Paper
-                            className="md:p-10"
+                            className="md:p-8"
                             sx={{
                                 backgroundImage: "url('/img/Section9/background_medium.svg')",
                                 backgroundSize: 'cover',
@@ -236,7 +236,7 @@ export default function Futura(): ReactNode {
                                     >
                                         Get Started
                                     </Button>
-                                    <Cardano className="absolute mb-4 lg:top-[-170px] lg:right-[4px] lg:!text-[140px] xl:top-[-170px] xl:right-[-18px] 2xl:right-[4px]" />
+                                    <Cardano className="absolute mb-4 lg:top-[-163px] lg:right-[-4px] lg:!text-[140px] xl:top-[-170px] xl:right-[-18px] 2xl:right-[4px]" />
                                 </div>
                             </div>
                         </Paper>

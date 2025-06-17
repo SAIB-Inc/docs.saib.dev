@@ -5,7 +5,9 @@ sidebar_position: 3
 
 # Minting Native Assets on Cardano
 
-Minting is the process of creating new tokens on the Cardano blockchain. This guide covers the complete minting process, from policy creation to token distribution.
+Minting is the process of creating new tokens on the Cardano blockchain. This guide covers the complete minting process, from policy creation to token distribution. Unlike other blockchains that require smart contracts for token creation, Cardano's native asset functionality allows minting through simple transaction commands and policy scripts. Understanding the minting process empowers developers to create custom tokens for various use cases while maintaining full control over supply and distribution.
+
+---
 
 ## Understanding Minting Policies
 
@@ -13,28 +15,46 @@ A minting policy is a set of rules that determines who can mint or burn tokens a
 
 ### Policy Types
 
-1. **Simple Signature**: Requires a specific key signature
-2. **Time-Locked**: Can only mint before/after certain times
-3. **Multi-Signature**: Requires multiple signatures
-4. **Script-Based**: Complex logic using Plutus scripts
+1. **Simple Signature**: Requires a specific key signature. This is the most straightforward policy type where only the holder of a particular private key can mint or burn tokens. It's ideal for single-owner tokens or projects where one entity maintains full control over the token supply. The simplicity makes it perfect for testing and small-scale projects.
+
+2. **Time-Locked**: Can only mint before/after certain times. These policies enforce temporal constraints on minting operations, allowing tokens to be created only within specific time windows. Common use cases include limited-time token sales, vesting schedules, or ensuring a token supply becomes fixed after a certain date. Time locks use Cardano's slot numbers for precise timing control.
+
+3. **Multi-Signature**: Requires multiple signatures. This policy type enhances security by requiring agreement from multiple parties before minting can occur. It's perfect for team-managed projects, DAOs, or any scenario where distributed control is desired. The policy can specify the exact number of required signatures (M of N), providing flexibility in governance models.
+
+4. **Script-Based**: Complex logic using Plutus scripts. These policies leverage Cardano's smart contract capabilities to implement sophisticated minting rules beyond simple signatures or time constraints. Plutus scripts can incorporate external data, complex conditions, and state management. This enables advanced features like oracle-based minting, conditional token creation based on on-chain events, or integration with other smart contracts.
 
 ### Policy Components
 
+Understanding the structure of minting policies is crucial for creating secure and functional tokens. Policies are defined using JSON format with specific fields that determine the authorization logic. Here's a breakdown of the key components:
+
 ```javascript
 {
-  "type": "all",              // Condition type
-  "scripts": [                // Array of conditions
+  "type": "all",              // Condition type - requires ALL conditions in scripts array to be satisfied
+  "scripts": [                // Array of conditions that must be met for minting/burning
     {
-      "type": "sig",         // Signature requirement
-      "keyHash": "abc123..." // Public key hash
+      "type": "sig",         // Signature requirement - verifies a specific key signed the transaction
+      "keyHash": "abc123..." // Public key hash - identifies which key must provide the signature
     }
   ]
 }
 ```
 
+The policy structure supports various condition types:
+- **"all"**: Requires every condition in the scripts array to be satisfied
+- **"any"**: Requires at least one condition to be satisfied
+- **"atLeast"**: Requires a minimum number (N) of conditions to be met
+- **"sig"**: Validates a cryptographic signature from a specific key
+- **"before"/"after"**: Time-based conditions using slot numbers
+
+These components can be combined to create sophisticated authorization schemes that match your project's security and operational requirements.
+
+---
+
 ## Step-by-Step Minting Guide
 
 ### 1. Setup Environment
+
+Before minting tokens, ensure your development environment is properly configured with the necessary tools and network settings. This step verifies that cardano-cli is installed and sets up the connection to either mainnet or testnet.
 
 ```bash
 # Check cardano-cli is installed
@@ -46,6 +66,8 @@ export NETWORK="--mainnet"  # or "--testnet-magic 1"
 ```
 
 ### 2. Create Policy Keys
+
+Generate the cryptographic keys that will control your minting policy. These keys determine who has the authority to mint or burn tokens under this policy. Keep the signing key (policy.skey) secure, as anyone with access to it can mint tokens.
 
 ```bash
 # Generate verification and signing keys
@@ -59,6 +81,8 @@ cardano-cli address key-hash \
 ```
 
 ### 3. Design Your Policy
+
+Choose the appropriate policy structure based on your project's requirements. The policy type determines the rules for minting and burning tokens. Consider factors like security needs, team structure, and token distribution timeline when selecting a policy type.
 
 #### Simple Policy (Single Signature)
 ```json
@@ -100,6 +124,8 @@ cardano-cli address key-hash \
 
 ### 4. Calculate Policy ID
 
+The Policy ID is a unique identifier derived from your policy script's hash. This ID becomes part of your token's identity and cannot be changed. All tokens minted under this policy will share the same Policy ID.
+
 ```bash
 # Save policy to file
 cat > policy.script << EOF
@@ -114,6 +140,8 @@ cardano-cli transaction policyid --script-file policy.script > policyID
 ```
 
 ### 5. Prepare Token Metadata
+
+Metadata provides essential information about your tokens that wallets and exchanges use for display purposes. Well-structured metadata enhances user experience and ensures your tokens are properly recognized across the ecosystem.
 
 Create metadata following CIP-25 (NFTs) or CIP-38 (fungible tokens):
 
@@ -134,6 +162,8 @@ Create metadata following CIP-25 (NFTs) or CIP-38 (fungible tokens):
 ```
 
 ### 6. Build Minting Transaction
+
+Construct the transaction that will create your tokens on the blockchain. This step combines all previous elements - the policy, metadata, and transaction inputs/outputs - into a single transaction. Ensure you have sufficient ADA to cover transaction fees and minimum UTXO requirements.
 
 ```bash
 # Get payment address info
@@ -159,6 +189,8 @@ cardano-cli transaction build \
 
 ### 7. Sign Transaction
 
+Authorize the minting transaction with the required signatures. The signing process varies based on your policy type - simple policies need just the policy key, while multi-signature policies require signatures from multiple parties. This step proves you have the authority to mint under the specified policy.
+
 ```bash
 # For simple signature policy
 cardano-cli transaction sign \
@@ -178,103 +210,23 @@ cardano-cli transaction witness \
 
 ### 8. Submit Transaction
 
+Broadcast your signed transaction to the Cardano network. Once submitted and confirmed, your tokens will be created and distributed according to the transaction outputs. Monitor the transaction status to ensure successful minting.
+
 ```bash
 cardano-cli transaction submit \
     --tx-file mint.signed \
     $NETWORK
 ```
 
-## Advanced Minting Patterns
-
-### Batch Minting
-
-Mint multiple tokens in one transaction:
-
-```bash
-# Multiple tokens, same policy
---mint "1000 $POLICY_ID.Token1 + 2000 $POLICY_ID.Token2"
-
-# Multiple outputs
---tx-out "$ADDR1+2000000+500 $POLICY_ID.Token1" \
---tx-out "$ADDR2+2000000+500 $POLICY_ID.Token1"
-```
-
-### Parameterized Minting
-
-Using Plutus scripts for dynamic minting:
-
-```haskell
-{-# INLINABLE mkPolicy #-}
-mkPolicy :: TokenName -> Integer -> ScriptContext -> Bool
-mkPolicy tn amt ctx = 
-    traceIfFalse "wrong amount" correctAmount &&
-    traceIfFalse "not signed" signedByOwner
-  where
-    info = scriptContextTxInfo ctx
-    correctAmount = valueOf (txInfoMint info) (ownCurrencySymbol ctx) tn == amt
-    signedByOwner = txSignedBy info ownerPKH
-```
-
-### Minting with Smart Contracts
-
-```javascript
-// Using Lucid
-const mintingPolicy = {
-  type: "PlutusV2",
-  script: compiledScript
-};
-
-const policyId = lucid.utils.mintingPolicyToId(mintingPolicy);
-
-const tx = await lucid
-  .newTx()
-  .mintAssets({
-    [policyId + fromText("MyNFT")]: 1n
-  })
-  .attachMintingPolicy(mintingPolicy)
-  .complete();
-```
-
-## Minting Policy Best Practices
-
-### 1. Policy Design Considerations
-
-- **Immutability**: Policies cannot be changed after creation
-- **Time Limits**: Consider if minting should be time-bound
-- **Key Management**: Secure storage of policy keys
-- **Burning Rights**: Design who can burn tokens
-
-### 2. Security Guidelines
-
-- Never share policy signing keys
-- Use hardware wallets for high-value policies
-- Consider multi-sig for team projects
-- Test on testnet first
-
-### 3. Common Pitfalls
-
-- **Lost Keys**: No recovery if policy keys are lost
-- **Wrong Time Slots**: Ensure correct slot calculations
-- **Metadata Errors**: Validate JSON before minting
-- **Insufficient ADA**: Include min-ADA requirements
+---
 
 ## Minting Tools and Services
 
-### Command Line Tools
-
-- **cardano-cli**: Official CLI tool
-- **cncli**: Community node CLI
-- **token-registry-api**: For token registration
-
-### GUI Tools
-
-- **Tangocrypto**: API and minting interface
-- **NMKR**: No-code NFT minting
-- **BlockFrost**: API with minting endpoints
+Beyond the standard cardano-cli covered in the minting guide, the Cardano ecosystem offers specialized tools and libraries that simplify token creation through higher-level abstractions. These solutions range from no-code GUI interfaces for non-technical users to powerful SDKs like Chrysalis for .NET developers, enabling rapid development of minting applications. Whether you prefer visual interfaces, REST APIs, or programmatic control through your favorite programming language, these tools accelerate the minting process while maintaining the security and reliability of native assets.
 
 ### Development Libraries
 
-- **Chrysalis (.NET)**
+- **[Chrysalis (.NET)](/docs/chrysalis/overview)**: SAIB's comprehensive framework providing type-safe, intuitive APIs for minting operations
   ```csharp
   var mint = new MintTokens()
   {
@@ -286,7 +238,7 @@ const tx = await lucid
   };
   ```
 
-- **Lucid (TypeScript)**
+- **Lucid (TypeScript)**: A lightweight, modern library for building Cardano dApps with an intuitive API that simplifies minting operations
   ```typescript
   const tx = await lucid.newTx()
     .mintAssets(assets)
@@ -294,18 +246,33 @@ const tx = await lucid
     .complete();
   ```
 
+---
+
 ## Token Registration
 
-After minting, register your token for better wallet support:
+Token registration enhances the user experience by ensuring your tokens display properly with their metadata across wallets and blockchain explorers. While tokens function without registration, registered tokens show their names, symbols, and logos instead of just policy IDs and hexadecimal names. The Cardano Token Registry maintains this decentralized database of token information that ecosystem tools reference.
 
-1. **Prepare registration JSON**
-2. **Submit to Cardano Token Registry**
-3. **Wait for approval (usually 24-48 hours)**
-4. **Token appears with metadata in wallets**
+### Registration Process
+
+1. **Prepare registration JSON**:
+   Create a properly formatted JSON file containing your token's metadata, including name, description, policy ID, ticker symbol, decimals, and logo URL. The metadata must match exactly what was used during minting to ensure consistency.
+
+2. **Submit to Cardano Token Registry**:
+   Fork the official token registry repository on GitHub, add your token's JSON file following the prescribed directory structure, and create a pull request. The submission must include proof of token ownership, typically by including a specific transaction signed with the policy key.
+
+3. **Wait for approval (usually 24-48 hours)**:
+   Registry maintainers review submissions for completeness, accuracy, and compliance with standards. They verify token ownership and ensure metadata quality before merging the pull request into the main registry.
+
+4. **Token appears with metadata in wallets**:
+   Once approved and merged, wallets and services that sync with the registry will begin displaying your token with its proper name, symbol, and logo. This process typically takes effect within hours of approval as services update their local caches.
+
+---
 
 ## Burning Tokens
 
-To permanently remove tokens:
+Token burning permanently removes tokens from circulation by sending them back to the minting policy with a negative mint value. This irreversible action reduces the total supply and requires the same authorization as minting - only parties with the appropriate policy keys can burn tokens.
+
+To burn tokens, use a negative mint amount in your transaction:
 
 ```bash
 # Negative mint amount burns tokens
@@ -319,27 +286,10 @@ cardano-cli transaction build \
     $NETWORK
 ```
 
-## Troubleshooting
-
-### Common Errors
-
-1. **"ScriptWitnessNotValidating"**
-   - Check policy script matches transaction
-   - Verify all required signatures
-
-2. **"TokenBundleSizeExceeded"**
-   - Too many tokens in one UTXO
-   - Split into multiple outputs
-
-3. **"InsufficientFunds"**
-   - Include enough ADA for fees and min-ADA
-
-4. **"BadInputs"**
-   - UTXO already spent
-   - Query latest UTXO state
+---
 
 ## Next Steps
 
-- Explore [NFT-specific features](./nfts.md)
-- Learn about [token standards](https://cips.cardano.org)
-- Review [Plutus minting policies](https://plutus.readthedocs.io)
+- Create [Fungible Tokens](./tokens.md) using the minting knowledge gained here
+- Explore [NFT Creation](./nfts.md) for unique digital assets
+- Build minting applications with [Chrysalis](/docs/chrysalis/overview) for automated token creation

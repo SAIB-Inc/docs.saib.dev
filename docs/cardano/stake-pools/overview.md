@@ -13,6 +13,25 @@ Think of a stake pool as a lottery system where your chances of winning depend o
 
 When your pool creates a block, you earn rewards that are automatically distributed between you (the operator) and your delegators. The entire process is non-custodial, meaning delegators keep full control of their ADA at all times.
 
+## The Economics of Running a Pool
+
+Let's look at the real numbers for running a stake pool based on current mainnet parameters and market conditions.
+
+### Costs You'll Face
+
+Running a competitive stake pool requires reliable infrastructure. Based on current market prices:
+
+| Infrastructure        | Minimum Setup | Recommended Setup    |
+|-----------------------|---------------|----------------------|
+| Block Producer Server | $50-70 (VPS)  | $150-200 (Dedicated) |
+| Relay Server 1        | $25-40 (VPS)  | $80-120 (Cloud)      |
+| Relay Server 2        | $25-40 (VPS)  | $80-120 (Cloud)      |
+| **Monthly Total**     | **$100-150**  | **$310-440**         |
+
+Additional one-time costs:
+- Pool registration: 500 ADA deposit (refundable when you retire the pool)
+- Transaction fees: ~2-5 ADA for registration and updates
+
 ### How Much Can You Earn?
 
 Your earnings depend on three factors: how much ADA is delegated to your pool, your fees, and how reliably your pool operates. 
@@ -43,13 +62,13 @@ Pool with 10 million ADA delegated:
 
 ### Breaking Even Analysis
 
-With current ADA price at $0.596 (December 2024) and minimum fixed fee of 170 ADA per epoch:
+With ADA price around $0.60 and minimum fixed fee of 170 ADA per epoch:
 
 ```
 Monthly costs: $310 (recommended setup)
-Monthly epochs: ~6.08 epochs
-Minimum ADA from fees: 170 × 6.08 = 1,033 ADA/month
-Value of minimum fees: 1,033 × $0.596 = $616/month
+Monthly epochs: ~6.2 epochs (30 days ÷ 5 days/epoch)
+Minimum ADA from fees: 170 × 6.2 = 1,054 ADA/month
+Value of minimum fees: 1,054 × $0.60 = $632/month
 
 Result: Minimum fees alone can cover infrastructure costs
 Additional margin fees are your profit
@@ -59,9 +78,9 @@ This is why many pools can operate with 0% margin - the 170 ADA minimum fee cove
 
 ## Current Network Statistics
 
-As of December 2024, the Cardano network has:
-- **Active pools**: 2,997
-- **Total staked**: 21.82 billion ADA (~60.6% of circulating supply)
+The Cardano network has approximately (these numbers change daily):
+- **Active pools**: ~3,000
+- **Total staked**: ~22 billion ADA (~60% of circulating supply)
 - **k parameter**: 500 (target number of pools)
 - **Saturation point**: ~64.4 million ADA per pool
 
@@ -87,14 +106,14 @@ Based on official Cardano documentation and real-world pool operations:
 
 **Minimum specifications**:
 - CPU: 2+ cores, 2GHz+ (Intel/AMD x86_64)
-- RAM: 24GB
-- Storage: 150GB (250GB recommended)
-- Network: Broadband, ~1GB/hour bandwidth
+- RAM: 32GB (absolute minimum, may use swap)
+- Storage: 150GB SSD (current chain ~110GB)
+- Network: Broadband, ~20-30GB/day bandwidth
 - OS: 64-bit Linux (Ubuntu 20.04+, Debian 10+)
 
 **Recommended for production**:
 - CPU: 4+ cores, 3GHz+
-- RAM: 32GB
+- RAM: 32-64GB
 - Storage: 500GB SSD
 - Network: 100Mbps+ symmetric
 

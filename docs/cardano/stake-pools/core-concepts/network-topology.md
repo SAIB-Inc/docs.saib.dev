@@ -5,106 +5,44 @@ sidebar_position: 3
 
 # Network Topology
 
-Network topology defines how your stake pool nodes connect to each other and the broader Cardano network. A well-designed topology ensures reliability, security, and optimal block propagation.
+Network topology defines how your stake pool nodes connect to each other and the Cardano network. A properly designed topology ensures reliable block propagation, security against attacks, and resilience to network failures.
 
----
+## Understanding Topology Basics
 
-## Topology Fundamentals
+In Cardano, each node maintains a list of peers it connects to. These connections are bidirectional TCP connections on port 3001 (by default). Your topology configuration determines:
+- Which nodes your pool connects to
+- How many connections to maintain
+- Whether to accept incoming connections
+- How to handle peer discovery
 
-### What is Topology?
+## Basic Pool Topology
 
-In Cardano, topology refers to:
-- Which nodes connect to which other nodes
-- The direction of these connections (incoming/outgoing)
-- The geographic and network distribution of nodes
-- The security boundaries between node types
+The fundamental principle of stake pool topology is separation of concerns: your block producer must remain isolated from the public internet, while relay nodes handle all external communication.
 
-### Why Topology Matters
+![Stake Pool Network Topology](/img/stake-pool-topology.svg)
 
-Your topology directly impacts:
-- **Security**: Protecting block producer from attacks
-- **Performance**: How fast your blocks propagate
-- **Reliability**: Resilience to node or network failures  
-- **Decentralization**: Contributing to network health
+### Minimum Secure Setup
 
----
+At minimum, you need:
+1. **One Block Producer**: Never exposed to the internet
+2. **Two Relay Nodes**: Public-facing, in different locations
 
-## Basic Topology Patterns
+This setup provides basic redundancy and security. If one relay fails, your pool can still produce blocks through the other relay.
 
-### Minimum Viable Topology
+### Production Topology Configuration
 
-The simplest secure topology:
-
-```
-         ┌──────────────┐
-         │Block Producer│
-         │  (Private)   │
-         └──────┬───────┘
-                │
-        ┌───────┴────────┐
-        │                │
-   ┌────▼─────┐    ┌─────▼────┐
-   │ Relay 1  │    │ Relay 2  │
-   │ (Public) │    │ (Public) │
-   └────┬─────┘    └─────┬────┘
-        │                │
-        └────────────────┘
-                │
-        Cardano Network
-```
-
-**Characteristics:**
-- 1 block producer (BP)
-- 2 relay nodes minimum
-- BP only connects to own relays
-- Relays connect to BP and external nodes
-
-### Recommended Production Topology
-
-For production pools:
-
-```
-                ┌──────────────┐
-                │Block Producer│
-                │   (Private)  │
-                └──────┬───────┘
-                       │
-          ┌────────────┼────────────┐
-          │            │            │
-    ┌─────▼────┐ ┌─────▼────┐ ┌────▼─────┐
-    │ Relay 1  │ │ Relay 2  │ │ Relay 3  │
-    │  (USA)   │ │   (EU)   │ │  (Asia)  │
-    └─────┬────┘ └─────┬────┘ └────┬─────┘
-          │            │            │
-          └────────────┼────────────┘
-                       │
-               Cardano Network
-```
-
-**Benefits:**
-- Geographic distribution
-- Better global propagation
-- Redundancy across regions
-- Resilient to regional issues
-
----
-
-## Topology Configuration
-
-### Block Producer Configuration
-
-The block producer's topology file should ONLY list your relays:
+For your block producer, create a topology file that ONLY lists your relay nodes:
 
 ```json
 {
   "Producers": [
     {
-      "addr": "relay1.yourpool.com",
+      "addr": "10.0.1.10",
       "port": 3001,
       "valency": 1
     },
     {
-      "addr": "relay2.yourpool.com",
+      "addr": "10.0.2.10",
       "port": 3001,
       "valency": 1
     }
@@ -112,31 +50,25 @@ The block producer's topology file should ONLY list your relays:
 }
 ```
 
-**Key Points:**
-- No public pool entries
-- Use DNS names or static IPs
-- Valency = 1 (one connection per entry)
-- Different port possible for security
+Replace the IP addresses with your actual relay IPs. The block producer should never connect to external nodes.
 
-### Relay Node Configuration
-
-Relays need diverse connections:
+For relay nodes, include your block producer and external peers:
 
 ```json
 {
   "Producers": [
     {
-      "addr": "10.0.0.1",
+      "addr": "10.0.0.5",
       "port": 3000,
       "valency": 1
     },
     {
-      "addr": "relays-new.cardano-mainnet.iohk.io",
+      "addr": "relay1.example-pool.com",
       "port": 3001,
-      "valency": 2
+      "valency": 1
     },
     {
-      "addr": "other-pool-relay.com",
+      "addr": "relay2.another-pool.com",
       "port": 3001,
       "valency": 1
     }
@@ -144,308 +76,137 @@ Relays need diverse connections:
 }
 ```
 
-**Includes:**
-- Your block producer (private IP)
-- IOHK bootstrap relays
-- Other pool relays
-- Community relays
+The first entry should be your block producer IP. Add 10-20 external pool relays for good connectivity. The "valency" of 1 maintains an active connection.
 
----
+## P2P Topology (Modern Approach)
 
-## P2P vs Legacy Topology
+Cardano now supports P2P (peer-to-peer) topology, which automatically finds and connects to other nodes. This is becoming the standard for new pools.
 
-### Legacy (Manual) Topology
+![P2P vs Legacy Topology](/img/p2p-topology.svg)
 
-Traditional topology requires manual peer management:
+With P2P mode, your node will:
+- Automatically discover other nodes
+- Maintain optimal connections
+- Improve block propagation
 
-**Pros:**
-- Full control over connections
-- Predictable peer set
-- Easier debugging
-
-**Cons:**
-- Manual maintenance
-- Static connections
-- Requires peer exchange
-
-### P2P (Automatic) Topology
-
-Modern P2P mode enables automatic peer discovery:
-
-```json
-{
-  "localRoots": [
-    {
-      "accessPoints": [
-        {"address": "bp.yourpool.com", "port": 3000}
-      ],
-      "advertise": false,
-      "valency": 1
-    }
-  ],
-  "publicRoots": [
-    {
-      "accessPoints": [
-        {"address": "relays-new.cardano-mainnet.iohk.io", "port": 3001}
-      ],
-      "advertise": false
-    }
-  ],
-  "useLedgerAfterSlot": 0
-}
-```
-
-**Benefits:**
-- Automatic peer discovery
-- Dynamic optimization
-- Improved decentralization
-- Reduced maintenance
-
----
+P2P configuration is more complex than legacy topology. Most new operators start with legacy topology and migrate to P2P once comfortable with pool operations.
 
 ## Geographic Distribution
 
-### Why Distribute Globally
+Placing your relay nodes in different locations improves your pool's performance and reliability.
 
-Geographic distribution provides:
-- **Faster propagation**: Blocks reach global nodes quicker
-- **Network resilience**: Survives regional outages
-- **Regulatory safety**: Not dependent on single jurisdiction
-- **DDoS resistance**: Harder to attack all locations
+### Choosing Relay Locations
 
-### Optimal Distribution Pattern
+Consider these factors when placing relays:
+1. **Distance from block producer**: Closer is generally better
+2. **Different providers**: Don't put all relays with one hosting company
+3. **Major regions**: Consider where most Cardano nodes are located
 
-```
-┌─────────────────────────────────────┐
-│         Global Distribution         │
-├─────────────────────────────────────┤
-│                                     │
-│  USA-East    Europe    Asia-Pacific │
-│     ●          ●           ●        │
-│   Relay 1   Relay 2     Relay 3    │
-│                                     │
-│         Block Producer              │
-│            ● (Any secure location)  │
-└─────────────────────────────────────┘
-```
+Common relay locations:
+- North America (US East/West Coast)
+- Europe (Germany, Netherlands)
+- Asia (Singapore, Japan)
 
-### Latency Considerations
+### Testing Network Speed
 
-Target latencies:
-- **BP ↔ Relay**: &lt; 50ms (critical)
-- **Relay ↔ Relay**: &lt; 150ms (important)
-- **Relay ↔ Network**: &lt; 200ms (acceptable)
-
----
-
-## Security Topology
-
-### Network Segmentation
-
-Implement security zones:
-
-```
-┌─────────────────────────┐
-│   DMZ (Public Zone)     │
-│  ┌─────┐    ┌─────┐    │
-│  │Relay│    │Relay│    │
-│  └──┬──┘    └──┬──┘    │
-└─────┼──────────┼───────┘
-      │          │
-   Firewall   Firewall
-      │          │
-┌─────┼──────────┼───────┐
-│  Private Network Zone   │
-│     └────┬─────┘       │
-│          │             │
-│   ┌──────▼──────┐      │
-│   │Block Producer│      │
-│   └─────────────┘      │
-└────────────────────────┘
-```
-
-### Firewall Rules
-
-#### Block Producer Firewall
-```bash
-# Incoming - Only from your relays
-iptables -A INPUT -s RELAY1_IP -p tcp --dport 3000 -j ACCEPT
-iptables -A INPUT -s RELAY2_IP -p tcp --dport 3000 -j ACCEPT
-iptables -A INPUT -p tcp --dport 3000 -j DROP
-
-# Outgoing - Only to your relays
-iptables -A OUTPUT -d RELAY1_IP -p tcp --dport 3001 -j ACCEPT
-iptables -A OUTPUT -d RELAY2_IP -p tcp --dport 3001 -j ACCEPT
-```
-
-#### Relay Firewall
-```bash
-# Incoming - Open to Cardano network
-iptables -A INPUT -p tcp --dport 3001 -j ACCEPT
-
-# Rate limiting
-iptables -A INPUT -p tcp --dport 3001 -m state --state NEW -m recent --set
-iptables -A INPUT -p tcp --dport 3001 -m state --state NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
-```
-
----
-
-## Advanced Topology Patterns
-
-### Hidden Relay Pattern
-
-Add a hidden relay between public relays and BP:
-
-```
-        Public Zone          Private Zone
-    ┌─────┐    ┌─────┐      ┌─────┐     ┌────┐
-    │Relay│    │Relay│      │Hidden│     │ BP │
-    │  1  │───►│  2  │─────►│Relay│────►│    │
-    └─────┘    └─────┘      └─────┘     └────┘
-        ▲         ▲
-        │         │
-    Internet  Internet
-```
-
-**Benefits:**
-- Extra security layer
-- Filters malicious traffic
-- Reduces BP exposure
-
-### Multi-Region Redundancy
-
-Deploy redundant infrastructure:
-
-```
-Region A                Region B
-┌─────────┐            ┌─────────┐
-│ Relay A1│            │ Relay B1│
-│ Relay A2├────────────┤ Relay B2│
-└────┬────┘            └────┬────┘
-     │                      │
-     └──────┐      ┌────────┘
-            │      │
-         ┌──▼──────▼──┐
-         │Block Producer│
-         └────────────┘
-```
-
----
-
-## Topology Best Practices
-
-### DO's ✅
-
-1. **Diversify relay providers**
-   - Use different hosting companies
-   - Mix cloud and bare metal
-   - Avoid single points of failure
-
-2. **Monitor all connections**
-   - Track peer counts
-   - Alert on disconnections
-   - Log topology changes
-
-3. **Regular topology updates**
-   - Add new community peers
-   - Remove dead peers
-   - Optimize based on metrics
-
-4. **Use DNS where possible**
-   - Easier updates
-   - Supports failover
-   - More flexible
-
-### DON'Ts ❌
-
-1. **Don't expose block producer**
-   - Never in public topology
-   - No direct internet access
-   - Firewall everything
-
-2. **Don't use same provider for all**
-   - Creates single failure point
-   - Vulnerable to provider issues
-   - Poor geographic distribution
-
-3. **Don't neglect monitoring**
-   - Topology issues compound
-   - Early detection critical
-   - Automate alerts
-
----
-
-## Troubleshooting Topology
-
-### Common Issues
-
-#### "No peers connected"
-```bash
-# Check node status
-cardano-cli query tip --mainnet
-
-# Verify topology file
-cat /path/to/topology.json
-
-# Check firewall rules
-sudo iptables -L -n
-```
-
-#### "Block propagation slow"
-- Add more geographic diversity
-- Check relay peer counts
-- Verify network latency
-- Consider P2P mode
-
-#### "Relay keeps disconnecting"
-- Check firewall timeouts
-- Verify DNS resolution
-- Monitor network stability
-- Review peer quality
-
----
-
-## Monitoring Topology
-
-### Key Metrics
-
-Monitor these continuously:
-- **Peer count**: Should be stable
-- **Propagation time**: &lt;5 seconds target
-- **Connection drops**: Should be minimal
-- **Geographic coverage**: Well distributed
-
-### Useful Commands
+Check the connection speed between your nodes:
 
 ```bash
-# Check peer connections
-echo "peers" | nc -q 1 localhost 12798 | jq '.peers'
+# Simple ping test
+ping -c 10 relay1.yourpool.com
 
-# Monitor live connections
-watch -n 5 'ss -tn | grep :3001 | wc -l'
+# Look for the average time at the bottom
+# Good: less than 50ms to block producer
+# Acceptable: less than 150ms between relays
+```
 
-# Test connectivity
+## Monitoring Topology Health
+
+### Checking Connections
+
+Monitor how many peers your node is connected to:
+
+```bash
+# Count active connections
+ss -tn state established | grep :3001 | wc -l
+
+# Check if node is synced
+cardano-cli latest query tip
+```
+
+Look for:
+- At least 5-10 peer connections for relays
+- Sync progress at 100.00
+- Current slot close to network tip
+
+### Basic Health Checks
+
+Create a simple monitoring routine:
+
+```bash
+# Check peer count
+echo "Active connections:"
+ss -tn state established | grep :3001 | wc -l
+
+# Check sync status
+echo "Node sync status:"
+cardano-cli latest query tip | grep sync
+
+# Check if cardano-node is running
+echo "Node process:"
+ps aux | grep cardano-node | grep -v grep
+```
+
+If peer count drops below 5 or sync isn't at 100%, investigate potential issues.
+
+## Troubleshooting Common Issues
+
+### No Incoming Connections
+
+If your relay isn't getting connections:
+
+```bash
+# Test if port is open from another server
 nc -zv relay.yourpool.com 3001
+
+# Check local port is listening
+sudo netstat -tlnp | grep 3001
 ```
 
----
+Common causes:
+- Port 3001 not open in firewall
+- Wrong IP in topology files
+- Node not fully synced yet
 
-## Future Considerations
+### Connection Problems
 
-### Ouroboros Genesis
+If having trouble connecting to other nodes:
 
-Future protocol updates will enable:
-- Dynamic availability
-- Self-healing topology
-- Enhanced peer selection
-- Improved security
+```bash
+# Test connection to a peer
+ping relay.example.com
 
-### Network Growth
+# Check DNS resolution
+nslookup relay.example.com
+```
 
-Plan for:
-- Increasing peer counts
-- Higher bandwidth needs
-- More sophisticated attacks
-- Enhanced monitoring needs
+Common fixes:
+- Verify IP addresses in topology.json
+- Ensure DNS names resolve correctly
+- Check network connectivity
 
----
+## Best Practices
+
+1. **Regular Updates**: Update your topology connections monthly
+2. **Peer Diversity**: Connect to pools of various sizes
+3. **Monitor Continuously**: Set up alerts for connection drops
+4. **Document Everything**: Keep records of all topology changes
+5. **Test Failover**: Regularly test relay failures
+
+## Next Steps
+
+- Configure [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements) for optimal performance
+- Study [Pool Architecture](/docs/cardano/stake-pools/core-concepts/pool-architecture) for complete system design
+- Implement monitoring for your topology
+
+Remember: Your network topology is your pool's connection to the Cardano network. A well-designed topology ensures your blocks reach the network quickly and reliably.

@@ -5,240 +5,200 @@ sidebar_position: 1
 
 # Pool Architecture
 
-Understanding the architectural components of a Cardano stake pool is essential for both operators and delegators. This guide explains how pools are structured and why each component matters.
+Understanding how a Cardano stake pool is structured helps you build and operate a reliable pool. This guide explains the essential components and how they work together.
 
----
+## Basic Architecture
 
-## Architectural Overview
+A Cardano stake pool consists of multiple servers (nodes) working together. The architecture separates the sensitive block-producing component from the public-facing relay nodes for security and reliability.
 
-A Cardano stake pool consists of multiple interconnected nodes working together to participate in the blockchain consensus. The architecture is designed for security, reliability, and decentralization.
-
-```
-Internet ←→ Relay Nodes ←→ Block Producer Node
-              ↕     ↕
-         Other Pools & Nodes
-```
-
----
+![Cardano Stake Pool Architecture](/img/pool-architecture.svg)
 
 ## Core Components
 
 ### Block Producer Node
 
-The block producer is the heart of your stake pool. It's responsible for creating new blocks when selected by the protocol.
+The block producer is the core of your stake pool. It creates new blocks when your pool is selected to do so.
 
-#### Key Characteristics
-- **Isolated**: Only connects to your own relay nodes
-- **Secure**: Holds sensitive cryptographic keys
-- **Critical**: Must be online when scheduled to produce blocks
-- **Single instance**: Only one block producer per pool
+**Key characteristics:**
+- Runs the cardano-node software in block production mode
+- Holds the operational keys (KES, VRF, operational certificate)
+- Never connects directly to the internet
+- Only communicates with your own relay nodes
+- Must be highly available during assigned slots
 
-#### What It Does
-1. **Monitors slot leadership**: Checks if selected to produce blocks
-2. **Creates blocks**: Assembles transactions when elected
-3. **Signs blocks**: Uses pool keys to authorize new blocks
-4. **Sends to relays**: Propagates blocks through relay nodes
-
-:::warning Security Critical
-The block producer should NEVER be directly exposed to the internet. All communication should go through relay nodes.
-:::
+**Basic configuration:**
+The block producer runs with these essential parameters:
+```bash
+cardano-node run \
+  --topology block-producer-topology.json \
+  --database-path db \
+  --socket-path node.socket \
+  --port 3000 \
+  --config mainnet-config.json \
+  --shelley-kes-key kes.skey \
+  --shelley-vrf-key vrf.skey \
+  --shelley-operational-certificate node.cert
+```
 
 ### Relay Nodes
 
-Relay nodes are the pool's interface to the Cardano network. They handle all external communication while protecting the block producer.
+Relay nodes are your pool's connection to the Cardano network. They protect your block producer while ensuring good network connectivity.
 
-#### Key Characteristics
-- **Public facing**: Open to connections from any node
-- **Multiple instances**: Typically 2-3 relays per pool
-- **Geographically distributed**: Spread across regions for resilience
-- **Less sensitive**: Don't hold block-signing keys
+**Key characteristics:**
+- Run cardano-node without block production keys
+- Have public IP addresses that other nodes can connect to
+- Handle all external network traffic
+- Should be geographically distributed
+- Minimum of 2 relays recommended for redundancy
 
-#### What They Do
-1. **Relay transactions**: Forward transactions to/from the network
-2. **Propagate blocks**: Distribute newly created blocks
-3. **Maintain connections**: Keep links with other pools' relays
-4. **Filter traffic**: Protect block producer from malicious data
-
-### Network Topology
-
-The topology defines how your nodes connect to each other and the wider network.
-
-#### Recommended Setup
-```
-┌─────────────────┐
-│ Block Producer  │
-│   (Private)     │
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    │         │
-┌───▼───┐ ┌───▼───┐
-│Relay 1│ │Relay 2│
-│ (USA) │ │ (EU)  │
-└───┬───┘ └───┬───┘
-    │         │
-    └────┬────┘
-         │
-   Cardano Network
-```
-
----
-
-## Connection Architecture
-
-### Block Producer Connections
-- **Incoming**: Only from your own relay nodes
-- **Outgoing**: Only to your own relay nodes
-- **Ports**: Custom port (not 3001) for added security
-- **Firewall**: Whitelist only relay IP addresses
-
-### Relay Node Connections
-- **Incoming**: From any Cardano node (public)
-- **Outgoing**: To block producer and other relays
-- **Ports**: Standard port 3001 for compatibility
-- **Firewall**: Rate limiting and DDoS protection
-
----
-
-## Security Layers
-
-### 1. Network Isolation
+**Basic configuration:**
+Relays run without the key parameters:
 ```bash
-# Block Producer firewall rules (example)
-- Allow inbound from Relay-1 IP on port 3000
-- Allow inbound from Relay-2 IP on port 3000  
-- Deny all other inbound connections
-- Allow outbound to Relay IPs only
+cardano-node run \
+  --topology relay-topology.json \
+  --database-path db \
+  --socket-path node.socket \
+  --port 3001 \
+  --config mainnet-config.json \
+  --host-addr 0.0.0.0
 ```
 
-### 2. Key Separation
-| Key Type | Location | Network Access |
-|----------|----------|----------------|
-| Cold keys | Offline | Never |
-| KES keys | Block producer | Isolated |
-| VRF keys | Block producer | Isolated |
-| Node certificates | All nodes | As needed |
+## Network Communication
 
-### 3. Geographic Distribution
-Distributing nodes provides:
-- **Resilience**: Survives regional outages
-- **Performance**: Better global block propagation
-- **Security**: Harder to attack all nodes simultaneously
+The communication flow in a stake pool follows these principles:
 
----
+1. **Block Producer → Relays**: Your block producer only connects to your own relay nodes
+2. **Relays ↔ Relays**: Your relays connect to each other for redundancy
+3. **Relays ↔ Network**: Your relays connect to other pools' relays and nodes
+4. **Network → Block Producer**: Never allowed directly
+
+This design ensures that even if a relay is compromised, your block producer remains secure.
+
+## Minimum Setup Requirements
+
+To run a stake pool, you need at least:
+
+1. **One block producer node** - The secure server that creates blocks
+2. **Two relay nodes** - Public-facing servers in different locations
+3. **Monitoring** - Basic monitoring to ensure your pool stays online
+
+## File Structure
+
+A typical stake pool has these key files organized as follows:
+
+```
+/opt/cardano/
+├── configuration/
+│   ├── mainnet-config.json      # Node configuration
+│   ├── mainnet-topology.json    # Network topology
+│   ├── mainnet-byron-genesis.json
+│   ├── mainnet-shelley-genesis.json
+│   └── mainnet-alonzo-genesis.json
+├── keys/
+│   ├── kes.skey                 # KES signing key (hot)
+│   ├── vrf.skey                 # VRF signing key (hot)
+│   └── node.cert                # Operational certificate
+├── db/                          # Blockchain database
+└── node.socket                  # Unix socket for CLI
+```
+
+## Security Considerations
+
+### Network Security
+
+Your block producer should be protected by:
+- Firewall rules that only allow connections from your relays
+- Private network or VPN between block producer and relays
+- No public IP address on the block producer
+
+Example firewall setup (using ufw on Ubuntu):
+```bash
+# On block producer - only allow relay IPs
+ufw allow from RELAY1_IP to any port 3000
+ufw allow from RELAY2_IP to any port 3000
+ufw default deny incoming
+
+# On relays - allow public access
+ufw allow 3001/tcp
+ufw allow 22/tcp  # SSH - restrict to your IP
+```
+
+### Key Security
+
+Different keys have different security requirements:
+
+| Key Type          | Location       | Network Access |
+|-------------------|----------------|----------------|
+| Cold keys         | Offline        | Never          |
+| KES keys          | Block producer | Isolated       |
+| VRF keys          | Block producer | Isolated       |
+| Node certificates | All nodes      | As needed      |
+
+## Monitoring Basics
+
+Monitor these essential metrics:
+
+1. **Node sync status**: Ensure all nodes are fully synced
+```bash
+cardano-cli latest query tip
+```
+
+2. **Peer connections**: Check that nodes have adequate peers
+```bash
+# Check established connections
+ss -tn state established '( dport = :3001 or sport = :3001 )' | wc -l
+```
+
+3. **System resources**: Monitor CPU, memory, and disk usage
+```bash
+# Basic resource check
+top -b -n 1 | grep cardano-node
+df -h | grep cardano
+free -h
+```
+
+4. **KES key expiry**: Track when KES keys need rotation
+```bash
+cardano-cli latest query kes-period-info \
+  --op-cert-file node.cert
+```
 
 ## Performance Considerations
 
-### Block Propagation Path
-When your pool creates a block:
-1. Block producer creates and signs block (&lt; 50ms)
-2. Sends to relay nodes (&lt; 100ms)
-3. Relays broadcast to peers (&lt; 500ms)
-4. Global propagation (&lt; 5 seconds)
+For reliable block production:
 
-### Critical Timing
-- **Slot duration**: 1 second
-- **Target propagation**: &lt; 5 seconds globally
-- **Maximum delay**: ~20 seconds before height battle
-
-:::info Height Battles
-If two pools create valid blocks for the same slot, the one that propagates faster typically wins. Good network architecture improves your chances.
-:::
-
----
-
-## High Availability Patterns
-
-### Active-Passive Block Producer
-Some operators run a backup block producer:
-```
-Primary BP ←→ Relays ←→ Network
-    ↕ (monitoring)
-Backup BP (offline with same keys)
+1. **Time Synchronization**: Use NTP to keep accurate time
+```bash
+# Install and configure NTP
+sudo apt install chrony
+sudo systemctl enable chrony
 ```
 
-:::caution One Active Producer
-NEVER run two block producers simultaneously with the same keys. This causes "double signing" and harms the network.
-:::
+2. **Resource Allocation**: Ensure adequate resources
+- Block producer: Higher CPU and memory priority
+- Relays: Good network bandwidth
+- All nodes: Fast SSD storage
 
-### Relay Redundancy
-- **Minimum**: 2 relay nodes
-- **Recommended**: 3 relay nodes
-- **Different providers**: Avoid single points of failure
-- **Load balancing**: Distribute connections evenly
+3. **Network Latency**: Keep latency low between components
+- Block producer to relays: < 50ms recommended
+- Between relays: < 150ms acceptable
 
----
+## Operational Best Practices
 
-## Monitoring Architecture
+1. **Regular Updates**: Keep cardano-node software current
+2. **Backup Configuration**: Keep copies of all configuration files
+3. **Document Everything**: Record IP addresses, configurations, and procedures
+4. **Test Failover**: Regularly test what happens if a relay fails
+5. **Monitor Actively**: Don't wait for problems to find you
 
-Essential monitoring points:
-1. **Block Producer**:
-   - Slot leader schedule
-   - Block production success
-   - Memory and CPU usage
-   - Key rotation status
+## Getting Started
 
-2. **Relay Nodes**:
-   - Peer connections count
-   - Network latency
-   - Bandwidth usage
-   - Sync status
+To set up your pool architecture:
 
-3. **Overall Pool**:
-   - End-to-end block propagation time
-   - Missed slot analysis
-   - Rewards tracking
+1. **Plan your infrastructure**: Decide on hosting providers and locations
+2. **Set up servers**: Install operating system and basic security
+3. **Install cardano-node**: Follow the official installation guide
+4. **Configure topology**: Set up the connections between nodes
+5. **Start with testnet**: Practice on testnet before mainnet
 
-   ---
-
-## Common Architecture Mistakes
-
-### ❌ Single Relay Node
-**Problem**: Single point of failure
-**Solution**: Always run at least 2 relays
-
-### ❌ Public Block Producer
-**Problem**: Security vulnerability
-**Solution**: Isolate BP behind relays
-
-### ❌ Same Provider for All Nodes
-**Problem**: Provider outage affects entire pool
-**Solution**: Diversify across providers
-
-### ❌ Inadequate Monitoring
-**Problem**: Missing issues until too late
-**Solution**: Comprehensive monitoring stack
-
----
-
-## Architecture Evolution
-
-### Starting Small
-Begin with minimum viable architecture:
-- 1 Block Producer
-- 2 Relay Nodes
-- Basic monitoring
-
-### Scaling Up
-As your pool grows:
-- Add third relay in different region
-- Implement advanced monitoring
-- Set up backup infrastructure
-- Automate operations
-
-### Enterprise Grade
-For large pools:
-- Multiple geographic regions
-- Automated failover systems
-- 24/7 monitoring team
-- Disaster recovery procedures
-
----
-
-## Next Steps
-
-- Review [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements)
-- Understand [Cryptographic Keys](/docs/cardano/stake-pools/core-concepts/cryptographic-keys)
-- Plan [Network Topology](/docs/cardano/stake-pools/core-concepts/network-topology)
-
----
+Remember: A well-designed architecture is the foundation of a successful stake pool. Start simple, ensure it works reliably, then optimize as you gain experience.

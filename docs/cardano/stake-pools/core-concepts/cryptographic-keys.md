@@ -11,14 +11,14 @@ Running a Cardano stake pool requires managing several types of cryptographic ke
 
 A Cardano stake pool uses six different types of keys. Think of them like a set of specialized keys for different doors in a building - each opens something specific and some are more critical than others.
 
-| Key Type | Purpose | Where It Lives | Rotation Schedule |
-|:---------|:--------|:---------------|:------------------|
-| **Payment keys** | Control rewards wallet | Cold (offline) | Never |
-| **Stake keys** | Own the pool registration | Cold (offline) | Never |
-| **Cold keys** | Master pool identity | Cold (offline) | Never |
-| **VRF keys** | Prove right to make blocks | Hot (on server) | Never |
-| **KES keys** | Sign blocks (time-limited) | Hot (on server) | Every 93 days |
-| **Operational certificate** | Links cold and KES keys | Hot (on server) | Every 93 days |
+| Key Type                    | Purpose                    | Where It Lives  | Rotation Schedule |
+|-----------------------------|----------------------------|-----------------|-------------------|
+| **Payment keys**            | Control rewards wallet     | Cold (offline)  | Never             |
+| **Stake keys**              | Own the pool registration  | Cold (offline)  | Never             |
+| **Cold keys**               | Master pool identity       | Cold (offline)  | Never             |
+| **VRF keys**                | Prove right to make blocks | Hot (on server) | Never             |
+| **KES keys**                | Sign blocks (time-limited) | Hot (on server) | Every 93 days     |
+| **Operational certificate** | Links cold and KES keys    | Hot (on server) | Every 93 days     |
 
 ## Understanding Each Key Type
 
@@ -106,7 +106,7 @@ kes.vkey      # Public verification key
 ```
 
 **Why they expire**:
-KES keys use forward-secure signatures. Even if compromised, old signatures can't be forged. The key evolves through 62 periods (129,600 slots each), totaling approximately 93 days.
+KES keys use forward-secure signatures. Even if compromised, old signatures can't be forged. The key evolves through 62 periods (129,600 slots each), totaling approximately 93.3 days.
 
 **Security level**: LOW - Can be rotated without pool re-registration
 
@@ -160,41 +160,39 @@ Always generate keys in this sequence:
 
 ```bash
 # 1. Payment keys
-cardano-cli address key-gen \
+cardano-cli latest address key-gen \
     --verification-key-file payment.vkey \
     --signing-key-file payment.skey
 
 # 2. Stake keys  
-cardano-cli stake-address key-gen \
+cardano-cli latest stake-address key-gen \
     --verification-key-file stake.vkey \
     --signing-key-file stake.skey
 
 # 3. Generate stake address
-cardano-cli stake-address build \
+cardano-cli latest stake-address build \
     --stake-verification-key-file stake.vkey \
-    --out-file stake.addr \
-    --mainnet
+    --out-file stake.addr
 
 # 4. Generate payment address
-cardano-cli address build \
+cardano-cli latest address build \
     --payment-verification-key-file payment.vkey \
     --stake-verification-key-file stake.vkey \
-    --out-file payment.addr \
-    --mainnet
+    --out-file payment.addr
 
 # 5. Cold keys
-cardano-cli node key-gen \
+cardano-cli latest node key-gen \
     --cold-verification-key-file cold.vkey \
     --cold-signing-key-file cold.skey \
     --operational-certificate-issue-counter-file cold.counter
 
 # 6. VRF keys
-cardano-cli node key-gen-VRF \
+cardano-cli latest node key-gen-VRF \
     --verification-key-file vrf.vkey \
     --signing-key-file vrf.skey
 
 # 7. KES keys (on block producer or air-gapped)
-cardano-cli node key-gen-KES \
+cardano-cli latest node key-gen-KES \
     --verification-key-file kes.vkey \
     --signing-key-file kes.skey
 ```
@@ -214,7 +212,7 @@ KES_PERIOD=$((CURRENT_SLOT / SLOTS_PER_KES_PERIOD))
 echo "Current KES period: $KES_PERIOD"
 
 # Generate operational certificate
-cardano-cli node issue-op-cert \
+cardano-cli latest node issue-op-cert \
     --kes-verification-key-file kes.vkey \
     --cold-signing-key-file cold.skey \
     --operational-certificate-issue-counter cold.counter \
@@ -274,9 +272,7 @@ KES keys must be rotated before they expire. Here's the complete process:
 
 ```bash
 # Check current KES period on running node
-export CARDANO_NODE_SOCKET_PATH=/path/to/node.socket
-cardano-cli query kes-period-info \
-    --mainnet \
+cardano-cli latest query kes-period-info \
     --op-cert-file node.cert
 
 # Example output:
@@ -291,7 +287,7 @@ When approaching expiry (within 7 days):
 
 ```bash
 # On air-gapped machine or secure environment
-cardano-cli node key-gen-KES \
+cardano-cli latest node key-gen-KES \
     --verification-key-file kes_new.vkey \
     --signing-key-file kes_new.skey
 ```
@@ -300,11 +296,11 @@ cardano-cli node key-gen-KES \
 
 ```bash
 # Get current slot from online node
-CURRENT_SLOT=$(cardano-cli query tip --mainnet | jq -r '.slot')
+CURRENT_SLOT=$(cardano-cli latest query tip | grep "slot" | cut -d':' -f2 | tr -d ' ,')
 KES_PERIOD=$((CURRENT_SLOT / 129600))
 
 # On air-gapped machine with cold.skey
-cardano-cli node issue-op-cert \
+cardano-cli latest node issue-op-cert \
     --kes-verification-key-file kes_new.vkey \
     --cold-signing-key-file cold.skey \
     --operational-certificate-issue-counter cold.counter \
@@ -335,8 +331,7 @@ chown cardano:cardano kes.skey node.cert
 systemctl start cardano-node
 
 # Verify successful rotation
-cardano-cli query kes-period-info \
-    --mainnet \
+cardano-cli latest query kes-period-info \
     --op-cert-file node.cert
 
 # Check logs for successful block production
@@ -396,16 +391,15 @@ Verify:
 ls -la kes.skey vrf.skey node.cert
 
 # Verify certificate validity
-cardano-cli query kes-period-info \
-    --mainnet \
+cardano-cli latest query kes-period-info \
     --op-cert-file node.cert
 
 # Check VRF key hash
-cardano-cli node key-hash-VRF \
+cardano-cli latest node key-hash-VRF \
     --verification-key-file vrf.vkey
 
 # Verify node.cert contents
-cardano-cli text-view decode-cbor \
+cardano-cli latest text-view decode-cbor \
     --in-file node.cert
 ```
 
@@ -413,6 +407,5 @@ cardano-cli text-view decode-cbor \
 
 - Review [Network Topology](/docs/cardano/stake-pools/core-concepts/network-topology) for secure network setup
 - Study [Pool Architecture](/docs/cardano/stake-pools/core-concepts/pool-architecture) for overall system design
-- Configure monitoring for KES expiry alerts
 
 Remember: Your keys are your pool. Treat them with the security and respect they deserve.

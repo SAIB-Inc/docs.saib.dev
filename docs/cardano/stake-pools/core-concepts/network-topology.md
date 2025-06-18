@@ -7,6 +7,8 @@ sidebar_position: 3
 
 Network topology defines how your stake pool nodes connect to each other and the broader Cardano network. A well-designed topology ensures reliability, security, and optimal block propagation.
 
+---
+
 ## Topology Fundamentals
 
 ### What is Topology?
@@ -24,6 +26,8 @@ Your topology directly impacts:
 - **Performance**: How fast your blocks propagate
 - **Reliability**: Resilience to node or network failures  
 - **Decentralization**: Contributing to network health
+
+---
 
 ## Basic Topology Patterns
 
@@ -82,6 +86,8 @@ For production pools:
 - Better global propagation
 - Redundancy across regions
 - Resilient to regional issues
+
+---
 
 ## Topology Configuration
 
@@ -144,6 +150,8 @@ Relays need diverse connections:
 - Other pool relays
 - Community relays
 
+---
+
 ## P2P vs Legacy Topology
 
 ### Legacy (Manual) Topology
@@ -193,6 +201,8 @@ Modern P2P mode enables automatic peer discovery:
 - Improved decentralization
 - Reduced maintenance
 
+---
+
 ## Geographic Distribution
 
 ### Why Distribute Globally
@@ -225,6 +235,8 @@ Target latencies:
 - **BP ↔ Relay**: &lt; 50ms (critical)
 - **Relay ↔ Relay**: &lt; 150ms (important)
 - **Relay ↔ Network**: &lt; 200ms (acceptable)
+
+---
 
 ## Security Topology
 
@@ -276,6 +288,8 @@ iptables -A INPUT -p tcp --dport 3001 -m state --state NEW -m recent --set
 iptables -A INPUT -p tcp --dport 3001 -m state --state NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
 ```
 
+---
+
 ## Advanced Topology Patterns
 
 ### Hidden Relay Pattern
@@ -315,6 +329,8 @@ Region A                Region B
          │Block Producer│
          └────────────┘
 ```
+
+---
 
 ## Topology Best Practices
 
@@ -357,6 +373,8 @@ Region A                Region B
    - Early detection critical
    - Automate alerts
 
+---
+
 ## Troubleshooting Topology
 
 ### Common Issues
@@ -385,6 +403,8 @@ sudo iptables -L -n
 - Monitor network stability
 - Review peer quality
 
+---
+
 ## Monitoring Topology
 
 ### Key Metrics
@@ -407,6 +427,8 @@ watch -n 5 'ss -tn | grep :3001 | wc -l'
 # Test connectivity
 nc -zv relay.yourpool.com 3001
 ```
+
+---
 
 ## Future Considerations
 

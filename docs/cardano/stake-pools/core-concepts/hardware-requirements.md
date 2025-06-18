@@ -7,6 +7,8 @@ sidebar_position: 4
 
 Running a Cardano stake pool requires reliable hardware that can handle continuous operation. This guide breaks down the minimum and recommended specifications for both mainnet and testnet deployments.
 
+---
+
 ## Quick Reference
 
 | Component | Testnet Minimum | Mainnet Minimum | Mainnet Recommended |
@@ -15,6 +17,8 @@ Running a Cardano stake pool requires reliable hardware that can handle continuo
 | **RAM** | 8 GB | 16 GB | 32 GB |
 | **Storage** | 30 GB | 150 GB | 500 GB SSD |
 | **Network** | 1 Mbps | 10 Mbps | 100 Mbps+ |
+
+---
 
 ## Understanding the Requirements
 
@@ -34,6 +38,8 @@ Under-specced hardware leads to:
 - Network instability
 - Frustrated delegators
 :::
+
+---
 
 ## CPU Requirements
 
@@ -56,6 +62,8 @@ The Cardano node uses CPU for:
 :::tip Performance Tip
 Higher single-thread performance often matters more than core count. A 6-core CPU at 4.0 GHz typically outperforms a 12-core CPU at 2.5 GHz for Cardano operations.
 :::
+
+---
 
 ## Memory (RAM) Requirements
 
@@ -81,6 +89,8 @@ Buffer/Cache:      Remaining
 As of late 2024, cardano-node typically uses 12-14 GB of RAM on mainnet. This will increase as the blockchain grows.
 :::
 
+---
+
 ## Storage Requirements
 
 ### Minimum: 150 GB SSD
@@ -104,6 +114,8 @@ As of late 2024, cardano-node typically uses 12-14 GB of RAM on mainnet. This wi
 Traditional hard drives are NOT suitable for stake pools. The random I/O patterns of blockchain operations require SSD performance.
 :::
 
+---
+
 ## Network Requirements
 
 ### Bandwidth
@@ -123,6 +135,8 @@ Traditional hard drives are NOT suitable for stake pools. The random I/O pattern
 - 3000: Monitoring (optional)
 - 22: SSH management
 ```
+
+---
 
 ## Operating System
 
@@ -145,6 +159,8 @@ While technically possible, Windows and MacOS are not recommended for production
 - Performance overhead
 - Tooling incompatibility
 :::
+
+---
 
 ## Virtual vs Physical Hardware
 
@@ -183,6 +199,8 @@ While technically possible, Windows and MacOS are not recommended for production
 - Power/cooling concerns
 - No built-in redundancy
 
+---
+
 ## Cost Considerations
 
 ### Monthly Estimates (USD)
@@ -206,6 +224,8 @@ Monthly Operating:
 - Time: 10-20 hours
 ```
 
+---
+
 ## Platform-Specific Recommendations
 
 ### Popular VPS Providers
@@ -222,6 +242,8 @@ Monthly Operating:
 - **Equinix**: Premium connectivity
 - **Local datacenters**: Often cost-effective
 
+---
+
 ## Scaling Considerations
 
 ### Starting Small
@@ -236,6 +258,8 @@ Consider upgrading when:
 - Memory usage exceeds 80%
 - CPU regularly hits 100%
 - Delegator stake grows significantly
+
+---
 
 ## Multi-Node Setup
 
@@ -253,6 +277,8 @@ For production pools, consider:
 - Different providers
 - Lower-cost options viable
 
+---
+
 ## Monitoring Requirements
 
 Reserve resources for:
@@ -260,6 +286,8 @@ Reserve resources for:
 - **Grafana**: 512 MB RAM, 1 GB storage
 - **Alert Manager**: 256 MB RAM
 - **Log aggregation**: Variable
+
+---
 
 ## Future-Proofing
 
@@ -275,6 +303,8 @@ Plan for these trends:
 - **Monitor degradation**: SSD wear, fan failure
 - **Keep spare parts**: For critical components
 - **Document everything**: For smooth transitions
+
+---
 
 ## Verification Commands
 

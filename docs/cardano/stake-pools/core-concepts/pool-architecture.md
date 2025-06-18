@@ -7,6 +7,8 @@ sidebar_position: 1
 
 Understanding the architectural components of a Cardano stake pool is essential for both operators and delegators. This guide explains how pools are structured and why each component matters.
 
+---
+
 ## Architectural Overview
 
 A Cardano stake pool consists of multiple interconnected nodes working together to participate in the blockchain consensus. The architecture is designed for security, reliability, and decentralization.
@@ -16,6 +18,8 @@ Internet ←→ Relay Nodes ←→ Block Producer Node
               ↕     ↕
          Other Pools & Nodes
 ```
+
+---
 
 ## Core Components
 
@@ -78,6 +82,8 @@ The topology defines how your nodes connect to each other and the wider network.
    Cardano Network
 ```
 
+---
+
 ## Connection Architecture
 
 ### Block Producer Connections
@@ -91,6 +97,8 @@ The topology defines how your nodes connect to each other and the wider network.
 - **Outgoing**: To block producer and other relays
 - **Ports**: Standard port 3001 for compatibility
 - **Firewall**: Rate limiting and DDoS protection
+
+---
 
 ## Security Layers
 
@@ -117,6 +125,8 @@ Distributing nodes provides:
 - **Performance**: Better global block propagation
 - **Security**: Harder to attack all nodes simultaneously
 
+---
+
 ## Performance Considerations
 
 ### Block Propagation Path
@@ -134,6 +144,8 @@ When your pool creates a block:
 :::info Height Battles
 If two pools create valid blocks for the same slot, the one that propagates faster typically wins. Good network architecture improves your chances.
 :::
+
+---
 
 ## High Availability Patterns
 
@@ -155,6 +167,8 @@ NEVER run two block producers simultaneously with the same keys. This causes "do
 - **Different providers**: Avoid single points of failure
 - **Load balancing**: Distribute connections evenly
 
+---
+
 ## Monitoring Architecture
 
 Essential monitoring points:
@@ -175,6 +189,8 @@ Essential monitoring points:
    - Missed slot analysis
    - Rewards tracking
 
+   ---
+
 ## Common Architecture Mistakes
 
 ### ❌ Single Relay Node
@@ -192,6 +208,8 @@ Essential monitoring points:
 ### ❌ Inadequate Monitoring
 **Problem**: Missing issues until too late
 **Solution**: Comprehensive monitoring stack
+
+---
 
 ## Architecture Evolution
 
@@ -214,6 +232,8 @@ For large pools:
 - Automated failover systems
 - 24/7 monitoring team
 - Disaster recovery procedures
+
+---
 
 ## Next Steps
 

@@ -1,5 +1,5 @@
 ---
-title: Stake Pool Overview
+title: Overview
 sidebar_position: 1
 ---
 
@@ -16,6 +16,8 @@ A stake pool is a network node that holds the combined stake of multiple partici
 - **Probabilistic selection**: Block production rights based on relative stake size
 - **Reward sharing**: Automatic distribution after pool fees
 - **Open participation**: Anyone can operate a pool or delegate to one
+
+---
 
 ## Technical Architecture
 
@@ -45,6 +47,8 @@ Cardano uses multiple key types for security and functionality:
 | **VRF Keys** | Randomness for slot leader selection | Block producer | Never |
 | **KES Keys** | Block signing with forward security | Block producer | Every 90 days |
 | **Operational Certificate** | Links cold and hot keys | Block producer | With KES rotation |
+
+---
 
 ## Protocol Parameters
 
@@ -78,6 +82,8 @@ If a pool produces 10,000 ADA in rewards with 340 ADA fixed fee and 2% margin:
 4. Delegator rewards: 9,466.8 ADA distributed proportionally
 :::
 
+---
+
 ## Requirements for Pool Operation
 
 ### Technical Skills
@@ -88,25 +94,12 @@ Running a successful stake pool requires:
 - **Blockchain knowledge**: Understanding Cardano's consensus mechanism
 - **DevOps skills**: Automation, monitoring, incident response
 
-### Time Commitment
-- **Initial setup**: 40-80 hours for learning and configuration
-- **Ongoing maintenance**: 10-20 hours per month
-- **Emergency response**: Available 24/7 for critical issues
-- **Community engagement**: Regular interaction with delegators
-
-### Financial Investment
-| Category | One-time Cost | Monthly Cost |
-|----------|---------------|--------------|
-| **Hardware/VPS** | $1,000-5,000 | $50-500 |
-| **Monitoring tools** | $0-200 | $0-50 |
-| **Backup solutions** | $100-500 | $10-100 |
-| **Pool deposit** | 500 ADA | - |
-| **Emergency fund** | 1,000+ ADA | - |
+---
 
 ## Rewards and Economics
 
 ### How Rewards Work
-Every epoch (5 days), the protocol:
+Every epoch, the protocol:
 1. **Calculates total rewards**: From transaction fees and monetary expansion
 2. **Assigns slot leaders**: Based on stake distribution using VRF
 3. **Rewards block producers**: For successfully created blocks
@@ -126,6 +119,8 @@ Every epoch (5 days), the protocol:
 | **Uptime** | Percentage of assigned blocks produced | Direct impact - missed blocks = lost rewards |
 | **Height Battles** | Blocks lost to competing pools | Minor impact with good network connectivity |
 | **Pledge** | Operator's committed stake | Higher pledge = slightly higher rewards |
+
+---
 
 ## Delegation Process
 
@@ -151,21 +146,7 @@ Epoch N+4:  First rewards distributed
 - **Risk**: No slashing - cannot lose staked ADA
 - **Costs**: Small transaction fee (~0.17 ADA) to delegate
 
-## Network Health Metrics
-
-### Current Network Statistics (2024)
-- **Active pools**: ~3,000
-- **Total staked**: ~23 billion ADA (64% of circulating supply)
-- **Minimum viable stake**: ~1M ADA for consistent block production
-- **Average pool ROA**: 3-4% annually
-- **Decentralization**: Top 10 pools control &lt;25% of stake
-
-### Pool Distribution Goals
-The k-parameter aims to achieve:
-- **Target pool count**: 500 fully saturated pools
-- **Geographic distribution**: Pools across all continents
-- **Operator diversity**: No single entity controlling multiple large pools
-- **Infrastructure variety**: Mix of cloud, bare metal, and home operations
+---
 
 ## Common Challenges
 
@@ -180,19 +161,5 @@ The k-parameter aims to achieve:
 2. **Saturation monitoring**: Moving stake when pools grow too large
 3. **Reward expectations**: Understanding variance and patience
 4. **Scam awareness**: Avoiding fraudulent pools or promises
-
-## Future Developments
-
-### Protocol Improvements
-- **P2P networking**: Enhanced peer discovery and communication
-- **Input endorsers**: Additional consensus layer for faster finality
-- **Parameter updates**: Potential changes to k, a0, and minimum fees
-- **Sustainability**: Long-term funding models as rewards decrease
-
-### Ecosystem Growth
-- **Tooling improvements**: Better monitoring and management solutions
-- **Education initiatives**: Comprehensive operator training programs
-- **Standardization**: Industry best practices and certifications
-- **Innovation**: New services and features from pool operators
 
 ---

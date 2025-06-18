@@ -18,6 +18,8 @@ Cardano stake pools use multiple types of cryptographic keys for security and fu
 | **KES Keys** | Block signing | Hot | 90 days | Low - Temporary impact |
 | **Operational Certificate** | Links cold to hot keys | Hot | 90 days | Low - With KES |
 
+---
+
 ## Understanding Each Key Type
 
 ### Payment Keys (addr.skey/addr.vkey)
@@ -141,6 +143,8 @@ cardano-cli node issue-op-cert \
   --out-file node.cert
 ```
 
+---
+
 ## Key Generation Best Practices
 
 ### 1. Air-Gapped Environment
@@ -172,6 +176,8 @@ cat /proc/sys/kernel/random/entropy_avail
 # Should be > 256, ideally > 1000
 # Move mouse, type randomly to increase
 ```
+
+---
 
 ## Key Storage Strategy
 
@@ -211,6 +217,8 @@ cold.counter      # Certificate counter
 └─────────────────┘
 ```
 
+---
+
 ## KES Key Rotation Process
 
 ### When to Rotate
@@ -235,6 +243,8 @@ CURRENT_KES=$((CURRENT_SLOT / SLOTS_PER_KES))
 :::warning Rotation Timing
 Start rotation process at least 7 days before expiry to allow for any issues.
 :::
+
+---
 
 ## Security Considerations
 
@@ -279,39 +289,28 @@ chown pooluser:pooluser * # Correct ownership
 - Missing rotation = no blocks
 - Automate monitoring
 
+---
+
 ## Verification Commands
 
 ### Verify Key Integrity
 ```bash
 # Check key pair match
-cardano-cli key verification-key \
+cardano-cli latest key verification-key \
   --signing-key-file stake.skey \
   --verification-key-file stake.vkey
 
 # Verify operational certificate
-cardano-cli text-view decode-cbor \
+cardano-cli latest text-view decode-cbor \
   --in-file node.cert
 ```
 
 ### Monitor KES Status
 ```bash
 # On running node
-cardano-cli query kes-period-info \
-  --mainnet \
+cardano-cli latest query kes-period-info \
   --op-cert-file node.cert
 ```
-
-## Key Management Tools
-
-### Hardware Security
-- **Hardware wallets**: Ledger/Trezor for payment keys
-- **YubiKey**: For SSH access to servers
-- **HSM**: Enterprise-grade key storage
-
-### Software Tools
-- **GPG encryption**: For key backups
-- **Pass/KeePass**: Encrypted password managers
-- **Shamir's Secret**: Split keys into shares
 
 ## Next Steps
 

@@ -5,316 +5,414 @@ sidebar_position: 2
 
 # Cryptographic Keys
 
-Cardano stake pools use multiple types of cryptographic keys for security and functionality. Understanding these keys is crucial for safe pool operation.
+Running a Cardano stake pool requires managing several types of cryptographic keys. Each key has a specific purpose, and understanding how to generate, store, and use them correctly is critical for pool security.
 
-## Key Types Overview
+## Overview of Pool Keys
 
-| Key Type | Purpose | Hot/Cold | Rotation | Exposure Risk |
-|----------|---------|----------|----------|---------------|
-| **Payment Keys** | Control pool rewards | Cold | Never | High - Loss of funds |
-| **Stake Keys** | Pool ownership & pledge | Cold | Never | High - Loss of pool |
-| **Cold Keys** | Pool identity & certificates | Cold | Never | High - Pool compromise |
-| **VRF Keys** | Slot leader selection | Hot | Never | Medium - No blocks |
-| **KES Keys** | Block signing | Hot | 90 days | Low - Temporary impact |
-| **Operational Certificate** | Links cold to hot keys | Hot | 90 days | Low - With KES |
+A Cardano stake pool uses six different types of keys. Think of them like a set of specialized keys for different doors in a building - each opens something specific and some are more critical than others.
 
----
+| Key Type | Purpose | Where It Lives | Rotation Schedule |
+|:---------|:--------|:---------------|:------------------|
+| **Payment keys** | Control rewards wallet | Cold (offline) | Never |
+| **Stake keys** | Own the pool registration | Cold (offline) | Never |
+| **Cold keys** | Master pool identity | Cold (offline) | Never |
+| **VRF keys** | Prove right to make blocks | Hot (on server) | Never |
+| **KES keys** | Sign blocks (time-limited) | Hot (on server) | Every 93 days |
+| **Operational certificate** | Links cold and KES keys | Hot (on server) | Every 93 days |
 
 ## Understanding Each Key Type
 
-### Payment Keys (addr.skey/addr.vkey)
+### Payment Keys
 
-Payment keys control the wallet that receives pool rewards and pays for transactions.
+Payment keys control the wallet where your pool rewards are sent. These are standard Cardano wallet keys, consisting of a signing key (secret) and verification key (public).
 
-**Purpose:**
-- Receive pool operator rewards
-- Pay for pool transactions (registration, updates)
-- Control pledged funds
-
-**Security:**
-- Store offline (cold storage)
-- Never put on pool servers
-- Consider hardware wallet
-- Backup multiple copies securely
-
-:::danger Critical
-Loss of payment keys means loss of all funds in that address. These are your most sensitive keys.
-:::
-
-### Stake Keys (stake.skey/stake.vkey)
-
-Stake keys represent pool ownership and are used for:
-
-**Purpose:**
-- Registering stake address
-- Delegating to your own pool (pledge)
-- Claiming rewards
-- Retiring the pool
-
-**Security:**
-- Store offline with payment keys
-- Required only for certificates
-- Never needed on running nodes
-
-### Cold Keys (cold.skey/cold.vkey/cold.counter)
-
-Cold keys are the pool's master identity keys.
-
-**Purpose:**
-- Generate pool certificate
-- Create operational certificates
-- Authorize KES key rotations
-- Update pool parameters
-
-**Components:**
-```bash
-cold.skey     # Secret key - NEVER expose
-cold.vkey     # Verification key - Public
-cold.counter  # Tracks operational certs issued
+**Files created**:
+```
+payment.skey  # Secret signing key - NEVER share this
+payment.vkey  # Public verification key
+payment.addr  # Wallet address derived from keys
 ```
 
-**Security:**
-- Generate on air-gapped machine
-- Store offline permanently
-- Never copy to online systems
-- The counter prevents replay attacks
+**What they control**:
+- Pool rewards payments
+- Pledge funds
+- Transaction fees
 
-:::info Air-Gapped Generation
-Generate cold keys on a computer that has never and will never connect to the internet for maximum security.
-:::
+**Security level**: CRITICAL - Loss means loss of all funds in that address
 
-### VRF Keys (vrf.skey/vrf.vkey)
+### Stake Keys
 
-Verifiable Random Function keys prove your pool's right to create blocks.
+Stake keys represent ownership of your pool registration. They're used to register, update, and retire your pool.
 
-**Purpose:**
-- Participate in slot leader election
-- Prove block creation rights
-- Generate randomness for protocol
-
-**Characteristics:**
-- Required on block producer
-- Never rotated
-- Part of pool registration
-
-**Security Impact:**
-- Loss prevents block creation
-- No direct fund risk
-- Requires pool re-registration to replace
-
-### KES Keys (kes.skey/kes.vkey)
-
-Key Evolving Signature keys provide forward security for block signing.
-
-**Purpose:**
-- Sign blocks you produce
-- Evolve automatically for security
-- Limit damage from key compromise
-
-**Rotation Schedule:**
-- Valid for 129,600 slots (90 days)
-- Must rotate before expiry
-- Track current KES period
-
-```bash
-# Check current KES period
-CURRENT_SLOT=$(cardano-cli query tip --mainnet | jq -r '.slot')
-KES_PERIOD=$((CURRENT_SLOT / 129600))
-echo "Current KES Period: $KES_PERIOD"
+**Files created**:
+```
+stake.skey    # Secret signing key for stake address
+stake.vkey    # Public verification key
+stake.addr    # Stake address for registration
 ```
 
-### Operational Certificate (node.cert)
+**What they control**:
+- Pool registration certificate
+- Pool retirement
+- Delegation certificates
 
-Links your cold keys to hot KES keys, allowing block production without exposing cold keys.
+**Security level**: CRITICAL - Loss means you can't manage your pool
 
-**Contains:**
+### Cold Keys
+
+Cold keys are your pool's master identity keys. They should be generated on an air-gapped machine and never touch an online system.
+
+**Files created**:
+```
+cold.skey     # Secret key - your pool's identity
+cold.vkey     # Public key - shared in certificates
+cold.counter  # Counter tracking operational certificates issued
+```
+
+The counter file is crucial - it prevents replay attacks by tracking how many operational certificates you've created.
+
+**What they control**:
+- Operational certificate generation
+- Pool parameter updates
+- KES key rotation authorization
+
+**Security level**: CRITICAL - Compromise means someone can impersonate your pool
+
+### VRF Keys
+
+VRF (Verifiable Random Function) keys prove your pool's right to create blocks when selected. These keys generate cryptographic proofs that the protocol can verify.
+
+**Files created**:
+```
+vrf.skey      # Secret VRF key - needed on block producer
+vrf.vkey      # Public VRF key - included in pool registration
+```
+
+**What they do**:
+- Generate randomness for slot leader selection
+- Prove your pool was legitimately selected
+- Must be online for block production
+
+**Security level**: MEDIUM - Loss means no block production until re-registration
+
+### KES Keys
+
+KES (Key Evolving Signature) keys sign the blocks your pool produces. They're unique because they automatically expire after 90 days as a security feature.
+
+**Files created**:
+```
+kes.skey      # Secret signing key - evolves over time
+kes.vkey      # Public verification key
+```
+
+**Why they expire**:
+KES keys use forward-secure signatures. Even if compromised, old signatures can't be forged. The key evolves through 62 periods (129,600 slots each), totaling approximately 93 days.
+
+**Security level**: LOW - Can be rotated without pool re-registration
+
+### Operational Certificate
+
+The operational certificate links your cold keys to your KES keys, allowing block production without exposing cold keys online.
+
+**File created**:
+```
+node.cert     # Certificate signed by cold keys
+```
+
+**What it contains**:
 - KES verification key
+- Start KES period
 - Issue counter
-- KES period validity
-- Cold key signature
+- Signature from cold keys
 
-**Generation:**
+## Generating Keys Safely
+
+The most critical aspect of key generation is doing it securely. Here's the recommended approach:
+
+### 1. Prepare an Air-Gapped Environment
+
+Use a computer that will never connect to the internet:
+
 ```bash
+# Option 1: Live Linux USB (recommended)
+# Download Ubuntu/Debian ISO, verify checksum, create bootable USB
+# Boot from USB, never connect to network
+
+# Option 2: Dedicated offline machine
+# Fresh OS install, disable all network interfaces
+# Physical removal of network cards is even better
+```
+
+### 2. Install cardano-cli
+
+On your air-gapped machine:
+
+```bash
+# Copy cardano-cli binary via USB from online machine
+# Verify the binary hash matches official release
+chmod +x cardano-cli
+./cardano-cli version
+```
+
+### 3. Generate Keys in Order
+
+Always generate keys in this sequence:
+
+```bash
+# 1. Payment keys
+cardano-cli address key-gen \
+    --verification-key-file payment.vkey \
+    --signing-key-file payment.skey
+
+# 2. Stake keys  
+cardano-cli stake-address key-gen \
+    --verification-key-file stake.vkey \
+    --signing-key-file stake.skey
+
+# 3. Generate stake address
+cardano-cli stake-address build \
+    --stake-verification-key-file stake.vkey \
+    --out-file stake.addr \
+    --mainnet
+
+# 4. Generate payment address
+cardano-cli address build \
+    --payment-verification-key-file payment.vkey \
+    --stake-verification-key-file stake.vkey \
+    --out-file payment.addr \
+    --mainnet
+
+# 5. Cold keys
+cardano-cli node key-gen \
+    --cold-verification-key-file cold.vkey \
+    --cold-signing-key-file cold.skey \
+    --operational-certificate-issue-counter-file cold.counter
+
+# 6. VRF keys
+cardano-cli node key-gen-VRF \
+    --verification-key-file vrf.vkey \
+    --signing-key-file vrf.skey
+
+# 7. KES keys (on block producer or air-gapped)
+cardano-cli node key-gen-KES \
+    --verification-key-file kes.vkey \
+    --signing-key-file kes.skey
+```
+
+### 4. Create Operational Certificate
+
+Determine the current KES period and create certificate:
+
+```bash
+# Get current slot (you'll need this from an online node)
+# For this example, assume slot 112233445
+
+# Calculate KES period
+SLOTS_PER_KES_PERIOD=129600
+CURRENT_SLOT=112233445
+KES_PERIOD=$((CURRENT_SLOT / SLOTS_PER_KES_PERIOD))
+echo "Current KES period: $KES_PERIOD"
+
+# Generate operational certificate
 cardano-cli node issue-op-cert \
-  --kes-verification-key-file kes.vkey \
-  --cold-signing-key-file cold.skey \
-  --operational-certificate-issue-counter cold.counter \
-  --kes-period <start-kes-period> \
-  --out-file node.cert
+    --kes-verification-key-file kes.vkey \
+    --cold-signing-key-file cold.skey \
+    --operational-certificate-issue-counter cold.counter \
+    --kes-period $KES_PERIOD \
+    --out-file node.cert
 ```
 
----
+## Key Storage Best Practices
 
-## Key Generation Best Practices
-
-### 1. Air-Gapped Environment
-
-Create a secure environment:
-```bash
-# Use a live Linux USB that never touches network
-# Ubuntu or Debian recommended
-# Disable all network interfaces
-# Generate all keys offline
-```
-
-### 2. Generation Order
-
-Follow this sequence:
-1. **Payment/Stake keys** - For addresses
-2. **Cold keys** - Pool identity  
-3. **VRF keys** - For randomness
-4. **KES keys** - For block signing
-5. **Operational certificate** - Links cold to KES
-
-### 3. Secure Random Generation
-
-Ensure proper entropy:
-```bash
-# Check available entropy
-cat /proc/sys/kernel/random/entropy_avail
-
-# Should be > 256, ideally > 1000
-# Move mouse, type randomly to increase
-```
-
----
-
-## Key Storage Strategy
-
-### Hot Storage (On Servers)
-Only these files on block producer:
-```
-kes.skey          # Rotated every 90 days
-vrf.skey          # Static hot key
-node.cert         # Operational certificate
-```
+How you store your keys is as important as how you generate them.
 
 ### Cold Storage (Offline)
-Never on servers:
-```
-payment.skey      # Wallet control
-stake.skey        # Stake control
-cold.skey         # Pool identity
-cold.counter      # Certificate counter
-```
 
-### Backup Strategy
+Never put these on internet-connected devices:
+- payment.skey
+- stake.skey  
+- cold.skey
+- cold.counter
 
+**Storage methods**:
 ```
-┌─────────────────┐
-│   Master Copy   │ USB/Paper
-│  (Air-gapped)   │ Safety deposit box
-└─────────────────┘
-         ↓
-┌─────────────────┐
-│  Backup Copy 1  │ Encrypted USB
-│  (Encrypted)    │ Home safe
-└─────────────────┘
-         ↓
-┌─────────────────┐
-│  Backup Copy 2  │ Encrypted cloud
-│  (Encrypted)    │ Different provider
-└─────────────────┘
+Primary: Encrypted USB drive in secure location
+Backup 1: Different encrypted USB in separate location
+Backup 2: Paper printout in bank safety deposit box
 ```
 
----
-
-## KES Key Rotation Process
-
-### When to Rotate
-
-Monitor KES expiry:
+**Encryption example**:
 ```bash
-# Calculate remaining days
-SLOTS_PER_KES=129600
+# Encrypt sensitive keys
+tar -czf - *.skey cold.counter | \
+    gpg --symmetric --cipher-algo AES256 > pool_cold_keys.tar.gz.gpg
+
+# Decrypt when needed
+gpg --decrypt pool_cold_keys.tar.gz.gpg | tar -xzf -
+```
+
+### Hot Storage (On Block Producer)
+
+Only these files on your block producer:
+```
+kes.skey      # Current KES key
+vrf.skey      # VRF key  
+node.cert     # Operational certificate
+```
+
+**Set proper permissions**:
+```bash
+chmod 400 kes.skey vrf.skey node.cert
+chown cardano:cardano kes.skey vrf.skey node.cert
+```
+
+## KES Key Rotation
+
+KES keys must be rotated before they expire. Here's the complete process:
+
+### 1. Monitor KES Key Expiry
+
+```bash
+# Check current KES period on running node
+export CARDANO_NODE_SOCKET_PATH=/path/to/node.socket
+cardano-cli query kes-period-info \
+    --mainnet \
+    --op-cert-file node.cert
+
+# Example output:
+# ✓ Operational certificate's KES period is within the correct KES period interval
+# ✓ The current KES period is: 426
+# ✗ The operational certificate expires in 17 KES periods, or 93.5 days
+```
+
+### 2. Generate New KES Key
+
+When approaching expiry (within 7 days):
+
+```bash
+# On air-gapped machine or secure environment
+cardano-cli node key-gen-KES \
+    --verification-key-file kes_new.vkey \
+    --signing-key-file kes_new.skey
+```
+
+### 3. Create New Operational Certificate
+
+```bash
+# Get current slot from online node
 CURRENT_SLOT=$(cardano-cli query tip --mainnet | jq -r '.slot')
-CURRENT_KES=$((CURRENT_SLOT / SLOTS_PER_KES))
-# Compare with your certificate's KES period
+KES_PERIOD=$((CURRENT_SLOT / 129600))
+
+# On air-gapped machine with cold.skey
+cardano-cli node issue-op-cert \
+    --kes-verification-key-file kes_new.vkey \
+    --cold-signing-key-file cold.skey \
+    --operational-certificate-issue-counter cold.counter \
+    --kes-period $KES_PERIOD \
+    --out-file node_new.cert
 ```
 
-### Rotation Steps
-
-1. **Generate new KES keys** (on secure machine)
-2. **Create new operational certificate** (needs cold.skey)
-3. **Copy to block producer**
-4. **Restart node with new keys**
-5. **Verify successful rotation**
-
-:::warning Rotation Timing
-Start rotation process at least 7 days before expiry to allow for any issues.
-:::
-
----
-
-## Security Considerations
-
-### Access Control
+### 4. Deploy New Keys
 
 ```bash
-# Proper file permissions
-chmod 400 *.skey          # Read-only for owner
-chmod 644 *.vkey          # Public keys readable
-chown pooluser:pooluser * # Correct ownership
+# On block producer
+# Stop the node
+systemctl stop cardano-node
+
+# Backup old keys
+mv kes.skey kes_old.skey
+mv node.cert node_old.cert
+
+# Install new keys
+mv kes_new.skey kes.skey
+mv node_new.cert node.cert
+
+# Set permissions
+chmod 400 kes.skey node.cert
+chown cardano:cardano kes.skey node.cert
+
+# Restart node
+systemctl start cardano-node
+
+# Verify successful rotation
+cardano-cli query kes-period-info \
+    --mainnet \
+    --op-cert-file node.cert
+
+# Check logs for successful block production
+journalctl -u cardano-node -n 100 | grep "Forged block"
 ```
 
-### Key Compromise Response
+## Security Checklist
 
-**If hot keys compromised:**
-1. Generate new KES keys immediately
-2. Create new operational certificate
-3. Restart node with new keys
-4. Monitor for suspicious activity
+### Generation Security
+- [ ] Used air-gapped machine for cold key generation
+- [ ] Verified cardano-cli binary integrity
+- [ ] Generated keys in correct order
+- [ ] Never exposed cold keys to internet
 
-**If cold keys compromised:**
-1. Generate entirely new pool keys
-2. Register as new pool
-3. Migrate delegators to new pool
-4. Retire compromised pool
+### Storage Security
+- [ ] Cold keys encrypted and offline
+- [ ] Multiple secure backups exist
+- [ ] Hot keys have restricted permissions
+- [ ] Regular backup verification
 
-### Common Security Mistakes
+### Operational Security
+- [ ] KES rotation calendar reminders set
+- [ ] Monitoring alerts for KES expiry
+- [ ] Documented rotation procedures
+- [ ] Tested recovery procedures
 
-❌ **Storing cold keys on servers**
-- Even "temporarily" is too risky
-- Use USB transfer for certificates only
+### Common Mistakes to Avoid
 
-❌ **Not backing up keys**
-- Single point of failure
-- Lost keys = lost pool
+**Never**:
+- Generate cold keys on online machines
+- Store unencrypted keys on cloud services
+- Share private keys for "help"
+- Forget to backup cold.counter file
+- Run multiple block producers with same keys
 
-❌ **Sharing keys for "help"**
-- Never share private keys
-- Scammers often request keys
+**Always**:
+- Test key recovery procedures
+- Monitor KES expiry actively
+- Keep detailed operation logs
+- Maintain secure backup locations
 
-❌ **Poor KES rotation planning**
-- Missing rotation = no blocks
-- Automate monitoring
+## Troubleshooting
 
----
+### "Invalid operational certificate" Error
 
-## Verification Commands
+Check these in order:
+1. KES period in certificate matches current period
+2. Cold counter file is in sync
+3. All keys belong to same pool
+4. Certificate was created with correct keys
 
-### Verify Key Integrity
+### Cannot Start Block Producer
+
+Verify:
 ```bash
-# Check key pair match
-cardano-cli latest key verification-key \
-  --signing-key-file stake.skey \
-  --verification-key-file stake.vkey
+# Check file permissions
+ls -la kes.skey vrf.skey node.cert
 
-# Verify operational certificate
-cardano-cli latest text-view decode-cbor \
-  --in-file node.cert
-```
+# Verify certificate validity
+cardano-cli query kes-period-info \
+    --mainnet \
+    --op-cert-file node.cert
 
-### Monitor KES Status
-```bash
-# On running node
-cardano-cli latest query kes-period-info \
-  --op-cert-file node.cert
+# Check VRF key hash
+cardano-cli node key-hash-VRF \
+    --verification-key-file vrf.vkey
+
+# Verify node.cert contents
+cardano-cli text-view decode-cbor \
+    --in-file node.cert
 ```
 
 ## Next Steps
 
-- Learn about [Network Topology](/docs/cardano/stake-pools/core-concepts/network-topology)
-- Understand [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements)
+- Review [Network Topology](/docs/cardano/stake-pools/core-concepts/network-topology) for secure network setup
+- Study [Pool Architecture](/docs/cardano/stake-pools/core-concepts/pool-architecture) for overall system design
+- Configure monitoring for KES expiry alerts
 
----
+Remember: Your keys are your pool. Treat them with the security and respect they deserve.

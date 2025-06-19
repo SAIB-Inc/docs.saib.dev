@@ -64,7 +64,7 @@ cardano-node run \
   --config /opt/cardano/relay/config/config.json
 ```
 
-The critical parameter here is `--host-addr 0.0.0.0`, which allows the node to accept connections from any IP address. The standard port is 6000, though you can use a different port if needed.
+The critical parameter here is `--host-addr 0.0.0.0`, which allows the node to accept connections from any IP address. Common ports used are 6000 and 3001, though you can use any port above 1024.
 
 ## Topology Configuration
 
@@ -122,11 +122,29 @@ The newer P2P topology format provides automatic peer discovery:
       "advertise": false
     }
   ],
-  "useLedgerAfterSlot": 110332824
+  "bootstrapPeers": [
+    {
+      "address": "backbone.cardano.iog.io",
+      "port": 3001
+    },
+    {
+      "address": "backbone.mainnet.emurgornd.com",
+      "port": 3001
+    },
+    {
+      "address": "backbone.mainnet.cardanofoundation.org",
+      "port": 3001
+    }
+  ],
+  "useLedgerAfterSlot": 128908821
 }
 ```
 
-The P2P format enables dynamic peer discovery after the specified slot number.
+The P2P format enables dynamic peer discovery after the specified slot number. The `bootstrapPeers` section provides trusted peers for initial synchronization.
+
+:::tip P2P Mode Recommendation
+Starting with cardano-node v8.9.2, it's recommended to run nodes with P2P configuration enabled. With P2P mode, you no longer need to run topology updater scripts as the node handles peer discovery automatically.
+:::
 
 ## System Service Configuration
 
@@ -274,7 +292,7 @@ cardano hard nofile 32768
 
 ### Database Optimization
 
-Place the database on fast storage (SSD recommended) with sufficient space for growth. The blockchain grows approximately 2-3GB monthly.
+Place the database on fast storage (SSD recommended) with sufficient space for growth. The blockchain grows approximately 1GB monthly.
 
 ## Common Issues and Solutions
 

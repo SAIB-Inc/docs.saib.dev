@@ -13,25 +13,6 @@ Think of a stake pool as a lottery system where your chances of winning depend o
 
 When your pool creates a block, you earn rewards that are automatically distributed between you (the operator) and your delegators. The entire process is non-custodial, meaning delegators keep full control of their ADA at all times.
 
-## The Economics of Running a Pool
-
-Let's look at the real numbers for running a stake pool based on current mainnet parameters and market conditions.
-
-### Costs You'll Face
-
-Running a competitive stake pool requires reliable infrastructure. Based on current market prices:
-
-| Infrastructure        | Minimum Setup | Recommended Setup    |
-|-----------------------|---------------|----------------------|
-| Block Producer Server | $50-70 (VPS)  | $150-200 (Dedicated) |
-| Relay Server 1        | $25-40 (VPS)  | $80-120 (Cloud)      |
-| Relay Server 2        | $25-40 (VPS)  | $80-120 (Cloud)      |
-| **Monthly Total**     | **$100-150**  | **$310-440**         |
-
-Additional one-time costs:
-- Pool registration: 500 ADA deposit (refundable when you retire the pool)
-- Transaction fees: ~2-5 ADA for registration and updates
-
 ### How Much Can You Earn?
 
 Your earnings depend on three factors: how much ADA is delegated to your pool, your fees, and how reliably your pool operates. 

@@ -7,6 +7,10 @@ sidebar_position: 4
 
 A block producer node is the core component of your stake pool that creates new blocks on the Cardano blockchain. This guide covers the complete setup process from key generation to pool registration.
 
+:::tip Start with Testnet
+Always practice on testnet (preprod) first. The commands in this guide use testnet by default. Only move to mainnet after successfully running a testnet pool for several epochs.
+:::
+
 :::warning Security First
 Block producer nodes handle sensitive cryptographic keys. They must:
 - Never be directly exposed to the internet
@@ -21,7 +25,7 @@ Before configuring a block producer:
 1. Have at least one relay node fully synchronized
 2. Secure a dedicated server meeting [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements)
 3. Understand [Cryptographic Keys](/docs/cardano/stake-pools/core-concepts/cryptographic-keys) used in stake pools
-4. Have approximately 500 ADA for pool registration deposit plus transaction fees
+4. Have test ADA (tADA) from the [testnet faucet](https://docs.cardano.org/cardano-testnet/tools/faucet/) for registration
 
 ## Block Producer vs Relay Configuration
 
@@ -35,7 +39,7 @@ Block producers differ from relays in critical ways:
 | Keys required | Multiple operational keys | None |
 | Port | Any (often 6000 or 3001) | Must be accessible externally |
 
-## Setting Up the Block Producer
+## Configuration
 
 ### Directory Structure
 
@@ -49,9 +53,30 @@ cd /opt/cardano/block-producer
 chmod 700 keys
 ```
 
-### Configuration Files
+### Download Configuration Files
 
-Download the same configuration files as relay nodes, but modify the topology to only connect to your relays:
+For testnet (preprod):
+
+```bash
+cd /opt/cardano/block-producer/config
+
+curl -O -J https://book.world.dev.cardano.org/environments/preprod/config.json
+curl -O -J https://book.world.dev.cardano.org/environments/preprod/byron-genesis.json
+curl -O -J https://book.world.dev.cardano.org/environments/preprod/shelley-genesis.json
+curl -O -J https://book.world.dev.cardano.org/environments/preprod/alonzo-genesis.json
+curl -O -J https://book.world.dev.cardano.org/environments/preprod/conway-genesis.json
+curl -O -J https://book.world.dev.cardano.org/environments/preprod/topology.json
+```
+
+:::info Mainnet Configuration
+For mainnet, replace `preprod` with `mainnet` in all URLs above. Only do this after successful testnet operation.
+
+**Note**: The configuration files are maintained at the official [Cardano World repository](https://github.com/IntersectMBO/cardano-world/tree/master/docs/environments).
+:::
+
+### Topology Configuration
+
+The topology must only include your relay nodes. For legacy format:
 
 ```json
 {
@@ -113,13 +138,13 @@ cardano-cli address build \
   --payment-verification-key-file payment.vkey \
   --stake-verification-key-file stake.vkey \
   --out-file payment.addr \
-  --mainnet
+  --testnet-magic 1
 
 # Generate stake address
 cardano-cli stake-address build \
   --stake-verification-key-file stake.vkey \
   --out-file stake.addr \
-  --mainnet
+  --testnet-magic 1
 ```
 
 ### Cold Keys
@@ -141,7 +166,7 @@ cardano-cli node key-gen-VRF \
 
 ### KES Keys and Operational Certificate
 
-Key Evolving Signature (KES) keys must be rotated periodically. Generate them on your block producer:
+Key Evolving Signature (KES) keys must be rotated periodically (every 90 days). Generate them on your block producer:
 
 ```bash
 # Generate KES keys
@@ -151,7 +176,7 @@ cardano-cli node key-gen-KES \
 
 # Find current KES period
 SLOTS_PER_KES_PERIOD=$(cat shelley-genesis.json | jq -r '.slotsPerKESPeriod')
-SLOT_TIP=$(cardano-cli query tip --mainnet | jq -r '.slot')
+SLOT_TIP=$(cardano-cli query tip --testnet-magic 1 | jq -r '.slot')
 KES_PERIOD=$((SLOT_TIP / SLOTS_PER_KES_PERIOD))
 
 # Generate operational certificate (valid for 62 KES periods)
@@ -164,7 +189,7 @@ cardano-cli node issue-op-cert \
 ```
 
 :::caution KES Key Rotation
-KES keys expire after 62 periods (approximately 90 days on mainnet). Set up monitoring and rotate them before expiry to avoid missing blocks.
+KES keys must be rotated every 90 days. The exact number of periods depends on the network's slot length configuration. Set up monitoring and rotate them before expiry to avoid missing blocks. Check your network's `slotsPerKESPeriod` in shelley-genesis.json for precise calculations.
 :::
 
 ## Pool Registration Process
@@ -181,13 +206,13 @@ cardano-cli stake-address registration-certificate \
 
 # Submit in a transaction
 cardano-cli transaction build \
-  --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --mainnet | tail -n +3 | head -n 1 | awk '{print $1"#"$2}') \
+  --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 | tail -n +3 | head -n 1 | awk '{print $1"#"$2}') \
   --tx-out $(cat payment.addr)+0 \
   --change-address $(cat payment.addr) \
   --certificate-file stake-registration.cert \
   --witness-override 2 \
   --out-file tx.raw \
-  --mainnet
+  --testnet-magic 1
 
 # Sign and submit
 cardano-cli transaction sign \
@@ -195,11 +220,11 @@ cardano-cli transaction sign \
   --signing-key-file payment.skey \
   --signing-key-file stake.skey \
   --out-file tx.signed \
-  --mainnet
+  --testnet-magic 1
 
 cardano-cli transaction submit \
   --tx-file tx.signed \
-  --mainnet
+  --testnet-magic 1
 ```
 
 ### Create Pool Metadata
@@ -236,7 +261,7 @@ cardano-cli stake-pool registration-certificate \
   --pool-margin 0.03 \
   --pool-reward-account-verification-key-file stake.vkey \
   --pool-owner-stake-verification-key-file stake.vkey \
-  --mainnet \
+  --testnet-magic 1 \
   --pool-relay-ipv4 YOUR_RELAY1_IP \
   --pool-relay-port 6000 \
   --pool-relay-ipv4 YOUR_RELAY2_IP \
@@ -248,9 +273,20 @@ cardano-cli stake-pool registration-certificate \
 
 Parameters explained:
 - **pledge**: Amount in lovelace you commit (1 ADA = 1,000,000 lovelace)
-- **cost**: Fixed fee per epoch in lovelace (minimum 340 ADA)
+- **cost**: Fixed fee per epoch in lovelace (minimum 340 ADA = 340,000,000 lovelace on mainnet)
 - **margin**: Variable fee percentage (0.03 = 3%)
 - **relay**: Public relay endpoints (can specify multiple)
+
+### Create Delegation Certificate
+
+Before submitting the pool registration, create a delegation certificate to delegate your stake to your own pool:
+
+```bash
+cardano-cli stake-address delegation-certificate \
+  --stake-verification-key-file stake.vkey \
+  --cold-verification-key-file cold.vkey \
+  --out-file delegation.cert
+```
 
 ### Submit Pool Registration
 
@@ -259,14 +295,14 @@ Create and submit the registration transaction:
 ```bash
 # Build transaction
 cardano-cli transaction build \
-  --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --mainnet | tail -n +3 | head -n 1 | awk '{print $1"#"$2}') \
+  --tx-in $(cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1 | tail -n +3 | head -n 1 | awk '{print $1"#"$2}') \
   --tx-out $(cat payment.addr)+0 \
   --change-address $(cat payment.addr) \
   --certificate-file pool-registration.cert \
   --certificate-file delegation.cert \
   --witness-override 3 \
   --out-file tx.raw \
-  --mainnet
+  --testnet-magic 1
 
 # Sign with all required keys
 cardano-cli transaction sign \
@@ -275,12 +311,12 @@ cardano-cli transaction sign \
   --signing-key-file stake.skey \
   --signing-key-file cold.skey \
   --out-file tx.signed \
-  --mainnet
+  --testnet-magic 1
 
 # Submit to blockchain
 cardano-cli transaction submit \
   --tx-file tx.signed \
-  --mainnet
+  --testnet-magic 1
 ```
 
 ## Starting the Block Producer
@@ -335,9 +371,9 @@ sudo systemctl status cardano-bp
 # Monitor logs
 journalctl -u cardano-bp -f
 
-# Verify block production
+# Verify block production (after pool is active)
 cardano-cli query leadership-schedule \
-  --mainnet \
+  --testnet-magic 1 \
   --genesis shelley-genesis.json \
   --stake-pool-id $(cardano-cli stake-pool id --cold-verification-key-file cold.vkey) \
   --vrf-signing-key-file vrf.skey \
@@ -407,3 +443,10 @@ After successful pool registration:
 4. Implement comprehensive monitoring
 5. Create delegation marketing strategy
 6. Consider multi-owner setup for larger pledges
+
+## References
+
+- [Cardano Developer Portal - Stake Pool Course](https://developers.cardano.org/docs/stake-pool-course/)
+- [Cardano Operations Book](https://book.world.dev.cardano.org/)
+- [Official Cardano Documentation](https://docs.cardano.org/)
+- [Cardano World Repository](https://github.com/IntersectMBO/cardano-world)

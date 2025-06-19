@@ -141,14 +141,14 @@ The `DexPoolByIdReducer` captures the dynamic activity of decentralized exchange
 Once the DexPoolById table is populated, you can calculate the current price of Token A in terms of Token B using this simple formula:
 
 ```
-Price of Token A = TokenAPrice / TokenBPrice
+Price of Token A (in Token B) = Token B Amount / Token A Amount
 ```
 
 For example, in a real-world SNEK/ADA trading pair:
 
 ```
 // If pool contains 10,000,000 SNEK tokens and 5,000 ADA
-Price of 1 SNEK = 5,000 ADA / 10,000,000
+Price of 1 SNEK = 5,000 ADA / 10,000,000 SNEK
 
 Actual Price of SNEK = 0.0005 ADA
 ```

@@ -4,7 +4,7 @@ sidebar_position: 2
 hide_title: true
 ---
 
-![Chrysalis Banner](/img/docs/chrysalis/banner.png)
+# Transaction Model
 
 Cardano's Extended UTxO (EUTxO) model forms the foundation of all value transfer on the blockchain. This guide explores how Chrysalis implements comprehensive transaction building capabilities, providing developers with powerful tools to construct, sign, and submit transactions across all Cardano eras.
 

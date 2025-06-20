@@ -4,7 +4,7 @@ sidebar_position: 1
 hide_title: true
 ---
 
-![Chrysalis Banner](/img/docs/chrysalis/banner.png)
+# CBOR Fundamentals
 
 Understanding CBOR (Concise Binary Object Representation) is essential for working with Cardano, as it forms the foundation of all data serialization on the blockchain. This guide explores how Chrysalis implements CBOR to provide type-safe, high-performance serialization for Cardano applications.
 

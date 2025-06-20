@@ -4,9 +4,7 @@ sidebar_position: 2
 hide_title: true
 ---
 
-![Chrysalis Banner](/img/docs/chrysalis/banner.png)
-
----
+# Quick Start
 
 This quick start guide will walk you through installing Chrysalis, setting up your development environment, and creating your first Cardano application step-by-step. You'll learn how to quickly integrate Chrysalis into your workflow, understand basic concepts, and build a foundational project.
 

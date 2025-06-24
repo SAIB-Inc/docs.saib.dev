@@ -7,6 +7,8 @@ sidebar_position: 4
 
 Built-in functions are the computational workhorses of UPLC. These natively implemented operations provide efficient implementations of common operations that would be impossible or prohibitively expensive to implement in pure UPLC.
 
+---
+
 ## Why Built-ins Matter
 
 Built-in functions exist for three critical reasons:
@@ -16,6 +18,8 @@ Built-in functions exist for three critical reasons:
 3. **Cost Predictability**: Fixed costs for built-ins make transaction fees calculable
 
 Every built-in has a precisely defined cost model, ensuring that transaction fees remain predictable regardless of network conditions.
+
+---
 
 ## Arithmetic Operations
 
@@ -50,6 +54,8 @@ lessThanEqualsInteger : integer -> integer -> bool
 ```
 
 You can derive other comparisons from these primitives. For example, "greater than" is just "less than" with swapped arguments.
+
+---
 
 ## String and Bytestring Operations
 
@@ -86,6 +92,8 @@ decodeUtf8 : bytestring -> string
 
 This function can fail if the bytestring contains invalid UTF-8 sequences, making it one of the few built-ins that can cause runtime errors beyond type mismatches.
 
+---
+
 ## Cryptographic Functions
 
 ### Hash Functions
@@ -118,6 +126,8 @@ All signature verification functions take three arguments:
 3. Signature (as bytestring)
 
 They return `True` if the signature is valid, `False` otherwise. These functions never throw errors—invalid inputs simply return `False`.
+
+---
 
 ## Data Structure Operations
 
@@ -160,6 +170,8 @@ equalsData : data -> data -> bool
 
 These functions convert between UPLC's primitive types and the Data type used for datum and redeemer values. The `un*` versions will error if given Data of the wrong constructor type.
 
+---
+
 ## Control Flow
 
 ### Conditional Execution
@@ -177,6 +189,8 @@ trace : string -> a -> a
 ```
 
 The `trace` function outputs a string (for debugging) and returns its second argument. In production, traces are typically disabled for efficiency. When enabled, trace outputs appear in transaction validation logs.
+
+---
 
 ## Special Operations
 
@@ -198,6 +212,8 @@ serialiseData : data -> bytestring
 
 Converts Data values to their canonical CBOR encoding. This is essential for computing hashes of structured data in a deterministic way.
 
+---
+
 ## Working with Built-ins
 
 When using built-in functions, remember:
@@ -209,6 +225,8 @@ When using built-in functions, remember:
 3. **Error Behavior**: Most built-ins that can fail (like `unIData` or `headList`) do so immediately. There's no error recovery.
 
 4. **Evaluation Order**: Built-ins evaluate their arguments left-to-right before executing.
+
+---
 
 ## Example: Signature Verification
 
@@ -228,6 +246,8 @@ Here's a complete example verifying an Ed25519 signature:
 
 This program takes three bytestring arguments and returns a boolean indicating signature validity.
 
+---
+
 ## Performance Guidelines
 
 For optimal performance:
@@ -238,3 +258,5 @@ For optimal performance:
 - **Batch operations when possible**: Reduce the total number of built-in calls
 
 Understanding built-in functions and their costs is essential for writing efficient smart contracts that minimize transaction fees while maintaining security and correctness.
+
+---

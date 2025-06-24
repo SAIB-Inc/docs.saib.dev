@@ -7,6 +7,8 @@ sidebar_position: 5
 
 Understanding how UPLC programs execute is essential for writing efficient smart contracts and diagnosing validation failures. UPLC uses a deterministic evaluation model that ensures every validator on the Cardano network reaches the same conclusion about transaction validity.
 
+---
+
 ## The CEK Machine
 
 UPLC evaluation is based on the CEK machine—a well-studied abstract machine for evaluating lambda calculus. CEK stands for:
@@ -16,6 +18,8 @@ UPLC evaluation is based on the CEK machine—a well-studied abstract machine fo
 - **K**ontinuation: What to do with the result (the "call stack")
 
 This machine provides a precise, step-by-step evaluation strategy that balances efficiency with predictability.
+
+---
 
 ## Evaluation Strategy
 
@@ -55,6 +59,8 @@ When a lambda abstraction is evaluated, it captures its current environment, cre
 ```
 
 The lambda captures `x = 5` in its closure, so it can access this binding even when applied elsewhere in the program.
+
+---
 
 ## Reduction Rules
 
@@ -100,6 +106,8 @@ If any subterm evaluates to an error, the entire program fails:
 
 Errors cannot be caught or handled—they immediately terminate evaluation.
 
+---
+
 ## Cost Model
 
 Every evaluation step has an associated cost, measured in two dimensions:
@@ -120,6 +128,8 @@ Memory consumption tracks:
 - Stack depth for nested applications
 
 The cost model is deterministic—the same program always consumes the same resources, regardless of the machine executing it.
+
+---
 
 ## Execution Phases
 
@@ -152,6 +162,8 @@ For validator scripts:
 - Any error means validation failed
 - Resource exhaustion also causes failure
 
+---
+
 ## Common Evaluation Patterns
 
 ### Recursive Functions
@@ -183,6 +195,8 @@ Built-ins can be partially applied:
 ```
 
 This creates reusable partially-applied functions without repeatedly specifying common arguments.
+
+---
 
 ## Performance Optimization
 
@@ -218,6 +232,8 @@ Each recursive call increases memory usage. Use tail recursion or accumulator pa
 
 While UPLC is strict, `delay` and `force` provide controlled laziness. Use them to defer expensive computations that might not be needed.
 
+---
+
 ## Debugging Evaluation
 
 When scripts fail, understanding evaluation helps diagnose issues:
@@ -228,6 +244,8 @@ When scripts fail, understanding evaluation helps diagnose issues:
 4. **Logic Errors**: Correct types but wrong values, requiring trace analysis
 
 Tools like Aiken's UPLC evaluator can step through execution, showing each reduction and its cost.
+
+---
 
 ## Determinism Guarantees
 
@@ -240,6 +258,8 @@ UPLC evaluation is completely deterministic:
 
 This determinism is crucial for consensus—every node must agree on transaction validity.
 
+---
+
 ## Practical Implications
 
 When writing high-level smart contracts, remember:
@@ -250,3 +270,5 @@ When writing high-level smart contracts, remember:
 4. Debugging often requires thinking about UPLC-level execution
 
 The evaluation model might seem complex, but its predictability and determinism provide the foundation for Cardano's reliable smart contract platform. Master these concepts, and you'll write more efficient, cost-effective smart contracts.
+
+---

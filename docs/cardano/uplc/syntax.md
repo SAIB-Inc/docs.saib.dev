@@ -7,6 +7,8 @@ sidebar_position: 2
 
 Understanding UPLC syntax is essential for debugging smart contracts and optimizing their on-chain execution. While you'll rarely write UPLC by hand, recognizing its structure helps you interpret compiled output and diagnose issues at the lowest level of Cardano's execution stack.
 
+---
+
 ## Program Structure
 
 Every UPLC program starts with a `program` declaration that specifies the Plutus Core version. The current version is 2.0.0, and this version information ensures compatibility across the Cardano network.
@@ -18,6 +20,8 @@ Every UPLC program starts with a `program` declaration that specifies the Plutus
 ```
 
 The program wraps a single term that represents your entire smart contract logic. This term evaluates to produce the final result.
+
+---
 
 ## Terms and Expressions
 
@@ -106,6 +110,8 @@ UPLC provides a simple error mechanism. When an error occurs, evaluation stops i
 
 There's no error recovery or exception handling—errors are terminal.
 
+---
+
 ## Complete Example
 
 Here's a simple UPLC program that adds two integers:
@@ -122,6 +128,8 @@ This program:
 3. Applies the result to the integer constant 3
 4. Returns 5
 
+---
+
 ## Syntax Conventions
 
 When reading UPLC, remember these conventions:
@@ -130,6 +138,8 @@ When reading UPLC, remember these conventions:
 - Whitespace is insignificant except for separating tokens
 - Comments aren't supported in the core language
 - All operations are prefix notation (operator comes first)
+
+---
 
 ## Textual vs Binary Representation
 
@@ -141,6 +151,10 @@ The syntax shown here represents UPLC's human-readable form. On-chain, UPLC prog
 
 Tools like Aiken's CLI can convert between these representations, allowing you to inspect on-chain code in readable form.
 
+---
+
 ## Next Steps
 
 Now that you understand UPLC syntax, you're ready to explore how these syntactic elements map to actual data types and values during execution. The next section covers UPLC's type system and how values are represented during smart contract execution.
+
+---

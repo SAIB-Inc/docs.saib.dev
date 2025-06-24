@@ -7,11 +7,15 @@ sidebar_position: 3
 
 UPLC supports seven primitive data types that form the foundation of all on-chain computations. Understanding these types and their behavior is crucial for writing efficient smart contracts and debugging validation failures.
 
+---
+
 ## The Type System Paradox
 
 Despite being called "Untyped" Plutus Core, UPLC values are implicitly typed. The "untyped" designation means there's no compile-time type checking—types are erased from the high-level language during compilation. However, at runtime, operations still expect specific types and will fail if given incompatible values.
 
 This design keeps on-chain execution simple and predictable while pushing type safety to the compilation phase where it doesn't cost transaction fees.
+
+---
 
 ## Primitive Types
 
@@ -97,6 +101,8 @@ Lists are homogeneous sequences where all elements share the same type:
 
 Lists support recursive operations through built-ins like `headList`, `tailList`, and `nullList`. They're the primary collection type for processing multiple values.
 
+---
+
 ## The Data Type
 
 Beyond the seven primitive types, UPLC includes a special `Data` type that serves as a universal container. Data can encode any UPLC value into a standard format used for:
@@ -123,6 +129,8 @@ Conversion between primitive types and Data happens through built-in functions:
 - `mapData` / `unMapData` for maps
 - `listData` / `unListData` for lists
 
+---
+
 ## Type Safety in Practice
 
 While UPLC doesn't check types at compile time, type mismatches cause runtime failures. For example:
@@ -132,6 +140,8 @@ While UPLC doesn't check types at compile time, type mismatches cause runtime fa
 ```
 
 This operation fails because `addInteger` expects integer arguments. The error manifests as transaction validation failure, costing the user transaction fees despite the failure.
+
+---
 
 ## Memory and Performance Considerations
 
@@ -149,6 +159,8 @@ Different types have different memory and computational costs:
 
 **Data**: Additional encoding/decoding overhead. Necessary for transaction integration but avoid unnecessary conversions.
 
+---
+
 ## Best Practices
 
 When working with UPLC data types, follow these guidelines for optimal performance:
@@ -160,3 +172,5 @@ When working with UPLC data types, follow these guidelines for optimal performan
 5. Structure data to minimize traversal operations
 
 Understanding these types and their trade-offs helps you write smart contracts that execute efficiently on-chain, saving both computation costs and transaction fees.
+
+---

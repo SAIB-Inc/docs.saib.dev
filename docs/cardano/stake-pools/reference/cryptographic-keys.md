@@ -405,7 +405,7 @@ cardano-cli latest text-view decode-cbor \
 
 ## Next Steps
 
-- Review [Network Topology](/docs/cardano/stake-pools/core-concepts/network-topology) for secure network setup
-- Study [Pool Architecture](/docs/cardano/stake-pools/core-concepts/pool-architecture) for overall system design
+- Review [Network Topology](/docs/cardano/stake-pools/reference/network-topology) for secure network setup
+- Study [Pool Architecture](/docs/cardano/stake-pools/reference/pool-architecture) for overall system design
 
 Remember: Your keys are your pool. Treat them with the security and respect they deserve.

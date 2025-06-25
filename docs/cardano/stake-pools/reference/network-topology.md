@@ -205,8 +205,8 @@ Common fixes:
 
 ## Next Steps
 
-- Configure [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements) for optimal performance
-- Study [Pool Architecture](/docs/cardano/stake-pools/core-concepts/pool-architecture) for complete system design
+- Configure [Hardware Requirements](/docs/cardano/stake-pools/reference/hardware-requirements) for optimal performance
+- Study [Pool Architecture](/docs/cardano/stake-pools/reference/pool-architecture) for complete system design
 - Implement monitoring for your topology
 
 Remember: Your network topology is your pool's connection to the Cardano network. A well-designed topology ensures your blocks reach the network quickly and reliably.

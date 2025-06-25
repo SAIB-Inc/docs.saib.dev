@@ -1,6 +1,6 @@
 ---
 title: Relay Node Configuration
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 # Relay Node Configuration
@@ -9,8 +9,8 @@ Relay nodes serve as the communication bridge between your stake pool and the Ca
 
 :::info Prerequisites
 Before configuring relay nodes:
-- Review [Pool Architecture](/docs/cardano/stake-pools/core-concepts/pool-architecture) to understand relay's role
-- Ensure [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements) are met
+- Review [Pool Architecture](/docs/cardano/stake-pools/reference/pool-architecture) to understand relay's role
+- Ensure [Hardware Requirements](/docs/cardano/stake-pools/reference/hardware-requirements) are met
 - Have cardano-node installed on your system
 :::
 
@@ -317,4 +317,4 @@ After configuring your relay:
 3. Share your relay address with other SPOs for topology inclusion
 4. Monitor performance and adjust topology as needed
 
-For detailed installation instructions, consult the official Cardano documentation. For understanding how relays integrate with your pool, see [Network Topology](/docs/cardano/stake-pools/core-concepts/network-topology).
+For detailed installation instructions, consult the official Cardano documentation. For understanding how relays integrate with your pool, see [Network Topology](/docs/cardano/stake-pools/reference/network-topology).

@@ -1,6 +1,6 @@
 ---
 title: Block Producer Configuration
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 # Block Producer Configuration
@@ -23,8 +23,8 @@ Block producer nodes handle sensitive cryptographic keys. They must:
 
 Before configuring a block producer:
 1. Have at least one relay node fully synchronized
-2. Secure a dedicated server meeting [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements)
-3. Understand [Cryptographic Keys](/docs/cardano/stake-pools/core-concepts/cryptographic-keys) used in stake pools
+2. Secure a dedicated server meeting [Hardware Requirements](/docs/cardano/stake-pools/reference/hardware-requirements)
+3. Understand [Cryptographic Keys](/docs/cardano/stake-pools/reference/cryptographic-keys) used in stake pools
 4. Have test ADA (tADA) from the [testnet faucet](https://docs.cardano.org/cardano-testnet/tools/faucet/) for registration
 
 ## Block Producer vs Relay Configuration

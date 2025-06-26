@@ -5,209 +5,56 @@ sidebar_position: 1
 
 # Stake Pool Overview
 
-A Cardano stake pool is a server that processes transactions and creates new blocks for the blockchain. When you run a stake pool, you're helping to secure the network while earning rewards for yourself and the people who delegate their ADA to your pool.
+Running a Cardano stake pool means operating infrastructure that validates transactions and produces blocks for the blockchain. This guide provides engineers with the technical foundation needed to assess whether stake pool operation aligns with their capabilities and goals.
 
-## How Stake Pools Work
+## What Is a Stake Pool?
 
-Think of a stake pool as a lottery system where your chances of winning depend on how much ADA is delegated to your pool. Every second, the Cardano protocol randomly selects pools to create blocks. The more ADA delegated to your pool, the more often you'll be selected.
+A stake pool is a reliable server configuration that participates in the Cardano consensus protocol. When the Ouroboros algorithm selects your pool to produce a block, your infrastructure must be online and ready to respond within seconds. The selection probability depends on the total ADA delegated to your pool compared to the network total.
 
-When your pool creates a block, you earn rewards that are automatically distributed between you (the operator) and your delegators. The entire process is non-custodial, meaning delegators keep full control of their ADA at all times.
+The architecture requires multiple components working together. Your block producer node remains isolated from the internet, holding the cryptographic keys needed to sign blocks. This sensitive component connects only to your relay nodes, which handle all external network communication. This separation provides both security and resilience.
 
-### How Much Can You Earn?
+## Technical Requirements
 
-Your earnings depend on three factors: how much ADA is delegated to your pool, your fees, and how reliably your pool operates. 
+Operating a stake pool demands competence in Linux server administration. You'll manage multiple servers, configure networking, implement security measures, and maintain uptime targets above 95%. The learning curve is steep but manageable for engineers with systems administration experience.
 
-Current protocol parameters:
-- **Minimum pool cost**: 170 ADA per epoch (this is the minimum fixed fee)
-- **Monetary expansion**: 0.3% per epoch goes to rewards
-- **Treasury cut**: 20% of rewards go to treasury
-- **Optimal pool size**: ~64.4 million ADA (total stake / k parameter)
+Hardware requirements for mainnet production start at 4 CPU cores, 32GB RAM, and 500GB SSD storage per node. Network bandwidth should support sustained 100Mbps throughput. While testnet operations can run on lighter hardware, production deployments benefit from headroom for network growth and peak loads.
 
-Example calculations with real numbers:
+The minimum viable deployment includes one block producer and two relay nodes across different network providers or geographic locations. An additional air-gapped system handles cold key generation and signing operations. Budget approximately $300-400 monthly for infrastructure costs.
 
-```
-Pool with 1 million ADA delegated:
-- Expected blocks per epoch: ~0.7 blocks
-- Average reward per block: ~500 ADA
-- Epoch rewards: ~350 ADA
-- Operator take (170 ADA min + 1% margin): ~173 ADA
-- Delegator rewards: ~177 ADA distributed
+## Understanding the Economics
 
-Pool with 10 million ADA delegated:
-- Expected blocks per epoch: ~7 blocks
-- Average reward per block: ~500 ADA
-- Epoch rewards: ~3,500 ADA
-- Operator take (170 ADA min + 1% margin): ~203 ADA
-- Delegator rewards: ~3,297 ADA distributed
-```
+The Cardano protocol enforces a minimum fixed fee of 170 ADA per epoch (5 days) that goes directly to the pool operator. Operators also set a variable margin percentage applied to remaining rewards after the fixed fee. This two-tier fee structure ensures operators can cover basic costs even with modest delegation.
 
-### Breaking Even Analysis
+Rewards flow from the protocol's monetary expansion, currently set at 0.3% per epoch distributed to all stake pools proportional to their active stake. The protocol directs 20% to the treasury, with the remainder distributed as staking rewards. Your pool earns rewards only when selected to produce blocks, making consistent operation critical.
 
-With ADA price around $0.60 and minimum fixed fee of 170 ADA per epoch:
+Breaking even depends on attracting sufficient delegation. With current parameters, a pool needs approximately 1-2 million ADA delegated to cover typical infrastructure costs through the minimum fixed fee alone. Margin fees provide profit above this baseline.
 
-```
-Monthly costs: $310 (recommended setup)
-Monthly epochs: ~6.2 epochs (30 days ÷ 5 days/epoch)
-Minimum ADA from fees: 170 × 6.2 = 1,054 ADA/month
-Value of minimum fees: 1,054 × $0.60 = $632/month
+## Operational Considerations
 
-Result: Minimum fees alone can cover infrastructure costs
-Additional margin fees are your profit
-```
+Running a stake pool is a commitment to infrastructure reliability. The network depends on operators maintaining their pools through software updates, responding to issues promptly, and participating in network upgrades. Expect to spend 3-5 hours weekly on routine maintenance, with additional time needed for learning and community participation.
 
-This is why many pools can operate with 0% margin - the 170 ADA minimum fee covers basic costs.
+Key generation and management require particular attention. You'll handle multiple key types with different security requirements. Cold keys controlling pool ownership stay offline, while operational keys on the block producer rotate every 90 days. Losing keys or exposing them to compromise can result in permanent loss of your pool identity or funds.
 
-## Current Network Statistics
-
-The Cardano network has approximately (these numbers change daily):
-- **Active pools**: ~3,000
-- **Total staked**: ~22 billion ADA (~60% of circulating supply)
-- **k parameter**: 500 (target number of pools)
-- **Saturation point**: ~64.4 million ADA per pool
-
-You can verify current statistics:
-
-```bash
-# Set environment variables
-export CARDANO_NODE_SOCKET_PATH=/path/to/node.socket
-export CARDANO_NODE_NETWORK_ID=mainnet  # or testnet-magic 2 for preview
-
-# Check current epoch and slot
-cardano-cli latest query tip
-
-# Get protocol parameters and save to file
-cardano-cli latest query protocol-parameters > protocol.json
-```
-
-## Technical Requirements Summary
-
-Based on official Cardano documentation and real-world pool operations:
-
-### Hardware Requirements (Mainnet)
-
-**Minimum specifications**:
-- CPU: 2+ cores, 2GHz+ (Intel/AMD x86_64)
-- RAM: 32GB (absolute minimum, may use swap)
-- Storage: 150GB SSD (current chain ~110GB)
-- Network: Broadband, ~20-30GB/day bandwidth
-- OS: 64-bit Linux (Ubuntu 20.04+, Debian 10+)
-
-**Recommended for production**:
-- CPU: 4+ cores, 3GHz+
-- RAM: 32-64GB
-- Storage: 500GB SSD
-- Network: 100Mbps+ symmetric
-
-### Infrastructure Setup
-
-You need at least 3 servers:
-1. **Block Producer**: Never exposed to internet, holds hot keys
-2. **Relay 1**: Public-facing, syncs with network
-3. **Relay 2**: Public-facing, different location/provider
-
-Plus an air-gapped machine for generating cold keys (can be a laptop that never connects to internet).
-
-### Time Commitment
-
-Real operators report these time requirements:
-- Initial learning: 20-40 hours
-- Setup and testing: 20-30 hours  
-- Weekly maintenance: 3-5 hours
-- Staying informed: 2-3 hours/week
-- Emergency response: Must respond within hours
-
-## How Delegation Works
-
-Understanding the delegation timeline is crucial for managing expectations:
-
-```
-Epoch N (you delegate)
-  ↓ (wait ~5 days)
-Epoch N+1 (snapshot taken)
-  ↓ (wait ~5 days)  
-Epoch N+2 (stake becomes active)
-  ↓ (wait ~5 days)
-Epoch N+3 (rewards calculated)
-  ↓ (wait ~5 days)
-Epoch N+4 (rewards distributed)
-```
-
-Total time from delegation to first rewards: 15-20 days
-
-Key facts about delegation:
-- **Delegation fee**: ~0.17 ADA (standard transaction fee)
-- **Minimum to delegate**: No minimum, but very small amounts earn minimal rewards
-- **Stake never leaves wallet**: Delegators maintain full control
-- **No lock-up period**: Can spend or redelegate anytime
-- **Rewards compound**: Automatically added to delegated stake
-
-## Pool Fee Structure
-
-Pools charge two types of fees set by the operator:
-
-1. **Fixed fee**: Minimum 170 ADA per epoch (protocol enforced)
-2. **Margin fee**: 0-100% of remaining rewards (operator choice)
-
-How fees work with an example:
-```
-Total pool rewards: 10,000 ADA
-Fixed fee to operator: 170 ADA
-Remaining: 9,830 ADA
-Margin (2%): 196.6 ADA to operator
-Delegator rewards: 9,633.4 ADA distributed proportionally
-```
-
-Most pools charge between 0-5% margin. Some considerations:
-- 0% margin pools rely solely on the 170 ADA fixed fee
-- Higher margins need to offer additional value
-- Saturated pools (>64.4M ADA) earn fewer rewards per ADA
-
-## Making the Decision
-
-Before starting a stake pool, honestly assess:
-
-**Financial readiness**:
-- Can you cover $300-400/month for 6-12 months?
-- Do you have 500 ADA for the pool deposit?
-- Can you pledge at least some ADA to your pool?
-
-**Technical capability**:
-- Comfortable with Linux command line?
-- Can you follow technical documentation?
-- Willing to learn networking and security?
-
-**Time availability**:
-- 50+ hours for initial setup and learning?
-- 5+ hours weekly for maintenance?
-- Available for emergency issues?
-
-**Marketing ability**:
-- Can you explain why delegators should choose you?
-- Active in Cardano community?
-- Have a unique value proposition?
-
-If unsure about any of these, consider delegating first to learn the ecosystem.
+The delegation mechanism introduces a delay between attracting stake and earning rewards. After a delegator chooses your pool, the protocol waits for the next epoch boundary, takes a snapshot, then activates that stake in the following epoch. First rewards calculate one epoch later and distribute in the subsequent epoch. This 15-20 day delay challenges new pools trying to demonstrate their reliability.
 
 ## Getting Started
 
-Your path to running a pool:
+Begin your stake pool journey on testnet. The preview and preprod networks mirror mainnet's behavior while using test ADA with no monetary value. This environment lets you practice operations, test your procedures, and verify your understanding without financial risk.
 
-1. **Learn on testnet first**: Use preview or preprod testnet with test ADA
-2. **Join the community**: SPO channels on Discord, Telegram, Forum
-3. **Prepare your infrastructure**: Set up servers, practice key management
-4. **Build your brand**: Website, social media, pool purpose
-5. **Register on mainnet**: When confident in your setup
-6. **Attract delegation**: The ongoing challenge for all pools
+Set up monitoring and alerting early in your testnet phase. Your pool's reputation depends on consistent block production when selected. Missing assigned slots due to downtime or misconfiguration directly impacts delegator rewards and trust.
 
-Essential resources:
-- [Official Cardano Documentation](https://developers.cardano.org/)
-- [Guild Operators Tools](https://cardano-community.github.io/guild-operators/)
-- [CoinCashew Guides](https://www.coincashew.com/coins/overview-ada/guide-how-to-build-a-haskell-stakepool-node)
+Join the stake pool operator community through Telegram groups, Discord servers, and the Cardano Forum. Experienced operators share knowledge freely, and the community provides support for technical challenges. Building relationships also helps when you need to configure peer connections for your topology.
 
-Next, study these technical components:
-- [Pool Architecture](/docs/cardano/stake-pools/core-concepts/pool-architecture) - How pools are structured
-- [Cryptographic Keys](/docs/cardano/stake-pools/core-concepts/cryptographic-keys) - Security fundamentals
-- [Network Topology](/docs/cardano/stake-pools/core-concepts/network-topology) - Connecting to the network
-- [Hardware Requirements](/docs/cardano/stake-pools/core-concepts/hardware-requirements) - Detailed specifications
+## Technical Implementation Path
 
-Remember: Running a stake pool means running critical infrastructure. The network depends on reliable, committed operators who view their pools as long-term contributions to Cardano's decentralization and success.
+Start with the [Pool Architecture](/docs/cardano/stake-pools/reference/pool-architecture) reference to understand component relationships and network topology. The [Cryptographic Keys](/docs/cardano/stake-pools/reference/cryptographic-keys) guide explains the various keys and their security requirements.
+
+When ready to build, follow the [Getting Started](/docs/cardano/stake-pools/getting-started/requirements) guides for detailed setup procedures. The [Configuration](/docs/cardano/stake-pools/configuration/relay-configuration) section provides specific instructions for relay and block producer setup.
+
+For ongoing operations, the [Reference](/docs/cardano/stake-pools/reference/hardware-requirements) section contains detailed specifications and troubleshooting guidance.
+
+## Making the Decision
+
+Successful stake pool operation requires technical skill, financial resources, time commitment, and community engagement. The network benefits from diverse, independent operators committed to long-term participation. If you possess the necessary skills and resources, running a stake pool offers a unique opportunity to support Cardano's decentralization while building a sustainable operation.
+
+Engineers comfortable with infrastructure operations, interested in blockchain consensus mechanisms, and committed to reliability make ideal stake pool operators. The initial learning investment pays dividends through deep understanding of Cardano's technical architecture and participation in its ecosystem.

@@ -7,6 +7,8 @@ title: Data Models
 
 The Cardano.Metadata service uses specific data models for managing and serving Cardano token metadata. These models support the metadata registry functionality and API responses.
 
+---
+
 ## Entity Models
 
 ### TokenMetadata
@@ -55,6 +57,8 @@ Used to maintain synchronization with external metadata sources:
 - **Hash**: Current state hash for tracking changes
 - **Date**: Timestamp of the last synchronization
 
+---
+
 ## Response Models
 
 ### RegistryItem
@@ -95,6 +99,8 @@ Provides additional metadata about response values:
 - **SequenceNumber**: Version or sequence tracking
 - **Signatures**: Optional cryptographic signatures for data verification
 
+---
+
 ## GitHub Integration Models
 
 The service integrates with GitHub for metadata storage and retrieval. While the specific GitHub models are internal to the service, they support:
@@ -103,6 +109,8 @@ The service integrates with GitHub for metadata storage and retrieval. While the
 - Processing pull requests and updates
 - Managing metadata file structures
 
+---
+
 ## Database Schema
 
 The models map to a PostgreSQL database schema managed through Entity Framework Core:
@@ -110,6 +118,8 @@ The models map to a PostgreSQL database schema managed through Entity Framework 
 - **TokenMetadata** table stores the core token information
 - **SyncState** table tracks synchronization status
 - Supports migrations for schema evolution
+
+---
 
 ## Usage Context
 

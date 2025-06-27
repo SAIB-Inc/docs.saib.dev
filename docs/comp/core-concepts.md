@@ -7,12 +7,16 @@ title: Core Concepts
 
 This guide explores the technical concepts and implementation details for working with Cardano metadata in the Cardano.Metadata library.
 
+---
+
 ## Metadata Structure
 
 Cardano metadata is structured as a map where:
 - Keys are integers (0-65535)
 - Values can be integers, strings, byte arrays, lists, or nested maps
 - Maximum transaction metadata size is 16KB
+
+---
 
 ## Metadata Standards Implementation
 
@@ -58,6 +62,8 @@ For attaching messages to transactions:
 }
 ```
 
+---
+
 ## Metadata Labels
 
 Integer labels categorize different metadata types:
@@ -68,6 +74,8 @@ Integer labels categorize different metadata types:
 | 20    | Transaction Messages | CIP-20 |
 | 674   | Transaction Messages (alt) | CIP-20 |
 | 1967  | Arbitrary Data | - |
+
+---
 
 ## Validation
 
@@ -86,6 +94,8 @@ The library enforces Cardano's metadata constraints:
 - Total metadata: 16KB per transaction
 - Individual strings: 64 bytes
 - No limit on number of metadata entries
+
+---
 
 ## Evolution
 

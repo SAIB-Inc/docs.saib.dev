@@ -124,7 +124,9 @@ Replace **appsettings.json** with:
       "Endpoint": "https://cardano-preview.utxorpc-m1.demeter.run",
       "ApiKey": "your_api_key"
     },
-    "NetworkMagic": 2 // Preview testnet magic
+    "NetworkMagic": 2, // Preview testnet magic
+    "Slot": 97486312, // Absolute slot (omit to start from genesis)
+    "Hash": "25c516f6ab9eb272ad8b2b1cf3ead40a4c8a4eebd9998699d1a81fb4af410b4a" // Block hash at starting slot
   },
   "Sync": {
     // Dashboard settings

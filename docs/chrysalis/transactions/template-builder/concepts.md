@@ -78,9 +78,9 @@ A **`RedeemerDataBuilder<TParam, TData>`** is a delegate:
 (mapping: IdIndexMapping, params: TParam) -> TData
 ```
 - **IdIndexMapping**: allows you to lookup actual numeric indices for UTxOs or outputs by the `Id` you assigned
-- **TData**: any type that inherits from `CborBase` in the Chrysalis.Cbor library (e.g., `PlutusData`, `CborIndefList<Indices>`), allowing you to return arbitrary CBOR-serializable structures
+- **TData**: any type that inherits from `CborRecord` in the Chrysalis.Codec library (e.g., `PlutusData`, `CborIndefList<Indices>`), allowing you to return arbitrary CBOR-serializable structures
 
-> **Note:** Redeemer data builders can produce any custom CBOR type so long as it inherits `CborBase` from Chrysalis.Cbor, ensuring seamless integration with the low-level builder's witness set methods.
+> **Note:** Redeemer data builders can produce any custom CBOR type so long as it inherits `CborRecord` from Chrysalis.Codec, ensuring seamless integration with the low-level builder's witness set methods.
 
 During build, after the low-level `TransactionBuilder` has added all inputs/outputs, the template engine:
 1. Computes the mapping from your `Id` strings to concrete indices

@@ -12,7 +12,7 @@ The low-level `TransactionBuilder` in Chrysalis.Tx offers comprehensive control 
 - **Separation of Concerns:** Configure the transaction body, then witnesses, then build & sign.
 - **Extension Support:** Built-in helpers for fee calculation and Plutus evaluation.
 
-> **Note:** This API leverages core CBOR types from Chrysalis.Cbor (e.g., `CborAddress`, `Lovelace`, `CborEncodedValue`) to model on-chain data structures, ensuring type safety and consistency.
+> **Note:** This API leverages core CBOR types from Chrysalis.Codec (e.g., `CborAddress`, `Lovelace`, `CborEncodedValue`) to model on-chain data structures, ensuring type safety and consistency.
 
 **Source**: [TransactionBuilder.cs](https://github.com/SAIB-Inc/Chrysalis/blob/main/src/Chrysalis.Tx/Builders/TransactionBuilder.cs)
 

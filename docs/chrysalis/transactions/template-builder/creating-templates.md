@@ -17,7 +17,7 @@ var unlockTemplate = TransactionTemplateBuilder<UnlockParameters>
     .Create(provider);
 ```
 
-- `provider` implements `ITransactionProvider` (e.g., Blockfrost).
+- `provider` implements `ICardanoDataProvider` (e.g., Blockfrost).
 
 ---
 
@@ -59,13 +59,13 @@ unlockTemplate.AddInput((opts, p) => {
   });
   ```
 
-- **Redeemer Builder**: provide a function that generates CBOR data (any type inheriting from `CborBase`):
+- **Redeemer Builder**: provide a function that generates CBOR data (any type inheriting from `CborRecord`):
   ```csharp
   unlockTemplate.AddInput((opts, p) => {
       opts.From = "validator";
       opts.Id   = "lock";
       opts.SetRedeemerBuilder((mapping, parameters) =>
-          // return custom CborBase (e.g., PlutusData)
+          // return custom CborRecord (e.g., PlutusData)
           spendRedeemerBuilder(mapping, parameters)
       );
   });

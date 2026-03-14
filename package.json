@@ -17,30 +17,30 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "3.7.0",
-    "@docusaurus/preset-classic": "3.7.0",
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@fontsource/poppins": "^5.2.5",
-    "@fontsource/roboto": "^5.2.5",
-    "@fontsource/space-mono": "^5.2.5",
-    "@mdx-js/react": "^3.0.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/poppins": "^5.2.7",
+    "@fontsource/roboto": "^5.2.10",
+    "@fontsource/space-mono": "^5.2.9",
+    "@mdx-js/react": "^3.1.1",
     "@monaco-editor/react": "^4.7.0",
-    "@mui/icons-material": "^7.1.0",
-    "@mui/material": "^7.0.2",
-    "@tailwindcss/cli": "^4.1.4",
-    "clsx": "^2.0.0",
-    "prism-react-renderer": "^2.3.0",
+    "@mui/icons-material": "^7.3.9",
+    "@mui/material": "^7.3.9",
+    "@tailwindcss/cli": "^4.2.1",
+    "clsx": "^2.1.1",
+    "prism-react-renderer": "^2.4.1",
     "prismjs": "^1.30.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^4.1.4"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.7.0",
-    "@docusaurus/tsconfig": "3.7.0",
-    "@docusaurus/types": "3.7.0",
-    "typescript": "~5.6.2"
+    "@docusaurus/module-type-aliases": "^3.9.2",
+    "@docusaurus/tsconfig": "^3.9.2",
+    "@docusaurus/types": "^3.9.2",
+    "typescript": "~5.6.3"
   },
   "browserslist": {
     "production": [
